@@ -1,0 +1,193 @@
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
+import Project from '@/common/ProjectItem';
+import { projects } from '@/types/projects';
+import { motion, AnimatePresence } from 'framer-motion';
+import gsap from 'gsap';
+import Image from 'next/image';
+import Rounded from '@/common/RoundedButton';
+
+const scaleAnimation = {
+  initial: {scale: 0, x:"-50%", y:"-50%"},
+  enter: {scale: 1, x:"-50%", y:"-50%", transition: {duration: 0.4, ease: [0.76, 0, 0.24, 1]}},
+  closed: {scale: 0, x:"-50%", y:"-50%", transition: {duration: 0.4, ease: [0.32, 0, 0.67, 0]}}
+};
+
+// Define QuickToFunc type
+type QuickToFunc = (value: number) => void;
+
+export default function Projects() {
+  const [modal, setModal] = useState({active: false, index: 0});
+  const { active, index } = modal;
+  const modalContainer = useRef<HTMLDivElement>(null);
+  const cursor = useRef<HTMLDivElement>(null);
+  const cursorLabel = useRef<HTMLDivElement>(null);
+
+  // Use QuickToFunc type
+  const xMoveContainer = useRef<QuickToFunc | null>(null);
+  const yMoveContainer = useRef<QuickToFunc | null>(null);
+  const xMoveCursor = useRef<QuickToFunc | null>(null);
+  const yMoveCursor = useRef<QuickToFunc | null>(null);
+  const xMoveCursorLabel = useRef<QuickToFunc | null>(null);
+  const yMoveCursorLabel = useRef<QuickToFunc | null>(null);
+
+  useEffect(() => {
+    // Create quickTo instances
+    xMoveContainer.current = gsap.quickTo(modalContainer.current, "left", {duration: 0.8, ease: "power3"});
+    yMoveContainer.current = gsap.quickTo(modalContainer.current, "top", {duration: 0.8, ease: "power3"});
+    xMoveCursor.current = gsap.quickTo(cursor.current, "left", {duration: 0.5, ease: "power3"});
+    yMoveCursor.current = gsap.quickTo(cursor.current, "top", {duration: 0.5, ease: "power3"});
+    xMoveCursorLabel.current = gsap.quickTo(cursorLabel.current, "left", {duration: 0.45, ease: "power3"});
+    yMoveCursorLabel.current = gsap.quickTo(cursorLabel.current, "top", {duration: 0.45, ease: "power3"});
+  }, []);
+
+  const moveItems = (x: number, y: number) => {
+    xMoveContainer.current?.(x);
+    yMoveContainer.current?.(y);
+    xMoveCursor.current?.(x);
+    yMoveCursor.current?.(y);
+    xMoveCursorLabel.current?.(x);
+    yMoveCursorLabel.current?.(y);
+  };
+
+  const manageModal = (active: boolean, index: number, x: number, y: number) => {
+    moveItems(x, y);
+    setModal({active, index});
+  };
+
+    //const handleLiveClick = () => {
+    //if (active) {
+      // Get current project URL and open in new tab
+      //const currentProject = projects[index];
+      //window.open(currentProject.url, '_blank');
+    //}
+  //};
+
+  const [showAll, setShowAll] = useState(false);
+  const [displayedProjects, setDisplayedProjects] = useState(projects.slice(0, 7));
+  const projectsContainer = useRef<HTMLDivElement>(null);
+
+  // Expand/collapse animation
+  const handleToggleProjects = () => {
+    setShowAll(prev => !prev);
+    
+    // Use GSAP to animate the height change
+    if (projectsContainer.current) {
+      gsap.to(projectsContainer.current, {
+        height: showAll ? 'auto' : '100%',
+        duration: 0.6,
+        ease: 'power3.inOut',
+      });
+    }
+
+    // Update displayed projects
+    setDisplayedProjects(showAll ? projects.slice(0, 7) : projects);
+  };
+
+  return (
+    <section id="work" className="relative mt-36 min-h-screen">
+        <div className="h-[10vh]"></div>
+      <div 
+        onMouseMove={(e) => moveItems(e.clientX, e.clientY)} 
+        className="flex items-center flex-col"
+        >
+      <motion.div 
+        ref={projectsContainer}
+        className="max-w-7xl w-full mb-24 relative"
+        initial={{ height: 'auto' }}
+      >
+        <div className="grid grid-cols-12 px-4 pb-8 border-b border-[#c9c9c9]">
+          <h3 className="col-span-4 text-sm font-light">PROJECT</h3>
+          <h3 className="col-span-4 text-sm font-light">CATEGORY</h3>
+          <h3 className="col-span-2 text-sm font-light">CLIENT</h3>
+          <h3 className="col-span-1 text-sm font-light">YEAR</h3>
+          <h3 className="col-span-1 text-sm font-light text-right">WEBSITE</h3>
+        </div>
+
+        <AnimatePresence>
+          <div className="flex flex-col">
+            {displayedProjects.map((project, index) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                <Project 
+                  index={index} 
+                  {...project}
+                  manageModal={manageModal} 
+                />
+              </motion.div>
+            ))}
+          </div>
+        </AnimatePresence>
+      </motion.div>
+
+      <Rounded onClick={handleToggleProjects}>
+        <p className="relative z-10 px-14 py-2">
+          {showAll ? 'Show Less' : 'More Work'}
+        </p>
+      </Rounded>
+
+      <>
+        <motion.div 
+          ref={modalContainer}
+          variants={scaleAnimation}
+          initial="initial"
+          animate={active ? "enter" : "closed"}
+          className="h-[350px] w-[500px] fixed top-1/2 left-1/2 bg-white pointer-events-none overflow-hidden z-[3]"
+        >
+          <div 
+            style={{top: `${index * -100}%`}} 
+            className="h-full w-full relative transition-[top] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]"
+          >
+            {projects.map((project, index) => {
+              const { src, color } = project;
+              return (
+                <div 
+                  className="h-full w-full flex items-center justify-center"
+                  style={{backgroundColor: color}}
+                  key={`modal_${index}`}
+                >
+                  <Image 
+                    src={`/images/${src}`}
+                    width={430}
+                    height={0}
+                    alt="image"
+                    className="h-auto rounded-2xl"
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/*
+        <motion.div 
+          ref={cursor}
+          variants={scaleAnimation}
+          initial="initial"
+          animate={active ? "enter" : "closed"}
+          className="w-20 h-20 rounded-full bg-[#455CE9] text-white fixed z-[3] flex items-center justify-center text-sm font-light pointer-events-none"
+        />
+
+
+        <motion.div 
+          ref={cursorLabel}
+          variants={scaleAnimation}
+          initial="initial"
+          animate={active ? "enter" : "closed"}
+          className="w-20 h-20 rounded-full bg-transparent text-white fixed z-[3] flex items-center justify-center text-sm font-light cursor-pointer"
+          onClick={handleLiveClick}
+        >
+          Live
+        </motion.div>
+        */}
+      </>
+      </div>
+    </section>
+  );
+}
