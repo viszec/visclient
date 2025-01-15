@@ -2,26 +2,135 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
+/* Add these custom styles */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .scale-200 {
+    transform: scale(2);
   }
+}
+
+.dot {
+  @apply text-orange-500;
+}
+
+/* Add these to your existing globals.css */
+@layer components {
+  .section {
+    @apply max-w-[1440px] mx-auto overflow-hidden relative;
+  }
+
+  /* 添加一个包装器类来处理全宽背景色 */
+  .section-wrapper {
+    @apply w-full overflow-hidden relative;
+  }
+
+  .mask {
+    @apply relative overflow-hidden inline-flex;
+  }
+
+  .rounded-button {
+    @apply w-[180px] h-[180px] bg-[#1C1D20] text-white rounded-full 
+    absolute flex items-center justify-center cursor-pointer
+    top-[80%] left-[calc(100%-200px)];
+  }
+
+  .project-item {
+    @apply flex flex-col w-full px-[50px] pt-20 border-t border-gray-300 cursor-pointer transition-all duration-300 overflow-hidden;
+  }
+
+  .project-header {
+    @apply flex justify-between items-start w-full;
+  }
+
+  .project-number {
+    @apply text-2xl mr-5 transition-all duration-300 inline-block w-[50px] h-[50px] leading-[50px] text-center rounded-full bg-transparent;
+  }
+
+  .project-number-highlight {
+    @apply bg-[#ED8B4C] text-black;
+  }
+
+  .modal-container {
+    @apply h-[350px] w-[400px] fixed top-1/2 left-1/2 bg-white pointer-events-none overflow-hidden z-[3];
+  }
+
+  .cursor-dot {
+    @apply w-20 h-20 rounded-full bg-[#EB7A40] text-white fixed z-[3] flex items-center justify-center text-sm font-light pointer-events-none;
+  }
+
+  @screen md {
+    .modal-container {
+      @apply w-[90%] h-auto;
+    }
+    .cursor-dot {
+      @apply w-[60px] h-[60px] text-xs;
+    }
+  }
+
+  .sliding-image {
+    @apply w-1/4 h-[20vw] flex items-center justify-center;
+  }
+  
+  .image-container {
+    @apply relative w-4/5 h-4/5;
+  }
+
+  .hover-underline {
+    @apply relative;
+  }
+  
+  .hover-underline::after {
+    @apply content-[''] w-0 h-[1px] bg-white block mt-[2px] absolute left-1/2 -translate-x-1/2 transition-[width] duration-200 ease-linear;
+  }
+  
+  .hover-underline:hover::after {
+    @apply w-full;
+  }
+
+  .ease-bezier {
+    @apply transition-all duration-500;
+    transition-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  .burger-line::before,
+  .burger-line::after {
+    content: '';
+    @apply block h-[1px] w-[40%] mx-auto bg-white relative transition-transform duration-300;
+  }
+
+  .burger-line::before {
+    @apply top-[-5px];
+  }
+
+  .burger-line::after {
+    @apply top-[5px];
+  }
+
+  .burger-active .burger-line::before {
+    @apply rotate-45 top-[-1px];
+  }
+
+  .burger-active .burger-line::after {
+    @apply -rotate-45 top-0;
+  }
+}
+
+.burger-line {
+  height: 2px;
+  width: 24px;
+  background-color: white;
+  margin: 4px auto;
+  transition: transform 0.3s ease;
+}
+
+.burger-active .burger-line:first-child {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.burger-active .burger-line:last-child {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.visible {
+  transform: scale(1) !important;
 }
