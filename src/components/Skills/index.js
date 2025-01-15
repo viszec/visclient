@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useRef, useState } from 'react';
 
 import Card from './Card';
 import styles from './style.module.scss';

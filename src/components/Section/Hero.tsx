@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { motion } from "framer-motion";
@@ -16,19 +16,24 @@ const slideUp = {
   },
 };
 
-// Remove the unused interface
-// interface AnimationRefs {
-//   firstText: React.RefObject<HTMLParagraphElement>
-//   secondText: React.RefObject<HTMLParagraphElement>
-//   slider: React.RefObject<HTMLDivElement>
-// }
-
 export default function Hero() {
   const firstText = useRef<HTMLParagraphElement>(null);
   const secondText = useRef<HTMLParagraphElement>(null);
   const slider = useRef<HTMLDivElement>(null);
-  let xPercent = 0;
-  let direction = -1;
+  const xPercentRef = useRef(0);
+  const directionRef = useRef<number>(1);
+
+  const animate = useCallback(() => {
+    if (xPercentRef.current < -100) {
+      xPercentRef.current = 0;
+    } else if (xPercentRef.current > 0) {
+      xPercentRef.current = -100;
+    }
+    gsap.set(firstText.current, { xPercent: xPercentRef.current });
+    gsap.set(secondText.current, { xPercent: xPercentRef.current });
+    requestAnimationFrame(animate);
+    xPercentRef.current += 0.1 * directionRef.current;
+  }, []);
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -38,24 +43,14 @@ export default function Hero() {
         scrub: 0.25,
         start: 0,
         end: window.innerHeight,
-        onUpdate: (e) => (direction = e.direction * -1),
+        onUpdate: (e) => {
+          directionRef.current = e.direction * -1;
+        },
       },
       x: "-500px",
     });
     requestAnimationFrame(animate);
-  }, []);
-
-  const animate = () => {
-    if (xPercent < -100) {
-      xPercent = 0;
-    } else if (xPercent > 0) {
-      xPercent = -100;
-    }
-    gsap.set(firstText.current, { xPercent: xPercent });
-    gsap.set(secondText.current, { xPercent: xPercent });
-    requestAnimationFrame(animate);
-    xPercent += 0.1 * direction;
-  };
+  }, [animate]);
 
   return (
     <div className="section-wrapper">

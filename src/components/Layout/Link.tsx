@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { slide, scale } from '@/types/animation';
+import { scale } from '@/types/animation';
 
 interface NavLinkProps {
   data: {
