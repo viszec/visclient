@@ -89,7 +89,7 @@ export default function Projects() {
 
   const [isAnimating, setIsAnimating] = useState(false);
   const { scrollY } = useScroll();
-  const { ref, entry } = useInView({ 
+  const { ref } = useInView({ 
     threshold: 0,
     rootMargin: "100px 0px"
   });
