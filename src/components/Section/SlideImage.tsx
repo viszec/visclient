@@ -11,39 +11,39 @@ interface SlideItem {
 
 const slider1: SlideItem[] = [
   {
-    color: "#e3e5e7",
-    src: "acornledger.jpg"
+    src: "acornLedger.webp",
+    color: "#BA72D0",
   },
   {
-    color: "#d6d7dc",
-    src: "hivestream.png"
+    src: "hivestream.webp",
+    color: "#D18F52",
   },
   {
-    color: "#e3e3e3",
-    src: "cognix.png"
+    src: "cognix.webp",
+    color: "#000009",
   },
   {
-    color: "#21242b",
-    src: "nestease.png"
+    src: "nestease.webp",
+    color: "#596E65",
   }
 ];
 
 const slider2: SlideItem[] = [
   {
-    color: "#d4e3ec",
-    src: "opcc.png"
+    src: "opcc.webp",
+    color: "#4BA5D2",
   },
   {
-    color: "#e5e0e1",
-    src: "pp.png"
+    src: "pp.webp",
+    color: "#EFE8D3",
   },
   {
-    color: "#d7d4cf",
-    src: "astra.png"
+    src: "brightonelc.webp",
+    color: "#98B4CD",
   },
   {
-    color: "#e1dad6",
-    src: "brightonelc.png"
+    src: "astra.webp",
+    color: "#76BCC2",
   }
 ];
 
