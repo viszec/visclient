@@ -48,10 +48,12 @@ export default function RoundedButton({
       }, "exit");
 
     return () => {
-      if (timeoutId) clearTimeout(timeoutId);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
       timeline.current?.kill();
     };
-  }, []);
+  }, [timeoutId]);
 
   const handleMouseEnter = () => {
     if (timeoutId) clearTimeout(timeoutId);
