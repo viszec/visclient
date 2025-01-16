@@ -12,19 +12,15 @@ interface SocialLink {
 const SOCIAL_LINKS: SocialLink[] = [
   {
     name: "GitHub",
-    url: "https://github.com/yourusername"
+    url: "https://github.com/viszec"
   },
   {
     name: "Instagram",
-    url: "https://instagram.com/yourusername"
-  },
-  {
-    name: "Facebook",
-    url: "https://facebook.com/yourusername"
+    url: "https://www.instagram.com/viis.ma"
   },
   {
     name: "Linkedin",
-    url: "https://linkedin.com/in/yourusername"
+    url: "https://www.linkedin.com/in/imavisma/"
   }
 ];
 
@@ -55,8 +51,9 @@ export default function Contact() {
                   <Image
                     fill
                     alt="avatar"
-                    src="/images/avatar.png"
+                    src="/images/avatar.webp"
                     className="object-cover"
+                    loading="lazy"
                   />
                 </div>
                 <h2 className="ml-[0.3em] text-[5vw] font-light">

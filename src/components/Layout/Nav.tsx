@@ -30,7 +30,8 @@ const containerVariants = {
 export default function Nav() {
   const pathname = usePathname();
   const [selectedIndicator, setSelectedIndicator] = useState<string>(pathname);
-  //const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
+  
 
   useEffect(() => {
     setSelectedIndicator(pathname);
@@ -50,8 +51,8 @@ export default function Nav() {
           variants={containerVariants}
           className="flex flex-col text-4xl gap-3 mt-20"
         >
-          <div className="text-[#999999] border-b border-[#999999] uppercase text-xs mb-10">
-            <p className="tracking-wider">Mavis M. - Portfolio</p>
+          <div className="text-[#999999] border-b border-[#999999] uppercase text-lg font-light mb-10">
+            <p className="tracking-wider">Mavis M. -{'>'} Portfolio</p>
           </div>
           <AnimatePresence mode="wait">
             {ROUTES.map((item, index) => (

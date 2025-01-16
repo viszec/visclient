@@ -7,6 +7,7 @@ import Preloader from "@/components/Section/Preloader";
 import About from "@/components/Section/About";
 import Projects from "@/components/Section/Projects";
 import SlideImage from "@/components/Section/SlideImage";
+//import Skills from "@/components/Section/Skills";
 import Contact from "@/components/Section/Contact";
 import Header from "@/components/Layout/Header";
 

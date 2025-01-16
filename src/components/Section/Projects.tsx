@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { motion, useScroll } from 'framer-motion';
 import Project from '@/common/ProjectItem';
 import { projects } from '@/types/projects';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import Image from 'next/image';
 import Rounded from '@/common/RoundedButton';
@@ -85,109 +87,157 @@ export default function Projects() {
     setDisplayedProjects(showAll ? projects.slice(0, 7) : projects);
   };
 
-  return (
-    <section id="work" className="relative mt-36 min-h-screen">
-        <div className="h-[10vh]"></div>
-      <div 
-        onMouseMove={(e) => moveItems(e.clientX, e.clientY)} 
-        className="flex items-center flex-col"
-        >
-      <motion.div 
-        ref={projectsContainer}
-        className="max-w-7xl w-full mb-24 relative"
-        initial={{ height: 'auto' }}
-      >
-        <div className="grid grid-cols-12 px-4 pb-8 border-b border-[#c9c9c9]">
-          <h3 className="col-span-4 text-sm font-light">PROJECT</h3>
-          <h3 className="col-span-4 text-sm font-light">CATEGORY</h3>
-          <h3 className="col-span-2 text-sm font-light">CLIENT</h3>
-          <h3 className="col-span-1 text-sm font-light">YEAR</h3>
-          <h3 className="col-span-1 text-sm font-light text-right">WEBSITE</h3>
-        </div>
+  const [isAnimating, setIsAnimating] = useState(false);
+  const { scrollY } = useScroll();
+  const { ref, entry } = useInView({ 
+    threshold: 0,
+    rootMargin: "100px 0px"
+  });
 
-        <AnimatePresence>
-          <div className="flex flex-col">
-            {displayedProjects.map((project, index) => (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
+  useEffect(() => {
+    let lastScrollY = scrollY.get()
+    const aboutSection = document.getElementById('about')
+    const aboutBottom = aboutSection ? 
+      (aboutSection.getBoundingClientRect().top + window.scrollY + aboutSection.offsetHeight) : 0
+    
+    const unsubscribe = scrollY.on("change", (current) => {
+      const direction = current > lastScrollY ? "down" : "up"
+      
+      if (direction === "down") {
+        // Trigger when reaching 90% of About section
+        if (current >= aboutBottom * 0.9) {
+          setIsAnimating(true)
+        }
+      } else {
+        // Reset animation when scrolling back up past About section
+        if (current < aboutBottom * 0.7) {
+          setIsAnimating(false)
+        }
+      }
+      
+      lastScrollY = current
+    })
+
+    return () => unsubscribe()
+  }, [scrollY])
+
+  return (
+    <section id="work" ref={ref} className="relative py-32 min-h-screen">
+      <div className="h-[12vh]"></div>
+      <motion.div 
+        className="flex items-center flex-col"
+        initial={{ opacity: 0, y: 50 }}
+        animate={isAnimating ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+      >
+        <motion.div 
+          ref={projectsContainer}
+          className="max-w-7xl w-full mb-24 relative"
+          initial={{ opacity: 0 }}
+          animate={isAnimating ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <div className="grid grid-cols-12 px-4 pb-4 border-b border-[#c9c9c9] w-full">
+            {[
+              { text: "PROJECT", span: "col-start-1 col-end-5" },
+              { text: "CATEGORY", span: "col-start-5 col-end-9" },
+              { text: "CLIENT", span: "col-start-9 col-end-11" },
+              { text: "YEAR", span: "col-start-11 col-end-12" },
+              { text: "WEBSITE", span: "col-start-12 col-end-13", align: "text-right" }
+            ].map(({ text, span, align = "" }) => (
+              <h3 
+                key={text}
+                className={`${span} text-sm font-light ${align} text-gray-600`}
               >
-                <Project 
-                  index={index} 
-                  {...project}
-                  manageModal={manageModal} 
-                />
-              </motion.div>
+                {text}
+              </h3>
             ))}
           </div>
-        </AnimatePresence>
-      </motion.div>
 
-      <Rounded onClick={handleToggleProjects}>
-        <p className="relative z-10 px-14 py-2">
-          {showAll ? 'Show Less' : 'More Work'}
-        </p>
-      </Rounded>
-
-      <>
-        <motion.div 
-          ref={modalContainer}
-          variants={scaleAnimation}
-          initial="initial"
-          animate={active ? "enter" : "closed"}
-          className="h-[350px] w-[500px] fixed top-1/2 left-1/2 bg-white pointer-events-none overflow-hidden z-[3]"
-        >
-          <div 
-            style={{top: `${index * -100}%`}} 
-            className="h-full w-full relative transition-[top] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]"
-          >
-            {projects.map((project, index) => {
-              const { src, color } = project;
-              return (
-                <div 
-                  className="h-full w-full flex items-center justify-center"
-                  style={{backgroundColor: color}}
-                  key={`modal_${index}`}
+          <AnimatePresence>
+            <div className="flex flex-col">
+              {displayedProjects.map((project, index) => (
+                <motion.div
+                  key={project.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isAnimating ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
-                  <Image 
-                    src={`/images/${src}`}
-                    width={430}
-                    height={0}
-                    alt="image"
-                    className="h-auto rounded-2xl"
+                  <Project 
+                    index={index} 
+                    {...project}
+                    manageModal={manageModal} 
                   />
-                </div>
-              );
-            })}
-          </div>
+                </motion.div>
+              ))}
+            </div>
+          </AnimatePresence>
         </motion.div>
 
-        {/*
-        <motion.div 
-          ref={cursor}
-          variants={scaleAnimation}
-          initial="initial"
-          animate={active ? "enter" : "closed"}
-          className="w-20 h-20 rounded-full bg-[#455CE9] text-white fixed z-[3] flex items-center justify-center text-sm font-light pointer-events-none"
-        />
+        <Rounded onClick={handleToggleProjects}>
+          <p className="relative z-10 px-14 py-2 hover:text-white">
+            {showAll ? 'Show Less' : 'More Work'}
+          </p>
+        </Rounded>
+
+        <>
+          <motion.div 
+            ref={modalContainer}
+            variants={scaleAnimation}
+            initial="initial"
+            animate={active ? "enter" : "closed"}
+            className="h-[350px] w-[500px] fixed top-1/2 left-1/2 bg-white pointer-events-none overflow-hidden z-[3]"
+          >
+            <div 
+              style={{top: `${index * -100}%`}} 
+              className="h-full w-full relative transition-[top] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]"
+            >
+              {projects.map((project, index) => {
+                const { src, color } = project;
+                return (
+                  <div 
+                    className="h-full w-full flex items-center justify-center"
+                    style={{backgroundColor: color}}
+                    key={`modal_${index}`}
+                  >
+                    <Image 
+                      src={`/images/${src}`}
+                      width={430}
+                      height={0}
+                      alt="image"
+                      className="h-auto rounded-2xl"
+                      loading="lazy"
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          {/*
+          <motion.div 
+            ref={cursor}
+            variants={scaleAnimation}
+            initial="initial"
+            animate={active ? "enter" : "closed"}
+            className="w-20 h-20 rounded-full bg-[#455CE9] text-white fixed z-[3] flex items-center justify-center text-sm font-light pointer-events-none"
+          />
 
 
-        <motion.div 
-          ref={cursorLabel}
-          variants={scaleAnimation}
-          initial="initial"
-          animate={active ? "enter" : "closed"}
-          className="w-20 h-20 rounded-full bg-transparent text-white fixed z-[3] flex items-center justify-center text-sm font-light cursor-pointer"
-          onClick={handleLiveClick}
-        >
-          Live
-        </motion.div>
-        */}
-      </>
-      </div>
+          <motion.div 
+            ref={cursorLabel}
+            variants={scaleAnimation}
+            initial="initial"
+            animate={active ? "enter" : "closed"}
+            className="w-20 h-20 rounded-full bg-transparent text-white fixed z-[3] flex items-center justify-center text-sm font-light cursor-pointer"
+            onClick={handleLiveClick}
+          >
+            Live
+          </motion.div>
+          */}
+        </>
+      </motion.div>
     </section>
   );
 }

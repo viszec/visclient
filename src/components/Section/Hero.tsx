@@ -62,7 +62,7 @@ export default function Hero() {
           className="relative flex h-screen"
         >
           <Image
-            src="/images/ver2.png"
+            src="/images/ver2.webp"
             fill={true}
             alt="background"
             className="object-cover"

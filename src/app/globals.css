@@ -7,6 +7,26 @@
   .scale-200 {
     transform: scale(2);
   }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  .card-spread {
+    @apply transition-all duration-500 ease-custom-bezier;
+  }
 }
 
 .dot {
@@ -19,7 +39,6 @@
     @apply max-w-[1440px] mx-auto overflow-hidden relative;
   }
 
-  /* 添加一个包装器类来处理全宽背景色 */
   .section-wrapper {
     @apply w-full overflow-hidden relative;
   }
@@ -133,4 +152,18 @@
 
 .visible {
   transform: scale(1) !important;
+}
+
+/* add card floating animation */
+@keyframes floating {
+  0%, 100% {
+    transform: translate(-50%, -50%);
+  }
+  50% {
+    transform: translate(-50%, -60%);
+  }
+}
+
+.animate-floating {
+  animation: floating 3s infinite ease-in-out;
 }

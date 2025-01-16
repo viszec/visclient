@@ -64,7 +64,7 @@ export default function NavLink({ data, isActive, setSelectedIndicator }: NavLin
       />
       <Link 
         href={href}
-        className="text-white/90 hover:text-white transition-colors duration-200
+        className="text-white/80 hover:text-white font-light py-4 transition-colors duration-200
                    relative after:content-[''] after:absolute after:bottom-0 
                    after:left-0 after:w-0 after:h-[1px] after:bg-white 
                    after:transition-all after:duration-300

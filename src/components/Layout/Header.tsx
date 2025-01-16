@@ -19,7 +19,7 @@ export default function Header() {
 
   useEffect(() => {
     if (isActive) setIsActive(false);
-  }, [pathname, isActive]);
+  }, [pathname]);
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -56,7 +56,7 @@ export default function Header() {
 
   return (
     <>
-      <div ref={header} className="absolute flex z-[1] top-0 text-white p-[35px] justify-between w-full font-light items-center box-border">
+      <section ref={header} className="absolute flex z-[1] top-0 text-white p-[35px] justify-between w-full font-light items-center box-border">
         <div className="flex cursor-pointer group">
           <p className="m-0 transition-all duration-500 ease-bezier group-hover:rotate-[360deg]">©</p>
           <div className="flex relative overflow-hidden whitespace-nowrap ml-[5px] transition-all duration-500 ease-bezier group-hover:pr-[30px]">
@@ -77,7 +77,7 @@ export default function Header() {
             </Magnetic>
           ))}
         </nav>
-      </div>
+      </section>
 
       <div 
         ref={button} 
