@@ -21,28 +21,30 @@ export default function ProjectItem({
   liveURL,
   manageModal,
 }: ProjectProps) {
-  return (
-    <div className="grid grid-cols-12 px-4 py-6 border-b border-[#c9c9c9] cursor-pointer group relative">
-      {/* Project image trigger area - covers PROJECT to CLIENT columns */}
-      <div
-        className="absolute top-0 left-0 w-[75%] h-[80%] z-10"
-        onMouseEnter={(e) => manageModal(true, index, e.clientX, e.clientY)}
-        onMouseLeave={(e) => manageModal(false, index, e.clientX, e.clientY)}
-      />
-
-      <h2 className="col-span-4 text-3xl m-0 font-normal transition-all duration-400 group-hover:-translate-x-2.5">
-        {title}
-      </h2>
-      <p className="col-span-4 font-light self-center transition-all duration-400 group-hover:translate-x-2.5">
-        {category}
-      </p>
-      <p className="col-span-2 font-light self-center transition-all duration-400 group-hover:translate-x-2.5">
-        {client}
-      </p>
-      <p className="col-span-1 font-light self-center transition-all duration-400 group-hover:translate-x-2.5">
-        {year}
-      </p>
-      <p className="col-span-1 font-light self-center text-right transition-all duration-400 group-hover:translate-x-2.5">
+  const items = [
+    { 
+      content: title, 
+      span: "col-start-1 col-end-5", 
+      isTitle: true,
+      hoverTransform: "group-hover:-translate-x-2.5"
+    },
+    { 
+      content: category, 
+      span: "col-start-5 col-end-9",
+      hoverTransform: "group-hover:translate-x-2.5"
+    },
+    { 
+      content: client, 
+      span: "col-start-9 col-end-11",
+      hoverTransform: "group-hover:translate-x-2.5"
+    },
+    { 
+      content: year, 
+      span: "col-start-11 col-end-12",
+      hoverTransform: "group-hover:translate-x-2.5"
+    },
+    { 
+      content: (
         <Link
           href={liveURL}
           target="_blank"
@@ -51,7 +53,37 @@ export default function ProjectItem({
         >
           Live Link
         </Link>
-      </p>
+      ),
+      span: "col-start-12 col-end-13",
+      align: "text-right",
+      hoverTransform: "group-hover:translate-x-2.5"
+    }
+  ]
+
+  const baseStyles = "font-light self-center transition-all duration-400 group-hover:text-gray-400"
+  
+  return (
+    <div className="grid grid-cols-12 px-4 py-6 border-b border-gray-300 cursor-pointer group relative w-full">
+      <div
+        className="absolute top-0 left-0 w-[75%] h-[80%] z-10"
+        onMouseEnter={(e) => manageModal(true, index, e.clientX, e.clientY)}
+        onMouseLeave={(e) => manageModal(false, index, e.clientX, e.clientY)}
+      />
+
+      {items.map(({ content, span, isTitle, align = "", hoverTransform }, i) => (
+        <div
+          key={i}
+          className={`
+            ${span}
+            ${baseStyles}
+            ${isTitle ? "text-2xl font-normal m-0" : ""}
+            ${align}
+            ${hoverTransform}
+          `}
+        >
+          {content}
+        </div>
+      ))}
     </div>
-  );
+  )
 }

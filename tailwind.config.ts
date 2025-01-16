@@ -49,6 +49,21 @@ const config: Config = {
       },
       padding: {
         '200': '200px',
+      },
+      animation: {
+        'floating': 'floating 3s infinite ease-in-out',
+      },
+      perspective: {
+        '1000': '1000px',
+      },
+      transformStyle: {
+        'preserve-3d': 'preserve-3d',
+      },
+      backfaceVisibility: {
+        'hidden': 'hidden',
+      },
+      rotate: {
+        'y-180': 'rotateY(180deg)',
       }
     },
   },
