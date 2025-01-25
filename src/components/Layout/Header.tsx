@@ -26,7 +26,7 @@ export default function Header() {
 
   useEffect(() => {
     if (isActive) setIsActive(false);
-  }, [pathname]);
+  }, [pathname, isActive]);
 
   // Only use ScrollTrigger on desktop
   useLayoutEffect(() => {
