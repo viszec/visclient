@@ -20,12 +20,13 @@ interface PreloaderProps {
 }
 
 export default function Preloader({
-  words = ["Hello", "Bonjour", "Ciao", "Olà", "やあ", "Hallå", "Guten tag", "Hallo"],
+  //words = ["Hello", "Bonjour", "Ciao", "Olà", "やあ", "Hallå", "Guten tag", "Hallo"],
+  words = ["Creative", "Solid", "Design", "Engineering", "Is", "Awesome"],
   backgroundColor = "#141516",
   textColor = "white",
   dotColor = "white",
   initialDelay = 1000,
-  wordDelay = 150,
+  wordDelay = 120,
   onComplete
 }: PreloaderProps) {
   const [index, setIndex] = useState(0);
@@ -67,11 +68,11 @@ export default function Preloader({
   const curve = {
     initial: {
       d: initialPath,
-      transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] }
+      transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] }
     },
     exit: {
       d: targetPath,
-      transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.3 }
+      transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1], delay: 0.3 }
     }
   };
 

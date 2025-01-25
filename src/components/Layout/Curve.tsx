@@ -32,7 +32,8 @@ export default function Curve() {
 
   return (
     <svg 
-      className="absolute top-0 -left-[99px] w-[100px] h-full fill-[#292929] stroke-none"
+      className="absolute top-0 -left-[99px] w-[60px] h-full fill-[#292929] stroke-none
+                 lg:top-0 lg:-left-[99px] lg:w-[100px] lg:h-full"
       aria-hidden="true"
     >
       {path.initial && (

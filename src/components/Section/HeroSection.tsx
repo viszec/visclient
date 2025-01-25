@@ -1,0 +1,152 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useTheme } from "next-themes";
+import { Particles } from "@/components/ui/particles";
+import { TechSkills } from "@/common/TechSkills";
+import { useScreenSize } from "@/hooks/useScreenSize";
+import SliderText from "@/common/SliderText";
+
+// Animation variants
+const animations = {
+  slideUp: {
+    initial: { y: 100 },
+    enter: {
+      y: 0,
+      transition: { duration: 0.6, ease: [0.33, 1, 0.68, 1], delay: 2.5 },
+    }
+  },
+  fadeIn: {
+    initial: { opacity: 0, y: 20 },
+    enter: (delay: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, delay }
+    })
+  }
+};
+
+export default function Hero() {
+  const { theme } = useTheme();
+  const [particleColor, setParticleColor] = useState("#ffffff");
+  const { width, height } = useScreenSize();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [scale, setScale] = useState({ x: 0.4, y: 1 });
+
+  useEffect(() => {
+    setParticleColor(theme === "dark" ? "#ffffff" : "#000000");
+  }, [theme]);
+
+  useEffect(() => {
+    // Calculate scale based on viewport size
+    const calculateScale = () => {
+      if (width < 768) { // mobile
+        return { x: 1, y: 1 };
+      } else if (width < 1024) { // tablet
+        return { x: 0.7, y: 1 };
+      } else { // desktop
+        return { x: 0.4, y: 1 };
+      }
+    };
+    
+    setScale(calculateScale());
+  }, [width]);
+
+  return (
+    <section id="hero" className="relative w-full lg:h-[1050px] md:h-[768px] max-h-screen overflow-hidden">
+      {/* Background Container */}
+      <div className="absolute inset-0 w-full h-full">
+        {/* Background Text */}
+        <div className="relative w-full h-full flex items-center justify-center">
+          <Image
+            src="/images/bg-text.svg"
+            fill={true}
+            alt="background"
+            className="object-cover z-0 [mask-image:linear-gradient(to_top,transparent,white_200px)]
+            dark:[mask-image:linear-gradient(to_top,transparent,black_150px)]"
+            priority
+          />
+        </div>
+
+        {/* Particles Effect */}
+        <div className="absolute inset-0">
+          <Particles
+            className="w-full h-full"
+            quantity={Math.floor((width * height) / 15000)}
+            ease={80}
+            color={particleColor}
+            refresh
+          />
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <motion.div
+        variants={animations.slideUp}
+        initial="initial"
+        animate="enter"
+        className="section-container relative h-full flex items-center justify-center"
+      >
+        <div className="section-content flex flex-col items-center justify-center">
+          <motion.div
+            className="flex flex-col items-center space-y-12 text-center"
+            variants={animations.fadeIn}
+            initial="initial"
+            animate="enter"
+            custom={2.8}
+          >
+
+            
+            {/* Profile Content - Changed to row layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 pt-10 lg:pt-0 md:pt-12 sm:pt-24">
+              {/* Avatar */}
+              <div className="relative w-32 h-32 lg:w-120 lg:h-120 rounded-full overflow-hidden opacity-90">
+                <Image
+                  src="/images/mavis-avatar.webp"
+                  alt="avatar"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              
+              {/* Description and Tech Skills */}
+              <div className="flex flex-col items-start space-y-6">
+                <div className="flex flex-col items-start space-y-3">
+                    <div className="pb-6">
+                    <Image
+                    src="/icons/arrow.svg"
+                    alt="arrow"
+                    width={18}
+                    height={18}
+                    priority
+                    />
+                    </div>
+                  <h1 className="text-2xl lg:text-4xl font-light text-gray-700">
+                    CREATIVE
+                  </h1>
+                  <h2 className="text-xl lg:text-4xl font-light text-gray-700">
+                    Web Designer & Developer
+                    </h2>
+                    <p className="text-sm lg:text-2xl text-gray-700 pt-2 font-light italic">
+                    {'-->'} What I am interested in:
+                  </p>
+                </div>
+
+                {/* Tech Skills */}
+                <div className="w-full">
+                  <TechSkills />
+                </div>
+              </div>
+            </div>
+            <div className="hidden md:block lg:hidden">
+            <SliderText />
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
+    </section>
+  );
+}

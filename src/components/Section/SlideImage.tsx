@@ -59,12 +59,12 @@ export default function SlidingImages() {
   const height = useTransform(scrollYProgress, [0, 0.95], [50, 0]);
 
   return (
-    <div className="section-wrapper" style={{ backgroundColor: '#f5f5f5' }}>
-      <section id="slide-image" className="section">
+    <section className="section relative" style={{ backgroundColor: '#f5f5f5' }}>
+      <div id="slide-image" className="section-wrapper ">
         <div className="section-content">
           <div 
             ref={container} 
-            className="flex flex-col gap-[3vw] relative mt-[200px] z-[1]"
+            className="flex flex-col gap-[3vw] relative mt-24 z-[1]"
           >
             <motion.div 
               style={{ x: x1 }} 
@@ -148,7 +148,7 @@ export default function SlidingImages() {
             zIndex: 0
           }}
         />
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
