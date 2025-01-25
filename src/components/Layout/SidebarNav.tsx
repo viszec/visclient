@@ -27,7 +27,7 @@ const containerVariants = {
   }
 };
 
-export default function Nav() {
+export default function SidebarNav() {
   const pathname = usePathname();
   const [selectedIndicator, setSelectedIndicator] = useState<string>(pathname);
   //const [isVisible, setIsVisible] = useState(true);
@@ -43,15 +43,15 @@ export default function Nav() {
       initial="initial" 
       animate="enter" 
       exit="exit"
-      className="h-screen bg-[#292929] fixed right-0 top-0 text-white z-[3]
+      className="h-screen bg-[#292929] fixed right-0 top-0 text-white z-[3] lg:z-[3]
                  shadow-[-10px_0_30px_rgba(0,0,0,0.1)]"
     >
-      <div className="box-border h-full p-[100px] flex flex-col justify-between">
+      <div className="box-border h-full p-12 lg:p-[100px] flex flex-col justify-between">
         <motion.div 
           variants={containerVariants}
-          className="flex flex-col text-4xl gap-3 mt-20"
+          className="flex flex-col text-4xl gap-3 mt-10 lg:mt-20"
         >
-          <div className="text-[#999999] border-b border-[#999999] uppercase text-lg font-light mb-10">
+          <div className="text-[#999999] border-b border-[#999999] uppercase text-sm lg:text-lg font-light mb-10">
             <p className="tracking-wider">Mavis M. -{'>'} Portfolio</p>
           </div>
           <AnimatePresence mode="wait">

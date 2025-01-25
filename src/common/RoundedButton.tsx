@@ -72,16 +72,17 @@ export default function RoundedButton({
         onClick={onClick}
         className={`
           relative overflow-hidden cursor-pointer
-          rounded-full border-[1px] border-gray-400
-          flex items-center justify-center
-          px-[15px] py-[15px]
+          rounded-full lg:border-[1px] lg:border-gray-400
+          flex items-center justify-center w-[50px] h-[50px]
+          lg:w-[90px] lg:h-[90px] md:w-[60px] md:h-[60px]
+          px-2 py-2 md:px-[15px] md:py-[15px]
           ${className}
         `}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         {...props}
       >
-        <span className="relative z-[1] transition-colors duration-400 whitespace-nowrap">
+        <span className="relative z-[1] transition-colors duration-400 whitespace-nowrap text-sm md:text-base">
           {children}
         </span>
         <div

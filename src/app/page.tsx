@@ -1,18 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { AnimatePresence } from "framer-motion";
-import Hero from "@/components/Section/Hero";
-import Preloader from "@/components/Section/Preloader";
+//import { useEffect, useState } from "react";
+//import { AnimatePresence } from "framer-motion";
+import HeroSection from "@/components/Section/HeroSection";
+//import Preloader from "@/components/Section/Preloader";
 import About from "@/components/Section/About";
 import Projects from "@/components/Section/Projects";
 import SlideImage from "@/components/Section/SlideImage";
 //import Skills from "@/components/Section/Skills";
 import Contact from "@/components/Section/Contact";
 import Header from "@/components/Layout/Header";
+import Footer from "@/components/Layout/Footer";
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
+  /* const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -30,20 +31,22 @@ export default function Home() {
       };
     })();
   }, []);
+  */
 
   return (
     <>
-    <Header />
-    <main className="min-h-screen">
-      <AnimatePresence mode="wait">
+      <Header />
+      <main className="min-h-screen">
+        {/*<AnimatePresence mode="wait">
         {isLoading && <Preloader />}
-      </AnimatePresence>
-      <Hero />
-      <About />
-      <Projects />
-      <SlideImage />
-      <Contact />
-    </main>
+      </AnimatePresence>*/}
+        <HeroSection />
+        <About />
+        <Projects />
+        <SlideImage />
+        <Contact />
+      </main>
+      <Footer />
     </>
   );
 }

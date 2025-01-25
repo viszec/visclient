@@ -49,7 +49,7 @@ export default function ProjectItem({
           href={liveURL}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full"
+          className="text-xs lg:text-base relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full"
         >
           Live Link
         </Link>
@@ -76,12 +76,14 @@ export default function ProjectItem({
           className={`
             ${span}
             ${baseStyles}
-            ${isTitle ? "text-2xl font-normal m-0" : ""}
+            ${isTitle ? "text-base lg:text-2xl font-normal m-0" : ""}
             ${align}
             ${hoverTransform}
           `}
         >
-          {content}
+          <div className="text-xs lg:text-base">
+            {content}
+          </div>
         </div>
       ))}
     </div>

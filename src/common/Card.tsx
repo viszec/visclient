@@ -10,19 +10,19 @@ interface CardProps {
   backText: string;
 }
 
-const Card = forwardRef<HTMLDivElement, CardProps>(({ 
-  id, 
-  frontSrc, 
-  frontAlt, 
-  backText 
+const Card = forwardRef<HTMLDivElement, CardProps>(({
+  id,
+  frontSrc,
+  frontAlt,
+  backText
 }, ref) => {
   return (
-    <div 
+    <div
       className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                 w-[300px] h-[400px] perspective-1000" 
+                 w-[300px] h-[400px] perspective-1000"
       ref={ref}
     >
-      <div 
+      <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
                   w-full h-full animate-floating"
         style={{ animationDelay: `${(id - 1) * 0.2}s` }}

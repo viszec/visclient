@@ -122,8 +122,8 @@ export default function Projects() {
   }, [scrollY])
 
   return (
-    <section id="work" ref={ref} className="relative py-32 min-h-screen">
-      <div className="h-[12vh]"></div>
+    <section id="work" ref={ref} className="section-container !lg:px-0 py-12 lg:pt-32 lg:pb-48">
+      <div className="h-[9vh]"></div>
       <motion.div 
         className="flex items-center flex-col"
         initial={{ opacity: 0, y: 50 }}
@@ -132,7 +132,7 @@ export default function Projects() {
       >
         <motion.div 
           ref={projectsContainer}
-          className="max-w-7xl w-full mb-24 relative"
+          className="w-full mb-24 relative"
           initial={{ opacity: 0 }}
           animate={isAnimating ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -147,7 +147,7 @@ export default function Projects() {
             ].map(({ text, span, align = "" }) => (
               <h3 
                 key={text}
-                className={`${span} text-sm font-light ${align} text-gray-600`}
+                className={`${span} lg:text-sm text-xxs font-light ${align} text-gray-600`}
               >
                 {text}
               </h3>
@@ -175,8 +175,11 @@ export default function Projects() {
           </AnimatePresence>
         </motion.div>
 
-        <Rounded onClick={handleToggleProjects}>
-          <p className="relative z-10 px-14 py-2 hover:text-white">
+        <Rounded 
+          onClick={handleToggleProjects}
+          className="!w-[230px] !h-[65px] rounded-full mt-12 mb-16"
+        >
+          <p className="relative z-10 group-hover:text-white dark:group-hover:text-black text-lg font-normal tracking-wider">
             {showAll ? 'Show Less' : 'More Work'}
           </p>
         </Rounded>
@@ -187,7 +190,7 @@ export default function Projects() {
             variants={scaleAnimation}
             initial="initial"
             animate={active ? "enter" : "closed"}
-            className="h-[350px] w-[500px] fixed top-1/2 left-1/2 bg-white pointer-events-none overflow-hidden z-[3]"
+            className="h-[220px] w-[350px] lg:h-[350px] lg:w-[500px] fixed top-1/2 left-1/2 bg-white pointer-events-none overflow-hidden z-[3]"
           >
             <div 
               style={{top: `${index * -100}%`}} 

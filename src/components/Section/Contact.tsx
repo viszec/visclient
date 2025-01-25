@@ -2,27 +2,6 @@ import { useRef } from "react";
 import Image from "next/image";
 import { useScroll, motion, useTransform } from "framer-motion";
 import Rounded from "@/common/RoundedButton";
-import Magnetic from "@/common/Magnetic";
-
-interface SocialLink {
-  name: string;
-  url: string;
-}
-
-const SOCIAL_LINKS: SocialLink[] = [
-  {
-    name: "GitHub",
-    url: "https://github.com/viszec"
-  },
-  {
-    name: "Instagram",
-    url: "https://www.instagram.com/viis.ma"
-  },
-  {
-    name: "Linkedin",
-    url: "https://www.linkedin.com/in/imavisma/"
-  }
-];
 
 export default function Contact() {
   const container = useRef<HTMLDivElement>(null);
@@ -36,18 +15,18 @@ export default function Contact() {
   const rotate = useTransform(scrollYProgress, [0, 1], [120, 90]);
 
   return (
-    <div className="section-wrapper bg-[#2e2e2e]">
-      <section id="contact" className="section">
+    <div className="section bg-[#2e2e2e]">
+      <div id="contact" className="relative">
         <motion.div
           style={{ y }}
           ref={container}
           className="flex flex-col items-center justify-center text-white relative"
         >
-          <div className="pt-[200px] w-full max-w-[1800px] bg-[#2e2e2e]">
+          <div className="w-full pt-52 pb-12 bg-[#2e2e2e]">
             {/* Title Section */}
-            <div className="border-b border-[#868686] pb-[100px] mx-[200px] relative">
-              <span className="flex items-center">
-                <div className="relative w-[100px] h-[100px] rounded-full overflow-hidden">
+            <div className="border-b border-gray-500 pb-24 mx-20 relative">
+              <div className="flex items-center gap-4">
+                <div className="relative w-28 h-28 rounded-full overflow-hidden ml-20">
                   <Image
                     fill
                     alt="avatar"
@@ -56,22 +35,21 @@ export default function Contact() {
                     loading="lazy"
                   />
                 </div>
-                <h2 className="ml-[0.3em] text-[5vw] font-light">
+                <h1 className="text-2xl lg:text-8xl font-light ">
                   Let&apos;s work
-                </h2>
-              </span>
-
-              <h2 className="flex items-center text-[5vw] m-0 font-light">
+                </h1>
+              </div>
+              <h1 className="flex items-center text-2xl lg:text-8xl m-0 font-light ml-20">
                 together
-                <span className="relative inline-block w-[1.7em] h-[1.7em] ml-[0.2em] align-middle">
+                <div className="relative inline-block w-[1.7em] h-[1.7em] ml-[0.2em] align-middle">
                   <Image
                     src="/images/smiley.svg"
                     alt="Smiley face"
                     fill
                     className="object-contain"
                   />
-                </span>
-              </h2>
+                </div>
+              </h1>
 
               <motion.div
                 style={{ x }}
@@ -79,9 +57,9 @@ export default function Contact() {
               >
                 <Rounded
                   backgroundColor="#dd672c"
-                  className="w-[180px] h-[180px] bg-[#dd672c] text-white rounded-full absolute flex items-center justify-center cursor-pointer"
+                  className="lg:!w-52 lg:!h-52 md:w-!40 md:h-!40 sm:w-!32 sm:h-!32 bg-[#dd672c] text-white rounded-full absolute flex items-center justify-center cursor-pointer"
                 >
-                  <p className="m-0 text-base font-light relative z-[2]">
+                  <p className="m-0 text-lg font-light relative z-[2]">
                     Get in touch
                   </p>
                 </Rounded>
@@ -104,43 +82,17 @@ export default function Contact() {
             </div>
 
             {/* Navigation Section */}
-            <div className="flex gap-5 mt-[100px] mx-[200px]">
-              <Rounded>
-                <p className="m-0">imavisma@gmail.com</p>
+            <div className="flex gap-5 mt-14 mx-20">
+              <Rounded className="!w-[230px] !h-[65px] rounded-full mt-12 mb-16 border-gray-500">
+                <p className="m-0 text-gray-300 text-base">imavisma@gmail.com</p>
               </Rounded>
-              <Rounded>
-                <p className="m-0">+61(0)424209565</p>
+              <Rounded className="!w-[230px] !h-[65px] rounded-full mt-12 mb-16 border-gray-500">
+                <p className="m-0 text-gray-300 text-base">+61(0)424209565</p>
               </Rounded>
-            </div>
-
-            {/* Info Section */}
-            <div className="flex justify-between items-end mt-24 p-5">
-              <div>
-                <p className="m-0 text-base font-light text-gray-300">
-                  2024 © MAViS. All rights reserved.
-                </p>
-              </div>
-              <div className="flex gap-[15px] items-end">
-                <h3 className="m-0 p-[2.5px] text-gray-400 cursor-default font-light text-base">
-                  Socials
-                </h3>
-                {SOCIAL_LINKS.map((link) => (
-                  <Magnetic key={link.name}>
-                    <a 
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-300 font-light text-sm m-0 p-[2.5px] cursor-pointer hover-underline"
-                    >
-                      {link.name}
-                    </a>
-                  </Magnetic>
-                ))}
-              </div>
             </div>
           </div>
         </motion.div>
-      </section>
+      </div>
     </div>
   );
 }

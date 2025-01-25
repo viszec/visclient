@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { motion, useScroll } from "framer-motion";
 import Rounded from "@/common/RoundedButton";
+import Image from "next/image";
 
 // Animation variants for text reveal
 const slideUp = {
@@ -103,12 +104,12 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="flex px-24 mt-32 text-4xl justify-center"
+      className="section flex min-h-[800px] px-4 lg:px-28 mt-12 lg:mt-36 md:mt- sm:mt-46 text-4xl pb-12 justify-center"
     >
-      <div className="max-w-7xl w-full flex gap-12 relative pt-32">
+      <div className="section-container flex gap-4 lg:gap-12 relative pt-12 lg:pt-28">
         {/* Main heading - takes up 60% of space */}
-        <div className="w-[60%]">
-          <p className="m-0 text-[3rem] leading-[1.1] tracking-tight font-semibold">
+        <div className="w-[50%] lg:w-[60%]">
+          <p className="m-0 text-lg lg:text-[3rem] leading-[1.1] tracking-tight font-semibold">
             {phrase.split(" ").map((word, index) => (
               <span
                 key={index}
@@ -129,31 +130,47 @@ export default function About() {
         </div>
 
         {/* Description - takes up 40% of space */}
-        <div className="w-[30%] relative">
+        <div className="w-[50%] lg:w-[38%] relative">
           <motion.div
             className="flex-1"
             variants={fadeIn}
             initial="initial"
             animate={isAnimating ? "open" : "closed"}
           >
-            <p className="m-0 text-base text-gray-500 font-light leading-tight">
-              I am a Web Designer & Developer with a keen eye for detail and a
-              passion for innovative solutions. My approach blends creativity,
-              code, and user-focused design. I believe in the power of
-              collaboration to solve complex digital challenges. Every project
-              is an opportunity to learn, grow, and create something truly
-              special. Shall we embark on a digital adventure and see where it
-              takes us.
-            </p>
+            <div className="flex flex-col items-start space-y-3 mt-12 lg:mt-0">
+              <div className="pb-6">
+                <Image
+                  src="/icons/arrow.svg"
+                  alt="arrow"
+                  width={18}
+                  height={18}
+                  priority
+                />
+              </div>
+              <h1 className="text-2xl lg:text-4xl font-bold pb-4">MOTIVATION</h1>
+              <p className="m-0 text-xs lg:text-base font-light text-gray-500 leading-tight lg:leading-relaxed">
+                Digital excellence is driven by an unwavering commitment to
+                innovation and precision. As a web designer and developer, I
+                find deep motivation in transforming complex challenges into
+                elegant solutions. Each design element - from pixel-perfect
+                layouts to seamless interactions - becomes a deliberate step in
+                crafting meaningful user experiences. Drawing from a passion for
+                emerging technologies, I focus on creating solutions that not
+                only captivate but solve real business challenges. This journey
+                of continuous growth fuels my mission: to inspire, engage, and
+                deliver digital experiences that leave a lasting impact in our
+                ever-evolving landscape.
+              </p>
+            </div>
 
             {/* About me button - positioned absolutely */}
             <div
-              className="absolute top-[7.2em] left-8"
+              className="absolute lg:top-[12em] lg:-left-16"
               data-scroll
               data-scroll-speed={0.1}
             >
-              <Rounded className="rounded-button border-0">
-                <p className="m-0 text-2xl font-light relative z-[2]">
+              <Rounded className="rounded-button !border-0 !w-24 !h-24 lg:!w-40 lg:!h-40">
+                <p className="m-0 text-sm lg:text-2xl font-light relative z-[2]">
                   About me
                 </p>
               </Rounded>
