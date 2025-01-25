@@ -1,3 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-require-imports */
+
 import {
   createContext,
   forwardRef,
@@ -10,18 +14,7 @@ import {
   useState,
 } from "react"
 import { debounce } from "lodash"
-import Matter, {
-  Bodies,
-  Common,
-  Engine,
-  Events,
-  Mouse,
-  MouseConstraint,
-  Query,
-  Render,
-  Runner,
-  World,
-} from "matter-js"
+import Matter from 'matter-js'
 
 import { cn } from "@/lib/utils"
 
@@ -188,9 +181,9 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
     ref
   ) => {
     const canvas = useRef<HTMLDivElement>(null)
-    const engine = useRef(Engine.create())
-    const render = useRef<Render>()
-    const runner = useRef<Runner>()
+    const engine = useRef(Matter.Engine.create())
+    const render = useRef<Matter.Render>()
+    const runner = useRef<Matter.Runner>()
     const bodiesMap = useRef(new Map<string, PhysicsBody>())
     const frameId = useRef<number>()
     const mouseConstraint = useRef<Matter.MouseConstraint>()
@@ -215,7 +208,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
         let body
         if (props.bodyType === "circle") {
           const radius = Math.max(width, height) / 2
-          body = Bodies.circle(x, y, radius, {
+          body = Matter.Bodies.circle(x, y, radius, {
             ...props.matterBodyOptions,
             angle: angle,
             render: {
@@ -234,7 +227,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
             vertexSets.push(p)
           })
 
-          body = Bodies.fromVertices(x, y, vertexSets, {
+          body = Matter.Bodies.fromVertices(x, y, vertexSets, {
             ...props.matterBodyOptions,
             angle: angle,
             render: {
@@ -244,7 +237,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
             },
           })
         } else {
-          body = Bodies.rectangle(x, y, width, height, {
+          body = Matter.Bodies.rectangle(x, y, width, height, {
             ...props.matterBodyOptions,
             angle: angle,
             render: {
@@ -256,7 +249,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
         }
 
         if (body) {
-          World.add(engine.current.world, [body])
+          Matter.World.add(engine.current.world, [body])
           bodiesMap.current.set(id, { element, body, props })
         }
       },
@@ -267,7 +260,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
     const unregisterElement = useCallback((id: string) => {
       const body = bodiesMap.current.get(id)
       if (body) {
-        World.remove(engine.current.world, body.body)
+        Matter.World.remove(engine.current.world, body.body)
         bodiesMap.current.delete(id)
       }
     }, [])
@@ -292,12 +285,12 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
       const height = canvas.current.offsetHeight
       const width = canvas.current.offsetWidth
 
-      Common.setDecomp(require("poly-decomp"))
+      Matter.Common.setDecomp(require("poly-decomp"))
 
       engine.current.gravity.x = gravity.x
       engine.current.gravity.y = gravity.y
 
-      render.current = Render.create({
+      render.current = Matter.Render.create({
         element: canvas.current,
         engine: engine.current,
         options: {
@@ -308,8 +301,8 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
         },
       })
 
-      const mouse = Mouse.create(render.current.canvas)
-      mouseConstraint.current = MouseConstraint.create(engine.current, {
+      const mouse = Matter.Mouse.create(render.current.canvas)
+      mouseConstraint.current = Matter.MouseConstraint.create(engine.current, {
         mouse: mouse,
         constraint: {
           stiffness: 0.2,
@@ -322,7 +315,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
       // Add walls
       const walls = [
         // Floor
-        Bodies.rectangle(width / 2, height + 10, width, 20, {
+        Matter.Bodies.rectangle(width / 2, height + 10, width, 20, {
           isStatic: true,
           friction: 1,
           render: {
@@ -331,7 +324,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
         }),
 
         // Right wall
-        Bodies.rectangle(width + 10, height / 2, 20, height, {
+        Matter.Bodies.rectangle(width + 10, height / 2, 20, height, {
           isStatic: true,
           friction: 1,
           render: {
@@ -340,7 +333,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
         }),
 
         // Left wall
-        Bodies.rectangle(-10, height / 2, 20, height, {
+        Matter.Bodies.rectangle(-10, height / 2, 20, height, {
           isStatic: true,
           friction: 1,
           render: {
@@ -350,7 +343,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
       ]
 
       const topWall = addTopWall
-        ? Bodies.rectangle(width / 2, -10, width, 20, {
+        ? Matter.Bodies.rectangle(width / 2, -10, width, 20, {
             isStatic: true,
             friction: 1,
             render: {
@@ -364,13 +357,13 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
       }
 
       const touchingMouse = () =>
-        Query.point(
+        Matter.Query.point(
           engine.current.world.bodies,
           mouseConstraint.current?.mouse.position || { x: 0, y: 0 }
         ).length > 0
 
       if (grabCursor) {
-        Events.on(engine.current, "beforeUpdate", (event) => {
+        Matter.Events.on(engine.current, "beforeUpdate", (_event) => {
           if (canvas.current) {
             if (!mouseDown.current && !touchingMouse()) {
               canvas.current.style.cursor = "default"
@@ -382,7 +375,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
           }
         })
 
-        canvas.current.addEventListener("mousedown", (event) => {
+        canvas.current.addEventListener("mousedown", (_event) => {
           mouseDown.current = true
 
           if (canvas.current) {
@@ -393,7 +386,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
             }
           }
         })
-        canvas.current.addEventListener("mouseup", (event) => {
+        canvas.current.addEventListener("mouseup", (_event) => {
           mouseDown.current = false
 
           if (canvas.current) {
@@ -406,12 +399,12 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
         })
       }
 
-      World.add(engine.current.world, [mouseConstraint.current, ...walls])
+      Matter.World.add(engine.current.world, [mouseConstraint.current, ...walls])
 
       render.current.mouse = mouse
 
-      runner.current = Runner.create()
-      Render.run(render.current)
+      runner.current = Matter.Runner.create()
+      Matter.Render.run(render.current)
       updateElements()
       runner.current.enabled = false
 
@@ -428,22 +421,22 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
       }
 
       if (mouseConstraint.current) {
-        World.remove(engine.current.world, mouseConstraint.current)
+        Matter.World.remove(engine.current.world, mouseConstraint.current)
       }
 
       if (render.current) {
-        Mouse.clearSourceEvents(render.current.mouse)
-        Render.stop(render.current)
+        Matter.Mouse.clearSourceEvents(render.current.mouse)
+        Matter.Render.stop(render.current)
         render.current.canvas.remove()
       }
 
       if (runner.current) {
-        Runner.stop(runner.current)
+        Matter.Runner.stop(runner.current)
       }
 
       if (engine.current) {
-        World.clear(engine.current.world, false)
-        Engine.clear(engine.current)
+        Matter.World.clear(engine.current.world, false)
+        Matter.Engine.clear(engine.current)
       }
 
       bodiesMap.current.clear()
@@ -466,10 +459,10 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
       if (runner.current) {
         runner.current.enabled = true
 
-        Runner.run(runner.current, engine.current)
+        Matter.Runner.run(runner.current, engine.current)
       }
       if (render.current) {
-        Render.run(render.current)
+        Matter.Render.run(render.current)
       }
       frameId.current = requestAnimationFrame(updateElements)
       isRunning.current = true
@@ -479,10 +472,10 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
       if (!isRunning.current) return
 
       if (runner.current) {
-        Runner.stop(runner.current)
+        Matter.Runner.stop(runner.current)
       }
       if (render.current) {
-        Render.stop(render.current)
+        Matter.Render.stop(render.current)
       }
       if (frameId.current) {
         cancelAnimationFrame(frameId.current)
