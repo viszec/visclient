@@ -1,3 +1,4 @@
+"use client"
 import { Gravity, MatterBody } from "@/components/ui/gravity";
 
 interface TechSkill {
