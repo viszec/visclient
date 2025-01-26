@@ -41,17 +41,17 @@ export default function SliderText() {
   }, [animate]);
 
   return (
-    <div className="absolute top-[calc(100vh-150px)] lg:top-[calc(100vh-300px)]">
+    <div className="absolute top-[calc(100vh-180px)]">
       <div ref={slider} className="relative whitespace-nowrap">
         <p
           ref={firstText}
-          className="relative m-0 text-black text-6xl lg:text-[150px] font-normal lg:font-medium pr-12"
+          className="relative m-0 text-black text-4xl lg:text-[150px] font-normal lg:font-medium pr-12"
         >
           INNÖVATION <span className="dot">*</span>
         </p>
         <p
           ref={secondText}
-          className="absolute left-full top-0 m-0 text-black/90 text-6xl lg:text-[150px] font-normal lg:font-medium pr-12"
+          className="absolute left-full top-0 m-0 text-black/90 text-4xl lg:text-[150px] font-normal lg:font-medium pr-12"
         >
           CReATiVITY <span className="dot">•</span>
         </p>
