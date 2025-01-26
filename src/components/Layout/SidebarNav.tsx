@@ -8,6 +8,7 @@ import NavLink from '@/components/Layout/Link';
 import Curve from '@/components/Layout/Curve';
 import NavFooter from '@/components/Layout/NavFooter';
 import { ROUTES } from '@/config/routes';
+import Image from 'next/image';
 
 const containerVariants = {
   initial: { opacity: 0 },
@@ -72,8 +73,21 @@ export default function SidebarNav() {
               />
             ))}
           </AnimatePresence>
+          <div className='flex flex-col pt-16 space-y-2'>
+            <div className='flex items-center gap-1'>
+            <p className='text-sm text-white/70 font-normal'>Social</p>
+            <Image
+                    src="/icons/arrow.svg"
+                    alt="arrow"
+                    width={18}
+                    height={18}
+                    priority
+                    className="w-3 h-3 brightness-2 invert"
+                    />
+            </div>
+            <NavFooter />
+          </div>
         </motion.div>
-        <NavFooter />
       </div>
       <div className="absolute left-0 top-0 h-full w-[40px] lg:w-[100px]">
         <Curve />
