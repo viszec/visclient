@@ -28,7 +28,7 @@ export default function Footer() {
   return (
     <section className="section w-full h-full bg-black">
       <div className="flex flex-col">
-        <motion.div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-2 lg:gap-4 pt-2 lg:pt-10 sm:pt-4 pb-4 lg:pb-8 px-6 lg:px-20">
+        <motion.div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-4 lg:gap-4 pt-2 lg:pt-10 sm:pt-4 pb-6 lg:pb-8 px-6 lg:px-20">
           <div className="order-2 lg:order-1">
             <p className="text-xs lg:text-base font-light text-gray-300">
               2024 © MAViS. All rights reserved.
