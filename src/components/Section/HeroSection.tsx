@@ -104,7 +104,7 @@ export default function Hero() {
             custom={2.8}
           >
             {/* Profile Content - Changed to row layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 pt-32 lg:pt-0 pb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 pt-28 lg:pt-0 pb-10">
               {/* Avatar */}
               <div className="relative w-60 h-60 lg:w-120 lg:h-120 rounded-full overflow-hidden opacity-90">
                 <Image
@@ -118,8 +118,8 @@ export default function Hero() {
 
               {/* Description and Tech Skills */}
               <div className="flex flex-col items-start space-y-6">
-                <div className="flex flex-col items-start space-y-2 lg:space-y-3">
-                  <div className="pb-3 lg:pb-12">
+                <div className="flex flex-col items-start space-y-1.5 lg:space-y-3">
+                  <div className="pb-2 lg:pb-12">
                     <Image
                       src="/icons/arrow.svg"
                       alt="arrow"
@@ -134,7 +134,7 @@ export default function Hero() {
                   <h2 className="text-2xl lg:text-4xl font-light text-black">
                     Web Designer & Developer
                   </h2>
-                  <p className="text-lg lg:text-2xl text-black pt-1 lg:pt-2 font-light italic">
+                  <p className="text-lg lg:text-2xl text-black pt-0 lg:pt-2 font-light italic">
                     {"-->"} What I am interested in:
                   </p>
                 </div>

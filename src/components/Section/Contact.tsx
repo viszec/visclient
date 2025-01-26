@@ -42,11 +42,11 @@ export default function Contact() {
                   />
                 </div>
                 <h1 className="text-4xl lg:text-8xl font-light ">
-                  Let&apos;s work
-                </h1>
+                  Let&apos;s Create
+                </h1> 
               </div>
               <h1 className="flex items-center text-4xl lg:text-8xl m-0 font-light ml-10 lg:ml-20">
-                together
+                Together
                 <div className="relative inline-block w-[1.7em] h-[1.7em] ml-[0.4em] lg:ml-[0.2em] align-middle">
                   <Image
                     src="/images/smiley.svg"
@@ -87,15 +87,15 @@ export default function Contact() {
               </motion.svg>
 
               {/* Navigation Section */}
-              <div className="flex flex-col sm:flex-row gap-5 mt-8 lg:mt-14 px-8 lg:px-20">
+              <div className="flex flex-col sm:flex-row gap-5 mt-8 lg:mt-14 px-2 lg:px-20">
                 {CONTACT_INFO.map((info, index) => (
                   <Rounded
                     key={index}
-                    className="w-[180px] lg:!w-[230px] lg:!h-[65px] md:!w-[180px] md:!h-[50px] sm:!w-24
-                            sm:!h-10 rounded-full lg:mt-12 lg:mb-16 !border-[1px] !border-gray-500"
+                    className="w-3/5 sm:!w-[180px] sm:!h-[45px] md:!w-[180px] md:!h-[50px] lg:!w-[230px] lg:!h-[65px] 
+                              rounded-full lg:mt-12 lg:mb-16 !border-[1px] !border-gray-500"
                     onClick={() => (window.location.href = info.href)}
                   >
-                    <p className="m-0 text-gray-200 text-xs lg:text-base truncate px-2 lg:px-4">
+                    <p className="m-0 text-gray-200 text-sm lg:text-base truncate px-4">
                       {info.text}
                     </p>
                   </Rounded>
