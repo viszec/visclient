@@ -10,9 +10,13 @@ export default function Curve() {
   });
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    const curveWidth = isMobile ? 40 : 100;
+    const curveOffset = isMobile ? -30 : -100;
+    
     setPath({
-      initial: `M100 0 L100 ${window.innerHeight} Q-100 ${window.innerHeight/2} 100 0`,
-      target: `M100 0 L100 ${window.innerHeight} Q100 ${window.innerHeight/2} 100 0`
+      initial: `M${curveWidth} 0 L${curveWidth} ${window.innerHeight} Q${curveOffset} ${window.innerHeight/2} ${curveWidth} 0`,
+      target: `M${curveWidth} 0 L${curveWidth} ${window.innerHeight} Q${curveWidth} ${window.innerHeight/2} ${curveWidth} 0`
     });
   }, []);
 
@@ -32,9 +36,15 @@ export default function Curve() {
 
   return (
     <svg 
-      className="absolute top-0 -left-[99px] w-[60px] h-full fill-[#292929] stroke-none
-                 lg:top-0 lg:-left-[99px] lg:w-[100px] lg:h-full"
-      aria-hidden="true"
+      className="absolute top-0 w-[40px] h-full fill-black stroke-none -left-[39px]
+                 lg:w-[100px] lg:h-full lg:-left-[99px]"
+      viewBox={`0 0 ${window.innerWidth < 768 ? 40 : 100} ${window.innerHeight}`}
+      preserveAspectRatio="none"
+      style={{
+        transform: 'translateZ(0)',
+        willChange: 'transform',
+        zIndex: 2
+      }}
     >
       {path.initial && (
         <motion.path 
@@ -42,6 +52,10 @@ export default function Curve() {
           initial="initial" 
           animate="enter" 
           exit="exit"
+          style={{
+            transform: 'translateZ(0)',
+            willChange: 'transform'
+          }}
         />
       )}
     </svg>

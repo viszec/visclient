@@ -12,7 +12,7 @@ interface MenuButtonProps {
 export const MenuButton = ({ buttonRef, isActive, onClick, className = '' }: MenuButtonProps) => (
   <div 
     ref={buttonRef} 
-    className={`scale-0 fixed lg:right-2 z-[4] transition-transform duration-300 ease-out 
+    className={`scale-0 fixed lg:right-2 z-[98] transition-transform duration-300 ease-out 
                 right-4 top-3 lg:top-[70px] ${className}`}
   >
     <Rounded
