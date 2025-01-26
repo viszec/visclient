@@ -87,11 +87,11 @@ export default function Contact() {
               </motion.svg>
 
               {/* Navigation Section */}
-              <div className="flex flex-col sm:flex-row gap-5 mt-8 lg:mt-14 px-2 lg:px-20">
+              <div className="flex flex-col w-3/5 sm:flex-row gap-5 mt-8 lg:mt-14 px-2 lg:px-20">
                 {CONTACT_INFO.map((info, index) => (
                   <Rounded
                     key={index}
-                    className="w-3/5 sm:!w-[180px] sm:!h-[45px] md:!w-[180px] md:!h-[50px] lg:!w-[230px] lg:!h-[65px] 
+                    className="w-full sm:!w-[180px] sm:!h-[45px] md:!w-[180px] md:!h-[50px] lg:!w-[230px] lg:!h-[65px] 
                               rounded-full lg:mt-12 lg:mb-16 !border-[1px] !border-gray-500"
                     onClick={() => (window.location.href = info.href)}
                   >
