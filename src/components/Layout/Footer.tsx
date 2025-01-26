@@ -35,7 +35,7 @@ export default function Footer() {
             </p>
           </div>
           
-          <div className="flex items-center gap-4 order-1 lg:order-2">
+          <div className="flex items-center gap-2 lg:gap-4 order-1 lg:order-2">
             <div className="flex items-center gap-1">
             <h3 className="text-gray-300 cursor-default font-light text-xs lg:text-base">
               Socials

@@ -60,7 +60,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative w-full lg:h-[1050px] md:h-[840px] max-h-screen overflow-hidden"
+      className="relative w-full lg:h-[1250px] md:h-[850px] max-h-screen overflow-hidden"
     >
       {/* Background Container */}
       <div className="absolute inset-0 w-full h-full">
@@ -104,7 +104,7 @@ export default function Hero() {
             custom={2.8}
           >
             {/* Profile Content - Changed to row layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 pt-28 lg:pt-0 pb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 pt-28 lg:pt-0 pb-14">
               {/* Avatar */}
               <div className="relative w-60 h-60 lg:w-120 lg:h-120 rounded-full overflow-hidden opacity-90">
                 <Image
@@ -117,7 +117,7 @@ export default function Hero() {
               </div>
 
               {/* Description and Tech Skills */}
-              <div className="flex flex-col items-start space-y-6">
+              <div className="flex flex-col items-start space-y-2 lg:space-y-6">
                 <div className="flex flex-col items-start space-y-1.5 lg:space-y-3">
                   <div className="pb-2 lg:pb-12">
                     <Image
@@ -145,7 +145,7 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-            <div className="pt-10">
+            <div className="py-6">
               <SliderText />
             </div>
           </motion.div>

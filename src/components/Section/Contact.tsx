@@ -86,8 +86,8 @@ export default function Contact() {
                 />
               </motion.svg>
 
-              {/* Navigation Section */}
-              <div className="flex flex-col w-3/5 sm:flex-row gap-5 mt-8 lg:mt-14 px-2 lg:px-20">
+              {/* Contact info */}
+              <div className="flex flex-col w-full sm:w-3/5 sm:flex-row gap-5 mt-8 lg:mt-14 px-2 lg:px-20">
                 {CONTACT_INFO.map((info, index) => (
                   <Rounded
                     key={index}
