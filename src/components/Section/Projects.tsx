@@ -19,6 +19,21 @@ const scaleAnimation = {
 // Define QuickToFunc type
 type QuickToFunc = (value: number) => void;
 
+// 创建 useScreenWidth hook
+const useScreenWidth = () => {
+  const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return width;
+};
+
 export default function Projects() {
   const [modal, setModal] = useState({active: false, index: 0});
   const { active, index } = modal;
@@ -89,9 +104,12 @@ export default function Projects() {
 
   const [isAnimating, setIsAnimating] = useState(false);
   const { scrollY } = useScroll();
+  const screenWidth = useScreenWidth();
+  const isMobile = screenWidth < 768;
+
   const { ref } = useInView({ 
     threshold: 0,
-    rootMargin: "100px 0px"
+    rootMargin: isMobile ? "50px 0px" : "100px 0px"
   });
 
   useEffect(() => {
@@ -104,13 +122,15 @@ export default function Projects() {
       const direction = current > lastScrollY ? "down" : "up"
       
       if (direction === "down") {
-        // Trigger when reaching 90% of About section
-        if (current >= aboutBottom * 0.9) {
+        // 为移动端调整触发点
+        const triggerPoint = isMobile ? aboutBottom * 0.7 : aboutBottom * 0.9;
+        if (current >= triggerPoint) {
           setIsAnimating(true)
         }
       } else {
-        // Reset animation when scrolling back up past About section
-        if (current < aboutBottom * 0.7) {
+        // 为移动端调整重置点
+        const resetPoint = isMobile ? aboutBottom * 0.5 : aboutBottom * 0.7;
+        if (current < resetPoint) {
           setIsAnimating(false)
         }
       }
@@ -119,11 +139,11 @@ export default function Projects() {
     })
 
     return () => unsubscribe()
-  }, [scrollY])
+  }, [scrollY, isMobile]) // 添加 isMobile 作为依赖项
 
   return (
     <section id="work" ref={ref} className="section-container !lg:px-0 py-12 lg:pt-32 lg:pb-48">
-      <div className="h-[9vh]"></div>
+      <div className="h-[9vh] sm:h-[2vh]"></div>
       <motion.div 
         className="flex items-center flex-col"
         initial={{ opacity: 0, y: 50 }}
@@ -141,13 +161,13 @@ export default function Projects() {
             {[
               { text: "PROJECT", span: "col-start-1 col-end-5" },
               { text: "CATEGORY", span: "col-start-5 col-end-9" },
-              { text: "CLIENT", span: "col-start-9 col-end-11" },
-              { text: "YEAR", span: "col-start-11 col-end-12" },
+              { text: "CLIENT", span: "col-start-9 col-end-11", className: "hidden md:block" },
+              { text: "YEAR", span: "col-start-10 lg:col-start-11 col-end-12 lg:col-end-12" },
               { text: "WEBSITE", span: "col-start-12 col-end-13", align: "text-right" }
-            ].map(({ text, span, align = "" }) => (
+            ].map(({ text, span, align = "", className = "" }) => (
               <h3 
                 key={text}
-                className={`${span} lg:text-sm text-xxs font-light ${align} text-gray-600`}
+                className={`${span} lg:text-sm text-xxs font-light ${align} text-gray-600 ${className}`}
               >
                 {text}
               </h3>
@@ -177,9 +197,12 @@ export default function Projects() {
 
         <Rounded 
           onClick={handleToggleProjects}
-          className="!w-[230px] !h-[65px] rounded-full mt-12 mb-16"
+          className="!w-[140px] !h-[45px] sm:!w-[180px] sm:!h-[45px] lg:!w-[230px] lg:!h-[65px] 
+                    rounded-full mt-2 lg:mt-12 mb-12 lg:mb-16 
+                    !border-[1px] !border-gray-500 hover:!border-transparent"
         >
-          <p className="relative z-10 group-hover:text-white dark:group-hover:text-black text-lg font-normal tracking-wider">
+          <p className="relative z-10 group-hover:text-white dark:group-hover:text-black 
+                      text-base sm:text-sm lg:text-xl font-normal tracking-wider">
             {showAll ? 'Show Less' : 'More Work'}
           </p>
         </Rounded>
@@ -206,11 +229,12 @@ export default function Projects() {
                   >
                     <Image 
                       src={`/images/${src}`}
-                      width={430}
+                      width={0}
                       height={0}
                       alt="image"
-                      className="h-auto rounded-2xl"
+                      className="w-[280px] lg:w-[430px] h-auto rounded-lg lg:rounded-2xl"
                       loading="lazy"
+                      sizes="(max-width: 768px) 280px, 430px"
                     />
                   </div>
                 );

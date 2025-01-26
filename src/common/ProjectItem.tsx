@@ -36,11 +36,12 @@ export default function ProjectItem({
     { 
       content: client, 
       span: "col-start-9 col-end-11",
-      hoverTransform: "group-hover:translate-x-2.5"
+      hoverTransform: "group-hover:translate-x-2.5",
+      className: "hidden md:block"
     },
     { 
       content: year, 
-      span: "col-start-11 col-end-12",
+      span: "col-start-10 col-end-11 lg:col-start-11 lg:col-end-12",
       hoverTransform: "group-hover:translate-x-2.5"
     },
     { 
@@ -70,7 +71,7 @@ export default function ProjectItem({
         onMouseLeave={(e) => manageModal(false, index, e.clientX, e.clientY)}
       />
 
-      {items.map(({ content, span, isTitle, align = "", hoverTransform }, i) => (
+      {items.map(({ content, span, isTitle, align = "", hoverTransform, className = "" }, i) => (
         <div
           key={i}
           className={`
@@ -79,9 +80,10 @@ export default function ProjectItem({
             ${isTitle ? "text-base lg:text-2xl font-normal m-0" : ""}
             ${align}
             ${hoverTransform}
+            ${className}
           `}
         >
-          <div className="text-xs lg:text-base">
+          <div className={`${isTitle ? "text-sm lg:text-2xl" : "text-xs lg:text-base"}`}>
             {content}
           </div>
         </div>

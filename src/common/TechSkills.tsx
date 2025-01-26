@@ -10,18 +10,18 @@ interface TechSkill {
 }
 
 const TECH_SKILLS: TechSkill[] = [
-  { name: "react", color: "#0015ff", x: "30%", y: "10%" },
-  { name: "typescript", color: "#E794DA", x: "30%", y: "30%" },
+  { name: "React", color: "#0015ff", x: "30%", y: "10%" },
+  { name: "Typescript", color: "#E794DA", x: "30%", y: "30%" },
   { name: "JavaScript", color: "#1f464d", x: "40%", y: "20%", angle: 10 },
   { name: "tailwind css", color: "#ff5941", x: "75%", y: "10%" },
   { name: "GSAP", color: "rgb(249 115 22)", x: "80%", y: "20%" },
-  { name: "nodejs", color: "#ffd726", x: "50%", y: "10%" },
-  { name: "nextjs", color: "#000000",  x: "40%", y: "20%", angle: 4}
+  { name: "Nodejs", color: "#ffd726", x: "50%", y: "10%" },
+  { name: "Nextjs", color: "#000000",  x: "40%", y: "20%", angle: 4}
 ];
 
 export function TechSkills() {
   return (
-    <div className="w-full min-h-[170px] lg:min-h-[150px] flex flex-col relative font-azeretMono">
+    <div className="w-full min-h-[90px] lg:min-h-[150px] flex flex-col relative font-azeretMono">
       <Gravity gravity={{ x: 0, y: 1 }} className="w-full h-full">
         {TECH_SKILLS.map((skill) => (
           <MatterBody
@@ -32,7 +32,7 @@ export function TechSkills() {
             angle={skill.angle}
           >
             <div
-              className="text-base lg:text-xl sm:text-xxs text-white rounded-full hover:cursor-grab lg:px-5 lg:py-2 px-3 py-1"
+              className="text-sm lg:text-xl text-white rounded-full hover:cursor-grab lg:px-5 lg:py-2 px-3 py-0.5"
               style={{ backgroundColor: skill.color }}
             >
               {skill.name}

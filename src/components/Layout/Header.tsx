@@ -22,11 +22,22 @@ export default function Header() {
   const header = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
   const [isActive, setIsActive] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     if (isActive) setIsActive(false);
-  }, [pathname, isActive]);
+  }, [pathname]);
+
+  // Add scroll event handler
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Only use ScrollTrigger on desktop
   useLayoutEffect(() => {
@@ -63,9 +74,11 @@ export default function Header() {
     <>
       <header 
         ref={header} 
-        className="fixed top-0 w-full bg-white lg:bg-transparent backdrop-blur-sm z-[1] px-6 sm:px-4 md:px-8 lg:px-12"
+        className={`fixed top-0 w-full backdrop-blur-sm z-[100] px-5 md:px-8 lg:px-12 transition-colors duration-300
+          ${isScrolled ? 'lg:bg-white' : 'lg:bg-transparent'} 
+          bg-white md:bg-white/80`}
       >
-        <div className="flex justify-between items-center py-3 sm:py-5 md:py-4 lg:py-2">
+        <div className="flex justify-between items-center py-2 lg:py-2">
           <div className="flex items-center">
             <Logo />
           </div>

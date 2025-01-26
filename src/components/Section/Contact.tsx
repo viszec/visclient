@@ -1,8 +1,13 @@
-'use client'
+"use client";
 import { useRef } from "react";
 import Image from "next/image";
 import { useScroll, motion, useTransform } from "framer-motion";
 import Rounded from "@/common/RoundedButton";
+
+const CONTACT_INFO = [
+  { text: "imavisma@gmail.com", href: "mailto:imavisma@gmail.com" },
+  { text: "Let's Connect", href: "tel:+61424209565" },
+];
 
 export default function Contact() {
   const container = useRef<HTMLDivElement>(null);
@@ -16,18 +21,18 @@ export default function Contact() {
   const rotate = useTransform(scrollYProgress, [0, 1], [120, 90]);
 
   return (
-    <div className="section bg-[#2e2e2e]">
+    <div className="section bg-black">
       <div id="contact" className="relative">
         <motion.div
           style={{ y }}
           ref={container}
           className="flex flex-col items-center justify-center text-white relative"
         >
-          <div className="w-full pt-52 pb-12 bg-[#2e2e2e]">
+          <div className="w-full pt-20 pb-20 lg:pb-18 lg:pt-52 bg-black">
             {/* Title Section */}
-            <div className="border-b border-gray-500 pb-24 mx-20 relative">
+            <div className="border-b border-gray-500 pb-12 mx-6 lg:pb-8 lg:mx-20 relative">
               <div className="flex items-center gap-4">
-                <div className="relative w-28 h-28 rounded-full overflow-hidden ml-20">
+                <div className="relative w-16 lg:w-28 h-16 lg:h-28 rounded-full overflow-hidden ml-4 lg:ml-10">
                   <Image
                     fill
                     alt="avatar"
@@ -36,13 +41,13 @@ export default function Contact() {
                     loading="lazy"
                   />
                 </div>
-                <h1 className="text-2xl lg:text-8xl font-light ">
+                <h1 className="text-4xl lg:text-8xl font-light ">
                   Let&apos;s work
                 </h1>
               </div>
-              <h1 className="flex items-center text-2xl lg:text-8xl m-0 font-light ml-20">
+              <h1 className="flex items-center text-4xl lg:text-8xl m-0 font-light ml-10 lg:ml-20">
                 together
-                <div className="relative inline-block w-[1.7em] h-[1.7em] ml-[0.2em] align-middle">
+                <div className="relative inline-block w-[1.7em] h-[1.7em] ml-[0.4em] lg:ml-[0.2em] align-middle">
                   <Image
                     src="/images/smiley.svg"
                     alt="Smiley face"
@@ -54,13 +59,13 @@ export default function Contact() {
 
               <motion.div
                 style={{ x }}
-                className="absolute left-[calc(100%-400px)] top-[calc(100%-75px)]"
+                className="absolute left-[calc(100%-210px)] top-[calc(100%-45px)] lg:left-[calc(100%-400px)] lg:top-[calc(100%-175px)]"
               >
                 <Rounded
                   backgroundColor="#dd672c"
-                  className="lg:!w-52 lg:!h-52 md:w-!40 md:h-!40 sm:w-!32 sm:h-!32 bg-[#dd672c] text-white rounded-full absolute flex items-center justify-center cursor-pointer"
+                  className="lg:!w-52 lg:!h-52 !w-24 !h-24 bg-orange-500 hover:bg-white hover:text-black text-white rounded-full !border-transparent hover:!border-transparent absolute flex items-center justify-center cursor-pointer"
                 >
-                  <p className="m-0 text-lg font-light relative z-[2]">
+                  <p className="m-0 text-sm lg:text-lg font-light relative z-[2]">
                     Get in touch
                   </p>
                 </Rounded>
@@ -68,7 +73,7 @@ export default function Contact() {
 
               <motion.svg
                 style={{ rotate, scale: 2 }}
-                className="absolute top-[30%] left-[100%]"
+                className="absolute top-[30%] left-[95%] lg:top-[50%]"
                 width="9"
                 height="9"
                 viewBox="0 0 9 9"
@@ -80,16 +85,22 @@ export default function Contact() {
                   fill="white"
                 />
               </motion.svg>
-            </div>
 
-            {/* Navigation Section */}
-            <div className="flex gap-5 mt-14 mx-20">
-              <Rounded className="!w-[230px] !h-[65px] rounded-full mt-12 mb-16 border-gray-500">
-                <p className="m-0 text-gray-300 text-base">imavisma@gmail.com</p>
-              </Rounded>
-              <Rounded className="!w-[230px] !h-[65px] rounded-full mt-12 mb-16 border-gray-500">
-                <p className="m-0 text-gray-300 text-base">+61(0)424209565</p>
-              </Rounded>
+              {/* Navigation Section */}
+              <div className="flex flex-col sm:flex-row gap-5 mt-8 lg:mt-14 px-8 lg:px-20">
+                {CONTACT_INFO.map((info, index) => (
+                  <Rounded
+                    key={index}
+                    className="w-[180px] lg:!w-[230px] lg:!h-[65px] md:!w-[180px] md:!h-[50px] sm:!w-24
+                            sm:!h-10 rounded-full lg:mt-12 lg:mb-16 !border-[1px] !border-gray-500"
+                    onClick={() => (window.location.href = info.href)}
+                  >
+                    <p className="m-0 text-gray-200 text-xs lg:text-base truncate px-2 lg:px-4">
+                      {info.text}
+                    </p>
+                  </Rounded>
+                ))}
+              </div>
             </div>
           </div>
         </motion.div>

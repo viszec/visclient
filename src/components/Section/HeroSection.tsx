@@ -16,16 +16,16 @@ const animations = {
     enter: {
       y: 0,
       transition: { duration: 0.6, ease: [0.33, 1, 0.68, 1], delay: 2.5 },
-    }
+    },
   },
   fadeIn: {
     initial: { opacity: 0, y: 20 },
     enter: (delay: number) => ({
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, delay }
-    })
-  }
+      transition: { duration: 0.5, delay },
+    }),
+  },
 };
 
 export default function Hero() {
@@ -42,20 +42,26 @@ export default function Hero() {
   useEffect(() => {
     // Calculate scale based on viewport size
     const calculateScale = () => {
-      if (width < 768) { // mobile
+      if (width < 768) {
+        // mobile
         return { x: 1, y: 1 };
-      } else if (width < 1024) { // tablet
+      } else if (width < 1024) {
+        // tablet
         return { x: 0.7, y: 1 };
-      } else { // desktop
+      } else {
+        // desktop
         return { x: 0.4, y: 1 };
       }
     };
-    
+
     setScale(calculateScale());
   }, [width]);
 
   return (
-    <section id="hero" className="relative w-full lg:h-[1050px] md:h-[768px] max-h-screen overflow-hidden">
+    <section
+      id="hero"
+      className="relative w-full lg:h-[1050px] md:h-[840px] max-h-screen overflow-hidden"
+    >
       {/* Background Container */}
       <div className="absolute inset-0 w-full h-full">
         {/* Background Text */}
@@ -97,12 +103,10 @@ export default function Hero() {
             animate="enter"
             custom={2.8}
           >
-
-            
             {/* Profile Content - Changed to row layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 pt-10 lg:pt-0 md:pt-12 sm:pt-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 pt-32 lg:pt-0 pb-10">
               {/* Avatar */}
-              <div className="relative w-32 h-32 lg:w-120 lg:h-120 rounded-full overflow-hidden opacity-90">
+              <div className="relative w-60 h-60 lg:w-120 lg:h-120 rounded-full overflow-hidden opacity-90">
                 <Image
                   src="/images/mavis-avatar.webp"
                   alt="avatar"
@@ -111,27 +115,27 @@ export default function Hero() {
                   priority
                 />
               </div>
-              
+
               {/* Description and Tech Skills */}
               <div className="flex flex-col items-start space-y-6">
-                <div className="flex flex-col items-start space-y-3">
-                    <div className="pb-6">
+                <div className="flex flex-col items-start space-y-2 lg:space-y-3">
+                  <div className="pb-3 lg:pb-12">
                     <Image
-                    src="/icons/arrow.svg"
-                    alt="arrow"
-                    width={18}
-                    height={18}
-                    priority
+                      src="/icons/arrow.svg"
+                      alt="arrow"
+                      width={18}
+                      height={18}
+                      priority
                     />
-                    </div>
-                  <h1 className="text-2xl lg:text-4xl font-light text-gray-700">
+                  </div>
+                  <h1 className="text-3xl lg:text-5xl font-light text-black">
                     CREATIVE
                   </h1>
-                  <h2 className="text-xl lg:text-4xl font-light text-gray-700">
+                  <h2 className="text-2xl lg:text-4xl font-light text-black">
                     Web Designer & Developer
-                    </h2>
-                    <p className="text-sm lg:text-2xl text-gray-700 pt-2 font-light italic">
-                    {'-->'} What I am interested in:
+                  </h2>
+                  <p className="text-lg lg:text-2xl text-black pt-1 lg:pt-2 font-light italic">
+                    {"-->"} What I am interested in:
                   </p>
                 </div>
 
@@ -141,8 +145,8 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-            <div className="hidden md:block lg:hidden">
-            <SliderText />
+            <div className="pt-10">
+              <SliderText />
             </div>
           </motion.div>
         </div>

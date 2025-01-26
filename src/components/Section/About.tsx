@@ -105,12 +105,12 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="section flex min-h-[800px] px-4 lg:px-28 mt-12 lg:mt-36 md:mt- sm:mt-46 text-4xl pb-12 justify-center"
+      className="section flex min-h-[900px] lg:min-h-[800px] px-4 lg:px-28 mt-12 lg:mt-36 md:mt- sm:mt-46 text-4xl lg:pb-12 justify-center"
     >
-      <div className="section-container flex gap-4 lg:gap-12 relative pt-12 lg:pt-28">
-        {/* Main heading - takes up 60% of space */}
-        <div className="w-[50%] lg:w-[60%]">
-          <p className="m-0 text-lg lg:text-[3rem] leading-[1.1] tracking-tight font-semibold">
+      <div className="section-container flex flex-col lg:flex-row gap-4 lg:gap-12 relative pt-20 lg:pt-28">
+        {/* Main heading - takes up full width on mobile, 60% on desktop */}
+        <div className="w-full lg:w-[62%]">
+          <p className="m-0 text-2xl lg:text-[3rem] leading-[1.1] tracking-tight font-semibold">
             {phrase.split(" ").map((word, index) => (
               <span
                 key={index}
@@ -130,15 +130,15 @@ export default function About() {
           </p>
         </div>
 
-        {/* Description - takes up 40% of space */}
-        <div className="w-[50%] lg:w-[38%] relative">
+        {/* Description Section - full width on mobile, 38% on desktop */}
+        <div className="w-full lg:w-[38%] mt-8 lg:mt-0 relative">
           <motion.div
             className="flex-1"
             variants={fadeIn}
             initial="initial"
             animate={isAnimating ? "open" : "closed"}
           >
-            <div className="flex flex-col items-start space-y-3 mt-12 lg:mt-0">
+            <div className="flex flex-col items-start space-y-3">
               <div className="pb-6">
                 <Image
                   src="/icons/arrow.svg"
@@ -149,7 +149,7 @@ export default function About() {
                 />
               </div>
               <h1 className="text-2xl lg:text-4xl font-bold pb-4">MOTIVATION</h1>
-              <p className="m-0 text-xs lg:text-base font-light text-gray-500 leading-tight lg:leading-relaxed">
+              <p className="m-0 text-sm pr-12 lg:pr-0 lg:text-base font-light text-gray-500 leading-tight sm:tracking-tight lg:leading-relaxed">
                 Digital excellence is driven by an unwavering commitment to
                 innovation and precision. As a web designer and developer, I
                 find deep motivation in transforming complex challenges into
@@ -164,9 +164,9 @@ export default function About() {
               </p>
             </div>
 
-            {/* About me button - positioned absolutely */}
+            {/* About me button */}
             <div
-              className="absolute lg:top-[12em] lg:-left-16"
+              className="absolute left-[90%] top-[-2em] lg:top-[12em] lg:-left-16 mt-8 lg:mt-0"
               data-scroll
               data-scroll-speed={0.1}
             >

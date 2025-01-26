@@ -22,7 +22,7 @@ interface PreloaderProps {
 export default function Preloader({
   //words = ["Hello", "Bonjour", "Ciao", "Olà", "やあ", "Hallå", "Guten tag", "Hallo"],
   words = ["Creative", "Solid", "Design", "Engineering", "Is", "Awesome"],
-  backgroundColor = "#141516",
+  backgroundColor = "#00000A",
   textColor = "white",
   dotColor = "white",
   initialDelay = 1000,
@@ -83,14 +83,14 @@ export default function Preloader({
           variants={slideUp} 
           initial="initial" 
           exit="exit"
-          className="fixed inset-0 z-[99] flex items-center justify-center"
+          className="fixed inset-0 z-[100] flex items-center justify-center"
           style={{ backgroundColor }}
         >
           <motion.p 
             variants={opacity} 
             initial="initial" 
             animate="enter"
-            className="flex items-center absolute z-[1] text-[42px]"
+            className="flex items-center absolute z-[1] text-3xl lg:text-[58px]"
             style={{ color: textColor }}
           >
             <span 
