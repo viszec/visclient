@@ -27,7 +27,7 @@ export default function NavFooter() {
   return (
     
     <motion.div 
-      className="flex w-full justify-between text-sm font-light gap-10"
+      className="flex w-full px-10 justify-between text-xxs lg:text-sm font-light gap-4 lg:gap-10"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.5 }}
@@ -38,7 +38,7 @@ export default function NavFooter() {
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white/60 hover:text-white transition-colors duration-300"
+          className="text-white/80 hover:text-white transition-colors duration-300"
         >
           {link.name}
         </Link>
