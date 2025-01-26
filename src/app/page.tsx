@@ -1,9 +1,8 @@
 "use client";
-
-//import { useEffect, useState } from "react";
-//import { AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import HeroSection from "@/components/Section/HeroSection";
-//import Preloader from "@/components/Section/Preloader";
+import Preloader from "@/components/Section/Preloader";
 import About from "@/components/Section/About";
 import Projects from "@/components/Section/Projects";
 import SlideImage from "@/components/Section/SlideImage";
@@ -13,7 +12,7 @@ import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 
 export default function Home() {
-  /* const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -31,15 +30,14 @@ export default function Home() {
       };
     })();
   }, []);
-  */
 
   return (
     <>
       <Header />
       <main className="min-h-screen">
-        {/*<AnimatePresence mode="wait">
+      <AnimatePresence mode="wait">
         {isLoading && <Preloader />}
-      </AnimatePresence>*/}
+      </AnimatePresence>
         <HeroSection />
         <About />
         <Projects />
