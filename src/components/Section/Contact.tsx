@@ -28,9 +28,9 @@ export default function Contact() {
           ref={container}
           className="flex flex-col items-center justify-center text-white relative"
         >
-          <div className="w-full pt-20 pb-20 lg:pb-18 lg:pt-52 bg-black">
+          <div className="w-full pt-20 pb-18 lg:pb-18 lg:pt-52 bg-black">
             {/* Title Section */}
-            <div className="border-b border-gray-500 pb-12 mx-6 lg:pb-8 lg:mx-20 relative">
+            <div className="border-b border-gray-500 after:block after:mb-10 lg:after:mb-8 pb-4 lg:pb-8 mx-8 lg:mx-20 relative">
               <div className="flex items-center gap-4">
                 <div className="relative w-16 lg:w-28 h-16 lg:h-28 rounded-full overflow-hidden ml-4 lg:ml-10">
                   <Image
@@ -59,7 +59,7 @@ export default function Contact() {
 
               <motion.div
                 style={{ x }}
-                className="absolute left-[calc(100%-210px)] top-[calc(100%-45px)] lg:left-[calc(100%-400px)] lg:top-[calc(100%-175px)]"
+                className="absolute left-[calc(100%-210px)] top-[calc(100%-55px)] lg:left-[calc(100%-400px)] lg:top-[calc(100%-175px)]"
               >
                 <Rounded
                   backgroundColor="#dd672c"
@@ -87,7 +87,7 @@ export default function Contact() {
               </motion.svg>
 
               {/* Contact info */}
-              <div className="flex flex-col w-full sm:w-3/5 sm:flex-row gap-5 mt-8 lg:mt-14 px-2 lg:px-20">
+              <div className="flex flex-col w-full sm:w-3/5 sm:flex-row gap-5 mt-8 lg:mt-14 pr-24 pl-8 lg:px-20">
                 {CONTACT_INFO.map((info, index) => (
                   <Rounded
                     key={index}
