@@ -74,7 +74,7 @@ export default function Header() {
     <>
       <header 
         ref={header} 
-        className={`fixed top-0 w-full backdrop-blur-sm z-[100] px-5 md:px-8 lg:px-12 transition-colors duration-300
+        className={`fixed top-0 w-full backdrop-blur-sm z-[99] px-5 md:px-8 lg:px-12 transition-colors duration-300
           ${isScrolled ? 'lg:bg-white' : 'lg:bg-transparent'} 
           bg-white md:bg-white/80`}
       >
@@ -85,21 +85,22 @@ export default function Header() {
           
           <div className="flex items-center gap-4">
             <Navigation />
-            {/* Mobile menu button */}
-            <div className="md:hidden">
-              <MenuButton 
-                buttonRef={buttonRef}
-                isActive={isActive}
-                onClick={() => setIsActive(!isActive)}
-                className="scale-100"
-              />
-            </div>
           </div>
         </div>
       </header>
 
+      {/* Move out MenuButton to the out layer on mobile, ensure on the top */}
+      <div className="md:hidden fixed top-3 right-4 z-[200]">
+        <MenuButton 
+          buttonRef={buttonRef}
+          isActive={isActive}
+          onClick={() => setIsActive(!isActive)}
+          className="scale-100"
+        />
+      </div>
+
       {/* Desktop menu button */}
-      <div className="hidden md:block">
+      <div className="hidden md:block z-[101]">
         <MenuButton 
           buttonRef={buttonRef}
           isActive={isActive}

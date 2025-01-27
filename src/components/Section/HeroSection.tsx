@@ -125,6 +125,7 @@ export default function Hero() {
                       alt="arrow"
                       width={18}
                       height={18}
+                      className="w-6 h-6"
                       priority
                     />
                   </div>
@@ -134,9 +135,20 @@ export default function Hero() {
                   <h2 className="text-2xl lg:text-4xl font-light text-black">
                     Web Designer & Developer
                   </h2>
-                  <p className="text-lg lg:text-2xl text-black pt-0 lg:pt-2 font-light italic">
-                    {"-->"} What I am interested in:
-                  </p>
+                  <div className="flex w-7 h-[2px] lg:h-[3px] bg-black/80 my-3" />
+                  <div className="flex items-center gap-2 lg:gap-3">
+                    <p className="text-lg lg:text-3xl text-black font-light pt-3">
+                      What I am interested in
+                    </p>
+                    <Image
+                      src="/icons/arrow.svg"
+                      alt="arrow"
+                      width={18}
+                      height={18}
+                      priority
+                      className="w-3 h-3 lg:w-5 lg:h-5 rotate-90 transform"
+                    />
+                  </div>
                 </div>
 
                 {/* Tech Skills */}
