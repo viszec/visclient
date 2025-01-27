@@ -8,6 +8,7 @@ import { Particles } from "@/components/ui/particles";
 import { TechSkills } from "@/common/TechSkills";
 import { useScreenSize } from "@/hooks/useScreenSize";
 import SliderText from "@/common/SliderText";
+import { WelcomeIntro } from "@/common/WelcomeIntro";
 
 // Animation variants
 const animations = {
@@ -118,18 +119,27 @@ export default function Hero() {
 
               {/* Description and Tech Skills */}
               <div className="flex flex-col items-start space-y-2 lg:space-y-6">
-                <div className="flex flex-col items-start space-y-1.5 lg:space-y-3">
-                  <div className="pb-2 lg:pb-12">
+                <div className="flex flex-col items-start space-y-1 lg:space-y-2">
+                  <div className="flex flex-col items-start lg:items-start lg:space-y-1">
                     <Image
                       src="/icons/arrow.svg"
                       alt="arrow"
                       width={18}
                       height={18}
-                      className="w-6 h-6"
+                      className="w-5 h-5 lg:w-6 lg:h-6"
                       priority
                     />
+                    <WelcomeIntro />
                   </div>
-                  <h1 className="text-3xl lg:text-5xl font-light text-black">
+                  <div className="flex w-full items-start justify-start pt-2 lg:pt-0">
+                    <TechSkills />
+                  </div>
+                  <div className="py-6">
+              <SliderText />
+            </div>
+
+                  {/*<h1 className="text-3xl lg:text-5xl font-light text-black">
+                  {/*<h1 className="text-3xl lg:text-5xl font-light text-black">
                     CREATIVE
                   </h1>
                   <h2 className="text-2xl lg:text-4xl font-light text-black">
@@ -148,18 +158,16 @@ export default function Hero() {
                       priority
                       className="w-3 h-3 lg:w-5 lg:h-5 rotate-90 transform"
                     />
-                  </div>
+                  </div>*/}
                 </div>
 
                 {/* Tech Skills */}
-                <div className="w-full">
+                {/*<div className="w-full">
                   <TechSkills />
-                </div>
+                </div>*/}
               </div>
             </div>
-            <div className="py-6">
-              <SliderText />
-            </div>
+            
           </motion.div>
         </div>
       </motion.div>
