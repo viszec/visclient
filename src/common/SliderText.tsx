@@ -53,7 +53,7 @@ export default function SliderText() {
           ref={secondText}
           className="absolute left-full top-0 m-0 text-black/90 text-4xl lg:text-[150px] font-normal lg:font-medium pr-12"
         >
-          CReATiVITY <span className="dot">•</span>
+          CReATiVITY <span className="dot">*</span>
         </p>
       </div>
     </div>
