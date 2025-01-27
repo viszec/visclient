@@ -13,6 +13,7 @@ import Footer from "@/components/Layout/Footer";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [showHeader, setShowHeader] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -21,6 +22,7 @@ export default function Home() {
 
       setTimeout(() => {
         setIsLoading(false);
+        setShowHeader(true);
         document.body.style.cursor = "default";
         window.scrollTo(0, 0);
       }, 2000);
@@ -33,11 +35,11 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      {showHeader && <Header />}
       <main className="min-h-screen">
-      <AnimatePresence mode="wait">
-        {isLoading && <Preloader />}
-      </AnimatePresence>
+        <AnimatePresence mode="wait">
+          {isLoading && <Preloader />}
+        </AnimatePresence>
         <HeroSection />
         <About />
         <Projects />
