@@ -9,7 +9,7 @@ import { LetterSwapForward, LetterSwapPingPong } from "@/components/ui/letter-sw
 export function WelcomeIntro() {
   return (
     <div className="w-full h-full rounded-lg flex flex-col items-start justify-start font-calendas">
-      <div className="pt-6 lg:pt-12 text-black/90 rounded-xl !text-left gap-y-0.5 lg:gap-y-1 flex flex-col">
+      <div className="pt-3 lg:pt-12 text-black/90 rounded-xl !text-left gap-y-0.5 lg:gap-y-1 flex flex-col">
         <LetterSwapForward
           label="HI, FRIEND!"
           reverse={true}

@@ -131,12 +131,12 @@ export default function Hero() {
                     />
                     <WelcomeIntro />
                   </div>
-                  <div className="flex w-full items-start justify-start pt-2 lg:pt-0">
+                  <div className="flex w-full items-start justify-start pt-1 lg:pt-0">
                     <TechSkills />
                   </div>
                   <div className="py-6">
-              <SliderText />
-            </div>
+                    <SliderText />
+                  </div>
 
                   {/*<h1 className="text-3xl lg:text-5xl font-light text-black">
                   {/*<h1 className="text-3xl lg:text-5xl font-light text-black">
@@ -167,7 +167,6 @@ export default function Hero() {
                 </div>*/}
               </div>
             </div>
-            
           </motion.div>
         </div>
       </motion.div>

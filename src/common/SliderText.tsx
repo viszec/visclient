@@ -41,7 +41,7 @@ export default function SliderText() {
   }, [animate]);
 
   return (
-    <div className="absolute top-[calc(100vh-190px)]">
+    <div className="absolute top-[calc(100vh-160px)] lg:top-[calc(100vh-190px)]">
       <div ref={slider} className="relative whitespace-nowrap">
         <p
           ref={firstText}
