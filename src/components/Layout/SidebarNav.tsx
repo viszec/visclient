@@ -64,7 +64,7 @@ export default function SidebarNav() {
           >
             <div className="flex text-white/80 border-b py-2 border-gray-700 uppercase text-sm lg:text-2xl font-light tracking-tight mb-10">
               <div className="tracking-wider items-center gap-2">
-                Mavis Ma
+                Mavis M.
                 <Image
                   src="/icons/arrow.svg"
                   alt="arrow"
