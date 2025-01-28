@@ -5,7 +5,7 @@ import { useInView } from "react-intersection-observer";
 import { motion, useScroll } from "framer-motion";
 import Rounded from "@/common/RoundedButton";
 import Image from "next/image";
-
+import { VerticalCutReveal } from "@/components/ui/vertical-cut-reveal";
 // Animation variants for text reveal
 const slideUp = {
   initial: {
@@ -51,6 +51,8 @@ export default function About() {
     rootMargin: "100px 0px", // Slightly extend detection range
   });
 
+  const [showDescription, setShowDescription] = useState(false);
+  
   useEffect(() => {
     let lastScrollY = scrollY.get();
     const sectionTop =
@@ -101,11 +103,29 @@ export default function About() {
     return () => unsubscribe();
   }, [scrollY, entry]);
 
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    
+    if (isAnimating) {
+      // Start description animation 0.5s after phrase animation
+      timer = setTimeout(() => {
+        setShowDescription(true);
+      }, 500);
+    } else {
+      // Reset description when phrase animation resets
+      setShowDescription(false);
+    }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [isAnimating]); // Depend on isAnimating instead of mounting
+
   return (
     <section
       id="about"
       ref={ref}
-      className="section flex min-h-[900px] lg:min-h-[800px] px-4 lg:px-28 mt-12 lg:mt-36 md:mt- sm:mt-46 text-4xl lg:pb-12 justify-center"
+      className="section flex min-h-[900px] lg:min-h-[800px] px-4 lg:px-28 mt-12 lg:mt-36 md:mt- sm:mt-46 text-4xl lg:pb-0 justify-center"
     >
       <div className="section-container flex flex-col lg:flex-row gap-4 lg:gap-12 relative pt-20 lg:pt-28">
         {/* Main heading - takes up full width on mobile, 60% on desktop */}
@@ -148,20 +168,27 @@ export default function About() {
                   priority
                 />
               </div>
-              <h1 className="text-2xl lg:text-4xl font-bold pb-4">MOTIVATION</h1>
-              <p className="m-0 text-sm pr-12 lg:pr-0 lg:text-base font-light text-gray-500 leading-tight sm:tracking-tight lg:leading-relaxed">
-                Digital excellence is driven by an unwavering commitment to
-                innovation and precision. As a web designer and developer, I
-                find deep motivation in transforming complex challenges into
-                elegant solutions. Each design element - from pixel-perfect
-                layouts to seamless interactions - becomes a deliberate step in
-                crafting meaningful user experiences. Drawing from a passion for
-                emerging technologies, I focus on creating solutions that not
-                only captivate but solve real business challenges. This journey
-                of continuous growth fuels my mission: to inspire, engage, and
-                deliver digital experiences that leave a lasting impact in our
-                ever-evolving landscape.
-              </p>
+              <h1 className="text-2xl lg:text-4xl font-bold pb-4">
+                MOTIVATION
+              </h1>
+              {showDescription && (
+                <div className="m-0 text-sm pr-12 lg:pr-16 lg:text-base font-light text-gray-500 leading-tight sm:tracking-tight lg:leading-relaxed">
+                  <VerticalCutReveal
+                    splitBy="characters"
+                    staggerDuration={0.002}
+                    staggerFrom="random"
+                    transition={{
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 35,
+                      delay: 0.1,
+                    }}
+                    containerClassName="text-[#00000] leading-snug"
+                  >
+                    {`Digital excellence is driven by an unwavering commitment to innovation and precision. As a web designer and developer, I find deep motivation in transforming complex challenges into elegant solutions. Each design element - from pixel-perfect layouts to seamless interactions - becomes a deliberate step in crafting meaningful user experiences. Drawing from a passion for emerging technologies, I focus on creating solutions that not only captivate but solve real business challenges. This journey of continuous growth fuels my mission: to inspire, engage, and deliver digital experiences that leave a lasting impact in our ever-evolving landscape.`}
+                  </VerticalCutReveal>
+                </div>
+              )}
             </div>
 
             {/* About me button */}
