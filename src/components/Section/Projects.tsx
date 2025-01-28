@@ -122,13 +122,13 @@ export default function Projects() {
       const direction = current > lastScrollY ? "down" : "up"
       
       if (direction === "down") {
-        // 为移动端调整触发点
+        // mobile trigger point
         const triggerPoint = isMobile ? aboutBottom * 0.7 : aboutBottom * 0.9;
         if (current >= triggerPoint) {
           setIsAnimating(true)
         }
       } else {
-        // 为移动端调整重置点
+        // mobile reset point
         const resetPoint = isMobile ? aboutBottom * 0.5 : aboutBottom * 0.7;
         if (current < resetPoint) {
           setIsAnimating(false)

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
 
 interface ProjectProps {
   index: number;
@@ -52,7 +53,18 @@ export default function ProjectItem({
           rel="noopener noreferrer"
           className="text-xs lg:text-base relative after:content-[''] after:absolute after:w-0 after:h-[2px] after:bottom-0 after:left-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full"
         >
-          Live Link
+          <span className="hidden md:inline">Live Link</span>
+          <span className="flex items-center gap-1 md:hidden">
+            <Image
+              src="/icons/arrow.svg"
+              alt="arrow"
+              width={18}
+              height={18}
+              className="w-2 h-2"
+              priority
+            />
+            Live
+          </span>
         </Link>
       ),
       span: "col-start-12 col-end-13",
