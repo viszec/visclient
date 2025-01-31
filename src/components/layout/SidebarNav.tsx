@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { menuSlide } from '@/types/animation';
-import NavLink from '@/components/Layout/Link';
-import Curve from '@/components/Layout/Curve';
-import NavSocials from '@/components/Layout/NavSocials';
+import NavLink from '@/components/layout/Link';
+import Curve from '@/components/layout/Curve';
+import NavSocials from '@/components/layout/NavSocials';
 import { ROUTES } from '@/config/routes';
 import Image from 'next/image';
 

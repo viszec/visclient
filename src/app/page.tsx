@@ -1,15 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import HeroSection from "@/components/Section/HeroSection";
-import Preloader from "@/components/Section/Preloader";
-import About from "@/components/Section/About";
-import Projects from "@/components/Section/Projects";
-import SlideImage from "@/components/Section/SlideImage";
+import HeroSection from "@/components/sections/HeroSection";
+import Preloader from "@/components/sections/Preloader";
+import About from "@/components/sections/About";
+import Projects from "@/components/sections/Projects";
+import SlideImage from "@/components/sections/SlideImage";
 //import Skills from "@/components/Section/Skills";
-import Contact from "@/components/Section/Contact";
-import Header from "@/components/Layout/Header";
-import Footer from "@/components/Layout/Footer";
+import Contact from "@/components/sections/Contact";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);

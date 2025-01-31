@@ -1,6 +1,6 @@
 'use client'
 
-import Rounded from "@/common/RoundedButton";
+import Rounded from "@/components/common/RoundedButton";
 
 interface MenuButtonProps {
   buttonRef: React.RefObject<HTMLDivElement>;

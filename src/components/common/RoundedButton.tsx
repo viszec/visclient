@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, ReactNode } from 'react';
 import gsap from 'gsap';
-import Magnetic from "@/common/Magnetic";
+import Magnetic from "@/components/common/Magnetic";
 
 interface RoundedButtonProps {
   children: ReactNode;

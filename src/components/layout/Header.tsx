@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SidebarNav from "@/components/Layout/SidebarNav";
-import { Logo } from "@/common/Logo";
-import { Navigation } from "@/common/Navigation";
-import { MenuButton } from "@/common/MenuButton";
+import SidebarNav from "@/components/layout/SidebarNav";
+import { Logo } from "@/components/common/Logo";
+import { Navigation } from "@/components/common/Navigation";
+import { MenuButton } from "@/components/common/MenuButton";
 
 // Animation configurations
 const scrollAnimation = {

@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { Particles } from "@/components/ui/particles";
-import { TechSkills } from "@/common/TechSkills";
+import { TechSkills } from "@/components/common/TechSkills";
 import { useScreenSize } from "@/hooks/useScreenSize";
-import SliderText from "@/common/SliderText";
-import { WelcomeIntro } from "@/common/WelcomeIntro";
+import SliderText from "@/components/common/SliderText";
+import { WelcomeIntro } from "@/components/common/WelcomeIntro";
 
 // Animation variants
 const animations = {
