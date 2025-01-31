@@ -1,8 +1,8 @@
 "use client";
 
-import Magnetic from "@/common/Magnetic";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Magnetic from "@/components/common/Magnetic";
 
 interface SocialLink {
   name: string;

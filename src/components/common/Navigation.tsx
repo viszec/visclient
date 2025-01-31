@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ROUTES } from "@/config/routes";
-import Magnetic from "@/common/Magnetic";
+import Magnetic from "@/components/common/Magnetic";
 
 export const Navigation = () => (
   <nav className="hidden md:flex items-center">

@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { useScroll, motion, useTransform } from "framer-motion";
-import Rounded from "@/common/RoundedButton";
+import Rounded from "@/components/common/RoundedButton";
 
 const CONTACT_INFO = [
   { text: "imavisma@gmail.com", href: "mailto:imavisma@gmail.com" },

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from 'react';
-import Card from '@/common/Card';
+import Card from '@/components/common/Card';
 import ReactLenis from '@studio-freight/react-lenis';
 import gsap from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";

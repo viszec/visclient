@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { motion, useScroll } from "framer-motion";
-import Rounded from "@/common/RoundedButton";
+import Rounded from "@/components/common/RoundedButton";
 import Image from "next/image";
 import { VerticalCutReveal } from "@/components/ui/vertical-cut-reveal";
 // Animation variants for text reveal
