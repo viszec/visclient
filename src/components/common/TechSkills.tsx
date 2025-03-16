@@ -1,6 +1,5 @@
 "use client"
 import { Gravity, MatterBody } from "@/components/ui/gravity";
-import { useMemo } from "react";
 
 interface TechSkill {
   name: string;
@@ -32,7 +31,7 @@ export function TechSkills() {
         {TECH_SKILLS.map((skill) => (
           <MatterBody
             key={skill.name}
-            matterBodyOptions={{ 
+            matterBodyOptions={{
               friction: 0.6,
               restitution: 0.1
             }}
@@ -40,8 +39,8 @@ export function TechSkills() {
             y={skill.y}
             angle={skill.angle}
           >
-            <div 
-              className="relative p-[2px] lg:p-[4.5px] rounded-full bg-gradient-border" 
+            <div
+              className="relative p-[2px] lg:p-[4.5px] rounded-full bg-gradient-border"
               style={{
                 boxShadow: `
                   0 0 8px rgba(255,255,255,0.15),

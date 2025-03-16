@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { useScroll, motion, useTransform } from "framer-motion";
-import Rounded from "@/components/common/RoundedButton";
+//import Rounded from "@/components/common/RoundedButton";
 import ContactForm from "@/components/common/ContactForm";
 
 // const CONTACT_INFO = [
@@ -17,7 +17,7 @@ export default function Contact() {
     offset: ["start end", "end end"],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  //const x = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const y = useTransform(scrollYProgress, [0, 1], [-500, 0]);
   const rotate = useTransform(scrollYProgress, [0, 1], [120, 90]);
 

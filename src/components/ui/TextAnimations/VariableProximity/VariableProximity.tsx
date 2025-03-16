@@ -41,10 +41,10 @@ function useMousePositionRef(
       }
     };
 
-    const handleMouseMove = (ev: MouseEvent) =>
-      updatePosition(ev.clientX, ev.clientY);
-    const handleTouchMove = (ev: TouchEvent) => {
-      const touch = ev.touches[0];
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement> | MouseEvent) =>
+      updatePosition(e.clientX, e.clientY);
+    const handleTouchMove = (e: React.TouchEvent<HTMLDivElement> | TouchEvent) => {
+      const touch = e.touches[0];
       updatePosition(touch.clientX, touch.clientY);
     };
 
