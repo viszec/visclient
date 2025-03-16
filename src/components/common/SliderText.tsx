@@ -12,15 +12,19 @@ export default function SliderText() {
   const directionRef = useRef<number>(1);
 
   const animate = useCallback(() => {
-    if (xPercentRef.current < -100) {
+    if (xPercentRef.current < -200) {
       xPercentRef.current = 0;
     } else if (xPercentRef.current > 0) {
       xPercentRef.current = -100;
     }
-    gsap.set(firstText.current, { xPercent: xPercentRef.current });
-    gsap.set(secondText.current, { xPercent: xPercentRef.current });
+    
+    const tl = gsap.timeline();
+    tl.set([firstText.current, secondText.current], {
+      xPercent: xPercentRef.current
+    });
+    
     requestAnimationFrame(animate);
-    xPercentRef.current += 0.1 * directionRef.current;
+    xPercentRef.current += 0.05 * directionRef.current;
   }, []);
 
   useLayoutEffect(() => {
@@ -28,33 +32,33 @@ export default function SliderText() {
     gsap.to(slider.current, {
       scrollTrigger: {
         trigger: document.documentElement,
-        scrub: 0.15,
+        scrub: 0.05,
         start: 0,
         end: window.innerHeight,
         onUpdate: (e) => {
           directionRef.current = e.direction * -1;
         },
       },
-      x: "-500px",
+      x: "-200px",
     });
     requestAnimationFrame(animate);
   }, [animate]);
 
   return (
-    <div className="absolute top-[calc(100vh-160px)] lg:top-[calc(100vh-190px)]">
+    <div className="absolute top-[calc(100vh-160px)] lg:top-[calc(100vh-190px)] md:top-[calc(100vh-170px)]">
       <div ref={slider} className="relative whitespace-nowrap">
-        <p
+        <div
           ref={firstText}
           className="relative m-0 text-black text-4xl lg:text-[150px] font-normal lg:font-medium pr-12"
         >
           INNÖVATION <span className="dot">*</span>
-        </p>
-        <p
+        </div>
+        <div
           ref={secondText}
           className="absolute left-full top-0 m-0 text-black/90 text-4xl lg:text-[150px] font-normal lg:font-medium pr-12"
         >
           CReATiVITY <span className="dot">*</span>
-        </p>
+        </div>
       </div>
     </div>
   );

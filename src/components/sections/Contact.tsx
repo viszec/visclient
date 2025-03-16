@@ -2,12 +2,13 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { useScroll, motion, useTransform } from "framer-motion";
-import Rounded from "@/components/common/RoundedButton";
+//import Rounded from "@/components/common/RoundedButton";
+import ContactForm from "@/components/common/ContactForm";
 
-const CONTACT_INFO = [
-  { text: "imavisma@gmail.com", href: "mailto:imavisma@gmail.com" },
-  { text: "Let's Connect", href: "tel:+61424209565" },
-];
+// const CONTACT_INFO = [
+//   { text: "imavisma@gmail.com", href: "mailto:imavisma@gmail.com" },
+//   { text: "Let's Connect", href: "tel:+61424209565" },
+// ];
 
 export default function Contact() {
   const container = useRef<HTMLDivElement>(null);
@@ -16,7 +17,7 @@ export default function Contact() {
     offset: ["start end", "end end"],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  //const x = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const y = useTransform(scrollYProgress, [0, 1], [-500, 0]);
   const rotate = useTransform(scrollYProgress, [0, 1], [120, 90]);
 
@@ -28,42 +29,81 @@ export default function Contact() {
           ref={container}
           className="flex flex-col items-center justify-center text-white relative"
         >
-          <div className="w-full pt-20 pb-18 lg:pb-18 lg:pt-52 bg-black">
-            {/* Title Section */}
-            <div className="border-b border-gray-500 after:block after:mb-10 lg:after:mb-8 pb-4 lg:pb-8 mx-8 lg:mx-20 relative">
-              <div className="flex items-center gap-4">
-                <div className="relative w-16 lg:w-28 h-16 lg:h-28 rounded-full overflow-hidden ml-4 lg:ml-10">
-                  <Image
-                    fill
-                    alt="avatar"
-                    src="/images/avatar.webp"
-                    className="object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <h1 className="text-4xl lg:text-8xl font-light ">
-                  Let&apos;s Create
-                </h1> 
-              </div>
-              <h1 className="flex items-center text-4xl lg:text-8xl m-0 font-light ml-10 lg:ml-20">
-                Together
-                <div className="relative inline-block w-[1.7em] h-[1.7em] ml-[0.4em] lg:ml-[0.2em] align-middle">
-                  <Image
-                    src="/images/smiley.svg"
-                    alt="Smiley face"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              </h1>
+          <div className="w-full pt-56 pb-18 lg:pb-16 lg:pt-52 bg-black">
+            <div className="after:block after:mb-10 lg:after:mb-8 pb-4 lg:pb-8 mx-8 lg:mx-20 relative">
+              {/* Main content wrapper */}
+              <div className="flex flex-col lg:flex-row lg:gap-20">
+                {/* Left side - Title Section */}
+                <div className="lg:w-1/2">
+                  <div className="flex items-center gap-4">
+                    <div className="relative w-16 lg:w-28 h-16 lg:h-28 rounded-full overflow-hidden ml-4 lg:ml-10">
+                      <Image
+                        fill
+                        alt="avatar"
+                        src="/images/avatar.webp"
+                        className="object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h1 className="text-4xl lg:text-8xl font-light">
+                      Let&apos;s Create
+                    </h1>
+                  </div>
+                  <h1 className="flex items-center text-4xl lg:text-8xl m-0 font-light ml-10 lg:ml-20">
+                    Together
+                    <div className="relative inline-block w-[1.7em] h-[1.7em] ml-[0.4em] lg:ml-[0.2em] align-middle">
+                      <Image
+                        src="/images/smiley.svg"
+                        alt="Smiley face"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </h1>
 
-              <motion.div
+                  {/* Contact info buttons */}
+                  {/* <div className="flex flex-col sm:flex-row lg:flex-col gap-5 mt-8">
+                    {CONTACT_INFO.map((info, index) => (
+                      <Rounded
+                        key={index}
+                        className="w-full sm:!w-[180px] sm:!h-[45px] md:!w-[180px] md:!h-[50px] lg:!w-[230px] lg:!h-[65px] 
+                                  rounded-full lg:mt-12 !border-[1px] !border-gray-500"
+                        onClick={() => (window.location.href = info.href)}
+                      >
+                        <p className="m-0 text-gray-200 text-sm lg:text-base truncate px-4">
+                          {info.text}
+                        </p>
+                      </Rounded>
+                    ))}
+                  </div> */}
+                  {/* Description */}
+                  <div className="mt-8">
+                    <div className="text-gray-400 text-sm lg:text-base font-light px-4 lg:!px-20 leading-tight">
+                      This is me: I&apos;m not just a coder—I&apos;m a digital
+                      sorcerer who transforms pixels into captivating
+                      experiences! ✨ I craft creations that make people exclaim
+                      &quot;Blimey, that&apos;s brilliant!&quot; when code meets
+                      creativity. I excel at and love working with AI to push
+                      boundaries. Fancy creating digital journeys that turn
+                      scrolling into an adventure? Let&apos;s do something coool!
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right side - Contact Form */}
+                <div className="lg:w-1/3 mt-10 lg:mt-12">
+                  <ContactForm />
+                </div>
+              </div>
+
+              {/* Floating Get in touch button */}
+            {/*  <motion.div
                 style={{ x }}
-                className="absolute left-[calc(100%-210px)] top-[calc(100%-55px)] lg:left-[calc(100%-400px)] lg:top-[calc(100%-175px)]"
+                className="absolute left-[calc(100%-210px)] top-[calc(100%-55px)] lg:left-[calc(100%-1150px)] lg:top-[calc(100%-215px)]"
               >
                 <Rounded
                   backgroundColor="#dd672c"
-                  className="lg:!w-52 lg:!h-52 !w-24 !h-24 bg-orange-500 hover:bg-white hover:text-black text-white rounded-full !border-transparent hover:!border-transparent absolute flex items-center justify-center cursor-pointer"
+                  className="lg:!w-32 lg:!h-32 !w-24 !h-24 bg-orange-500 hover:bg-white hover:text-black text-white rounded-full !border-transparent hover:!border-transparent absolute flex items-center justify-center cursor-pointer"
                 >
                   <p className="m-0 text-sm lg:text-lg font-light relative z-[2]">
                     Get in touch
@@ -71,9 +111,10 @@ export default function Contact() {
                 </Rounded>
               </motion.div>
 
+              {/* Arrow SVG */}
               <motion.svg
                 style={{ rotate, scale: 2 }}
-                className="absolute top-[30%] left-[95%] lg:top-[50%]"
+                className="absolute top-[35%] left-[90%] lg:top-2"
                 width="9"
                 height="9"
                 viewBox="0 0 9 9"
@@ -85,22 +126,6 @@ export default function Contact() {
                   fill="white"
                 />
               </motion.svg>
-
-              {/* Contact info */}
-              <div className="flex flex-col w-full sm:w-3/5 sm:flex-row gap-5 mt-8 lg:mt-14 pr-24 pl-8 lg:px-20">
-                {CONTACT_INFO.map((info, index) => (
-                  <Rounded
-                    key={index}
-                    className="w-full sm:!w-[180px] sm:!h-[45px] md:!w-[180px] md:!h-[50px] lg:!w-[230px] lg:!h-[65px] 
-                              rounded-full lg:mt-12 lg:mb-16 !border-[1px] !border-gray-500"
-                    onClick={() => (window.location.href = info.href)}
-                  >
-                    <p className="m-0 text-gray-200 text-sm lg:text-base truncate px-4">
-                      {info.text}
-                    </p>
-                  </Rounded>
-                ))}
-              </div>
             </div>
           </div>
         </motion.div>

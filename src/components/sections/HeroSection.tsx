@@ -9,6 +9,7 @@ import { TechSkills } from "@/components/common/TechSkills";
 import { useScreenSize } from "@/hooks/useScreenSize";
 import SliderText from "@/components/common/SliderText";
 import { WelcomeIntro } from "@/components/common/WelcomeIntro";
+import TiltedCard from '@/components/ui/TiltedCard';
 
 // Animation variants
 const animations = {
@@ -94,77 +95,65 @@ export default function Hero() {
         variants={animations.slideUp}
         initial="initial"
         animate="enter"
-        className="section-container relative h-full flex items-center justify-center"
+        className="section-container relative h-full flex items-center justify-center w-full px-6 md:px-12 lg:px-20"
       >
-        <div className="section-content flex flex-col items-center justify-center">
+        <div className="section-content flex flex-col items-center justify-center w-full max-w-[1800px]">
           <motion.div
-            className="flex flex-col items-center space-y-12 text-center"
+            className="flex flex-col items-center space-y-12 text-center w-full"
             variants={animations.fadeIn}
             initial="initial"
             animate="enter"
             custom={2.8}
           >
-            {/* Profile Content - Changed to row layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 pt-28 lg:pt-0 pb-14">
-              {/* Avatar */}
-              <div className="relative w-60 h-60 lg:w-120 lg:h-120 rounded-full overflow-hidden opacity-90">
-                <Image
-                  src="/images/mavis-avatar.webp"
-                  alt="avatar"
-                  fill
-                  className="object-cover"
-                  priority
-                />
+            {/* Profile Content */}
+            <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-5 gap-8 md:gap-8 lg:gap-12 pt-28 lg:pt-0 pb-14 w-full">
+              {/* Avatar with TiltedCard */}
+              <div className="col-span-1 md:col-span-2 lg:col-span-2 relative flex justify-center md:justify-end lg:justify-end w-full opacity-90">
+                <div className="w-[10rem] h-[10rem] md:w-[15rem] md:h-[15rem]">
+                  <TiltedCard
+                    imageSrc="/images/mavis-avatar.webp"
+                    altText="Mavis Avatar"
+                    captionText="Mavis"
+                    containerHeight="100%"
+                    containerWidth="100%"
+                    imageHeight={width < 768 ? "16.5rem" : "32rem"}
+                    imageWidth={width < 768 ? "16.5rem" : "32rem"}
+                    rotateAmplitude={8}
+                    scaleOnHover={1.1}
+                    showMobileWarning={false}
+                    showTooltip={false}
+                    displayOverlayContent={false}
+                    className="rounded-full"
+                    overlayContent={
+                      <div className="tilted-card-text">
+                        Mavis M.
+                      </div>
+                    }
+                  />
+                </div>
               </div>
 
               {/* Description and Tech Skills */}
-              <div className="flex flex-col items-start space-y-2 lg:space-y-6">
-                <div className="flex flex-col items-start space-y-1 lg:space-y-2">
-                  <div className="flex flex-col items-start lg:items-start lg:space-y-1">
+              <div className="col-span-1 md:col-span-3 lg:col-span-3 flex flex-col items-center md:items-start space-y-4 lg:space-y-8 pt-4 md:pt-0">
+                <div className="flex flex-col items-center md:items-start space-y-3 lg:space-y-4 w-full pt-10 lg:pt-0">
+                  <div className="flex flex-col items-center md:items-start lg:items-start space-y-2 lg:space-y-3">
                     <Image
                       src="/icons/arrow.svg"
                       alt="arrow"
                       width={18}
                       height={18}
-                      className="w-5 h-5 lg:w-6 lg:h-6"
+                      className="w-5 h-5 lg:w-6 lg:h-6 hidden md:block"
                       priority
                     />
                     <WelcomeIntro />
                   </div>
-                  <div className="flex w-full items-start justify-start pt-1 lg:pt-0">
+                  <div className="flex w-full items-center justify-center max-w-[400px] lg:max-w-[570px]">
                     <TechSkills />
                   </div>
-                  <div className="py-6">
+                  <div className="py-4">
                     <SliderText />
                   </div>
-
-                  {/*<h1 className="text-3xl lg:text-5xl font-light text-black">
-                  {/*<h1 className="text-3xl lg:text-5xl font-light text-black">
-                    CREATIVE
-                  </h1>
-                  <h2 className="text-2xl lg:text-4xl font-light text-black">
-                    Web Designer & Developer
-                  </h2>
-                  <div className="flex w-7 h-[2px] lg:h-[3px] bg-black/80 my-3" />
-                  <div className="flex items-center gap-2 lg:gap-3">
-                    <p className="text-lg lg:text-3xl text-black font-light pt-3">
-                      What I am interested in
-                    </p>
-                    <Image
-                      src="/icons/arrow.svg"
-                      alt="arrow"
-                      width={18}
-                      height={18}
-                      priority
-                      className="w-3 h-3 lg:w-5 lg:h-5 rotate-90 transform"
-                    />
-                  </div>*/}
                 </div>
-
-                {/* Tech Skills */}
-                {/*<div className="w-full">
-                  <TechSkills />
-                </div>*/}
               </div>
             </div>
           </motion.div>

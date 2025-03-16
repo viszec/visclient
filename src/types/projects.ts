@@ -24,7 +24,7 @@ export const projects: ProjectType[] = [
       src: "hivestream.webp",
       color: "#D18F52",
       category: "Front-end Development",
-      client: "CognixAI",
+      client: "HiveStream",
       year: "2024",
       liveURL: "https://hivestream.au/"
     },
