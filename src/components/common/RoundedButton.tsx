@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, ReactNode } from 'react';
+import { useEffect, useRef, ReactNode, MouseEvent } from 'react';
 import gsap from 'gsap';
 import Magnetic from "@/components/common/Magnetic";
 
@@ -10,7 +10,8 @@ interface RoundedButtonProps {
   textColor?: string;
   borderColor?: string;
   className?: string;
-  onClick?: () => void;
+  onClick?: (e?: MouseEvent<HTMLDivElement>) => void;
+  disabled?: boolean;
 }
 
 export default function RoundedButton({
@@ -18,6 +19,7 @@ export default function RoundedButton({
   backgroundColor = "#EB7A40",
   className = "",
   onClick,
+  disabled = false,
   ...props
 }: RoundedButtonProps) {
   const circle = useRef<HTMLDivElement>(null);
@@ -69,17 +71,18 @@ export default function RoundedButton({
   return (
     <Magnetic>
       <div
-        onClick={onClick}
+        onClick={disabled ? undefined : onClick}
         className={`
           relative overflow-hidden cursor-pointer
           rounded-full lg:border-[1px] lg:border-gray-400
           flex items-center justify-center w-[50px] h-[50px]
           lg:w-[90px] lg:h-[90px] md:w-[60px] md:h-[60px]
           px-2 py-2 md:px-[15px] md:py-[15px]
+          ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
           ${className}
         `}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={disabled ? undefined : handleMouseEnter}
+        onMouseLeave={disabled ? undefined : handleMouseLeave}
         {...props}
       >
         <span className="relative z-[1] transition-colors duration-400 whitespace-nowrap text-sm md:text-base">

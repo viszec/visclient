@@ -2,6 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Flex:wght,opsz@100..1000,8..144&display=swap");
+
+
+/* Instrument Serif Font Classes */
+.instrument-serif-regular {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.instrument-serif-italic {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Helenoir Font Family */
+@font-face {
+  font-family: 'Halenoir';
+  src: url('/fonts/HalenoirCompact-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Halenoir';
+  src: url('/fonts/HalenoirCompact-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Halenoir';
+  src: url('/fonts/HalenoirCompact-DemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Halenoir';
+  src: url('/fonts/HalenoirCompact-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @layer base {
   :root {
@@ -236,4 +287,30 @@
 
 .animate-floating {
   animation: floating 3s infinite ease-in-out;
+}
+
+.variable-proximity {
+  font-family: "Roboto Flex", sans-serif;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.variable-proximity-demo {
+  font-family: "Roboto Flex", sans-serif;
+  font-variation-settings: 'wght' 400, 'opsz' 9;
+  transition: font-variation-settings 0.1s ease-out;
+}
+
+.variable-letter {
+  transition: font-variation-settings 0.1s ease-out;
 }

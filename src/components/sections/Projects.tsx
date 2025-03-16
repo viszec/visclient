@@ -142,12 +142,12 @@ export default function Projects() {
   }, [scrollY, isMobile]) // 添加 isMobile 作为依赖项
 
   return (
-    <section id="work" ref={ref} className="section-container !lg:px-0 py-12 lg:pt-32 lg:pb-48">
+    <section id="work" ref={ref} className="section-container !lg:px-0 py-12 lg:pt-28 lg:pb-48">
       <div className="h-[9vh] sm:h-[2vh]"></div>
       <motion.div 
         className="flex items-center flex-col"
-        initial={{ opacity: 0, y: 50 }}
-        animate={isAnimating ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 40 }}
+        animate={isAnimating ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
         transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
       >
         <motion.div 

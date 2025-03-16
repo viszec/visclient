@@ -23,7 +23,7 @@ export function LetterSwapForward({
   label,
   reverse = true,
   transition = {
-    type: "spring", 
+    type: "spring",
     duration: 0.7,
   },
   staggerDuration = 0.03,
@@ -87,7 +87,7 @@ export function LetterSwapForward({
 
   return (
     <span
-      className={`flex justify-start items-start relative overflow-hidden ${className}`}
+      className={`flex justify-center items-center relative overflow-hidden ${className}`}
       onMouseEnter={hoverStart}
       onClick={onClick}
       ref={scope}
@@ -187,7 +187,7 @@ export function LetterSwapPingPong({
 
   return (
     <motion.span
-      className={`flex justify-start items-start relative overflow-hidden ${className}`}
+      className={`flex justify-center items-center relative overflow-hidden ${className}`}
       onHoverStart={hoverStart}
       onHoverEnd={hoverEnd}
       onClick={onClick}
