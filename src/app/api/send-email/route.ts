@@ -39,10 +39,7 @@ export async function POST(request: Request) {
 
     // Validate required fields
     if (!name || !email || !message) {
-      return NextResponse.json(
-        { message: 'Missing required fields' },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
     }
 
     // Convert budget code to readable text
@@ -155,9 +152,7 @@ export async function POST(request: Request) {
 
       // Send notification email to website owner
       console.log('Sending notification email to website owner...');
-      const notificationResult = await transporter.sendMail(
-        notificationMailOptions
-      );
+      const notificationResult = await transporter.sendMail(notificationMailOptions);
       console.log('Notification email sent:', notificationResult.response);
 
       // Send auto-reply to the sender

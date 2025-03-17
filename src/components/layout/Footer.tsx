@@ -32,16 +32,12 @@ export default function Footer() {
       <div className="flex flex-col">
         <motion.div className="flex flex-col border-t lg:mx-20 border-gray-600 lg:flex-row justify-center lg:justify-between items-center gap-2 lg:gap-4 pt-2 lg:pt-6 sm:pt-4 pb-4 lg:pb-8">
           <div className="order-2 lg:order-1">
-            <div className="text-xs lg:text-sm font-light text-gray-300">
-              2025 © MAViS M. All rights reserved.
-            </div>
+            <div className="text-xs lg:text-sm font-light text-gray-300">2025 © MAViS M. All rights reserved.</div>
           </div>
 
           <div className="flex items-center gap-2 lg:gap-4 order-1 lg:order-2">
             <div className="flex items-center gap-1 mr-2">
-              <h3 className="text-gray-300 cursor-default font-light text-xs lg:text-sm">
-                Socials
-              </h3>
+              <h3 className="text-gray-300 cursor-default font-light text-xs lg:text-sm">Socials</h3>
               <Image
                 src="/icons/arrow.svg"
                 alt="arrow"

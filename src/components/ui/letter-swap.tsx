@@ -44,11 +44,7 @@ export function LetterSwapForward({
       }),
     });
 
-    animate(
-      '.letter',
-      { y: reverse ? '100%' : '-100%' },
-      mergeTransition(transition)
-    ).then(() => {
+    animate('.letter', { y: reverse ? '100%' : '-100%' }, mergeTransition(transition)).then(() => {
       animate(
         '.letter',
         {
@@ -146,11 +142,7 @@ export function LetterSwapPingPong({
       if (isHovered) return;
       setIsHovered(true);
 
-      animate(
-        '.letter',
-        { y: reverse ? '100%' : '-100%' },
-        mergeTransition(transition)
-      );
+      animate('.letter', { y: reverse ? '100%' : '-100%' }, mergeTransition(transition));
 
       animate(
         '.letter-secondary',

@@ -12,11 +12,7 @@ interface CircularTextProps {
   className?: string;
 }
 
-const getRotationTransition = (
-  duration: number,
-  from: number,
-  loop: boolean = true
-) => ({
+const getRotationTransition = (duration: number, from: number, loop: boolean = true) => ({
   from: from,
   to: from + 360,
   ease: 'linear',

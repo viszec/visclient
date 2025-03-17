@@ -31,7 +31,7 @@ export const projects: ProjectType[] = [
     title: 'CognixAI - Landing',
     src: 'cognix.webp',
     color: '#000009',
-    category: 'Design & Front-end Development',
+    category: 'Front-end Development',
     client: 'CognixAI',
     year: '2024',
     liveURL: 'https://cognix.au/',
@@ -79,8 +79,7 @@ export const projects: ProjectType[] = [
     category: 'Logo Design',
     client: 'Freelance',
     year: '2021',
-    liveURL:
-      'https://drive.google.com/file/d/1jLR7BtkqjAyDGzEnu9hRrQ_spjmi8sdQ/view',
+    liveURL: 'https://drive.google.com/file/d/1jLR7BtkqjAyDGzEnu9hRrQ_spjmi8sdQ/view',
   },
   {
     title: 'Astra Early Learning',

@@ -4,12 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
-import {
-  AnimatePresence,
-  motion,
-  useScroll,
-  useTransform,
-} from 'framer-motion';
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 
 interface SlideItem {
   color: string;
@@ -55,9 +50,7 @@ const slider2: SlideItem[] = [
 ];
 
 const useScreenWidth = () => {
-  const [width, setWidth] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : 0
-  );
+  const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -99,23 +92,13 @@ export default function SlidingImages() {
   const x1 = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const x2 = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const height = useTransform(scrollYProgress, [0, 0.55], [200, 0]);
-  const borderRadiusProgress = useTransform(
-    scrollYProgress,
-    [0, 0.95],
-    [0, 100]
-  );
+  const borderRadiusProgress = useTransform(scrollYProgress, [0, 0.95], [0, 100]);
 
   return (
-    <section
-      className="section relative"
-      style={{ backgroundColor: '#f5f5f5' }}
-    >
+    <section className="section relative" style={{ backgroundColor: '#f5f5f5' }}>
       <div id="slide-image" className="section-wrapper">
         <div className={`section-content ${isMobile ? 'w-full px-0' : ''}`}>
-          <div
-            ref={container}
-            className="flex flex-col gap-[3vw] relative mt-24 lg:mt-32 z-[1]"
-          >
+          <div ref={container} className="flex flex-col gap-[3vw] relative mt-24 lg:mt-32 z-[1]">
             {isMobile ? (
               <div className="relative w-full">
                 <div className="overflow-hidden w-full h-[25vh]">
@@ -163,10 +146,7 @@ export default function SlidingImages() {
               </div>
             ) : (
               <>
-                <motion.div
-                  style={{ x: x1 }}
-                  className="flex relative gap-5 w-[120vw] -left-[10vw]"
-                >
+                <motion.div style={{ x: x1 }} className="flex relative gap-5 w-[120vw] -left-[10vw]">
                   {slider1.map((project, index) => (
                     <div
                       key={index}
@@ -188,10 +168,7 @@ export default function SlidingImages() {
                     </div>
                   ))}
                 </motion.div>
-                <motion.div
-                  style={{ x: x2 }}
-                  className="flex relative gap-[3vw] w-[120vw] -left-[10vw]"
-                >
+                <motion.div style={{ x: x2 }} className="flex relative gap-[3vw] w-[120vw] -left-[10vw]">
                   {slider2.map((project, index) => (
                     <div
                       key={index}
@@ -212,10 +189,7 @@ export default function SlidingImages() {
               </>
             )}
 
-            <motion.div
-              style={{ height }}
-              className="relative mt-12 lg:mt-[100px]"
-            >
+            <motion.div style={{ height }} className="relative mt-12 lg:mt-[100px]">
               <motion.div
                 className="absolute h-[1440%] w-[120%] -left-[10%]"
                 style={{

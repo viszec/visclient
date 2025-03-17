@@ -1,14 +1,6 @@
 'use client';
 
-import {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
 
 import { AnimationOptions, motion } from 'framer-motion';
 
@@ -65,8 +57,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
     ref
   ) => {
     const containerRef = useRef<HTMLSpanElement>(null);
-    const text =
-      typeof children === 'string' ? children : children?.toString() || '';
+    const text = typeof children === 'string' ? children : children?.toString() || '';
     const [isAnimating, setIsAnimating] = useState(false);
 
     // Разделение текста на символы с поддержкой Unicode и эмодзи
@@ -87,11 +78,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
           needsSpace: i !== words.length - 1,
         }));
       }
-      return splitBy === 'words'
-        ? text.split(' ')
-        : splitBy === 'lines'
-          ? text.split('\n')
-          : text.split(splitBy);
+      return splitBy === 'words' ? text.split(' ') : splitBy === 'lines' ? text.split('\n') : text.split(splitBy);
     }, [text, splitBy]);
 
     // Расчет задержек для эффекта stagger
@@ -101,16 +88,12 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
           splitBy === 'characters'
             ? elements.reduce(
                 (acc, word) =>
-                  acc +
-                  (typeof word === 'string'
-                    ? 1
-                    : word.characters.length + (word.needsSpace ? 1 : 0)),
+                  acc + (typeof word === 'string' ? 1 : word.characters.length + (word.needsSpace ? 1 : 0)),
                 0
               )
             : elements.length;
         if (staggerFrom === 'first') return index * staggerDuration;
-        if (staggerFrom === 'last')
-          return (total - 1 - index) * staggerDuration;
+        if (staggerFrom === 'last') return (total - 1 - index) * staggerDuration;
         if (staggerFrom === 'center') {
           const center = Math.floor(total / 2);
           return Math.abs(center - index) * staggerDuration;
@@ -180,32 +163,19 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
               needsSpace: i !== elements.length - 1,
             }))
         ).map((wordObj, wordIndex, array) => {
-          const previousCharsCount = array
-            .slice(0, wordIndex)
-            .reduce((sum, word) => sum + word.characters.length, 0);
+          const previousCharsCount = array.slice(0, wordIndex).reduce((sum, word) => sum + word.characters.length, 0);
 
           return (
-            <span
-              key={wordIndex}
-              aria-hidden="true"
-              className={cn('inline-flex overflow-hidden', wordLevelClassName)}
-            >
+            <span key={wordIndex} aria-hidden="true" className={cn('inline-flex overflow-hidden', wordLevelClassName)}>
               {wordObj.characters.map((char, charIndex) => (
-                <span
-                  className={cn(
-                    elementLevelClassName,
-                    'whitespace-pre-wrap relative'
-                  )}
-                  key={charIndex}
-                >
+                <span className={cn(elementLevelClassName, 'whitespace-pre-wrap relative')} key={charIndex}>
                   <motion.span
                     custom={previousCharsCount + charIndex}
                     initial="hidden"
                     animate={isAnimating ? 'visible' : 'hidden'}
                     variants={variants}
                     onAnimationComplete={
-                      wordIndex === elements.length - 1 &&
-                      charIndex === wordObj.characters.length - 1
+                      wordIndex === elements.length - 1 && charIndex === wordObj.characters.length - 1
                         ? onComplete
                         : undefined
                     }

@@ -10,11 +10,7 @@ interface MagneticProps {
   dampening?: number;
 }
 
-export default function Magnetic({
-  children,
-  strength = 0.35,
-  dampening = 0.3,
-}: MagneticProps) {
+export default function Magnetic({ children, strength = 0.35, dampening = 0.3 }: MagneticProps) {
   const magnetic = useRef<HTMLElement>(null);
 
   useEffect(() => {

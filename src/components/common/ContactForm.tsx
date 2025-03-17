@@ -6,13 +6,7 @@ import { Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 import Rounded from '@/components/common/RoundedButton';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface FormData {
   name: string;
@@ -84,11 +78,7 @@ export default function ContactForm() {
     // Basic validation
     if (!formData.name || !formData.email || !formData.message) {
       toast.error('Missing information', {
-        description: (
-          <span className="text-white">
-            Please fill in all required fields.
-          </span>
-        ),
+        description: <span className="text-white">Please fill in all required fields.</span>,
       });
       console.log('Validation failed: Missing required fields');
       return;
@@ -123,9 +113,8 @@ export default function ContactForm() {
         toast.success('Message sent!', {
           description: (
             <span className="text-white">
-              Hey{' '}
-              <span className="font-semibold text-white">{formData.name}</span>,
-              thank you for reaching out. I&apos;ll get back to you soon :)
+              Hey <span className="font-semibold text-white">{formData.name}</span>, thank you for reaching out.
+              I&apos;ll get back to you soon :)
             </span>
           ),
         });
@@ -144,19 +133,14 @@ export default function ContactForm() {
     } catch (error: unknown) {
       console.error('Error sending message:', error);
       toast.error('Message not sent', {
-        description:
-          error instanceof Error ? error.message : 'Please try again later.',
+        description: error instanceof Error ? error.message : 'Please try again later.',
       });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -176,10 +160,7 @@ export default function ContactForm() {
 
   const renderField = (field: (typeof FORM_FIELDS)[number]) => {
     const labelContent = (
-      <label
-        htmlFor={field.id}
-        className="block text-xs lg:text-sm font-medium mb-2 text-gray-300"
-      >
+      <label htmlFor={field.id} className="block text-xs lg:text-sm font-medium mb-2 text-gray-300">
         {field.label}
         {field.required && <span className="text-orange-500 ml-1">*</span>}
       </label>

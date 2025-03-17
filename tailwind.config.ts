@@ -86,7 +86,7 @@ const config: Config = {
         '3': '3',
       },
       transitionTimingFunction: {
-        'custom': 'cubic-bezier(0,0,0,1)',
+        custom: 'cubic-bezier(0,0,0,1)',
         'custom-2': 'cubic-bezier(0.76,0,0.24,1)',
       },
       backgroundColor: {
@@ -128,10 +128,8 @@ const config: Config = {
       backgroundImage: {
         'gradient-border':
           'linear-gradient(35deg, rgba(247,202,201,1) 0%, rgba(255,255,255,1) 15%, rgba(146,168,209,1) 30%, rgba(255,255,255,1) 45%, rgba(136,176,169,1) 60%, rgba(255,255,255,1) 75%, rgba(245,230,202,1) 100%)',
-        'metallic-gradient':
-          'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)',
-        holographic:
-          'linear-gradient(225deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%)',
+        'metallic-gradient': 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)',
+        holographic: 'linear-gradient(225deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%)',
       },
       fontFamily: {
         instrument: ['"Instrument Serif"', 'serif'],

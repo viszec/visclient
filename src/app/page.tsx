@@ -40,9 +40,7 @@ export default function Home() {
     <>
       {showHeader && <Header />}
       <main className="min-h-screen">
-        <AnimatePresence mode="wait">
-          {isLoading && <Preloader />}
-        </AnimatePresence>
+        <AnimatePresence mode="wait">{isLoading && <Preloader />}</AnimatePresence>
         <HeroSection />
         <About />
         <Projects />

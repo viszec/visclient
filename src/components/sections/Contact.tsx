@@ -36,13 +36,7 @@ export default function Contact() {
                 <div className="lg:w-1/2">
                   <div className="flex items-center gap-4">
                     <div className="relative w-16 lg:w-28 h-16 lg:h-28 rounded-full overflow-hidden ml-4 lg:ml-10">
-                      <Image
-                        fill
-                        alt="avatar"
-                        src="/images/avatar.webp"
-                        className="object-cover"
-                        loading="lazy"
-                      />
+                      <Image fill alt="avatar" src="/images/avatar.webp" className="object-cover" loading="lazy" />
                     </div>
                     <h1 className="text-4xl sm:text-6xl md:text-8xl font-light font-just-me-again">
                       Let&apos;s Create
@@ -51,12 +45,7 @@ export default function Contact() {
                   <h1 className="flex items-center text-4xl sm:text-6xl md:text-8xl font-just-me-again m-0 font-light ml-10 lg:ml-20">
                     Together
                     <div className="relative inline-block w-[1.2em] h-[1.2em] ml-[0.4em] lg:ml-[0.2em] align-middle">
-                      <Image
-                        src="/images/smiley.svg"
-                        alt="Smiley face"
-                        fill
-                        className="object-contain"
-                      />
+                      <Image src="/images/smiley.svg" alt="Smiley face" fill className="object-contain" />
                     </div>
                   </h1>
 
@@ -78,20 +67,15 @@ export default function Contact() {
                   {/* Description */}
                   <div className="mt-8">
                     <div className="text-gray-400 text-sm lg:text-base font-light px-4 lg:!px-20 leading-tight">
-                      <span className="font-medium">This is me:</span> I&apos;m
-                      not just a coder—I&apos;m a digital sorcerer who
-                      transforms pixels into mesmerizing experiences! ✨ I craft
-                      creations that make people exclaim,{' '}
-                      <span className="italic">
-                        &quot;Blimey, that&apos;s brilliant!&quot;
-                      </span>{' '}
-                      when code meets creativity.{' '}
+                      <span className="font-medium">This is me:</span> I&apos;m not just a coder—I&apos;m a digital
+                      sorcerer who transforms pixels into mesmerizing experiences! ✨ I craft creations that make people
+                      exclaim, <span className="italic">&quot;Blimey, that&apos;s brilliant!&quot;</span> when code
+                      meets creativity.{' '}
                       <span className="font-medium">
-                        Pushing boundaries with AI is my passion, and I thrive
-                        on blending technology with artistry.{' '}
+                        Pushing boundaries with AI is my passion, and I thrive on blending technology with
+                        artistry.{' '}
                       </span>
-                      Fancy turning scrolling into an adventure? Let&apos;s
-                      build something coool!
+                      Fancy turning scrolling into an adventure? Let&apos;s build something coool!
                     </div>
                   </div>
                 </div>
