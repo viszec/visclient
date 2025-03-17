@@ -27,13 +27,13 @@ export default function ProjectItem({
   const items = [
     {
       content: title,
-      span: 'col-start-1 col-end-5',
+      span: 'col-start-1 col-end-6 lg:col-end-5',
       isTitle: true,
       hoverTransform: 'group-hover:-translate-x-2.5',
     },
     {
       content: category,
-      span: 'col-start-5 col-end-9',
+      span: 'col-start-6 lg:col-start-5 col-end-9',
       hoverTransform: 'group-hover:translate-x-2.5',
     },
     {
@@ -79,7 +79,7 @@ export default function ProjectItem({
     'font-light self-center transition-all duration-400 group-hover:text-gray-400';
 
   return (
-    <div className="grid grid-cols-12 px-4 py-6 border-b border-gray-300 cursor-pointer group relative w-full">
+    <div className="grid grid-cols-12 pr-2 lg:px-4 py-6 border-b border-gray-300 cursor-pointer group relative w-full">
       <div
         className="absolute top-0 left-0 w-[75%] h-[80%] z-10"
         onMouseEnter={(e) => manageModal(true, index, e.clientX, e.clientY)}

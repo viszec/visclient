@@ -204,10 +204,10 @@ export default function Projects() {
           animate={isAnimating ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="grid grid-cols-12 px-4 pb-4 border-b border-[#c9c9c9] w-full">
+          <div className="grid grid-cols-12 pl-0 pr-4 lg:px-4 pb-4 border-b border-[#c9c9c9] w-full">
             {[
               { text: 'PROJECT', span: 'col-start-1 col-end-5' },
-              { text: 'CATEGORY', span: 'col-start-5 col-end-9' },
+              { text: 'CATEGORY', span: 'col-start-6 lg:col-start-5 col-end-9' },
               {
                 text: 'CLIENT',
                 span: 'col-start-9 col-end-11',
@@ -275,7 +275,7 @@ export default function Projects() {
             variants={scaleAnimation}
             initial="initial"
             animate={active ? 'enter' : 'closed'}
-            className="h-[220px] w-[350px] lg:h-[350px] lg:w-[500px] fixed top-1/2 left-1/2 bg-white pointer-events-none overflow-hidden z-[3]"
+            className="h-[200px] w-[220px] lg:h-[350px] lg:w-[500px] fixed top-1/2 left-1/2 bg-white pointer-events-none overflow-hidden z-[3]"
           >
             <div
               style={{ top: `${index * -100}%` }}
@@ -294,7 +294,7 @@ export default function Projects() {
                       width={0}
                       height={0}
                       alt="image"
-                      className="w-[280px] lg:w-[430px] h-auto rounded-lg lg:rounded-2xl"
+                      className="w-[180px] lg:w-[430px] h-auto rounded-lg lg:rounded-2xl"
                       loading="lazy"
                       sizes="(max-width: 768px) 280px, 430px"
                     />
