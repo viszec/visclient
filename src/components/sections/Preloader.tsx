@@ -100,19 +100,11 @@ export default function Preloader({
             className="flex items-center absolute z-[1] text-3xl lg:text-[58px]"
             style={{ color: textColor }}
           >
-            <span
-              className="block w-2.5 h-2.5 rounded-full mr-2.5"
-              style={{ backgroundColor: dotColor }}
-            />
+            <span className="block w-2.5 h-2.5 rounded-full mr-2.5" style={{ backgroundColor: dotColor }} />
             {words[index]}
           </motion.p>
           <svg className="absolute top-0 w-full h-[calc(100%+300px)]">
-            <motion.path
-              variants={curve}
-              initial="initial"
-              exit="exit"
-              style={{ fill: backgroundColor }}
-            />
+            <motion.path variants={curve} initial="initial" exit="exit" style={{ fill: backgroundColor }} />
           </svg>
         </motion.div>
       )}

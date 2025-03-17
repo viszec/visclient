@@ -63,10 +63,7 @@ export default function Hero() {
   }, [width]);
 
   return (
-    <section
-      id="hero"
-      className="relative w-full lg:h-[1250px] md:h-[850px] max-h-screen overflow-hidden"
-    >
+    <section id="hero" className="relative w-full lg:h-[1250px] md:h-[850px] max-h-screen overflow-hidden">
       {/* Background Container */}
       <div className="absolute inset-0 w-full h-full">
         {/* Background Text */}
@@ -127,9 +124,7 @@ export default function Hero() {
                     showTooltip={false}
                     displayOverlayContent={false}
                     className="rounded-full"
-                    overlayContent={
-                      <div className="tilted-card-text">Mavis M.</div>
-                    }
+                    overlayContent={<div className="tilted-card-text">Mavis M.</div>}
                   />
                 </div>
               </div>

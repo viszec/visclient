@@ -9,12 +9,7 @@ interface MenuButtonProps {
   className?: string;
 }
 
-export const MenuButton = ({
-  buttonRef,
-  isActive,
-  onClick,
-  className = '',
-}: MenuButtonProps) => (
+export const MenuButton = ({ buttonRef, isActive, onClick, className = '' }: MenuButtonProps) => (
   <div
     ref={buttonRef}
     className={`scale-0 fixed lg:right-2 z-[101] transition-transform duration-300 ease-out 

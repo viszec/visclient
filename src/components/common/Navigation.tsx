@@ -11,10 +11,7 @@ export const Navigation = () => (
     {ROUTES.map((item) => (
       <Magnetic key={item.href}>
         <div className="flex flex-col relative z-[1] p-4 cursor-pointer group">
-          <Link
-            href={item.href}
-            className="text-sm lg:text-base no-underline hover:text-gray-700"
-          >
+          <Link href={item.href} className="text-sm lg:text-base no-underline hover:text-gray-700">
             {item.label}
           </Link>
           <div

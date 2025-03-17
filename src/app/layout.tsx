@@ -18,11 +18,7 @@ export const metadata: Metadata = {
     'Greetings! I am a creative Web Developer and Designer based in Melbourne, Australia. I specialize in creating memorable web experiences for forward-thinking brands.',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${justMe.variable}`}>
       <body className={inter.className}>

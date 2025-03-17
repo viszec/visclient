@@ -79,8 +79,7 @@ export const projects: ProjectType[] = [
     category: 'Logo Design',
     client: 'Freelance',
     year: '2021',
-    liveURL:
-      'https://drive.google.com/file/d/1jLR7BtkqjAyDGzEnu9hRrQ_spjmi8sdQ/view',
+    liveURL: 'https://drive.google.com/file/d/1jLR7BtkqjAyDGzEnu9hRrQ_spjmi8sdQ/view',
   },
   {
     title: 'Astra Early Learning',

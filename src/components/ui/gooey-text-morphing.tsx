@@ -12,13 +12,7 @@ interface GooeyTextProps {
   textClassName?: string;
 }
 
-export function GooeyText({
-  texts,
-  morphTime = 1,
-  cooldownTime = 0.25,
-  className,
-  textClassName,
-}: GooeyTextProps) {
+export function GooeyText({ texts, morphTime = 1, cooldownTime = 0.25, className, textClassName }: GooeyTextProps) {
   const text1Ref = React.useRef<HTMLSpanElement>(null);
   const text2Ref = React.useRef<HTMLSpanElement>(null);
 
@@ -76,8 +70,7 @@ export function GooeyText({
           textIndex = (textIndex + 1) % texts.length;
           if (text1Ref.current && text2Ref.current) {
             text1Ref.current.textContent = texts[textIndex % texts.length];
-            text2Ref.current.textContent =
-              texts[(textIndex + 1) % texts.length];
+            text2Ref.current.textContent = texts[(textIndex + 1) % texts.length];
           }
         }
         doMorph();
@@ -110,10 +103,7 @@ export function GooeyText({
         </defs>
       </svg>
 
-      <div
-        className="flex items-center justify-center"
-        style={{ filter: 'url(#threshold)' }}
-      >
+      <div className="flex items-center justify-center" style={{ filter: 'url(#threshold)' }}>
         <span
           ref={text1Ref}
           className={cn(

@@ -39,11 +39,7 @@ const linkVariants = {
   }),
 };
 
-export default function NavLink({
-  data,
-  isActive,
-  setSelectedIndicator,
-}: NavLinkProps) {
+export default function NavLink({ data, isActive, setSelectedIndicator }: NavLinkProps) {
   const [isHovered, setIsHovered] = useState(false);
   const { title, href, index } = data;
 

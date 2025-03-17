@@ -34,9 +34,7 @@ type QuickToFunc = (value: number) => void;
 
 // 创建 useScreenWidth hook
 const useScreenWidth = () => {
-  const [width, setWidth] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : 0
-  );
+  const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -101,12 +99,7 @@ export default function Projects() {
     yMoveCursorLabel.current?.(y);
   };
 
-  const manageModal = (
-    active: boolean,
-    index: number,
-    x: number,
-    y: number
-  ) => {
+  const manageModal = (active: boolean, index: number, x: number, y: number) => {
     moveItems(x, y);
     setModal({ active, index });
   };
@@ -120,9 +113,7 @@ export default function Projects() {
   //};
 
   const [showAll, setShowAll] = useState(false);
-  const [displayedProjects, setDisplayedProjects] = useState(
-    projects.slice(0, 7)
-  );
+  const [displayedProjects, setDisplayedProjects] = useState(projects.slice(0, 7));
   const projectsContainer = useRef<HTMLDivElement>(null);
 
   // Expand/collapse animation
@@ -156,9 +147,7 @@ export default function Projects() {
     let lastScrollY = scrollY.get();
     const aboutSection = document.getElementById('about');
     const aboutBottom = aboutSection
-      ? aboutSection.getBoundingClientRect().top +
-        window.scrollY +
-        aboutSection.offsetHeight
+      ? aboutSection.getBoundingClientRect().top + window.scrollY + aboutSection.offsetHeight
       : 0;
 
     const unsubscribe = scrollY.on('change', (current) => {
@@ -185,11 +174,7 @@ export default function Projects() {
   }, [scrollY, isMobile]); // add isMobile as a dependency
 
   return (
-    <section
-      id="work"
-      ref={ref}
-      className="section-container !lg:px-0 py-12 lg:pt-28 lg:pb-48"
-    >
+    <section id="work" ref={ref} className="section-container !lg:px-0 py-12 lg:pt-28 lg:pb-48">
       <div className="h-[9vh] sm:h-[2vh]"></div>
       <motion.div
         className="flex items-center flex-col"
@@ -223,10 +208,7 @@ export default function Projects() {
                 align: 'text-right',
               },
             ].map(({ text, span, align = '', className = '' }) => (
-              <h3
-                key={text}
-                className={`${span} lg:text-sm text-xxs font-light ${align} text-gray-600 ${className}`}
-              >
+              <h3 key={text} className={`${span} lg:text-sm text-xxs font-light ${align} text-gray-600 ${className}`}>
                 {text}
               </h3>
             ))}
@@ -238,17 +220,11 @@ export default function Projects() {
                 <motion.div
                   key={project.title}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={
-                    isAnimating ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                  }
+                  animate={isAnimating ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
-                  <Project
-                    index={index}
-                    {...project}
-                    manageModal={manageModal}
-                  />
+                  <Project index={index} {...project} manageModal={manageModal} />
                 </motion.div>
               ))}
             </div>

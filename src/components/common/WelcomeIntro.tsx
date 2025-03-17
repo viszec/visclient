@@ -1,9 +1,6 @@
 'use client';
 
-import {
-  LetterSwapForward,
-  LetterSwapPingPong,
-} from '@/components/ui/letter-swap';
+import { LetterSwapForward, LetterSwapPingPong } from '@/components/ui/letter-swap';
 
 export function WelcomeIntro() {
   return (

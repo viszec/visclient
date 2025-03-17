@@ -4,7 +4,7 @@
     "singleQuote": true,
     "tabWidth": 2,
     "useTabs": false,
-    "printWidth": 80,
+    "printWidth": 120,
     "bracketSpacing": true,
     "arrowParens": "always",
     "endOfLine": "lf",
@@ -13,6 +13,8 @@
     "htmlWhitespaceSensitivity": "css",
     "bracketSameLine": false,
     "jsxSingleQuote": false,
+    "objectCurlyNewline": false,
+    "proseWrap": "never",
     "plugins": [
         "prettier-plugin-tailwindcss",
         "@trivago/prettier-plugin-sort-imports"
