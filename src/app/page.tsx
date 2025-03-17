@@ -11,6 +11,7 @@ import Contact from "@/components/sections/Contact";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [showHeader, setShowHeader] = useState(false);

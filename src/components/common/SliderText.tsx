@@ -49,13 +49,13 @@ export default function SliderText() {
       <div ref={slider} className="relative whitespace-nowrap">
         <div
           ref={firstText}
-          className="relative m-0 text-black text-4xl lg:text-[150px] font-normal lg:font-medium pr-12"
+          className="relative m-0 text-black/85 text-4xl lg:text-[150px] font-normal lg:font-medium pr-12"
         >
           INNÖVATION <span className="dot">*</span>
         </div>
         <div
           ref={secondText}
-          className="absolute left-full top-0 m-0 text-black/90 text-4xl lg:text-[150px] font-normal lg:font-medium pr-12"
+          className="absolute left-full top-0 m-0 text-black/85 text-4xl lg:text-[150px] font-normal lg:font-medium pr-12"
         >
           CReATiVITY <span className="dot">*</span>
         </div>

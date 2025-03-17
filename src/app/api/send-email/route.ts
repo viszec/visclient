@@ -10,7 +10,7 @@ Budget: {{budget}}
 Message:
 {{message}}
 
---------------------------------
+------------
 This message was sent from your website contact form.
 `;
 

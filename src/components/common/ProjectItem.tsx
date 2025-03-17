@@ -89,13 +89,13 @@ export default function ProjectItem({
           className={`
             ${span}
             ${baseStyles}
-            ${isTitle ? "text-base lg:text-2xl font-normal m-0" : ""}
+            ${isTitle ? "text-base text-black/85 uppercase lg:text-2xl font-semibold m-0" : ""}
             ${align}
             ${hoverTransform}
             ${className}
           `}
         >
-          <div className={`${isTitle ? "text-sm lg:text-2xl" : "text-xs lg:text-base"}`}>
+          <div className={`${isTitle ? "text-sm text-black/85 lg:text-2xl" : "text-xs text-black/85 lg:text-base"}`}>
             {content}
           </div>
         </div>

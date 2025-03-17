@@ -131,7 +131,7 @@ export default function About() {
       <div className="section-container flex flex-col lg:flex-row gap-4 lg:gap-12 relative pt-20 lg:pt-28">
         {/* Main heading - takes up full width on mobile, 60% on desktop */}
         <div className="w-full lg:w-[62%]">
-          <p className="m-0 text-xl lg:text-[2.6rem] leading-[1.1em] tracking-tight font-bold">
+          <p className="m-0 text-xl lg:text-[2.6rem] leading-[1.1em] tracking-tight font-bold text-black/85">
             {phrase.split(" ").map((word, index) => (
               <span
                 key={index}
@@ -169,7 +169,7 @@ export default function About() {
                   priority
                 />
               </div>
-              <h1 className="text-2xl lg:text-4xl font-bold pb-4">
+              <h1 className="text-2xl lg:text-4xl font-bold text-black/85 pb-4">
                 MOTIVATION
               </h1>
               {showDescription && (

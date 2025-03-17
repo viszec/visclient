@@ -1,9 +1,14 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Just_Me_Again_Down_Here } from 'next/font/google'
 import './globals.css'
 import { Toaster } from '@/components/ui/sonner'
 
 const inter = Inter({ subsets: ['latin'] })
+const justMe = Just_Me_Again_Down_Here({ 
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-just-me-again'
+})
 
 export const metadata: Metadata = {
   title: 'Mavis M. -> Creative Web Developer & Designer | Melbourne AU',
@@ -16,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${justMe.variable}`}>
       <body className={inter.className}>
         {children}
         <Toaster />

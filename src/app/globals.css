@@ -4,9 +4,8 @@
 
 /* Google Fonts Import */
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
-
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Flex:wght,opsz@100..1000,8..144&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Just+Another+Hand&family=Just+Me+Again+Down+Here&display=swap');
 
 /* Instrument Serif Font Classes */
 .instrument-serif-regular {
@@ -52,6 +51,20 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+}
+
+/* Just Another Hand Font Classes */
+.just-another-hand {
+  font-family: "Just Another Hand", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Just Me Again Down Here Font Classes */
+.just-me-again {
+  font-family: "Just Me Again Down Here", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 @layer base {

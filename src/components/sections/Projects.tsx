@@ -139,7 +139,7 @@ export default function Projects() {
     })
 
     return () => unsubscribe()
-  }, [scrollY, isMobile]) // 添加 isMobile 作为依赖项
+  }, [scrollY, isMobile]) // add isMobile as a dependency
 
   return (
     <section id="work" ref={ref} className="section-container !lg:px-0 py-12 lg:pt-28 lg:pb-48">
