@@ -1,8 +1,10 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import Magnetic from "@/components/common/Magnetic";
+import Image from 'next/image';
+
+import { motion } from 'framer-motion';
+
+import Magnetic from '@/components/common/Magnetic';
 
 interface SocialLink {
   name: string;
@@ -11,16 +13,16 @@ interface SocialLink {
 
 const SOCIAL_LINKS: SocialLink[] = [
   {
-    name: "GitHub",
-    url: "https://github.com/viszec",
+    name: 'GitHub',
+    url: 'https://github.com/viszec',
   },
   {
-    name: "Instagram",
-    url: "https://www.instagram.com/viis.ma",
+    name: 'Instagram',
+    url: 'https://www.instagram.com/viis.ma',
   },
   {
-    name: "LinkedIn",
-    url: "https://www.linkedin.com/in/imavisma/",
+    name: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/imavisma/',
   },
 ];
 

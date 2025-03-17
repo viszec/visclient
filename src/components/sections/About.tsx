@@ -1,23 +1,27 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { useInView } from "react-intersection-observer";
-import { motion, useScroll } from "framer-motion";
+import { useEffect, useState } from 'react';
+
 //import Rounded from "@/components/common/RoundedButton";
-import Image from "next/image";
-import { VerticalCutReveal } from "@/components/ui/vertical-cut-reveal";
-import CircularText from "@/components/ui/TextAnimations/CircularText/CircularText";
+import Image from 'next/image';
+
+import { motion, useScroll } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+
+import CircularText from '@/components/ui/TextAnimations/CircularText/CircularText';
+import { VerticalCutReveal } from '@/components/ui/vertical-cut-reveal';
+
 // Animation variants for text reveal
 const slideUp = {
   initial: {
-    y: "100%",
+    y: '100%',
   },
   open: (i: number) => ({
-    y: "0%",
+    y: '0%',
     transition: { duration: 0.7, delay: 0.05 * i },
   }),
   closed: {
-    y: "100%",
+    y: '100%',
     transition: { duration: 0.5 },
   },
 };
@@ -49,7 +53,7 @@ export default function About() {
     // Only need to detect when section is in view
     // No need for multiple thresholds since we're using scrollY position
     threshold: 0,
-    rootMargin: "100px 0px", // Slightly extend detection range
+    rootMargin: '100px 0px', // Slightly extend detection range
   });
 
   const [showDescription, setShowDescription] = useState(false);
@@ -60,8 +64,8 @@ export default function About() {
       (entry?.target?.getBoundingClientRect()?.top ?? 0) + window.scrollY;
     const sectionHeight = entry?.target?.getBoundingClientRect()?.height ?? 0;
 
-    const unsubscribe = scrollY.on("change", (current) => {
-      const direction = current > lastScrollY ? "down" : "up";
+    const unsubscribe = scrollY.on('change', (current) => {
+      const direction = current > lastScrollY ? 'down' : 'up';
       const relativeScroll = current - sectionTop;
 
       /* Animation Trigger Points:
@@ -74,7 +78,7 @@ export default function About() {
        * - Keep visible: While in section
        */
 
-      if (direction === "down") {
+      if (direction === 'down') {
         // Trigger when reaching end of Hero
         if (relativeScroll >= -sectionHeight * 0.4 && relativeScroll <= 0) {
           setIsAnimating(true);
@@ -132,7 +136,7 @@ export default function About() {
         {/* Main heading - takes up full width on mobile, 60% on desktop */}
         <div className="w-full lg:w-[62%]">
           <p className="m-0 text-xl lg:text-[2.6rem] leading-[1.1em] tracking-tight font-bold text-black/85">
-            {phrase.split(" ").map((word, index) => (
+            {phrase.split(' ').map((word, index) => (
               <span
                 key={index}
                 className="inline-block overflow-hidden mr-[0.15em]"
@@ -142,7 +146,7 @@ export default function About() {
                   variants={slideUp}
                   custom={index}
                   initial="initial"
-                  animate={isAnimating ? "open" : "closed"}
+                  animate={isAnimating ? 'open' : 'closed'}
                 >
                   {word}
                 </motion.span>
@@ -157,7 +161,7 @@ export default function About() {
             className="flex-1"
             variants={fadeIn}
             initial="initial"
-            animate={isAnimating ? "open" : "closed"}
+            animate={isAnimating ? 'open' : 'closed'}
           >
             <div className="flex flex-col items-start space-y-3">
               <div className="pb-6">
@@ -179,7 +183,7 @@ export default function About() {
                     staggerDuration={0.002}
                     staggerFrom="random"
                     transition={{
-                      type: "spring",
+                      type: 'spring',
                       stiffness: 200,
                       damping: 35,
                       delay: 0.1,

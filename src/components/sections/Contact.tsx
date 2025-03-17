@@ -1,15 +1,19 @@
-"use client";
-import { useRef } from "react";
-import Image from "next/image";
-import { useScroll, motion, useTransform } from "framer-motion";
+'use client';
+
+import { useRef } from 'react';
+
+import Image from 'next/image';
+
+import { motion, useScroll, useTransform } from 'framer-motion';
+
 //import Rounded from "@/components/common/RoundedButton";
-import ContactForm from "@/components/common/ContactForm";
+import ContactForm from '@/components/common/ContactForm';
 
 export default function Contact() {
   const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: container,
-    offset: ["start end", "end end"],
+    offset: ['start end', 'end end'],
   });
 
   //const x = useTransform(scrollYProgress, [0, 1], [0, 100]);
@@ -74,10 +78,20 @@ export default function Contact() {
                   {/* Description */}
                   <div className="mt-8">
                     <div className="text-gray-400 text-sm lg:text-base font-light px-4 lg:!px-20 leading-tight">
-                      <span className="font-medium">This is me:</span> I&apos;m not just a coder—I&apos;m a digital sorcerer who transforms pixels into mesmerizing
-                      experiences! ✨ I craft creations that make people exclaim, <span className="italic">&quot;Blimey, that&apos;s brilliant!&quot;</span> when code meets
-                      creativity. <span className="font-medium">Pushing boundaries with AI is my passion, and I thrive on blending technology with artistry. </span>
-                      Fancy turning scrolling into an adventure? Let&apos;s build something coool!
+                      <span className="font-medium">This is me:</span> I&apos;m
+                      not just a coder—I&apos;m a digital sorcerer who
+                      transforms pixels into mesmerizing experiences! ✨ I craft
+                      creations that make people exclaim,{' '}
+                      <span className="italic">
+                        &quot;Blimey, that&apos;s brilliant!&quot;
+                      </span>{' '}
+                      when code meets creativity.{' '}
+                      <span className="font-medium">
+                        Pushing boundaries with AI is my passion, and I thrive
+                        on blending technology with artistry.{' '}
+                      </span>
+                      Fancy turning scrolling into an adventure? Let&apos;s
+                      build something coool!
                     </div>
                   </div>
                 </div>
@@ -89,7 +103,7 @@ export default function Contact() {
               </div>
 
               {/* Floating Get in touch button */}
-            {/*  <motion.div
+              {/*  <motion.div
                 style={{ x }}
                 className="absolute left-[calc(100%-210px)] top-[calc(100%-55px)] lg:left-[calc(100%-1150px)] lg:top-[calc(100%-215px)]"
               >

@@ -4,18 +4,18 @@
 
 /* Google Fonts Import */
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Flex:wght,opsz@100..1000,8..144&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght,opsz@100..1000,8..144&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Just+Another+Hand&family=Just+Me+Again+Down+Here&display=swap');
 
 /* Instrument Serif Font Classes */
 .instrument-serif-regular {
-  font-family: "Instrument Serif", serif;
+  font-family: 'Instrument Serif', serif;
   font-weight: 400;
   font-style: normal;
 }
 
 .instrument-serif-italic {
-  font-family: "Instrument Serif", serif;
+  font-family: 'Instrument Serif', serif;
   font-weight: 400;
   font-style: italic;
 }
@@ -55,14 +55,14 @@
 
 /* Just Another Hand Font Classes */
 .just-another-hand {
-  font-family: "Just Another Hand", cursive;
+  font-family: 'Just Another Hand', cursive;
   font-weight: 400;
   font-style: normal;
 }
 
 /* Just Me Again Down Here Font Classes */
 .just-me-again {
-  font-family: "Just Me Again Down Here", cursive;
+  font-family: 'Just Me Again Down Here', cursive;
   font-weight: 400;
   font-style: normal;
 }
@@ -166,37 +166,35 @@
 /* Add these to your existing globals.css */
 @layer components {
   .section {
-    @apply w-full mx-auto overflow-hidden relative;
+    @apply relative mx-auto w-full overflow-hidden;
   }
 
   .section-container {
-    @apply relative w-full max-w-1680 mx-auto px-4 sm:px-6 lg:px-12 overflow-hidden;
+    @apply relative mx-auto w-full max-w-1680 overflow-hidden px-4 sm:px-6 lg:px-12;
   }
 
   .section-wrapper {
-    @apply w-full h-full flex flex-col items-center justify-center;
+    @apply flex h-full w-full flex-col items-center justify-center;
   }
 
   .mask {
-    @apply relative overflow-hidden inline-flex;
+    @apply relative inline-flex overflow-hidden;
   }
 
   .rounded-button {
-    @apply w-[180px] h-[180px] bg-[#1C1D20] text-white rounded-full 
-    absolute flex items-center justify-center cursor-pointer
-    top-[80%] left-[calc(100%-200px)];
+    @apply absolute left-[calc(100%-200px)] top-[80%] flex h-[180px] w-[180px] cursor-pointer items-center justify-center rounded-full bg-[#1C1D20] text-white;
   }
 
   .project-item {
-    @apply flex flex-col w-full px-[50px] pt-20 border-t border-gray-300 cursor-pointer transition-all duration-300 overflow-hidden;
+    @apply flex w-full cursor-pointer flex-col overflow-hidden border-t border-gray-300 px-[50px] pt-20 transition-all duration-300;
   }
 
   .project-header {
-    @apply flex justify-between items-start w-full;
+    @apply flex w-full items-start justify-between;
   }
 
   .project-number {
-    @apply text-2xl mr-5 transition-all duration-300 inline-block w-[50px] h-[50px] leading-[50px] text-center rounded-full bg-transparent;
+    @apply mr-5 inline-block h-[50px] w-[50px] rounded-full bg-transparent text-center text-2xl leading-[50px] transition-all duration-300;
   }
 
   .project-number-highlight {
@@ -204,38 +202,38 @@
   }
 
   .modal-container {
-    @apply h-[350px] w-[400px] fixed top-1/2 left-1/2 bg-white pointer-events-none overflow-hidden z-[3];
+    @apply pointer-events-none fixed left-1/2 top-1/2 z-[3] h-[350px] w-[400px] overflow-hidden bg-white;
   }
 
   .cursor-dot {
-    @apply w-20 h-20 rounded-full bg-[#EB7A40] text-white fixed z-[3] flex items-center justify-center text-sm font-light pointer-events-none;
+    @apply pointer-events-none fixed z-[3] flex h-20 w-20 items-center justify-center rounded-full bg-[#EB7A40] text-sm font-light text-white;
   }
 
   @screen md {
     .modal-container {
-      @apply w-[90%] h-auto;
+      @apply h-auto w-[90%];
     }
     .cursor-dot {
-      @apply w-[60px] h-[60px] text-xs;
+      @apply h-[60px] w-[60px] text-xs;
     }
   }
 
   .sliding-image {
-    @apply w-1/4 h-[20vw] flex items-center justify-center;
+    @apply flex h-[20vw] w-1/4 items-center justify-center;
   }
-  
+
   .image-container {
-    @apply relative w-4/5 h-4/5;
+    @apply relative h-4/5 w-4/5;
   }
 
   .hover-underline {
     @apply relative;
   }
-  
+
   .hover-underline::after {
-    @apply content-[''] w-0 h-[1px] bg-white block mt-[2px] absolute left-1/2 -translate-x-1/2 transition-[width] duration-200 ease-linear;
+    @apply absolute left-1/2 mt-[2px] block h-[1px] w-0 -translate-x-1/2 bg-white transition-[width] duration-200 ease-linear content-[''];
   }
-  
+
   .hover-underline:hover::after {
     @apply w-full;
   }
@@ -248,7 +246,7 @@
   .burger-line::before,
   .burger-line::after {
     content: '';
-    @apply block h-[1px] w-[40%] mx-auto bg-white relative transition-transform duration-300;
+    @apply relative mx-auto block h-[1px] w-[40%] bg-white transition-transform duration-300;
   }
 
   .burger-line::before {
@@ -260,11 +258,11 @@
   }
 
   .burger-active .burger-line::before {
-    @apply rotate-45 top-[-1px];
+    @apply top-[-1px] rotate-45;
   }
 
   .burger-active .burger-line::after {
-    @apply -rotate-45 top-0;
+    @apply top-0 -rotate-45;
   }
 }
 
@@ -290,7 +288,8 @@
 
 /* add card floating animation */
 @keyframes floating {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(-50%, -50%);
   }
   50% {
@@ -303,7 +302,7 @@
 }
 
 .variable-proximity {
-  font-family: "Roboto Flex", sans-serif;
+  font-family: 'Roboto Flex', sans-serif;
 }
 
 .sr-only {
@@ -319,8 +318,10 @@
 }
 
 .variable-proximity-demo {
-  font-family: "Roboto Flex", sans-serif;
-  font-variation-settings: 'wght' 400, 'opsz' 9;
+  font-family: 'Roboto Flex', sans-serif;
+  font-variation-settings:
+    'wght' 400,
+    'opsz' 9;
   transition: font-variation-settings 0.1s ease-out;
 }
 

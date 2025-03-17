@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { cn } from "@/lib/utils";
+import * as React from 'react';
+
+import { cn } from '@/lib/utils';
 
 interface GooeyTextProps {
   texts: string[];
@@ -16,7 +17,7 @@ export function GooeyText({
   morphTime = 1,
   cooldownTime = 0.25,
   className,
-  textClassName
+  textClassName,
 }: GooeyTextProps) {
   const text1Ref = React.useRef<HTMLSpanElement>(null);
   const text2Ref = React.useRef<HTMLSpanElement>(null);
@@ -41,10 +42,10 @@ export function GooeyText({
     const doCooldown = () => {
       morph = 0;
       if (text1Ref.current && text2Ref.current) {
-        text2Ref.current.style.filter = "";
-        text2Ref.current.style.opacity = "100%";
-        text1Ref.current.style.filter = "";
-        text1Ref.current.style.opacity = "0%";
+        text2Ref.current.style.filter = '';
+        text2Ref.current.style.opacity = '100%';
+        text1Ref.current.style.filter = '';
+        text1Ref.current.style.opacity = '0%';
       }
     };
 
@@ -75,7 +76,8 @@ export function GooeyText({
           textIndex = (textIndex + 1) % texts.length;
           if (text1Ref.current && text2Ref.current) {
             text1Ref.current.textContent = texts[textIndex % texts.length];
-            text2Ref.current.textContent = texts[(textIndex + 1) % texts.length];
+            text2Ref.current.textContent =
+              texts[(textIndex + 1) % texts.length];
           }
         }
         doMorph();
@@ -92,7 +94,7 @@ export function GooeyText({
   }, [texts, morphTime, cooldownTime]);
 
   return (
-    <div className={cn("relative", className)}>
+    <div className={cn('relative', className)}>
       <svg className="absolute h-0 w-0" aria-hidden="true" focusable="false">
         <defs>
           <filter id="threshold">
@@ -110,21 +112,21 @@ export function GooeyText({
 
       <div
         className="flex items-center justify-center"
-        style={{ filter: "url(#threshold)" }}
+        style={{ filter: 'url(#threshold)' }}
       >
         <span
           ref={text1Ref}
           className={cn(
-            "absolute inline-block select-none text-center text-6xl md:text-[60pt]",
-            "text-foreground",
+            'absolute inline-block select-none text-center text-6xl md:text-[60pt]',
+            'text-foreground',
             textClassName
           )}
         />
         <span
           ref={text2Ref}
           className={cn(
-            "absolute inline-block select-none text-center text-6xl md:text-[60pt]",
-            "text-foreground",
+            'absolute inline-block select-none text-center text-6xl md:text-[60pt]',
+            'text-foreground',
             textClassName
           )}
         />

@@ -1,8 +1,10 @@
-'use client'
+'use client';
 
-import Link from "next/link";
-import { ROUTES } from "@/config/routes";
-import Magnetic from "@/components/common/Magnetic";
+import Link from 'next/link';
+
+import { ROUTES } from '@/config/routes';
+
+import Magnetic from '@/components/common/Magnetic';
 
 export const Navigation = () => (
   <nav className="hidden md:flex items-center">
@@ -15,12 +17,14 @@ export const Navigation = () => (
           >
             {item.label}
           </Link>
-          <div className="absolute w-[5px] h-[5px] top-[38px] left-1/2 
+          <div
+            className="absolute w-[5px] h-[5px] top-[38px] left-1/2 
                         bg-gray-700 rounded-full scale-0 -translate-x-1/2 
                         transition-transform duration-200 ease-bezier 
-                        group-hover:scale-100" />
+                        group-hover:scale-100"
+          />
         </div>
       </Magnetic>
     ))}
   </nav>
-); 
+);

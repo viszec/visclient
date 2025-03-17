@@ -1,6 +1,9 @@
-'use client'
+'use client';
 
-import { LetterSwapForward, LetterSwapPingPong } from "@/components/ui/letter-swap"
+import {
+  LetterSwapForward,
+  LetterSwapPingPong,
+} from '@/components/ui/letter-swap';
 
 export function WelcomeIntro() {
   return (
@@ -18,16 +21,16 @@ export function WelcomeIntro() {
         />
         <LetterSwapPingPong
           label="Creative Web Developer"
-          staggerFrom={"center"}
+          staggerFrom={'center'}
           reverse={false}
           className="text-xl lg:text-5xl font-overusedGrotesk lg:tracking-wide font-normal lg:py-1 text-black/85"
         />
         <LetterSwapPingPong
           label="< Technologies I work with />"
-          staggerFrom={"last"}
-          className="text-sm lg:text-xl mono font-overusedGrotesk font-normal tracking-tight lg:tracking-normal mt-1 mb-1 lg:mb-0 lg:mt-3 text-black/60" 
+          staggerFrom={'last'}
+          className="text-sm lg:text-xl mono font-overusedGrotesk font-normal tracking-tight lg:tracking-normal mt-1 mb-1 lg:mb-0 lg:mt-3 text-black/60"
         />
       </div>
     </div>
-  )
+  );
 }

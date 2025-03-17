@@ -1,19 +1,32 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { useInView } from 'react-intersection-observer';
-import { motion, useScroll } from 'framer-motion';
-import Project from '@/components/common/ProjectItem';
+import { useEffect, useRef, useState } from 'react';
+
+import Image from 'next/image';
+
 import { projects } from '@/types/projects';
+import { motion, useScroll } from 'framer-motion';
 import { AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
-import Image from 'next/image';
+import { useInView } from 'react-intersection-observer';
+
+import Project from '@/components/common/ProjectItem';
 import Rounded from '@/components/common/RoundedButton';
 
 const scaleAnimation = {
-  initial: {scale: 0, x:"-50%", y:"-50%"},
-  enter: {scale: 1, x:"-50%", y:"-50%", transition: {duration: 0.4, ease: [0.76, 0, 0.24, 1]}},
-  closed: {scale: 0, x:"-50%", y:"-50%", transition: {duration: 0.4, ease: [0.32, 0, 0.67, 0]}}
+  initial: { scale: 0, x: '-50%', y: '-50%' },
+  enter: {
+    scale: 1,
+    x: '-50%',
+    y: '-50%',
+    transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] },
+  },
+  closed: {
+    scale: 0,
+    x: '-50%',
+    y: '-50%',
+    transition: { duration: 0.4, ease: [0.32, 0, 0.67, 0] },
+  },
 };
 
 // Define QuickToFunc type
@@ -21,7 +34,9 @@ type QuickToFunc = (value: number) => void;
 
 // 创建 useScreenWidth hook
 const useScreenWidth = () => {
-  const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
+  const [width, setWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 0
+  );
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -35,7 +50,7 @@ const useScreenWidth = () => {
 };
 
 export default function Projects() {
-  const [modal, setModal] = useState({active: false, index: 0});
+  const [modal, setModal] = useState({ active: false, index: 0 });
   const { active, index } = modal;
   const modalContainer = useRef<HTMLDivElement>(null);
   const cursor = useRef<HTMLDivElement>(null);
@@ -51,12 +66,30 @@ export default function Projects() {
 
   useEffect(() => {
     // Create quickTo instances
-    xMoveContainer.current = gsap.quickTo(modalContainer.current, "left", {duration: 0.8, ease: "power3"});
-    yMoveContainer.current = gsap.quickTo(modalContainer.current, "top", {duration: 0.8, ease: "power3"});
-    xMoveCursor.current = gsap.quickTo(cursor.current, "left", {duration: 0.5, ease: "power3"});
-    yMoveCursor.current = gsap.quickTo(cursor.current, "top", {duration: 0.5, ease: "power3"});
-    xMoveCursorLabel.current = gsap.quickTo(cursorLabel.current, "left", {duration: 0.45, ease: "power3"});
-    yMoveCursorLabel.current = gsap.quickTo(cursorLabel.current, "top", {duration: 0.45, ease: "power3"});
+    xMoveContainer.current = gsap.quickTo(modalContainer.current, 'left', {
+      duration: 0.8,
+      ease: 'power3',
+    });
+    yMoveContainer.current = gsap.quickTo(modalContainer.current, 'top', {
+      duration: 0.8,
+      ease: 'power3',
+    });
+    xMoveCursor.current = gsap.quickTo(cursor.current, 'left', {
+      duration: 0.5,
+      ease: 'power3',
+    });
+    yMoveCursor.current = gsap.quickTo(cursor.current, 'top', {
+      duration: 0.5,
+      ease: 'power3',
+    });
+    xMoveCursorLabel.current = gsap.quickTo(cursorLabel.current, 'left', {
+      duration: 0.45,
+      ease: 'power3',
+    });
+    yMoveCursorLabel.current = gsap.quickTo(cursorLabel.current, 'top', {
+      duration: 0.45,
+      ease: 'power3',
+    });
   }, []);
 
   const moveItems = (x: number, y: number) => {
@@ -68,27 +101,34 @@ export default function Projects() {
     yMoveCursorLabel.current?.(y);
   };
 
-  const manageModal = (active: boolean, index: number, x: number, y: number) => {
+  const manageModal = (
+    active: boolean,
+    index: number,
+    x: number,
+    y: number
+  ) => {
     moveItems(x, y);
-    setModal({active, index});
+    setModal({ active, index });
   };
 
-    //const handleLiveClick = () => {
-    //if (active) {
-      // Get current project URL and open in new tab
-      //const currentProject = projects[index];
-      //window.open(currentProject.url, '_blank');
-    //}
+  //const handleLiveClick = () => {
+  //if (active) {
+  // Get current project URL and open in new tab
+  //const currentProject = projects[index];
+  //window.open(currentProject.url, '_blank');
+  //}
   //};
 
   const [showAll, setShowAll] = useState(false);
-  const [displayedProjects, setDisplayedProjects] = useState(projects.slice(0, 7));
+  const [displayedProjects, setDisplayedProjects] = useState(
+    projects.slice(0, 7)
+  );
   const projectsContainer = useRef<HTMLDivElement>(null);
 
   // Expand/collapse animation
   const handleToggleProjects = () => {
-    setShowAll(prev => !prev);
-    
+    setShowAll((prev) => !prev);
+
     // Use GSAP to animate the height change
     if (projectsContainer.current) {
       gsap.to(projectsContainer.current, {
@@ -107,50 +147,57 @@ export default function Projects() {
   const screenWidth = useScreenWidth();
   const isMobile = screenWidth < 768;
 
-  const { ref } = useInView({ 
+  const { ref } = useInView({
     threshold: 0,
-    rootMargin: isMobile ? "50px 0px" : "100px 0px"
+    rootMargin: isMobile ? '50px 0px' : '100px 0px',
   });
 
   useEffect(() => {
-    let lastScrollY = scrollY.get()
-    const aboutSection = document.getElementById('about')
-    const aboutBottom = aboutSection ? 
-      (aboutSection.getBoundingClientRect().top + window.scrollY + aboutSection.offsetHeight) : 0
-    
-    const unsubscribe = scrollY.on("change", (current) => {
-      const direction = current > lastScrollY ? "down" : "up"
-      
-      if (direction === "down") {
+    let lastScrollY = scrollY.get();
+    const aboutSection = document.getElementById('about');
+    const aboutBottom = aboutSection
+      ? aboutSection.getBoundingClientRect().top +
+        window.scrollY +
+        aboutSection.offsetHeight
+      : 0;
+
+    const unsubscribe = scrollY.on('change', (current) => {
+      const direction = current > lastScrollY ? 'down' : 'up';
+
+      if (direction === 'down') {
         // mobile trigger point
         const triggerPoint = isMobile ? aboutBottom * 0.7 : aboutBottom * 0.9;
         if (current >= triggerPoint) {
-          setIsAnimating(true)
+          setIsAnimating(true);
         }
       } else {
         // mobile reset point
         const resetPoint = isMobile ? aboutBottom * 0.5 : aboutBottom * 0.7;
         if (current < resetPoint) {
-          setIsAnimating(false)
+          setIsAnimating(false);
         }
       }
-      
-      lastScrollY = current
-    })
 
-    return () => unsubscribe()
-  }, [scrollY, isMobile]) // add isMobile as a dependency
+      lastScrollY = current;
+    });
+
+    return () => unsubscribe();
+  }, [scrollY, isMobile]); // add isMobile as a dependency
 
   return (
-    <section id="work" ref={ref} className="section-container !lg:px-0 py-12 lg:pt-28 lg:pb-48">
+    <section
+      id="work"
+      ref={ref}
+      className="section-container !lg:px-0 py-12 lg:pt-28 lg:pb-48"
+    >
       <div className="h-[9vh] sm:h-[2vh]"></div>
-      <motion.div 
+      <motion.div
         className="flex items-center flex-col"
         initial={{ opacity: 0, y: 40 }}
         animate={isAnimating ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
         transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
       >
-        <motion.div 
+        <motion.div
           ref={projectsContainer}
           className="w-full mb-24 relative"
           initial={{ opacity: 0 }}
@@ -159,13 +206,24 @@ export default function Projects() {
         >
           <div className="grid grid-cols-12 px-4 pb-4 border-b border-[#c9c9c9] w-full">
             {[
-              { text: "PROJECT", span: "col-start-1 col-end-5" },
-              { text: "CATEGORY", span: "col-start-5 col-end-9" },
-              { text: "CLIENT", span: "col-start-9 col-end-11", className: "hidden md:block" },
-              { text: "YEAR", span: "col-start-10 lg:col-start-11 col-end-12 lg:col-end-12" },
-              { text: "WEBSITE", span: "col-start-12 col-end-13", align: "text-right" }
-            ].map(({ text, span, align = "", className = "" }) => (
-              <h3 
+              { text: 'PROJECT', span: 'col-start-1 col-end-5' },
+              { text: 'CATEGORY', span: 'col-start-5 col-end-9' },
+              {
+                text: 'CLIENT',
+                span: 'col-start-9 col-end-11',
+                className: 'hidden md:block',
+              },
+              {
+                text: 'YEAR',
+                span: 'col-start-10 lg:col-start-11 col-end-12 lg:col-end-12',
+              },
+              {
+                text: 'WEBSITE',
+                span: 'col-start-12 col-end-13',
+                align: 'text-right',
+              },
+            ].map(({ text, span, align = '', className = '' }) => (
+              <h3
                 key={text}
                 className={`${span} lg:text-sm text-xxs font-light ${align} text-gray-600 ${className}`}
               >
@@ -180,14 +238,16 @@ export default function Projects() {
                 <motion.div
                   key={project.title}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={isAnimating ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  animate={
+                    isAnimating ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+                  }
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
-                  <Project 
-                    index={index} 
+                  <Project
+                    index={index}
                     {...project}
-                    manageModal={manageModal} 
+                    manageModal={manageModal}
                   />
                 </motion.div>
               ))}
@@ -195,39 +255,41 @@ export default function Projects() {
           </AnimatePresence>
         </motion.div>
 
-        <Rounded 
+        <Rounded
           onClick={handleToggleProjects}
           className="!w-[140px] !h-[45px] sm:!w-[180px] sm:!h-[45px] lg:!w-[230px] lg:!h-[65px] 
                     rounded-full mt-2 lg:mt-12 mb-12 lg:mb-16 
                     !border-[1px] !border-gray-500 hover:!border-transparent"
         >
-          <p className="relative z-10 group-hover:text-white dark:group-hover:text-black 
-                      text-base sm:text-sm lg:text-xl font-normal tracking-wider">
+          <p
+            className="relative z-10 group-hover:text-white dark:group-hover:text-black 
+                      text-base sm:text-sm lg:text-xl font-normal tracking-wider"
+          >
             {showAll ? 'Show Less' : 'More Work'}
           </p>
         </Rounded>
 
         <>
-          <motion.div 
+          <motion.div
             ref={modalContainer}
             variants={scaleAnimation}
             initial="initial"
-            animate={active ? "enter" : "closed"}
+            animate={active ? 'enter' : 'closed'}
             className="h-[220px] w-[350px] lg:h-[350px] lg:w-[500px] fixed top-1/2 left-1/2 bg-white pointer-events-none overflow-hidden z-[3]"
           >
-            <div 
-              style={{top: `${index * -100}%`}} 
+            <div
+              style={{ top: `${index * -100}%` }}
               className="h-full w-full relative transition-[top] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]"
             >
               {projects.map((project, index) => {
                 const { src, color } = project;
                 return (
-                  <div 
+                  <div
                     className="h-full w-full flex items-center justify-center"
-                    style={{backgroundColor: color}}
+                    style={{ backgroundColor: color }}
                     key={`modal_${index}`}
                   >
-                    <Image 
+                    <Image
                       src={`/images/${src}`}
                       width={0}
                       height={0}

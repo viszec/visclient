@@ -7,27 +7,27 @@ export interface RouteItem {
 
 export const ROUTES: RouteItem[] = [
   {
-    title: "Home",
-    href: "/",
-    label: "Home",
-    description: "Back to homepage"
+    title: 'Home',
+    href: '/',
+    label: 'Home',
+    description: 'Back to homepage',
   },
   {
-    title: "About",
-    href: "/#about",
-    label: "About",
-    description: "Learn more about me"
+    title: 'About',
+    href: '/#about',
+    label: 'About',
+    description: 'Learn more about me',
   },
   {
-    title: "Work",
-    href: "/#work",
-    label: "Work",
-    description: "View my projects"
+    title: 'Work',
+    href: '/#work',
+    label: 'Work',
+    description: 'View my projects',
   },
   {
-    title: "Contact",
-    href: "/#contact",
-    label: "Contact",
-    description: "Get in touch"
-  }
-]; 
+    title: 'Contact',
+    href: '/#contact',
+    label: 'Contact',
+    description: 'Get in touch',
+  },
+];

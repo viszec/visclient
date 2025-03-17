@@ -1,15 +1,18 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { useTheme } from "next-themes";
-import { Particles } from "@/components/ui/particles";
-import { TechSkills } from "@/components/common/TechSkills";
-import { useScreenSize } from "@/hooks/useScreenSize";
-import SliderText from "@/components/common/SliderText";
-import { WelcomeIntro } from "@/components/common/WelcomeIntro";
+import { useEffect, useState } from 'react';
+
+import Image from 'next/image';
+
+import { useScreenSize } from '@/hooks/useScreenSize';
+import { motion } from 'framer-motion';
+import { useTheme } from 'next-themes';
+
+import SliderText from '@/components/common/SliderText';
+import { TechSkills } from '@/components/common/TechSkills';
+import { WelcomeIntro } from '@/components/common/WelcomeIntro';
 import TiltedCard from '@/components/ui/TiltedCard';
+import { Particles } from '@/components/ui/particles';
 
 // Animation variants
 const animations = {
@@ -32,13 +35,13 @@ const animations = {
 
 export default function Hero() {
   const { theme } = useTheme();
-  const [particleColor, setParticleColor] = useState("#ffffff");
+  const [particleColor, setParticleColor] = useState('#ffffff');
   const { width, height } = useScreenSize();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [scale, setScale] = useState({ x: 0.4, y: 1 });
 
   useEffect(() => {
-    setParticleColor(theme === "dark" ? "#ffffff" : "#000000");
+    setParticleColor(theme === 'dark' ? '#ffffff' : '#000000');
   }, [theme]);
 
   useEffect(() => {
@@ -116,8 +119,8 @@ export default function Hero() {
                     captionText="Mavis"
                     containerHeight="100%"
                     containerWidth="100%"
-                    imageHeight={width < 768 ? "16.5rem" : "32rem"}
-                    imageWidth={width < 768 ? "16.5rem" : "32rem"}
+                    imageHeight={width < 768 ? '16.5rem' : '32rem'}
+                    imageWidth={width < 768 ? '16.5rem' : '32rem'}
                     rotateAmplitude={8}
                     scaleOnHover={1.1}
                     showMobileWarning={false}
@@ -125,9 +128,7 @@ export default function Hero() {
                     displayOverlayContent={false}
                     className="rounded-full"
                     overlayContent={
-                      <div className="tilted-card-text">
-                        Mavis M.
-                      </div>
+                      <div className="tilted-card-text">Mavis M.</div>
                     }
                   />
                 </div>
