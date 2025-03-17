@@ -166,9 +166,16 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
           const previousCharsCount = array.slice(0, wordIndex).reduce((sum, word) => sum + word.characters.length, 0);
 
           return (
-            <span key={wordIndex} aria-hidden="true" className={cn('inline-flex overflow-hidden', wordLevelClassName)}>
+            <span
+              key={wordIndex}
+              aria-hidden="true"
+              className={cn('inline-flex overflow-hidden', wordLevelClassName)}
+            >
               {wordObj.characters.map((char, charIndex) => (
-                <span className={cn(elementLevelClassName, 'whitespace-pre-wrap relative')} key={charIndex}>
+                <span
+                  className={cn(elementLevelClassName, 'whitespace-pre-wrap relative')}
+                  key={charIndex}
+                >
                   <motion.span
                     custom={previousCharsCount + charIndex}
                     initial="hidden"

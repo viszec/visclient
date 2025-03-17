@@ -133,7 +133,10 @@ export default function About() {
         <div className="w-full lg:w-[62%]">
           <p className="m-0 text-xl lg:text-[2.6rem] leading-[1.1em] tracking-tight font-bold text-black/85">
             {phrase.split(' ').map((word, index) => (
-              <span key={index} className="inline-block overflow-hidden mr-[0.15em]">
+              <span
+                key={index}
+                className="inline-block overflow-hidden mr-[0.15em]"
+              >
                 <motion.span
                   className="inline-block font-grotesk"
                   variants={slideUp}
@@ -150,10 +153,21 @@ export default function About() {
 
         {/* Description Section - full width on mobile, 38% on desktop */}
         <div className="w-full lg:w-[38%] mt-8 lg:mt-0 relative">
-          <motion.div className="flex-1" variants={fadeIn} initial="initial" animate={isAnimating ? 'open' : 'closed'}>
+          <motion.div
+            className="flex-1"
+            variants={fadeIn}
+            initial="initial"
+            animate={isAnimating ? 'open' : 'closed'}
+          >
             <div className="flex flex-col items-start space-y-3">
               <div className="pb-6">
-                <Image src="/icons/arrow.svg" alt="arrow" width={18} height={18} priority />
+                <Image
+                  src="/icons/arrow.svg"
+                  alt="arrow"
+                  width={18}
+                  height={18}
+                  priority
+                />
               </div>
               <h1 className="text-2xl lg:text-4xl font-bold text-black/85 pb-4">MOTIVATION</h1>
               {showDescription && (

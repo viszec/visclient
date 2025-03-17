@@ -174,7 +174,11 @@ export default function Projects() {
   }, [scrollY, isMobile]); // add isMobile as a dependency
 
   return (
-    <section id="work" ref={ref} className="section-container !lg:px-0 py-12 lg:pt-28 lg:pb-48">
+    <section
+      id="work"
+      ref={ref}
+      className="section-container !lg:px-0 py-12 lg:pt-28 lg:pb-48"
+    >
       <div className="h-[9vh] sm:h-[2vh]"></div>
       <motion.div
         className="flex items-center flex-col"
@@ -208,7 +212,10 @@ export default function Projects() {
                 align: 'text-right',
               },
             ].map(({ text, span, align = '', className = '' }) => (
-              <h3 key={text} className={`${span} lg:text-sm text-xxs font-light ${align} text-gray-600 ${className}`}>
+              <h3
+                key={text}
+                className={`${span} lg:text-sm text-xxs font-light ${align} text-gray-600 ${className}`}
+              >
                 {text}
               </h3>
             ))}
@@ -224,7 +231,11 @@ export default function Projects() {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
-                  <Project index={index} {...project} manageModal={manageModal} />
+                  <Project
+                    index={index}
+                    {...project}
+                    manageModal={manageModal}
+                  />
                 </motion.div>
               ))}
             </div>

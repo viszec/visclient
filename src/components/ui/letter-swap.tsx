@@ -96,8 +96,14 @@ export function LetterSwapForward({
 
       {label.split('').map((letter: string, i: number) => {
         return (
-          <span className="whitespace-pre relative flex" key={i}>
-            <motion.span className={`relative letter`} style={{ top: 0 }}>
+          <span
+            className="whitespace-pre relative flex"
+            key={i}
+          >
+            <motion.span
+              className={`relative letter`}
+              style={{ top: 0 }}
+            >
               {letter}
             </motion.span>
             <motion.span
@@ -200,8 +206,14 @@ export function LetterSwapPingPong({
 
       {label.split('').map((letter: string, i: number) => {
         return (
-          <span className="whitespace-pre relative flex" key={i}>
-            <motion.span className={`relative letter`} style={{ top: 0 }}>
+          <span
+            className="whitespace-pre relative flex"
+            key={i}
+          >
+            <motion.span
+              className={`relative letter`}
+              style={{ top: 0 }}
+            >
               {letter}
             </motion.span>
             <motion.span

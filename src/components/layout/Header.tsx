@@ -104,7 +104,11 @@ export default function Header() {
 
       {/* Desktop menu button */}
       <div className="hidden md:block z-[101]">
-        <MenuButton buttonRef={buttonRef} isActive={isActive} onClick={() => setIsActive(!isActive)} />
+        <MenuButton
+          buttonRef={buttonRef}
+          isActive={isActive}
+          onClick={() => setIsActive(!isActive)}
+        />
       </div>
 
       <AnimatePresence mode="wait">{isActive && <SidebarNav />}</AnimatePresence>

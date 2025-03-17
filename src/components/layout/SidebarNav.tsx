@@ -60,7 +60,10 @@ export default function SidebarNav() {
                    pt-[60px] lg:pt-[80px]"
       >
         <div className="box-border h-full p-12 lg:p-[100px] flex flex-col justify-between">
-          <motion.div variants={containerVariants} className="flex flex-col text-4xl gap-3">
+          <motion.div
+            variants={containerVariants}
+            className="flex flex-col text-4xl gap-3"
+          >
             <div className="flex text-white/80 border-b py-2 border-gray-700 uppercase text-sm lg:text-2xl font-light tracking-tight mb-10">
               <div className="tracking-wider items-center gap-2">
                 Mavis M.

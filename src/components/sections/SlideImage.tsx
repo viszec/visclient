@@ -95,10 +95,19 @@ export default function SlidingImages() {
   const borderRadiusProgress = useTransform(scrollYProgress, [0, 0.95], [0, 100]);
 
   return (
-    <section className="section relative" style={{ backgroundColor: '#f5f5f5' }}>
-      <div id="slide-image" className="section-wrapper">
+    <section
+      className="section relative"
+      style={{ backgroundColor: '#f5f5f5' }}
+    >
+      <div
+        id="slide-image"
+        className="section-wrapper"
+      >
         <div className={`section-content ${isMobile ? 'w-full px-0' : ''}`}>
-          <div ref={container} className="flex flex-col gap-[3vw] relative mt-24 lg:mt-32 z-[1]">
+          <div
+            ref={container}
+            className="flex flex-col gap-[3vw] relative mt-24 lg:mt-32 z-[1]"
+          >
             {isMobile ? (
               <div className="relative w-full">
                 <div className="overflow-hidden w-full h-[25vh]">
@@ -146,7 +155,10 @@ export default function SlidingImages() {
               </div>
             ) : (
               <>
-                <motion.div style={{ x: x1 }} className="flex relative gap-5 w-[120vw] -left-[10vw]">
+                <motion.div
+                  style={{ x: x1 }}
+                  className="flex relative gap-5 w-[120vw] -left-[10vw]"
+                >
                   {slider1.map((project, index) => (
                     <div
                       key={index}
@@ -168,7 +180,10 @@ export default function SlidingImages() {
                     </div>
                   ))}
                 </motion.div>
-                <motion.div style={{ x: x2 }} className="flex relative gap-[3vw] w-[120vw] -left-[10vw]">
+                <motion.div
+                  style={{ x: x2 }}
+                  className="flex relative gap-[3vw] w-[120vw] -left-[10vw]"
+                >
                   {slider2.map((project, index) => (
                     <div
                       key={index}
@@ -189,7 +204,10 @@ export default function SlidingImages() {
               </>
             )}
 
-            <motion.div style={{ height }} className="relative mt-12 lg:mt-[100px]">
+            <motion.div
+              style={{ height }}
+              className="relative mt-12 lg:mt-[100px]"
+            >
               <motion.div
                 className="absolute h-[1440%] w-[120%] -left-[10%]"
                 style={{

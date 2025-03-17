@@ -22,7 +22,10 @@ export default function Contact() {
 
   return (
     <div className="section bg-black">
-      <div id="contact" className="relative">
+      <div
+        id="contact"
+        className="relative"
+      >
         <motion.div
           style={{ y }}
           ref={container}
@@ -36,7 +39,13 @@ export default function Contact() {
                 <div className="lg:w-1/2">
                   <div className="flex items-center gap-4">
                     <div className="relative w-16 lg:w-28 h-16 lg:h-28 rounded-full overflow-hidden ml-4 lg:ml-10">
-                      <Image fill alt="avatar" src="/images/avatar.webp" className="object-cover" loading="lazy" />
+                      <Image
+                        fill
+                        alt="avatar"
+                        src="/images/avatar.webp"
+                        className="object-cover"
+                        loading="lazy"
+                      />
                     </div>
                     <h1 className="text-4xl sm:text-6xl md:text-8xl font-light font-just-me-again">
                       Let&apos;s Create
@@ -45,7 +54,12 @@ export default function Contact() {
                   <h1 className="flex items-center text-4xl sm:text-6xl md:text-8xl font-just-me-again m-0 font-light ml-10 lg:ml-20">
                     Together
                     <div className="relative inline-block w-[1.2em] h-[1.2em] ml-[0.4em] lg:ml-[0.2em] align-middle">
-                      <Image src="/images/smiley.svg" alt="Smiley face" fill className="object-contain" />
+                      <Image
+                        src="/images/smiley.svg"
+                        alt="Smiley face"
+                        fill
+                        className="object-contain"
+                      />
                     </div>
                   </h1>
 
