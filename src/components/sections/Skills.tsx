@@ -169,7 +169,10 @@ export default function Skills() {
 
   return (
     <ReactLenis root>
-      <div className="m-0 p-0 box-border" ref={container}>
+      <div
+        className="m-0 p-0 box-border"
+        ref={container}
+      >
         <section className="relative w-full min-h-screen bg-black">
           <h1
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 

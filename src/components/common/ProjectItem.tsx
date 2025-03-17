@@ -49,7 +49,14 @@ export default function ProjectItem({ index, title, category, client, year, live
         >
           <span className="hidden md:inline">Live Link</span>
           <span className="flex items-center gap-1 md:hidden">
-            <Image src="/icons/arrow.svg" alt="arrow" width={18} height={18} className="w-2 h-2" priority />
+            <Image
+              src="/icons/arrow.svg"
+              alt="arrow"
+              width={18}
+              height={18}
+              className="w-2 h-2"
+              priority
+            />
             Live
           </span>
         </Link>

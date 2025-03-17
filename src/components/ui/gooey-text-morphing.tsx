@@ -88,7 +88,11 @@ export function GooeyText({ texts, morphTime = 1, cooldownTime = 0.25, className
 
   return (
     <div className={cn('relative', className)}>
-      <svg className="absolute h-0 w-0" aria-hidden="true" focusable="false">
+      <svg
+        className="absolute h-0 w-0"
+        aria-hidden="true"
+        focusable="false"
+      >
         <defs>
           <filter id="threshold">
             <feColorMatrix
@@ -103,7 +107,10 @@ export function GooeyText({ texts, morphTime = 1, cooldownTime = 0.25, className
         </defs>
       </svg>
 
-      <div className="flex items-center justify-center" style={{ filter: 'url(#threshold)' }}>
+      <div
+        className="flex items-center justify-center"
+        style={{ filter: 'url(#threshold)' }}
+      >
         <span
           ref={text1Ref}
           className={cn(

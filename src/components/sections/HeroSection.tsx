@@ -127,9 +127,7 @@ export default function Hero() {
                     showTooltip={false}
                     displayOverlayContent={false}
                     className="rounded-full"
-                    overlayContent={
-                      <div className="tilted-card-text">Mavis M.</div>
-                    }
+                    overlayContent={<div className="tilted-card-text">Mavis M.</div>}
                   />
                 </div>
               </div>

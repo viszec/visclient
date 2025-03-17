@@ -27,7 +27,10 @@ const TECH_SKILLS: TechSkill[] = [
 export function TechSkills() {
   return (
     <div className="w-full min-h-[80px] lg:min-h-[140px] flex flex-col relative font-azeretMono">
-      <Gravity gravity={{ x: 0, y: 1 }} className="w-full h-full">
+      <Gravity
+        gravity={{ x: 0, y: 1 }}
+        className="w-full h-full"
+      >
         {TECH_SKILLS.map((skill) => (
           <MatterBody
             key={skill.name}

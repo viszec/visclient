@@ -160,7 +160,10 @@ export default function ContactForm() {
 
   const renderField = (field: (typeof FORM_FIELDS)[number]) => {
     const labelContent = (
-      <label htmlFor={field.id} className="block text-xs lg:text-sm font-medium mb-2 text-gray-300">
+      <label
+        htmlFor={field.id}
+        className="block text-xs lg:text-sm font-medium mb-2 text-gray-300"
+      >
         {field.label}
         {field.required && <span className="text-orange-500 ml-1">*</span>}
       </label>
@@ -245,7 +248,10 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 text-white">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-6 text-white"
+    >
       {FORM_FIELDS.map(renderField)}
       <div className="pt-2">
         <Rounded

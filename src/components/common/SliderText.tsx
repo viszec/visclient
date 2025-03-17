@@ -47,7 +47,10 @@ export default function SliderText() {
 
   return (
     <div className="absolute top-[calc(100vh-160px)] lg:top-[calc(100vh-190px)] md:top-[calc(100vh-170px)]">
-      <div ref={slider} className="relative whitespace-nowrap">
+      <div
+        ref={slider}
+        className="relative whitespace-nowrap"
+      >
         <div
           ref={firstText}
           className="relative m-0 text-black/85 text-4xl lg:text-[150px] font-normal lg:font-medium pr-12"
