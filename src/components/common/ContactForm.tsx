@@ -1,15 +1,18 @@
-"use client";
-import { FormEvent, useState } from "react";
-import Rounded from "@/components/common/RoundedButton";
+'use client';
+
+import { FormEvent, useState } from 'react';
+
+import { Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
+
+import Rounded from '@/components/common/RoundedButton';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+} from '@/components/ui/select';
 
 interface FormData {
   name: string;
@@ -20,48 +23,48 @@ interface FormData {
 
 const FORM_FIELDS = [
   {
-    id: "name",
-    label: "Name",
-    type: "text",
+    id: 'name',
+    label: 'Name',
+    type: 'text',
     required: true,
-    placeholder: "Enter your name",
+    placeholder: 'Enter your name',
   },
   {
-    id: "email",
-    label: "Email",
-    type: "email",
+    id: 'email',
+    label: 'Email',
+    type: 'email',
     required: true,
-    placeholder: "your@email.com",
+    placeholder: 'your@email.com',
   },
   {
-    id: "message",
-    label: "Message",
-    type: "textarea",
+    id: 'message',
+    label: 'Message',
+    type: 'textarea',
     required: true,
     rows: 4,
-    placeholder: "Tell me more about your project...",
+    placeholder: 'Tell me more about your project...',
   },
   {
-    id: "budget",
-    label: "Project Budget",
-    type: "select",
+    id: 'budget',
+    label: 'Project Budget',
+    type: 'select',
     required: false,
-    placeholder: "Select your budget range",
+    placeholder: 'Select your budget range',
     options: [
-      { value: "default", label: "Select..." },
-      { value: "small", label: "$1,000 - $5,000" },
-      { value: "medium", label: "$5,000 - $10,000" },
-      { value: "large", label: "$10,000+" },
+      { value: 'default', label: 'Select...' },
+      { value: 'small', label: '$1,000 - $5,000' },
+      { value: 'medium', label: '$5,000 - $10,000' },
+      { value: 'large', label: '$10,000+' },
     ],
   },
 ] as const;
 
 export default function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    message: "",
-    budget: "",
+    name: '',
+    email: '',
+    message: '',
+    budget: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -76,57 +79,59 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log("Form submission started");
+    console.log('Form submission started');
 
     // Basic validation
     if (!formData.name || !formData.email || !formData.message) {
-      toast.error("Missing information", {
+      toast.error('Missing information', {
         description: (
           <span className="text-white">
             Please fill in all required fields.
           </span>
         ),
       });
-      console.log("Validation failed: Missing required fields");
+      console.log('Validation failed: Missing required fields');
       return;
     }
 
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      toast.error("Invalid email", {
-        description: "Please enter a valid email address.",
+      toast.error('Invalid email', {
+        description: 'Please enter a valid email address.',
       });
-      console.log("Validation failed: Invalid email format");
+      console.log('Validation failed: Invalid email format');
       return;
     }
 
     setIsSubmitting(true);
-    console.log("Sending form data:", formData);
+    console.log('Sending form data:', formData);
 
     try {
-      const response = await fetch("/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
-      console.log("API response status:", response.status);
+      console.log('API response status:', response.status);
 
       const responseData = await response.json().catch(() => null);
-      console.log("API response data:", responseData);
+      console.log('API response data:', responseData);
 
       if (response.ok) {
-        toast.success("Message sent!", {
+        toast.success('Message sent!', {
           description: (
             <span className="text-white">
-              Hey <span className="font-semibold text-white">{formData.name}</span>, thank you for reaching out. I&apos;ll get back to you soon :)
+              Hey{' '}
+              <span className="font-semibold text-white">{formData.name}</span>,
+              thank you for reaching out. I&apos;ll get back to you soon :)
             </span>
-          )
+          ),
         });
 
         // Reset form
-        setFormData({ name: "", email: "", message: "", budget: "" });
+        setFormData({ name: '', email: '', message: '', budget: '' });
         setFilledFields({
           name: false,
           email: false,
@@ -134,13 +139,13 @@ export default function ContactForm() {
           budget: false,
         });
       } else {
-        throw new Error(responseData?.message || "Failed to send message");
+        throw new Error(responseData?.message || 'Failed to send message');
       }
     } catch (error: unknown) {
-      console.error("Error sending message:", error);
-      toast.error("Message not sent", {
+      console.error('Error sending message:', error);
+      toast.error('Message not sent', {
         description:
-          error instanceof Error ? error.message : "Please try again later."
+          error instanceof Error ? error.message : 'Please try again later.',
       });
     } finally {
       setIsSubmitting(false);
@@ -161,13 +166,13 @@ export default function ContactForm() {
     // Update filled state based on whether the field has a value
     setFilledFields((prev) => ({
       ...prev,
-      [name]: value.trim() !== "",
+      [name]: value.trim() !== '',
     }));
   };
 
   // Consistent input styles with dark background
   const inputStyles =
-    "w-full px-4 py-3 bg-gray-800/50 rounded-lg border-none focus:outline-none focus:ring-0 text-white placeholder:text-gray-500/70 placeholder:text-xs lg:placeholder:text-sm";
+    'w-full px-4 py-3 bg-gray-800/50 rounded-lg border-none focus:outline-none focus:ring-0 text-white placeholder:text-gray-500/70 placeholder:text-xs lg:placeholder:text-sm';
 
   const renderField = (field: (typeof FORM_FIELDS)[number]) => {
     const labelContent = (
@@ -181,9 +186,9 @@ export default function ContactForm() {
     );
 
     const isFilled = filledFields[field.id as keyof FormData];
-    const fieldStyles = `${inputStyles} ${isFilled ? "" : ""}`;
+    const fieldStyles = `${inputStyles} ${isFilled ? '' : ''}`;
 
-    if (field.type === "textarea") {
+    if (field.type === 'textarea') {
       return (
         <div key={field.id}>
           {labelContent}
@@ -202,21 +207,21 @@ export default function ContactForm() {
       );
     }
 
-    if (field.type === "select") {
+    if (field.type === 'select') {
       return (
         <div key={field.id}>
           {labelContent}
           <Select
             name={field.id}
-            value={formData[field.id as keyof FormData] || "default"}
+            value={formData[field.id as keyof FormData] || 'default'}
             onValueChange={(value) => {
               setFormData((prev) => ({
                 ...prev,
-                [field.id]: value === "default" ? "" : value,
+                [field.id]: value === 'default' ? '' : value,
               }));
               setFilledFields((prev) => ({
                 ...prev,
-                [field.id]: value !== "default",
+                [field.id]: value !== 'default',
               }));
             }}
             disabled={isSubmitting}
@@ -266,10 +271,10 @@ export default function ContactForm() {
           onClick={(e) => {
             if (e) {
               e.preventDefault();
-              console.log("Button clicked, submitting form");
+              console.log('Button clicked, submitting form');
               handleSubmit(e as FormEvent);
             } else {
-              console.log("Event is undefined, creating synthetic event");
+              console.log('Event is undefined, creating synthetic event');
               handleSubmit({} as FormEvent);
             }
           }}
@@ -279,7 +284,7 @@ export default function ContactForm() {
           <div className="flex items-center justify-center gap-2">
             {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
             <p className="m-0 text-white font-medium text-sm lg:text-base">
-              {isSubmitting ? "Sending..." : "Let's Connect"}
+              {isSubmitting ? 'Sending...' : "Let's Connect"}
             </p>
           </div>
         </Rounded>

@@ -1,56 +1,58 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { usePathname } from 'next/navigation';
-import { menuSlide } from '@/types/animation';
-import NavLink from '@/components/layout/Link';
-import Curve from '@/components/layout/Curve';
-import NavSocials from '@/components/layout/NavSocials';
-import { ROUTES } from '@/config/routes';
+import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+
+import { ROUTES } from '@/config/routes';
+import { menuSlide } from '@/types/animation';
+import { AnimatePresence, motion } from 'framer-motion';
+
+import Curve from '@/components/layout/Curve';
+import NavLink from '@/components/layout/Link';
+import NavSocials from '@/components/layout/NavSocials';
 
 const containerVariants = {
   initial: { opacity: 0 },
-  enter: { 
+  enter: {
     opacity: 1,
-    transition: { 
+    transition: {
       duration: 0.5,
-      staggerChildren: 0.1 
-    }
+      staggerChildren: 0.1,
+    },
   },
-  exit: { 
+  exit: {
     opacity: 0,
-    transition: { 
+    transition: {
       duration: 0.5,
-      staggerChildren: 0.1 
-    }
-  }
+      staggerChildren: 0.1,
+    },
+  },
 };
 
 export default function SidebarNav() {
   const pathname = usePathname();
   const [selectedIndicator, setSelectedIndicator] = useState<string>(pathname);
   //const [isVisible, setIsVisible] = useState(true);
-  
 
   useEffect(() => {
     setSelectedIndicator(pathname);
   }, [pathname]);
 
   return (
-    <motion.div 
-      variants={menuSlide} 
-      initial="initial" 
-      animate="enter" 
+    <motion.div
+      variants={menuSlide}
+      initial="initial"
+      animate="enter"
       exit="exit"
       className="fixed inset-0 z-[100] pointer-events-none"
     >
       {/* Half-transparent bg mask */}
       {/*<div className="absolute inset-0 bg-black/20 backdrop-blur-sm pointer-events-auto" />*/}
-      
+
       {/* Navigation */}
-      <div 
+      <div
         className="absolute right-0 top-0 h-screen bg-black text-white
                    w-[60vw] sm:w-[40vw] lg:w-[35vw]
                    overflow-visible pointer-events-auto
@@ -58,7 +60,7 @@ export default function SidebarNav() {
                    pt-[60px] lg:pt-[80px]"
       >
         <div className="box-border h-full p-12 lg:p-[100px] flex flex-col justify-between">
-          <motion.div 
+          <motion.div
             variants={containerVariants}
             className="flex flex-col text-4xl gap-3"
           >
@@ -69,7 +71,7 @@ export default function SidebarNav() {
                   src="/icons/arrow.svg"
                   alt="arrow"
                   width={18}
-                  height={18} 
+                  height={18}
                   priority
                   className="w-3 h-3 lg:w-4 lg:h-4 brightness-0/80 invert"
                 />
@@ -78,25 +80,27 @@ export default function SidebarNav() {
             </div>
             <AnimatePresence mode="wait">
               {ROUTES.map((item, index) => (
-                <NavLink 
+                <NavLink
                   key={index}
-                  data={{...item, index}}
+                  data={{ ...item, index }}
                   isActive={selectedIndicator === item.href}
                   setSelectedIndicator={setSelectedIndicator}
                 />
               ))}
             </AnimatePresence>
-            <div className='flex flex-col pt-18 lg:pt-24 space-y-2'>
-              <div className='flex items-center gap-1'>
-              <p className='text-base lg:text-xl text-white/80 font-light tracking-tight'>Let&apos;s connect</p>
-              <Image
-                      src="/icons/arrow.svg"
-                      alt="arrow"
-                      width={18}
-                      height={18} 
-                      priority
-                      className="w-3 h-3 lg:w-4 lg:h-4 brightness-0/80 invert"
-                      />
+            <div className="flex flex-col pt-18 lg:pt-24 space-y-2">
+              <div className="flex items-center gap-1">
+                <p className="text-base lg:text-xl text-white/80 font-light tracking-tight">
+                  Let&apos;s connect
+                </p>
+                <Image
+                  src="/icons/arrow.svg"
+                  alt="arrow"
+                  width={18}
+                  height={18}
+                  priority
+                  className="w-3 h-3 lg:w-4 lg:h-4 brightness-0/80 invert"
+                />
               </div>
               <NavSocials />
             </div>
@@ -108,4 +112,4 @@ export default function SidebarNav() {
       </div>
     </motion.div>
   );
-} 
+}

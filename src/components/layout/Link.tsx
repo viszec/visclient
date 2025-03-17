@@ -1,9 +1,11 @@
-'use client'
+'use client';
 
 import { useState } from 'react';
+
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+
 import { scale } from '@/types/animation';
+import { motion } from 'framer-motion';
 
 interface NavLinkProps {
   data: {
@@ -23,8 +25,8 @@ const linkVariants = {
     transition: {
       duration: 0.5,
       delay: 0.1 * i,
-      ease: [0.76, 0, 0.24, 1]
-    }
+      ease: [0.76, 0, 0.24, 1],
+    },
   }),
   exit: (i: number) => ({
     opacity: 0,
@@ -32,17 +34,21 @@ const linkVariants = {
     transition: {
       duration: 0.5,
       delay: 0.1 * i,
-      ease: [0.76, 0, 0.24, 1]
-    }
-  })
+      ease: [0.76, 0, 0.24, 1],
+    },
+  }),
 };
 
-export default function NavLink({ data, isActive, setSelectedIndicator }: NavLinkProps) {
+export default function NavLink({
+  data,
+  isActive,
+  setSelectedIndicator,
+}: NavLinkProps) {
   const [isHovered, setIsHovered] = useState(false);
   const { title, href, index } = data;
 
   return (
-    <motion.div 
+    <motion.div
       className="relative flex items-center group"
       onMouseEnter={() => {
         setSelectedIndicator(href);
@@ -55,14 +61,14 @@ export default function NavLink({ data, isActive, setSelectedIndicator }: NavLin
       animate="enter"
       exit="exit"
     >
-      <motion.div 
+      <motion.div
         variants={scale}
-        animate={isActive || isHovered ? "open" : "closed"}
+        animate={isActive || isHovered ? 'open' : 'closed'}
         className="w-1 h-1 lg:w-2 lg:h-2 bg-white rounded-full absolute -left-[20px] lg:-left-[30px]
                    transition-transform duration-200 ease-out
                    transform scale-0 group-hover:scale-100"
       />
-      <Link 
+      <Link
         href={href}
         className="text-white/80 hover:text-white font-light py-4 text-base lg:text-3xl transition-colors duration-200
                    relative after:content-[''] after:absolute after:bottom-0 
@@ -74,4 +80,4 @@ export default function NavLink({ data, isActive, setSelectedIndicator }: NavLin
       </Link>
     </motion.div>
   );
-} 
+}

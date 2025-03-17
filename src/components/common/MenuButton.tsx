@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import Rounded from "@/components/common/RoundedButton";
+import Rounded from '@/components/common/RoundedButton';
 
 interface MenuButtonProps {
   buttonRef: React.RefObject<HTMLDivElement>;
@@ -9,9 +9,14 @@ interface MenuButtonProps {
   className?: string;
 }
 
-export const MenuButton = ({ buttonRef, isActive, onClick, className = '' }: MenuButtonProps) => (
-  <div 
-    ref={buttonRef} 
+export const MenuButton = ({
+  buttonRef,
+  isActive,
+  onClick,
+  className = '',
+}: MenuButtonProps) => (
+  <div
+    ref={buttonRef}
     className={`scale-0 fixed lg:right-2 z-[101] transition-transform duration-300 ease-out 
                 right-4 top-3 lg:top-[70px] ${className}`}
   >
@@ -26,4 +31,4 @@ export const MenuButton = ({ buttonRef, isActive, onClick, className = '' }: Men
       </div>
     </Rounded>
   </div>
-); 
+);

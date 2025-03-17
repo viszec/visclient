@@ -1,6 +1,7 @@
-'use client'
+'use client';
 
-import React, { useEffect, useRef, ReactElement } from 'react';
+import React, { ReactElement, useEffect, useRef } from 'react';
+
 import gsap from 'gsap';
 
 interface MagneticProps {
@@ -9,34 +10,34 @@ interface MagneticProps {
   dampening?: number;
 }
 
-export default function Magnetic({ 
-  children, 
-  strength = 0.35, 
-  dampening = 0.3 
+export default function Magnetic({
+  children,
+  strength = 0.35,
+  dampening = 0.3,
 }: MagneticProps) {
   const magnetic = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const xTo = gsap.quickTo(magnetic.current, "x", {
+    const xTo = gsap.quickTo(magnetic.current, 'x', {
       duration: 1,
-      ease: `elastic.out(1, ${dampening})`
+      ease: `elastic.out(1, ${dampening})`,
     });
-    
-    const yTo = gsap.quickTo(magnetic.current, "y", {
+
+    const yTo = gsap.quickTo(magnetic.current, 'y', {
       duration: 1,
-      ease: `elastic.out(1, ${dampening})`
+      ease: `elastic.out(1, ${dampening})`,
     });
 
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       const element = magnetic.current;
-      
+
       if (!element) return;
 
       const { height, width, left, top } = element.getBoundingClientRect();
       const x = clientX - (left + width / 2);
       const y = clientY - (top + height / 2);
-      
+
       xTo(x * strength);
       yTo(y * strength);
     };
@@ -48,14 +49,14 @@ export default function Magnetic({
 
     const element = magnetic.current;
     if (element) {
-      element.addEventListener("mousemove", handleMouseMove);
-      element.addEventListener("mouseleave", handleMouseLeave);
+      element.addEventListener('mousemove', handleMouseMove);
+      element.addEventListener('mouseleave', handleMouseLeave);
     }
 
     return () => {
       if (element) {
-        element.removeEventListener("mousemove", handleMouseMove);
-        element.removeEventListener("mouseleave", handleMouseLeave);
+        element.removeEventListener('mousemove', handleMouseMove);
+        element.removeEventListener('mouseleave', handleMouseLeave);
       }
     };
   }, [strength, dampening]);

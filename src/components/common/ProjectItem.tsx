@@ -1,7 +1,9 @@
-"use client";
-import Link from "next/link";
-import React from "react";
-import Image from "next/image";
+'use client';
+
+import React from 'react';
+
+import Image from 'next/image';
+import Link from 'next/link';
 
 interface ProjectProps {
   index: number;
@@ -23,29 +25,29 @@ export default function ProjectItem({
   manageModal,
 }: ProjectProps) {
   const items = [
-    { 
-      content: title, 
-      span: "col-start-1 col-end-5", 
+    {
+      content: title,
+      span: 'col-start-1 col-end-5',
       isTitle: true,
-      hoverTransform: "group-hover:-translate-x-2.5"
+      hoverTransform: 'group-hover:-translate-x-2.5',
     },
-    { 
-      content: category, 
-      span: "col-start-5 col-end-9",
-      hoverTransform: "group-hover:translate-x-2.5"
+    {
+      content: category,
+      span: 'col-start-5 col-end-9',
+      hoverTransform: 'group-hover:translate-x-2.5',
     },
-    { 
-      content: client, 
-      span: "col-start-9 col-end-11",
-      hoverTransform: "group-hover:translate-x-2.5",
-      className: "hidden md:block"
+    {
+      content: client,
+      span: 'col-start-9 col-end-11',
+      hoverTransform: 'group-hover:translate-x-2.5',
+      className: 'hidden md:block',
     },
-    { 
-      content: year, 
-      span: "col-start-10 col-end-11 lg:col-start-11 lg:col-end-12",
-      hoverTransform: "group-hover:translate-x-2.5"
+    {
+      content: year,
+      span: 'col-start-10 col-end-11 lg:col-start-11 lg:col-end-12',
+      hoverTransform: 'group-hover:translate-x-2.5',
     },
-    { 
+    {
       content: (
         <Link
           href={liveURL}
@@ -67,14 +69,15 @@ export default function ProjectItem({
           </span>
         </Link>
       ),
-      span: "col-start-12 col-end-13",
-      align: "text-right",
-      hoverTransform: "group-hover:translate-x-2.5"
-    }
-  ]
+      span: 'col-start-12 col-end-13',
+      align: 'text-right',
+      hoverTransform: 'group-hover:translate-x-2.5',
+    },
+  ];
 
-  const baseStyles = "font-light self-center transition-all duration-400 group-hover:text-gray-400"
-  
+  const baseStyles =
+    'font-light self-center transition-all duration-400 group-hover:text-gray-400';
+
   return (
     <div className="grid grid-cols-12 px-4 py-6 border-b border-gray-300 cursor-pointer group relative w-full">
       <div
@@ -83,23 +86,37 @@ export default function ProjectItem({
         onMouseLeave={(e) => manageModal(false, index, e.clientX, e.clientY)}
       />
 
-      {items.map(({ content, span, isTitle, align = "", hoverTransform, className = "" }, i) => (
-        <div
-          key={i}
-          className={`
+      {items.map(
+        (
+          {
+            content,
+            span,
+            isTitle,
+            align = '',
+            hoverTransform,
+            className = '',
+          },
+          i
+        ) => (
+          <div
+            key={i}
+            className={`
             ${span}
             ${baseStyles}
-            ${isTitle ? "text-base lg:text-2xl font-normal m-0" : ""}
+            ${isTitle ? 'text-base text-black/85 uppercase lg:text-2xl font-medium m-0' : ''}
             ${align}
             ${hoverTransform}
             ${className}
           `}
-        >
-          <div className={`${isTitle ? "text-sm lg:text-2xl" : "text-xs lg:text-base"}`}>
-            {content}
+          >
+            <div
+              className={`${isTitle ? 'text-sm text-black/85 lg:text-2xl' : 'text-xs text-black/85 lg:text-base'}`}
+            >
+              {content}
+            </div>
           </div>
-        </div>
-      ))}
+        )
+      )}
     </div>
-  )
+  );
 }

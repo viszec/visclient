@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import { useRef, useLayoutEffect, useCallback } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useCallback, useLayoutEffect, useRef } from 'react';
+
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export default function SliderText() {
   const firstText = useRef<HTMLParagraphElement>(null);
@@ -17,12 +18,12 @@ export default function SliderText() {
     } else if (xPercentRef.current > 0) {
       xPercentRef.current = -100;
     }
-    
+
     const tl = gsap.timeline();
     tl.set([firstText.current, secondText.current], {
-      xPercent: xPercentRef.current
+      xPercent: xPercentRef.current,
     });
-    
+
     requestAnimationFrame(animate);
     xPercentRef.current += 0.05 * directionRef.current;
   }, []);
@@ -39,7 +40,7 @@ export default function SliderText() {
           directionRef.current = e.direction * -1;
         },
       },
-      x: "-200px",
+      x: '-200px',
     });
     requestAnimationFrame(animate);
   }, [animate]);
@@ -49,13 +50,13 @@ export default function SliderText() {
       <div ref={slider} className="relative whitespace-nowrap">
         <div
           ref={firstText}
-          className="relative m-0 text-black text-4xl lg:text-[150px] font-normal lg:font-medium pr-12"
+          className="relative m-0 text-black/85 text-4xl lg:text-[150px] font-normal lg:font-medium pr-12"
         >
           INNÖVATION <span className="dot">*</span>
         </div>
         <div
           ref={secondText}
-          className="absolute left-full top-0 m-0 text-black/90 text-4xl lg:text-[150px] font-normal lg:font-medium pr-12"
+          className="absolute left-full top-0 m-0 text-black/85 text-4xl lg:text-[150px] font-normal lg:font-medium pr-12"
         >
           CReATiVITY <span className="dot">*</span>
         </div>

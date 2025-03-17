@@ -1,34 +1,34 @@
 /*
 	Installed from https://reactbits.dev/ts/tailwind/
 */
+import React, { useEffect, useState } from 'react';
 
-import React, { useEffect, useState } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation } from 'framer-motion';
 
 interface CircularTextProps {
   text: string;
   spinDuration?: number;
-  onHover?: "slowDown" | "speedUp" | "pause" | "goBonkers";
+  onHover?: 'slowDown' | 'speedUp' | 'pause' | 'goBonkers';
   className?: string;
 }
 
 const getRotationTransition = (
   duration: number,
   from: number,
-  loop: boolean = true,
+  loop: boolean = true
 ) => ({
   from: from,
   to: from + 360,
-  ease: "linear",
+  ease: 'linear',
   duration: duration,
-  type: "tween",
+  type: 'tween',
   repeat: loop ? Infinity : 0,
 });
 
 const getTransition = (duration: number, from: number) => ({
   rotate: getRotationTransition(duration, from),
   scale: {
-    type: "spring",
+    type: 'spring',
     damping: 20,
     stiffness: 300,
   },
@@ -37,8 +37,8 @@ const getTransition = (duration: number, from: number) => ({
 const CircularText: React.FC<CircularTextProps> = ({
   text,
   spinDuration = 20,
-  onHover = "speedUp",
-  className = "",
+  onHover = 'speedUp',
+  className = '',
 }) => {
   const letters = Array.from(text);
   const controls = useAnimation();
@@ -55,31 +55,31 @@ const CircularText: React.FC<CircularTextProps> = ({
   const handleHoverStart = () => {
     if (!onHover) return;
     switch (onHover) {
-      case "slowDown":
+      case 'slowDown':
         controls.start({
           rotate: currentRotation + 360,
           scale: 1,
           transition: getTransition(spinDuration * 2, currentRotation),
         });
         break;
-      case "speedUp":
+      case 'speedUp':
         controls.start({
           rotate: currentRotation + 360,
           scale: 1,
           transition: getTransition(spinDuration / 4, currentRotation),
         });
         break;
-      case "pause":
+      case 'pause':
         controls.start({
           rotate: currentRotation,
           scale: 1,
           transition: {
-            rotate: { type: "spring", damping: 20, stiffness: 300 },
-            scale: { type: "spring", damping: 20, stiffness: 300 },
+            rotate: { type: 'spring', damping: 20, stiffness: 300 },
+            scale: { type: 'spring', damping: 20, stiffness: 300 },
           },
         });
         break;
-      case "goBonkers":
+      case 'goBonkers':
         controls.start({
           rotate: currentRotation + 360,
           scale: 0.8,
@@ -116,19 +116,19 @@ const CircularText: React.FC<CircularTextProps> = ({
         const transform = `rotateZ(${rotation}deg) translate3d(${x}px, ${y}px, 0)`;
 
         const isSpecialChar = letter === '☺';
-        
+
         return (
           <span
             key={i}
             className={`absolute inline-block inset-0 transition-all duration-500 ease-[cubic-bezier(0,0,0,1)] p-1 lg:p-3 ${
               isSpecialChar ? 'text-[1.3em] lg:text-[1.5em]' : ''
             }`}
-            style={{ 
-              transform, 
+            style={{
+              transform,
               WebkitTransform: transform,
-              ...(isSpecialChar && { 
-                marginTop: '-0.2em'
-              })
+              ...(isSpecialChar && {
+                marginTop: '-0.2em',
+              }),
             }}
           >
             {letter}

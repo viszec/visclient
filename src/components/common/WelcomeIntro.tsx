@@ -1,10 +1,9 @@
-//👋
-//🌤️ IT IS NICE ⇗ TO
-//MEET 😊 YOU.
+'use client';
 
-'use client'
-
-import { LetterSwapForward, LetterSwapPingPong } from "@/components/ui/letter-swap"
+import {
+  LetterSwapForward,
+  LetterSwapPingPong,
+} from '@/components/ui/letter-swap';
 
 export function WelcomeIntro() {
   return (
@@ -13,30 +12,25 @@ export function WelcomeIntro() {
         <LetterSwapForward
           label="Hey, nice to meet you!"
           reverse={true}
-          className="text-md lg:text-2xl italic font-light text-black/80"
+          className="text-md lg:text-2xl italic font-light text-black/85"
         />
         <LetterSwapForward
           label="MAVIS MA"
           reverse={false}
-          className="text-4xl lg:text-8xl font-semibold lg:py-1 text-black/80"
+          className="text-4xl lg:text-8xl font-semibold lg:py-1 text-black/85"
         />
-        {/* <LetterSwapForward
-          label="A CREATIVE"
-          staggerFrom={"center"}
-          className="text-xl md:text-3xl mono font-light tracking-relaxed text-black/80 lg:py-1 !text-left"
-        /> */}
         <LetterSwapPingPong
           label="Creative Web Developer"
-          staggerFrom={"center"}
+          staggerFrom={'center'}
           reverse={false}
-          className="text-xl lg:text-5xl font-overusedGrotesk lg:tracking-wide font-normal lg:py-1 text-black/80"
+          className="text-xl lg:text-5xl font-overusedGrotesk lg:tracking-wide font-normal lg:py-1 text-black/85"
         />
         <LetterSwapPingPong
           label="< Technologies I work with />"
-          staggerFrom={"last"}
-          className="text-sm lg:text-2xl mono font-overusedGrotesk font-normal tracking-tight lg:tracking-normal mt-1 mb-1 lg:mb-0 lg:mt-3 text-black/60"
+          staggerFrom={'last'}
+          className="text-sm lg:text-xl mono font-overusedGrotesk font-normal tracking-tight lg:tracking-normal mt-1 mb-1 lg:mb-0 lg:mt-3 text-black/60"
         />
       </div>
     </div>
-  )
+  );
 }

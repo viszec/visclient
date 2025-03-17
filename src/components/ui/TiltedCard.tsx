@@ -3,19 +3,19 @@
 	Installed from https://reactbits.dev/ts/tailwind/
 	3-6-2025
 */
+import { useRef, useState } from 'react';
 
-import type { SpringOptions } from "framer-motion";
-import { useRef, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import type { SpringOptions } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 interface TiltedCardProps {
-  imageSrc: React.ComponentProps<"img">["src"];
+  imageSrc: React.ComponentProps<'img'>['src'];
   altText?: string;
   captionText?: string;
-  containerHeight?: React.CSSProperties["height"];
-  containerWidth?: React.CSSProperties["width"];
-  imageHeight?: React.CSSProperties["height"];
-  imageWidth?: React.CSSProperties["width"];
+  containerHeight?: React.CSSProperties['height'];
+  containerWidth?: React.CSSProperties['width'];
+  imageHeight?: React.CSSProperties['height'];
+  imageWidth?: React.CSSProperties['width'];
   scaleOnHover?: number;
   rotateAmplitude?: number;
   showMobileWarning?: boolean;
@@ -33,12 +33,12 @@ const springValues: SpringOptions = {
 
 export default function TiltedCard({
   imageSrc,
-  altText = "Tilted card image",
-  captionText = "",
-  containerHeight = "300px",
-  containerWidth = "100%",
-  imageHeight = "300px",
-  imageWidth = "300px",
+  altText = 'Tilted card image',
+  captionText = '',
+  containerHeight = '300px',
+  containerWidth = '100%',
+  imageHeight = '300px',
+  imageWidth = '300px',
   scaleOnHover = 1.1,
   rotateAmplitude = 14,
   showMobileWarning = true,

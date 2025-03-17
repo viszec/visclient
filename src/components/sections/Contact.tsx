@@ -1,20 +1,19 @@
-"use client";
-import { useRef } from "react";
-import Image from "next/image";
-import { useScroll, motion, useTransform } from "framer-motion";
-//import Rounded from "@/components/common/RoundedButton";
-import ContactForm from "@/components/common/ContactForm";
+'use client';
 
-// const CONTACT_INFO = [
-//   { text: "imavisma@gmail.com", href: "mailto:imavisma@gmail.com" },
-//   { text: "Let's Connect", href: "tel:+61424209565" },
-// ];
+import { useRef } from 'react';
+
+import Image from 'next/image';
+
+import { motion, useScroll, useTransform } from 'framer-motion';
+
+//import Rounded from "@/components/common/RoundedButton";
+import ContactForm from '@/components/common/ContactForm';
 
 export default function Contact() {
   const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: container,
-    offset: ["start end", "end end"],
+    offset: ['start end', 'end end'],
   });
 
   //const x = useTransform(scrollYProgress, [0, 1], [0, 100]);
@@ -29,8 +28,8 @@ export default function Contact() {
           ref={container}
           className="flex flex-col items-center justify-center text-white relative"
         >
-          <div className="w-full pt-56 pb-18 lg:pb-16 lg:pt-52 bg-black">
-            <div className="after:block after:mb-10 lg:after:mb-8 pb-4 lg:pb-8 mx-8 lg:mx-20 relative">
+          <div className="w-full pt-72 md:pt-28 pb-8 md:pb-18 lg:pb-16 lg:pt-30 bg-black/85">
+            <div className="after:block after:mb-10 lg:after:mb-8 pb-2 md:pb-4 lg:pb-8 mx-8 lg:mx-20 relative">
               {/* Main content wrapper */}
               <div className="flex flex-col lg:flex-row lg:gap-20">
                 {/* Left side - Title Section */}
@@ -45,13 +44,13 @@ export default function Contact() {
                         loading="lazy"
                       />
                     </div>
-                    <h1 className="text-4xl lg:text-8xl font-light">
+                    <h1 className="text-4xl sm:text-6xl md:text-8xl font-light font-just-me-again">
                       Let&apos;s Create
                     </h1>
                   </div>
-                  <h1 className="flex items-center text-4xl lg:text-8xl m-0 font-light ml-10 lg:ml-20">
+                  <h1 className="flex items-center text-4xl sm:text-6xl md:text-8xl font-just-me-again m-0 font-light ml-10 lg:ml-20">
                     Together
-                    <div className="relative inline-block w-[1.7em] h-[1.7em] ml-[0.4em] lg:ml-[0.2em] align-middle">
+                    <div className="relative inline-block w-[1.2em] h-[1.2em] ml-[0.4em] lg:ml-[0.2em] align-middle">
                       <Image
                         src="/images/smiley.svg"
                         alt="Smiley face"
@@ -79,25 +78,32 @@ export default function Contact() {
                   {/* Description */}
                   <div className="mt-8">
                     <div className="text-gray-400 text-sm lg:text-base font-light px-4 lg:!px-20 leading-tight">
-                      This is me: I&apos;m not just a coder—I&apos;m a digital
-                      sorcerer who transforms pixels into captivating
-                      experiences! ✨ I craft creations that make people exclaim
-                      &quot;Blimey, that&apos;s brilliant!&quot; when code meets
-                      creativity. I excel at and love working with AI to push
-                      boundaries. Fancy creating digital journeys that turn
-                      scrolling into an adventure? Let&apos;s do something coool!
+                      <span className="font-medium">This is me:</span> I&apos;m
+                      not just a coder—I&apos;m a digital sorcerer who
+                      transforms pixels into mesmerizing experiences! ✨ I craft
+                      creations that make people exclaim,{' '}
+                      <span className="italic">
+                        &quot;Blimey, that&apos;s brilliant!&quot;
+                      </span>{' '}
+                      when code meets creativity.{' '}
+                      <span className="font-medium">
+                        Pushing boundaries with AI is my passion, and I thrive
+                        on blending technology with artistry.{' '}
+                      </span>
+                      Fancy turning scrolling into an adventure? Let&apos;s
+                      build something coool!
                     </div>
                   </div>
                 </div>
 
                 {/* Right side - Contact Form */}
-                <div className="lg:w-1/3 mt-10 lg:mt-12">
+                <div className="lg:w-1/3 mt-6 md:mt-10 lg:mt-12">
                   <ContactForm />
                 </div>
               </div>
 
               {/* Floating Get in touch button */}
-            {/*  <motion.div
+              {/*  <motion.div
                 style={{ x }}
                 className="absolute left-[calc(100%-210px)] top-[calc(100%-55px)] lg:left-[calc(100%-1150px)] lg:top-[calc(100%-215px)]"
               >

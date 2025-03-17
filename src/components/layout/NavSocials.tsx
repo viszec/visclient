@@ -1,7 +1,8 @@
-'use client'
+'use client';
+
+import Link from 'next/link';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { Github, Instagram, Linkedin } from 'lucide-react';
 
 interface SocialLink {
@@ -12,25 +13,25 @@ interface SocialLink {
 
 const SOCIAL_LINKS: SocialLink[] = [
   {
-    name: "GitHub",
+    name: 'GitHub',
     icon: <Github />,
-    url: "https://github.com/viszec"
+    url: 'https://github.com/viszec',
   },
   {
-    name: "Instagram",
+    name: 'Instagram',
     icon: <Instagram />,
-    url: "https://www.instagram.com/viis.ma"
+    url: 'https://www.instagram.com/viis.ma',
   },
   {
-    name: "Linkedin",
+    name: 'Linkedin',
     icon: <Linkedin />,
-    url: "https://www.linkedin.com/in/imavisma/"
-  }
+    url: 'https://www.linkedin.com/in/imavisma/',
+  },
 ];
 
 export default function NavSocials() {
   return (
-    <motion.div 
+    <motion.div
       className="flex w-1/3 pl-0 pr-10 lg:pt-2 justify-between text-xs lg:text-sm font-light gap-3 lg:gap-5"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -52,4 +53,4 @@ export default function NavSocials() {
       ))}
     </motion.div>
   );
-} 
+}

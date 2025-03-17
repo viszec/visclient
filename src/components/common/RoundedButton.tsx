@@ -1,8 +1,10 @@
-'use client'
+'use client';
 
-import { useEffect, useRef, ReactNode, MouseEvent } from 'react';
+import { MouseEvent, ReactNode, useEffect, useRef } from 'react';
+
 import gsap from 'gsap';
-import Magnetic from "@/components/common/Magnetic";
+
+import Magnetic from '@/components/common/Magnetic';
 
 interface RoundedButtonProps {
   children: ReactNode;
@@ -16,8 +18,8 @@ interface RoundedButtonProps {
 
 export default function RoundedButton({
   children,
-  backgroundColor = "#EB7A40",
-  className = "",
+  backgroundColor = '#EB7A40',
+  className = '',
   onClick,
   disabled = false,
   ...props
@@ -30,24 +32,32 @@ export default function RoundedButton({
     // Initialize the circle mask
     if (circle.current) {
       gsap.set(circle.current, {
-        top: "100%",
-        width: "100%"
+        top: '100%',
+        width: '100%',
       });
     }
 
     timeline.current = gsap.timeline({ paused: true });
     timeline.current
-      .to(circle.current, {
-        top: "-25%",
-        width: "150%",
-        duration: 0.4,
-        ease: "power3.in"
-      }, "enter")
-      .to(circle.current, {
-        top: "-150%",
-        width: "125%",
-        duration: 0.25
-      }, "exit");
+      .to(
+        circle.current,
+        {
+          top: '-25%',
+          width: '150%',
+          duration: 0.4,
+          ease: 'power3.in',
+        },
+        'enter'
+      )
+      .to(
+        circle.current,
+        {
+          top: '-150%',
+          width: '125%',
+          duration: 0.25,
+        },
+        'exit'
+      );
 
     return () => {
       if (timeoutId) {
@@ -83,6 +93,13 @@ export default function RoundedButton({
         `}
         onMouseEnter={disabled ? undefined : handleMouseEnter}
         onMouseLeave={disabled ? undefined : handleMouseLeave}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            onClick?.();
+          }
+        }}
+        tabIndex={0}
+        role="button"
         {...props}
       >
         <span className="relative z-[1] transition-colors duration-400 whitespace-nowrap text-sm md:text-base">
@@ -91,10 +108,10 @@ export default function RoundedButton({
         <div
           ref={circle}
           className="absolute h-[150%] rounded-[50%]"
-          style={{ 
+          style={{
             backgroundColor,
-            left: "-25%",
-            width: "150%"
+            left: '-25%',
+            width: '150%',
           }}
         />
       </div>
