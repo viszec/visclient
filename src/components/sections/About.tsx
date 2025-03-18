@@ -53,7 +53,7 @@ export default function About() {
     // Only need to detect when section is in view
     // No need for multiple thresholds since we're using scrollY position
     threshold: 0,
-    rootMargin: '100px 0px', // Slightly extend detection range
+    rootMargin: '20px 0px', // Slightly extend detection range
   });
 
   const [showDescription, setShowDescription] = useState(false);
@@ -111,7 +111,7 @@ export default function About() {
       // Start description animation 0.5s after phrase animation
       timer = setTimeout(() => {
         setShowDescription(true);
-      }, 500);
+      }, 200);
     } else {
       // Reset description when phrase animation resets
       setShowDescription(false);
@@ -126,12 +126,12 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="section flex min-h-[900px] lg:min-h-[800px] px-4 lg:px-28 mt-12 lg:mt-36 md:mt- sm:mt-46 text-4xl lg:pb-0 justify-center"
+      className="section flex min-h-[900px] lg:min-h-[1000px] px-4 lg:px-28 mt-12 lg:mt-24 md:mt-24 sm:mt-46 text-4xl lg:pb-0 justify-center relative w-full pt-12 lg:pt-20"
     >
       <div className="section-container flex flex-col lg:flex-row gap-4 lg:gap-12 relative pt-20 lg:pt-28">
         {/* Main heading - takes up full width on mobile, 60% on desktop */}
         <div className="w-full lg:w-[62%]">
-          <p className="m-0 text-xl lg:text-[2.6rem] leading-[1.1em] tracking-tight font-bold text-black/85">
+          <p className="m-0 text-xl lg:text-[2.6rem] leading-[1.1em] justify-between tracking-tight font-bold text-black/85">
             {phrase.split(' ').map((word, index) => (
               <span
                 key={index}
@@ -171,7 +171,7 @@ export default function About() {
               </div>
               <h1 className="text-2xl lg:text-4xl font-bold text-black/85 pb-4">MOTIVATION</h1>
               {showDescription && (
-                <div className="m-0 text-sm pr-12 lg:pr-16 lg:text-base font-light text-gray-500 leading-tight sm:tracking-tight lg:leading-relaxed">
+                <div className="m-0 text-sm pr-8 lg:pr-16 lg:text-base font-light text-gray-500 leading-tight sm:tracking-tight lg:leading-relaxed">
                   <VerticalCutReveal
                     splitBy="characters"
                     staggerDuration={0.002}
@@ -184,7 +184,7 @@ export default function About() {
                     }}
                     containerClassName="text-[#00000] leading-snug"
                   >
-                    {`Digital excellence is driven by an unwavering commitment to innovation and precision. As a web designer and developer, I find deep motivation in transforming complex challenges into elegant solutions. Each design element - from pixel-perfect layouts to seamless interactions - becomes a deliberate step in crafting meaningful user experiences. Drawing from a passion for emerging technologies, I focus on creating solutions that not only captivate but solve real business challenges. This journey of continuous growth fuels my mission: to inspire, engage, and deliver digital experiences that leave a lasting impact in our ever-evolving landscape.`}
+                    {`Digital excellence is driven by an unwavering commitment to innovation and precision. As a web designer and developer, I find deep motivation in transforming complex challenges into elegant solutions. Each design element, ranging from pixel-perfect layouts through seamless interactions, becomes a deliberate step in crafting meaningful user experiences. Drawing from a passion for emerging technologies, I focus on creating solutions that not only captivate but solve real business challenges. This journey of continuous growth fuels my mission: to inspire, engage, and deliver digital experiences that leave a lasting impact in our ever-evolving landscape.`}
                   </VerticalCutReveal>
                 </div>
               )}
@@ -193,7 +193,7 @@ export default function About() {
             {/* About me button */}
             <div
               className="absolute 
-                right-0 top-[-2.5em]          // mobile position
+                right-0 top-[-2em]          // mobile position
                 md:right-auto md:left-[-3.5em] md:top-[13.5em]  // tablet
                 laptop:right-auto laptop:left-[-3.5em] laptop:top-[15.5em]  // 13-inch MacBook
                 lg:right-auto lg:left-[-3.5em] lg:top-[11.5em]  // larger displays
@@ -207,7 +207,7 @@ export default function About() {
                 text="ABOUT·DEVELOPER·MAVIS·☺·"
                 onHover="speedUp"
                 spinDuration={50}
-                className="text-white font-normal text-sm tracking-tight bg-black/90 rounded-full relative z-10 hover:scale-105 transition-transform duration-300 p-0 lg:p-10"
+                className="text-white font-normal text-sm tracking-tight bg-black/90 rounded-full relative z-10 hover:scale-105 transition-transform duration-300 p-0 lg:p-10 lg:pt-0"
               />
               {/* <Rounded className="rounded-button !border-0 !w-24 !h-24 lg:!w-40 lg:!h-40">
                 <p className="m-0 text-sm lg:text-2xl font-light relative z-[2]">

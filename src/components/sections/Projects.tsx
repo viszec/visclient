@@ -8,10 +8,16 @@ import { projects } from '@/types/projects';
 import { motion, useScroll } from 'framer-motion';
 import { AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import { useInView } from 'react-intersection-observer';
 
 import Project from '@/components/common/ProjectItem';
 import Rounded from '@/components/common/RoundedButton';
+
+// register GSAP plugin
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const scaleAnimation = {
   initial: { scale: 0, x: '-50%', y: '-50%' },
@@ -32,7 +38,7 @@ const scaleAnimation = {
 // Define QuickToFunc type
 type QuickToFunc = (value: number) => void;
 
-// 创建 useScreenWidth hook
+// Create useScreenWidth hook
 const useScreenWidth = () => {
   const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
 
@@ -63,31 +69,55 @@ export default function Projects() {
   const yMoveCursorLabel = useRef<QuickToFunc | null>(null);
 
   useEffect(() => {
-    // Create quickTo instances
-    xMoveContainer.current = gsap.quickTo(modalContainer.current, 'left', {
-      duration: 0.8,
-      ease: 'power3',
-    });
-    yMoveContainer.current = gsap.quickTo(modalContainer.current, 'top', {
-      duration: 0.8,
-      ease: 'power3',
-    });
-    xMoveCursor.current = gsap.quickTo(cursor.current, 'left', {
-      duration: 0.5,
-      ease: 'power3',
-    });
-    yMoveCursor.current = gsap.quickTo(cursor.current, 'top', {
-      duration: 0.5,
-      ease: 'power3',
-    });
-    xMoveCursorLabel.current = gsap.quickTo(cursorLabel.current, 'left', {
-      duration: 0.45,
-      ease: 'power3',
-    });
-    yMoveCursorLabel.current = gsap.quickTo(cursorLabel.current, 'top', {
-      duration: 0.45,
-      ease: 'power3',
-    });
+    if (typeof window === 'undefined') return;
+
+    // create quickTo instance if ref exists
+    if (modalContainer.current) {
+      xMoveContainer.current = gsap.quickTo(modalContainer.current, 'left', {
+        duration: 0.8,
+        ease: 'power3',
+      });
+      yMoveContainer.current = gsap.quickTo(modalContainer.current, 'top', {
+        duration: 0.8,
+        ease: 'power3',
+      });
+    }
+
+    if (cursor.current) {
+      xMoveCursor.current = gsap.quickTo(cursor.current, 'left', {
+        duration: 0.5,
+        ease: 'power3',
+      });
+      yMoveCursor.current = gsap.quickTo(cursor.current, 'top', {
+        duration: 0.5,
+        ease: 'power3',
+      });
+    }
+
+    if (cursorLabel.current) {
+      xMoveCursorLabel.current = gsap.quickTo(cursorLabel.current, 'left', {
+        duration: 0.45,
+        ease: 'power3',
+      });
+      yMoveCursorLabel.current = gsap.quickTo(cursorLabel.current, 'top', {
+        duration: 0.45,
+        ease: 'power3',
+      });
+    }
+
+    // cleanup function
+    return () => {
+      // clean up GSAP instance
+      if (modalContainer.current) {
+        gsap.killTweensOf(modalContainer.current);
+      }
+      if (cursor.current) {
+        gsap.killTweensOf(cursor.current);
+      }
+      if (cursorLabel.current) {
+        gsap.killTweensOf(cursorLabel.current);
+      }
+    };
   }, []);
 
   const moveItems = (x: number, y: number) => {
@@ -140,7 +170,7 @@ export default function Projects() {
 
   const { ref } = useInView({
     threshold: 0,
-    rootMargin: isMobile ? '50px 0px' : '100px 0px',
+    rootMargin: isMobile ? '20px 0px' : '80px 0px',
   });
 
   useEffect(() => {
@@ -266,7 +296,7 @@ export default function Projects() {
           >
             <div
               style={{ top: `${index * -100}%` }}
-              className="h-full w-full relative transition-[top] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]"
+              className="h-full w-full relative transition-[top] duration-500 ease-custom-bezier"
             >
               {projects.map((project, index) => {
                 const { src, color } = project;
@@ -281,7 +311,7 @@ export default function Projects() {
                       width={0}
                       height={0}
                       alt="image"
-                      className="w-[180px] lg:w-[430px] h-auto rounded-lg lg:rounded-2xl"
+                      className="w-[180px] lg:w-[430px] h-auto"
                       loading="lazy"
                       sizes="(max-width: 768px) 280px, 430px"
                     />

@@ -1,5 +1,5 @@
 /*
-	Installed from https://reactbits.dev/ts/tailwind/
+  Installed from https://reactbits.dev/ts/tailwind/
 */
 import React, { useEffect, useState } from 'react';
 
@@ -116,7 +116,7 @@ const CircularText: React.FC<CircularTextProps> = ({
         return (
           <span
             key={i}
-            className={`absolute inline-block inset-0 transition-all duration-500 ease-[cubic-bezier(0,0,0,1)] p-1 lg:p-3 ${
+            className={`absolute inline-block inset-0 transition-all duration-500 ease-smooth-bezier p-1 lg:p-3 ${
               isSpecialChar ? 'text-[1.3em] lg:text-[1.5em]' : ''
             }`}
             style={{

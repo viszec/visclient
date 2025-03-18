@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
@@ -33,16 +33,35 @@ const animations = {
   },
 };
 
+// Helper function to calculate image size based on screen width
+const getImageSize = (width: number) => {
+  if (width < 768) {
+    return '16.5rem'; // Mobile size
+  } else if (width < 1441) {
+    return '26rem'; // Medium/tablet size
+  } else {
+    return '27rem'; // Large desktop size
+  }
+};
+
 export default function Hero() {
   const { theme } = useTheme();
-  const [particleColor, setParticleColor] = useState('#ffffff');
   const { width, height } = useScreenSize();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [scale, setScale] = useState({ x: 0.4, y: 1 });
+  const [particleColor, setParticleColor] = useState('#ffffff');
+  const [isMounted, setIsMounted] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
+  const [heroSize, setHeroSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     setParticleColor(theme === 'dark' ? '#ffffff' : '#000000');
   }, [theme]);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [scale, setScale] = useState({ x: 0.4, y: 1 });
 
   useEffect(() => {
     // Calculate scale based on viewport size
@@ -62,10 +81,27 @@ export default function Hero() {
     setScale(calculateScale());
   }, [width]);
 
+  useEffect(() => {
+    const updateHeroSize = () => {
+      if (heroRef.current) {
+        setHeroSize({
+          width: heroRef.current.offsetWidth,
+          height: heroRef.current.offsetHeight,
+        });
+      }
+    };
+
+    updateHeroSize();
+    window.addEventListener('resize', updateHeroSize);
+
+    return () => window.removeEventListener('resize', updateHeroSize);
+  }, []);
+
   return (
     <section
+      ref={heroRef}
       id="hero"
-      className="relative w-full lg:h-[1250px] md:h-[850px] max-h-screen overflow-hidden"
+      className="relative w-full lg:h-[1000px] md:h-[850px] max-h-screen overflow-hidden"
     >
       {/* Background Container */}
       <div className="absolute inset-0 w-full h-full">
@@ -79,6 +115,14 @@ export default function Hero() {
             dark:[mask-image:linear-gradient(to_top,transparent,black_150px)]"
             priority
           />
+        </div>
+        <div className="hidden md:block w-full !mx-0 !px-0">
+          {isMounted && (
+            <SliderText
+              containerWidth={heroSize.width}
+              containerHeight={heroSize.height}
+            />
+          )}
         </div>
 
         {/* Particles Effect */}
@@ -100,7 +144,7 @@ export default function Hero() {
         animate="enter"
         className="section-container relative h-full flex items-center justify-center w-full px-6 md:px-12 lg:px-20"
       >
-        <div className="section-content flex flex-col items-center justify-center w-full max-w-[1800px]">
+        <div className="section-content flex flex-col items-center justify-center w-full max-w-[1440px]">
           <motion.div
             className="flex flex-col items-center space-y-12 text-center w-full"
             variants={animations.fadeIn}
@@ -109,18 +153,18 @@ export default function Hero() {
             custom={2.8}
           >
             {/* Profile Content */}
-            <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-5 gap-8 md:gap-8 lg:gap-12 pt-28 lg:pt-0 pb-14 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-5 pro:grid-gap-5 md:gap-8 lg:gap-12 pt-28 lg:pt-0 pb-14 w-full">
               {/* Avatar with TiltedCard */}
-              <div className="col-span-1 md:col-span-2 lg:col-span-2 relative flex justify-center md:justify-end lg:justify-end w-full opacity-90">
-                <div className="w-[10rem] h-[10rem] md:w-[15rem] md:h-[15rem]">
+              <div className="col-span-1 md:col-span-2 lg:col-span-2 pro:col-span-2 relative flex justify-center lg:justify-end w-full opacity-90">
+                <div className="w-[10rem] h-[10rem] lg:w-[15rem] lg:h-[15rem] lg:mt-14 pl-0 lg:pl-16">
                   <TiltedCard
                     imageSrc="/images/mavis-avatar.webp"
                     altText="Mavis Avatar"
                     captionText="Mavis"
                     containerHeight="100%"
                     containerWidth="100%"
-                    imageHeight={width < 768 ? '16.5rem' : '32rem'}
-                    imageWidth={width < 768 ? '16.5rem' : '32rem'}
+                    imageHeight={getImageSize(width)}
+                    imageWidth={getImageSize(width)}
                     rotateAmplitude={8}
                     scaleOnHover={1.1}
                     showMobileWarning={false}
@@ -133,25 +177,22 @@ export default function Hero() {
               </div>
 
               {/* Description and Tech Skills */}
-              <div className="col-span-1 md:col-span-3 lg:col-span-3 flex flex-col items-center md:items-start space-y-4 lg:space-y-8 pt-4 md:pt-0">
-                <div className="flex flex-col items-center md:items-start space-y-3 lg:space-y-4 w-full pt-10 lg:pt-0">
-                  <div className="flex flex-col items-center md:items-start lg:items-start space-y-2 lg:space-y-3">
-                    <Image
-                      src="/icons/arrow.svg"
-                      alt="arrow"
-                      width={18}
-                      height={18}
-                      className="w-5 h-5 lg:w-6 lg:h-6 hidden md:block"
-                      priority
-                    />
+              <div className="col-span-1 lg:col-span-3 pro:col-span-3 flex flex-col items-center lg:items-start space-y-4 lg:space-y-8 pt-20 lg:pt-0">
+                <div className="flex flex-col items-center md:items-start lg:items-start space-y-2 lg:space-y-3">
+                  <Image
+                    src="/icons/arrow.svg"
+                    alt="arrow"
+                    width={18}
+                    height={18}
+                    className="w-5 h-5 lg:w-6 lg:h-6 hidden md:block"
+                    priority
+                  />
+                  <div className="flex flex-col items-center pl-0 lg:pl-8">
                     <WelcomeIntro />
                   </div>
-                  <div className="flex w-full items-center justify-center max-w-[400px] lg:max-w-[570px]">
-                    <TechSkills />
-                  </div>
-                  <div className="hidden md:flex w-full items-center justify-center py-4">
-                    <SliderText />
-                  </div>
+                </div>
+                <div className="flex w-full items-center lg:items-start justify-center max-w-[400px] lg:max-w-[550px]">
+                  <TechSkills />
                 </div>
               </div>
             </div>

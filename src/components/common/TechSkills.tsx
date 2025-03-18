@@ -1,5 +1,33 @@
 'use client';
 
+import {
+  Atom,
+  // for MCP
+  Box,
+  // for Nodejs
+  Brain,
+  // for TavaScript
+  Cpu,
+  // for Cursor
+  Figma,
+  // for React
+  FileJson2,
+  // for JypeScript
+  FileType,
+  // for GSAP
+  Frame,
+  // for Tailwind
+  GanttChart,
+  LucideIcon,
+  // for Notion
+  LucideProps,
+  // for Nextjs
+  NotebookPen,
+  // for Efficient Prompting
+  Paintbrush,
+  Server,
+} from 'lucide-react';
+
 import { Gravity, MatterBody } from '@/components/ui/gravity';
 
 interface TechSkill {
@@ -8,20 +36,23 @@ interface TechSkill {
   x: string;
   y: string;
   angle?: number;
+  icon: LucideIcon;
 }
 
 const TECH_SKILLS: TechSkill[] = [
-  { name: 'React', color: '', x: '25%', y: '10%' },
-  { name: 'TypeScript', color: '', x: '30%', y: '30%' },
-  { name: 'JavaScript', color: '', x: '40%', y: '20%', angle: 10 },
-  { name: 'Tailwind CSS', color: '', x: '75%', y: '10%', angle: 50 },
-  { name: 'GSAP', color: '', x: '80%', y: '20%' },
-  { name: 'Nodejs', color: '', x: '60%', y: '30%', angle: -15 },
-  { name: 'Cursor', color: '', x: '45%', y: '15%' },
-  { name: 'Figma', color: '', x: '70%', y: '25%' },
-  { name: 'MCP', color: '', x: '35%', y: '25%' },
-  { name: 'Nextjs', color: '', x: '50%', y: '20%', angle: 4 },
-  { name: 'Efficient Prompting', color: '', x: '55%', y: '15%', angle: 10 },
+  { name: 'Cursor', color: '', x: '42%', y: '15%', angle: -10, icon: Box },
+  { name: 'Nextjs', color: '', x: '40%', y: '20%', angle: 10, icon: Frame },
+  { name: 'React', color: '', x: '25%', y: '10%', icon: Atom },
+  { name: 'TypeScript', color: '', x: '30%', y: '30%', icon: FileType },
+  { name: 'JavaScript', color: '', x: '52%', y: '22%', angle: -10, icon: FileJson2 },
+  { name: 'Notion', color: '', x: '43%', y: '24%', angle: -20, icon: NotebookPen },
+  { name: 'Tailwind CSS', color: '', x: '75%', y: '10%', angle: 30, icon: Paintbrush },
+  { name: 'GSAP', color: '', x: '80%', y: '20%', icon: GanttChart },
+  { name: 'Nodejs', color: '', x: '60%', y: '30%', angle: -24, icon: Server },
+  { name: 'Figma', color: '', x: '60%', y: '35%', icon: Figma },
+  { name: 'MCP', color: '', x: '72%', y: '25%', angle: -10, icon: Cpu },
+
+  { name: 'Efficient Prompting', color: '', x: '55%', y: '15%', angle: 10, icon: Brain },
 ];
 
 export function TechSkills() {
@@ -54,12 +85,13 @@ export function TechSkills() {
               }}
             >
               <div
-                className="text-xs lg:text-sm text-white rounded-full hover:cursor-grab p-1 px-3 lg:p-2 lg:px-5"
+                className="text-xxs lg:text-sm text-white rounded-full hover:cursor-grab p-1 px-3 lg:p-2 lg:px-4 flex items-center gap-1 lg:gap-2"
                 style={{
                   background: '#4E4E4E',
                 }}
               >
-                {skill.name}
+                <skill.icon className="w-3 h-3 lg:w-4 lg:h-4 opacity-80" />
+                <span>{skill.name}</span>
               </div>
             </div>
           </MatterBody>

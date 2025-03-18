@@ -13,10 +13,7 @@ const config: Config = {
     screens: {
       sm: '640px',
       md: '768px',
-      laptop: '1024px', // 13" MacBook Pro
-      lg: '1280px', // larger displays
-      xl: '1440px', // 27" display
-      '2xl': '1536px',
+      lg: '1366px', // larger displays/ipad pro
     },
     extend: {
       colors: {
@@ -86,8 +83,8 @@ const config: Config = {
         '3': '3',
       },
       transitionTimingFunction: {
-        custom: 'cubic-bezier(0,0,0,1)',
-        'custom-2': 'cubic-bezier(0.76,0,0.24,1)',
+        'custom-bezier': 'cubic-bezier(0.76, 0, 0.24, 1)',
+        'smooth-bezier': 'cubic-bezier(0, 0, 0, 1)',
       },
       backgroundColor: {
         'modal-blue': '#455CE9',

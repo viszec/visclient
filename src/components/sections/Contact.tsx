@@ -44,6 +44,9 @@ export default function Contact() {
                         alt="avatar"
                         src="/images/avatar.webp"
                         className="object-cover"
+                        sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 25vw"
+                        width={0}
+                        height={0}
                         loading="lazy"
                       />
                     </div>
@@ -59,6 +62,7 @@ export default function Contact() {
                         alt="Smiley face"
                         fill
                         className="object-contain"
+                        loading="lazy"
                       />
                     </div>
                   </h1>
@@ -81,7 +85,7 @@ export default function Contact() {
                   {/* Description */}
                   <div className="mt-8">
                     <div className="text-gray-400 text-sm lg:text-base font-light px-4 lg:!px-20 leading-tight">
-                      <span className="font-medium">This is me:</span> I&apos;m not just a coder—I&apos;m a digital
+                      <span className="font-medium">This is me:</span> I&apos;m not just a coder 😉 I&apos;m a digital
                       sorcerer who transforms pixels into mesmerizing experiences! ✨ I craft creations that make people
                       exclaim, <span className="italic">&quot;Blimey, that&apos;s brilliant!&quot;</span> when code
                       meets creativity.{' '}
@@ -95,7 +99,7 @@ export default function Contact() {
                 </div>
 
                 {/* Right side - Contact Form */}
-                <div className="lg:w-1/3 mt-6 md:mt-10 lg:mt-12">
+                <div className="lg:w-1/3 md:mt-10 mt-12">
                   <ContactForm />
                 </div>
               </div>
