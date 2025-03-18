@@ -5,6 +5,13 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+// 注册 GSAP 插件
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface SlideItem {
   color: string;
@@ -131,8 +138,9 @@ export default function SlidingImages() {
                             src={`/images/${mobileSlider[currentIndex].src}`}
                             alt="project image"
                             fill
+                            sizes="(max-width: 768px) 90vw, 50vw"
                             className="object-contain"
-                            priority
+                            loading="lazy"
                           />
                         </div>
                       </div>
@@ -165,17 +173,15 @@ export default function SlidingImages() {
                       className="w-1/4 h-[20vw] flex items-center justify-center"
                       style={{ backgroundColor: project.color }}
                     >
-                      <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                        <div className="relative w-fit h-fit max-w-full max-h-full">
-                          <Image
-                            src={`/images/${project.src}`}
-                            alt="project image"
-                            width={500}
-                            height={300}
-                            className="object-contain rounded-lg lg:rounded-2xl max-w-full max-h-[16vw]"
-                            style={{ width: 'auto', height: 'auto' }}
-                          />
-                        </div>
+                      <div className="relative w-4/5 h-4/5">
+                        <Image
+                          src={`/images/${project.src}`}
+                          alt="project image"
+                          fill
+                          sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 25vw"
+                          className="object-contain"
+                          loading="lazy"
+                        />
                       </div>
                     </div>
                   ))}
@@ -192,10 +198,12 @@ export default function SlidingImages() {
                     >
                       <div className="relative w-4/5 h-4/5">
                         <Image
-                          fill
-                          alt="project image"
                           src={`/images/${project.src}`}
-                          className="object-cover rounded-2xl"
+                          alt="project image"
+                          fill
+                          sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 25vw"
+                          className="object-cover"
+                          loading="lazy"
                         />
                       </div>
                     </div>

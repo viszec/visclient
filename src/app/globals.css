@@ -155,7 +155,7 @@
   }
 
   .card-spread {
-    @apply ease-custom-bezier transition-all duration-500;
+    @apply transition-all duration-500 ease-custom-bezier;
   }
 }
 

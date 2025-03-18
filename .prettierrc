@@ -12,9 +12,7 @@
     "embeddedLanguageFormatting": "auto",
     "htmlWhitespaceSensitivity": "strict",
     "bracketSameLine": false,
-    "jsxBracketSameLine": false,
     "jsxSingleQuote": false,
-    "objectCurlyNewline": false,
     "proseWrap": "never",
     "plugins": [
         "prettier-plugin-tailwindcss",
