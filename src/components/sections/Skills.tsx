@@ -45,8 +45,13 @@ const CARDS_DATA: CardData[] = [
   },
 ];
 
-const POSITIONS = [14, 38, 62, 86];
-const ROTATIONS = [-15, -7.5, 7.5, 15];
+// Card positions from left to right (in percentage)
+// Represents the horizontal spread of cards across the viewport
+const POSITIONS = [20, 40, 60, 80];
+
+// Rotation angles for each card (in degrees)
+// Negative values rotate counterclockwise, positive values rotate clockwise
+const ROTATIONS = [-8, -4, 4, 8];
 
 export default function Skills() {
   const container = useRef<HTMLDivElement>(null);
@@ -61,106 +66,75 @@ export default function Skills() {
       if (!cardsSection) return;
 
       const cards = cardRefs.current.filter(Boolean);
-      const totalScrollHeight = window.innerWidth * 3;
 
-      // Pin cards section
-      ScrollTrigger.create({
-        trigger: cardsSection,
-        start: 'top top',
-        end: () => `+=${totalScrollHeight}`,
-        pin: true,
-        pinSpacing: true,
-      });
-
-      // Spread cards animation
-      cards.forEach((card, index) => {
-        gsap.to(card, {
-          left: `${POSITIONS[index]}%`,
-          rotation: `${ROTATIONS[index]}`,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: cardsSection,
-            start: 'top top',
-            end: () => `+=${totalScrollHeight}`,
-            scrub: 0.5,
-          },
+      // Initial state - cards stacked in center with floating animation
+      cards.forEach((card) => {
+        gsap.set(card, {
+          left: '50%',
+          top: '45%',
+          xPercent: -50,
+          yPercent: -50,
+          rotation: 0,
         });
       });
 
-      // Flip cards animation with stagger
+      // Create main timeline for the sequence
       cards.forEach((card, index) => {
         const frontEl = card?.querySelector('.flip-card-front');
         const backEl = card?.querySelector('.flip-card-back');
 
         if (!frontEl || !backEl || !card) return;
 
-        const staggerOffset = index * 0.5;
-        const startOffset = 1 / 3 + staggerOffset;
-        const endOffset = 2 / 3 + staggerOffset;
-
         ScrollTrigger.create({
           trigger: cardsSection,
-          start: 'top top',
-          end: () => `+=${totalScrollHeight}`,
-          scrub: 1,
+          start: 'top bottom-=10%', // Start when cards section is near viewport bottom
+          end: 'bottom top+=10%', // End when cards section is leaving viewport
+          scrub: 0.5,
           onUpdate: (self) => {
             const progress = self.progress;
-            if (progress >= startOffset && progress <= endOffset) {
-              const animationProgress = (progress - startOffset) / (1 / 3);
-              const frontRotation = -180 * animationProgress;
-              const backRotation = 180 - 180 * animationProgress;
-              const cardRotation = ROTATIONS[index] * (1 - animationProgress);
 
-              gsap.to(frontEl, {
-                rotationY: frontRotation,
-                ease: 'power1.out',
-              });
-              gsap.to(backEl, {
-                rotationY: backRotation,
-                ease: 'power1.out',
-              });
-              gsap.to(card, {
-                xPercent: -50,
-                yPercent: -50,
-                rotation: cardRotation,
-                ease: 'power1.out',
-              });
-            }
+            // Define animation phases
+            const spreadStart = 0.1;
+            const spreadEnd = 0.3;
+            const flipStart = 0.2;
+            const flipEnd = 0.4;
+            const reverseStart = 0.6;
+            const reverseEnd = 0.8;
+
+            // Calculate phase progress
+            const spreadProgress = gsap.utils.clamp(0, 1, (progress - spreadStart) / (spreadEnd - spreadStart));
+            const flipProgress = gsap.utils.clamp(0, 1, (progress - flipStart) / (flipEnd - flipStart));
+            const reverseProgress = gsap.utils.clamp(0, 1, (progress - reverseStart) / (reverseEnd - reverseStart));
+
+            // Spread animation
+            const currentPosition = gsap.utils.interpolate(50, POSITIONS[index], spreadProgress - reverseProgress);
+
+            const currentRotation = gsap.utils.interpolate(0, ROTATIONS[index], spreadProgress - reverseProgress);
+
+            // Apply spread
+            gsap.to(card, {
+              left: `${currentPosition}%`,
+              rotation: currentRotation,
+              duration: 0.1,
+            });
+
+            // Flip animation
+            const frontRotation = -180 * (flipProgress - reverseProgress);
+            const backRotation = 180 - 180 * (flipProgress - reverseProgress);
+
+            gsap.to(frontEl, {
+              rotationY: frontRotation,
+              duration: 0.1,
+            });
+            gsap.to(backEl, {
+              rotationY: backRotation,
+              duration: 0.1,
+            });
           },
         });
       });
 
-      // Mouse interactions
-      const handleMouseEnter = () => {
-        cards.forEach((card, index) => {
-          gsap.to(card, {
-            top: '50%',
-            left: '50%',
-            rotation: 0,
-            delay: index * 0.2,
-            ease: 'power1.out',
-          });
-        });
-      };
-
-      const handleMouseLeave = () => {
-        cards.forEach((card, index) => {
-          gsap.to(card, {
-            top: '50%',
-            left: '50%',
-            rotation: 0,
-            delay: index * 0.2,
-            ease: 'power1.out',
-          });
-        });
-      };
-
-      containerEl.addEventListener('mouseenter', handleMouseEnter);
-      containerEl.addEventListener('mouseleave', handleMouseLeave);
-
       return () => {
-        containerEl.removeEventListener('mouseenter', handleMouseEnter);
-        containerEl.removeEventListener('mouseleave', handleMouseLeave);
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     },
@@ -173,15 +147,17 @@ export default function Skills() {
         className="m-0 p-0 box-border"
         ref={container}
       >
-        <section className="relative w-full min-h-screen bg-black">
+        {/* Title section - 30% of viewport height */}
+        <section className="relative w-full h-[40vh] bg-white">
           <h1
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                         text-white text-center text-[5vw] font-light leading-none"
+            className="absolute top-3/4 left-1/2 -translate-x-1/2 -translate-y-1/2 
+                         text-black text-center text-4xl font-semibold tracking-wide"
           >
-            SERVICES <br /> WHAT I OFFER
+            SERVICES WHAT I OFFER
           </h1>
         </section>
-        <section className="relative w-full min-h-screen bg-black cards">
+        {/* Cards section - 65% of viewport height */}
+        <section className="relative w-full h-[55vh] bg-white cards">
           {CARDS_DATA.map((card, index) => (
             <Card
               key={card.id}
