@@ -11,7 +11,7 @@ import Contact from '@/components/sections/Contact';
 import HeroSection from '@/components/sections/HeroSection';
 import Preloader from '@/components/sections/Preloader';
 import Projects from '@/components/sections/Projects';
-import Skills from '@/components/sections/Skills';
+//import Skills from '@/components/sections/Skills';
 import SlideImage from '@/components/sections/SlideImage';
 
 export default function Home() {
@@ -45,7 +45,7 @@ export default function Home() {
         <About />
         <Projects />
         <SlideImage />
-        <Skills />
+        {/* <Skills /> */}
         <Contact />
       </main>
       <Footer />
