@@ -7,11 +7,11 @@ import { AnimatePresence } from 'framer-motion';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import About from '@/components/sections/About';
-//import Skills from "@/components/Section/Skills";
 import Contact from '@/components/sections/Contact';
 import HeroSection from '@/components/sections/HeroSection';
 import Preloader from '@/components/sections/Preloader';
 import Projects from '@/components/sections/Projects';
+//import Skills from '@/components/sections/Skills';
 import SlideImage from '@/components/sections/SlideImage';
 
 export default function Home() {
@@ -45,6 +45,7 @@ export default function Home() {
         <About />
         <Projects />
         <SlideImage />
+        {/* <Skills /> */}
         <Contact />
       </main>
       <Footer />

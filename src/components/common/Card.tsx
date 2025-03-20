@@ -35,17 +35,17 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({ id, frontSrc, frontAlt, ba
               width={300}
               height={400}
               alt={frontAlt}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover border-[1px] border-gray-200 rounded-lg shadow-sm"
             />
           </div>
           {/* Back of card */}
           <div
             className="flip-card-back absolute w-full h-full backface-hidden 
-                         rounded-lg overflow-hidden bg-white p-4 rotate-y-180"
+                         rounded-lg overflow-hidden bg-white p-4 rotate-y-180 border-[1px] border-gray-200 rounded-lg shadow-sm"
           >
             <p
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                         text-center text-xl font-medium"
+                         text-center text-xl font-medium text-gray-700"
             >
               {backText}
             </p>
