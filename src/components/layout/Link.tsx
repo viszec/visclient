@@ -15,6 +15,7 @@ interface NavLinkProps {
   };
   isActive: boolean;
   setSelectedIndicator: (href: string) => void;
+  className?: string;
 }
 
 const linkVariants = {
@@ -39,7 +40,7 @@ const linkVariants = {
   }),
 };
 
-export default function NavLink({ data, isActive, setSelectedIndicator }: NavLinkProps) {
+export default function NavLink({ data, isActive, setSelectedIndicator, className }: NavLinkProps) {
   const [isHovered, setIsHovered] = useState(false);
   const { title, href, index } = data;
 
@@ -60,15 +61,15 @@ export default function NavLink({ data, isActive, setSelectedIndicator }: NavLin
       <motion.div
         variants={scale}
         animate={isActive || isHovered ? 'open' : 'closed'}
-        className="w-1 h-1 lg:w-2 lg:h-2 bg-white rounded-full absolute -left-[20px] lg:-left-[30px]
+        className="w-1 h-1 lg:w-2 lg:h-2 bg-[#e6e5ef] rounded-full absolute -left-[20px] lg:-left-[30px]
                    transition-transform duration-200 ease-out
                    transform scale-0 group-hover:scale-100"
       />
       <Link
         href={href}
-        className="text-white/80 hover:text-white font-light py-4 text-base lg:text-3xl transition-colors duration-200
+        className="text-[#e6e5ef]/80 hover:text-[#e6e5ef] font-light py-2 text-sm lg:text-2xl transition-colors duration-200
                    relative after:content-[''] after:absolute after:bottom-0 
-                   after:left-0 after:w-0 after:h-[1px] after:bg-white 
+                   after:left-0 after:w-0 after:h-[1px] after:bg-[#e6e5ef] 
                    after:transition-all after:duration-300
                    hover:after:w-full"
       >

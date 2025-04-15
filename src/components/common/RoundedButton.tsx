@@ -18,7 +18,7 @@ interface RoundedButtonProps {
 
 export default function RoundedButton({
   children,
-  backgroundColor = '#EB7A40',
+  backgroundColor = '#333',
   className = '',
   onClick,
   disabled = false,
@@ -84,7 +84,7 @@ export default function RoundedButton({
         onClick={disabled ? undefined : onClick}
         className={`
           relative overflow-hidden cursor-pointer
-          rounded-full lg:border-[1px] lg:border-gray-400
+          rounded-full lg:border-[1px] lg:border-[#333]/80
           flex items-center justify-center w-[50px] h-[50px]
           lg:w-[90px] lg:h-[90px] md:w-[60px] md:h-[60px]
           px-2 py-2 md:px-[15px] md:py-[15px]
@@ -102,7 +102,7 @@ export default function RoundedButton({
         role="button"
         {...props}
       >
-        <span className="relative z-[1] transition-colors duration-400 whitespace-nowrap text-sm md:text-base">
+        <span className="relative z-[1] transition-colors duration-400 whitespace-nowrap text-sm md:text-base hover:text-[#efeee9]/70">
           {children}
         </span>
         <div

@@ -45,8 +45,42 @@ const fadeIn = {
 };
 
 export default function About() {
-  const phrase =
-    "BRINGING  DIGITAL  IDEAS  TO  LIFE  WITH  CARE  AND  CRAFT. CREATING  MEMORABLE  WEB EXPERIENCES  FOR  FORWARD-THINKING  BRANDS.  LET'S  EXPLORE  NEW  FRONTIERS  IN  DESIGN TOGETHER.";
+  // Define special words in an object for individual styling
+  const specialWords: { [key: string]: string } = {
+    CRAFT: 'text-green-500 font-bold',
+    Memorable: 'text-[#333]/70 italic font-serif font-medium',
+    'FORWARD-THINKING': 'text-[#333]/50 font-light italic',
+    FRONTIERS: 'text-black text-[1.8rem] xl:text-[2.8rem] 2xl:text-[4.2rem] font-just-me-again font-bold',
+  };
+
+  // Common words
+  const phraseWords = [
+    'BRINGING',
+    'DIGITAL',
+    'IDEAS',
+    'TO',
+    'LIFE',
+    'WITH',
+    'CARE',
+    'AND',
+    'CRAFT.',
+    'CREATING',
+    'Memorable',
+    'WEB',
+    'EXPERIENCES',
+    'FOR',
+    'FORWARD-THINKING',
+    'BRANDS.',
+    "LET'S",
+    'EXPLORE',
+    'NEW',
+    'FRONTIERS',
+    'IN',
+    'DESIGN',
+    'TOGETHER.',
+  ];
+
+  const phrase = phraseWords.join(' ');
   const [isAnimating, setIsAnimating] = useState(false);
   const { scrollY } = useScroll();
   const { ref, entry } = useInView({
@@ -126,19 +160,19 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="section flex min-h-[900px] lg:min-h-[1000px] px-4 lg:px-28 mt-12 lg:mt-24 md:mt-24 sm:mt-46 text-4xl lg:pb-0 justify-center relative w-full pt-12 lg:pt-20"
+      className="section flex min-h-screen lg:min-h-[1000px] bg-[#efeee9] px-4 lg:px-28 mt-12 lg:mt-24 md:mt-24 sm:mt-46 text-4xl lg:pb-0 justify-center relative w-full pt-12 lg:pt-20"
     >
       <div className="section-container flex flex-col lg:flex-row gap-4 lg:gap-12 relative pt-20 lg:pt-28">
         {/* Main heading - takes up full width on mobile, 60% on desktop */}
         <div className="w-full lg:w-[62%]">
-          <p className="m-0 text-xl lg:text-[2.6rem] leading-[1.1em] justify-between tracking-tight font-bold text-black/85">
-            {phrase.split(' ').map((word, index) => (
+          <p className="m-0 text-xl lg:text-[2.8rem] 2xl:text-[3.2rem] leading-[1.1em] justify-between tracking-tight font-bold text-[#333]">
+            {phraseWords.map((word, index) => (
               <span
                 key={index}
                 className="inline-block overflow-hidden mr-[0.15em]"
               >
                 <motion.span
-                  className="inline-block font-grotesk"
+                  className={`inline-block font-grotesk ${specialWords[word] || ''}`}
                   variants={slideUp}
                   custom={index}
                   initial="initial"
@@ -169,9 +203,9 @@ export default function About() {
                   priority
                 />
               </div>
-              <h1 className="text-2xl lg:text-4xl font-bold text-black/85 pb-4">MOTIVATION</h1>
+              <h1 className="text-2xl xl:text-[2.5rem] 2xl:text-[2.6rem] font-bold text-[#333] pb-4">MOTIVATION</h1>
               {showDescription && (
-                <div className="m-0 text-sm pr-8 lg:pr-16 lg:text-base font-light text-gray-500 leading-tight sm:tracking-tight lg:leading-relaxed">
+                <div className="m-0 text-sm pr-8 lg:pr-16 lg:text-lg 2xl:text-[19px] font-light text-[#333]/60 font-baskervville leading-tight sm:tracking-tight">
                   <VerticalCutReveal
                     splitBy="characters"
                     staggerDuration={0.002}
@@ -182,7 +216,7 @@ export default function About() {
                       damping: 35,
                       delay: 0.1,
                     }}
-                    containerClassName="text-[#00000] leading-snug"
+                    containerClassName="text-[#00000] leading-tight"
                   >
                     {`Digital excellence is driven by an unwavering commitment to innovation and precision. As a web designer and developer, I find deep motivation in transforming complex challenges into elegant solutions. Each design element, ranging from pixel-perfect layouts through seamless interactions, becomes a deliberate step in crafting meaningful user experiences. Drawing from a passion for emerging technologies, I focus on creating solutions that not only captivate but solve real business challenges. This journey of continuous growth fuels my mission: to inspire, engage, and deliver digital experiences that leave a lasting impact in our ever-evolving landscape.`}
                   </VerticalCutReveal>
@@ -207,7 +241,7 @@ export default function About() {
                 text="ABOUT·DEVELOPER·MAVIS·☺·"
                 onHover="speedUp"
                 spinDuration={50}
-                className="text-white font-normal text-sm tracking-tight bg-black/90 rounded-full relative z-10 hover:scale-105 transition-transform duration-300 p-0 lg:p-10 lg:pt-0"
+                className="text-[#e6e5ef] font-normal text-sm tracking-tight bg-[#333]/90 rounded-full relative z-10 hover:scale-105 transition-transform duration-300 p-0 lg:p-10 lg:pt-0"
               />
               {/* <Rounded className="rounded-button !border-0 !w-24 !h-24 lg:!w-40 lg:!h-40">
                 <p className="m-0 text-sm lg:text-2xl font-light relative z-[2]">

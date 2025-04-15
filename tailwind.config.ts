@@ -11,9 +11,11 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      sm: '640px',
-      md: '768px',
-      lg: '1366px', // larger displays/ipad pro
+      sm: '640px',     // mobile
+      md: '1024px',    // tablet
+      lg: '1280px',    // laptop
+      xl: '1440px',    // desktop
+      '2xl': '1680px', // large desktop
     },
     extend: {
       colors: {
@@ -71,9 +73,11 @@ const config: Config = {
         '200': '50rem',
       },
       maxWidth: {
-        '1440': '1400px',
-        '1680': '1680px',
-        '1920': '1920px',
+        'sm': '640px',
+        'md': '1025px',
+        'lg': '1280px',
+        'xl': '1440px',
+        '2xl': '1680px',
       },
       fontSize: {
         xxs: '0.6rem',
@@ -104,6 +108,7 @@ const config: Config = {
       },
       animation: {
         floating: 'floating 3s infinite ease-in-out',
+        'fill': 'fill 2s cubic-bezier(0.6,0,0.4,1) forwards'
       },
       perspective: {
         '1000': '1000px',
@@ -134,6 +139,14 @@ const config: Config = {
         'just-me-again': ['var(--font-just-me-again)', 'cursive'],
         azeretMono: ['AzeretMono', 'monospace'],
         halenoir: ['Halenoir', 'sans-serif'],
+        'roslindale': ['"Roslindale Display Condensed"', 'serif'],
+        'baskervville': ['"Baskervville"', 'serif'],
+      },
+      keyframes: {
+        fill: {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' }
+        }
       },
     },
   },

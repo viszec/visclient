@@ -37,7 +37,7 @@ export default function Curve() {
 
   return (
     <svg
-      className="absolute top-0 w-[40px] h-full fill-black/85 stroke-none -left-[39px]
+      className="absolute top-0 w-[40px] h-full fill-[#333]/85 stroke-none -left-[39px]
                  lg:w-[100px] lg:h-full lg:-left-[99px]"
       viewBox={`0 0 ${window.innerWidth < 768 ? 40 : 100} ${window.innerHeight}`}
       preserveAspectRatio="none"

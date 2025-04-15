@@ -53,7 +53,7 @@ export default function SidebarNav() {
 
       {/* Navigation */}
       <div
-        className="absolute right-0 top-0 h-screen bg-black text-white
+        className="absolute right-0 top-0 h-screen bg-[#333] text-[#e6e5ef]
                    w-[60vw] sm:w-[40vw] lg:w-[35vw]
                    overflow-visible pointer-events-auto
                    shadow-[-10px_0_30px_rgba(0,0,0,0.1)]
@@ -64,7 +64,7 @@ export default function SidebarNav() {
             variants={containerVariants}
             className="flex flex-col text-4xl gap-3"
           >
-            <div className="flex text-white/80 border-b py-2 border-gray-700 uppercase text-sm lg:text-2xl font-light tracking-tight mb-10">
+            <div className="flex text-[#e6e5ef]/80 border-b py-2 border-[#e6e5ef]/20 uppercase text-sm lg:text-2xl font-light tracking-tight mb-10">
               <div className="tracking-wider items-center gap-2">
                 Mavis M.
                 <Image
@@ -88,16 +88,16 @@ export default function SidebarNav() {
                 />
               ))}
             </AnimatePresence>
-            <div className="flex flex-col pt-18 lg:pt-24 space-y-2">
+            <div className="flex flex-col pt-[400px] lg:pt-[100px] space-y-2">
               <div className="flex items-center gap-1">
-                <p className="text-base lg:text-xl text-white/80 font-light tracking-tight">Let&apos;s connect</p>
+                <p className="text-sm lg:text-xl text-[#e6e5ef]/80 font-light tracking-tight">Let&apos;s connect</p>
                 <Image
                   src="/icons/arrow.svg"
                   alt="arrow"
                   width={18}
                   height={18}
                   priority
-                  className="w-3 h-3 lg:w-4 lg:h-4 brightness-0/80 invert"
+                  className="w-3 h-3 lg:w-4 lg:h-4 brightness-0/70 invert"
                 />
               </div>
               <NavSocials />

@@ -18,7 +18,7 @@ export const MenuButton = ({ buttonRef, isActive, onClick, className = '' }: Men
     <Rounded
       onClick={onClick}
       className="relative m-0 lg:m-[20px] w-[40px] h-[40px] lg:w-[80px] lg:h-[80px] rounded-full !border-0
-                bg-gray-800 cursor-pointer flex items-center justify-center"
+                bg-[#333] cursor-pointer flex items-center justify-center"
     >
       <div className={`w-full relative ${isActive ? 'burger-active' : ''}`}>
         <div className="burger-line" />

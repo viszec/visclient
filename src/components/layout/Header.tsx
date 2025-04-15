@@ -77,9 +77,9 @@ export default function Header() {
     <>
       <header
         ref={header}
-        className={`fixed top-0 w-full backdrop-blur-sm z-[99] px-5 md:px-8 lg:px-12 transition-colors duration-300
-          ${isScrolled ? 'lg:bg-white' : 'lg:bg-transparent'} 
-          bg-white md:bg-white/80`}
+        className={`fixed top-0 w-full backdrop-blur-sm z-[99] px-4 md:px-8 lg:px-12 2xl:px-12 transition-colors duration-300
+          ${isScrolled ? 'lg:bg-[#efeee9] shadow-sm' : 'lg:bg-transparent'} 
+          bg-[#efeee9] md:bg-[#efeee9]/80`}
       >
         <div className="flex justify-between items-center py-2 lg:py-2">
           <div className="flex items-center">

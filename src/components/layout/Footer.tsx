@@ -28,23 +28,23 @@ const SOCIAL_LINKS: SocialLink[] = [
 
 export default function Footer() {
   return (
-    <section className="section w-full h-full bg-black">
-      <div className="flex flex-col">
-        <motion.div className="flex flex-col border-t lg:mx-20 border-gray-600 lg:flex-row justify-center lg:justify-between items-center gap-2 lg:gap-4 pt-2 lg:pt-6 sm:pt-4 pb-4 lg:pb-8">
+    <section className="section w-full h-full bg-[#efeee9] ">
+      <div className="flex flex-col px-6 2xl:px-12">
+        <motion.div className="flex flex-col border-t border-gray-600 lg:flex-row justify-center lg:justify-between items-center gap-2 lg:gap-4 pt-2 lg:pt-6 sm:pt-4 pb-4 lg:pb-8">
           <div className="order-2 lg:order-1">
-            <div className="text-xs lg:text-sm font-light text-gray-300">2025 © MAViS M. ALL RIGHTS RESERVED.</div>
+            <div className="text-xs lg:text-sm text-[#333]">2025 © MAViS M. All Rights Reserved.</div>
           </div>
 
           <div className="flex items-center gap-2 lg:gap-4 order-1 lg:order-2">
             <div className="flex items-center gap-1 mr-2">
-              <h3 className="text-gray-300 cursor-default font-light text-xs lg:text-sm">Socials</h3>
+              <h3 className="text-[#333] cursor-default text-xs lg:text-sm">Socials</h3>
               <Image
                 src="/icons/arrow.svg"
                 alt="arrow"
                 width={18}
                 height={18}
                 priority
-                className="mt-[-2px] lg:mt-0 lg:w-3 lg:h-3 w-2.5 h-2.5 brightness-0 invert"
+                className="mt-[-2px] lg:mt-0 lg:w-3 lg:h-3 w-2.5 h-2.5 text-[#333]"
               />
             </div>
 
@@ -55,7 +55,7 @@ export default function Footer() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-300 font-light text-xs lg:text-sm hover-underline hover:text-orange-400"
+                    className="text-[#333] text-xs lg:text-sm hover-underline hover:text-[#333]/60"
                   >
                     {link.name}
                   </a>

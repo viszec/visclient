@@ -175,24 +175,47 @@ export default function Projects() {
 
   useEffect(() => {
     let lastScrollY = scrollY.get();
-    const aboutSection = document.getElementById('about');
-    const aboutBottom = aboutSection
-      ? aboutSection.getBoundingClientRect().top + window.scrollY + aboutSection.offsetHeight
-      : 0;
 
+    // get the position information of the Projects section
     const unsubscribe = scrollY.on('change', (current) => {
       const direction = current > lastScrollY ? 'down' : 'up';
 
+      // get the position information of the Projects section
+      const projectsSection = document.getElementById('work');
+      if (!projectsSection) return;
+
+      // calculate the relative scroll position, similar to the About component
+      const sectionTop = projectsSection.getBoundingClientRect().top + window.scrollY;
+      const sectionHeight = projectsSection.getBoundingClientRect().height;
+      const relativeScroll = current - sectionTop;
+
+      /* animation trigger points:
+       * Scroll down:
+       * - trigger: when the Projects section is close to the top (relative scroll in -40% to 0%)
+       * - reset: when the scroll is over 90% of the Projects section
+       *
+       * Scroll up:
+       * - trigger: when the Projects section is re-entered from the bottom (relative scroll in 40% to 90%)
+       * - reset: when the Projects section is completely out of the viewport
+       */
+
       if (direction === 'down') {
-        // mobile trigger point
-        const triggerPoint = isMobile ? aboutBottom * 0.7 : aboutBottom * 0.9;
-        if (current >= triggerPoint) {
+        // when the Projects section enters the bottom 20% of the viewport, trigger the animation
+        if (relativeScroll >= -sectionHeight * 0.4 && relativeScroll <= 0) {
           setIsAnimating(true);
         }
+        // when the Projects section is completely out of the viewport, reset
+        else if (relativeScroll > sectionHeight * 0.9) {
+          setIsAnimating(false);
+        }
       } else {
-        // mobile reset point
-        const resetPoint = isMobile ? aboutBottom * 0.5 : aboutBottom * 0.7;
-        if (current < resetPoint) {
+        // scroll up
+        // when the Projects section is re-entered from the bottom, show
+        if (relativeScroll >= sectionHeight * 0.4 && relativeScroll <= sectionHeight * 0.9) {
+          setIsAnimating(true);
+        }
+        // when the Projects section is completely out of the viewport, reset
+        else if (relativeScroll < -sectionHeight * 0.4) {
           setIsAnimating(false);
         }
       }
@@ -201,13 +224,13 @@ export default function Projects() {
     });
 
     return () => unsubscribe();
-  }, [scrollY, isMobile]); // add isMobile as a dependency
+  }, [scrollY, isMobile]);
 
   return (
     <section
       id="work"
       ref={ref}
-      className="section-container !lg:px-0 py-12 lg:pt-28 lg:pb-48"
+      className="section-container !lg:px-0 py-12 lg:pt-28 lg:pb-48 bg-[#efeee9]"
     >
       <div className="h-[9vh] sm:h-[2vh]"></div>
       <motion.div
@@ -223,7 +246,7 @@ export default function Projects() {
           animate={isAnimating ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="grid grid-cols-12 pl-0 pr-4 lg:px-4 pb-4 border-b border-[#c9c9c9] w-full">
+          <div className="grid grid-cols-12 pl-0 pr-4 lg:px-4 pb-4 border-b border-[#333] w-full">
             {[
               { text: 'PROJECT', span: 'col-start-1 col-end-5' },
               { text: 'CATEGORY', span: 'col-start-6 lg:col-start-5 col-end-9' },
@@ -244,7 +267,7 @@ export default function Projects() {
             ].map(({ text, span, align = '', className = '' }) => (
               <h3
                 key={text}
-                className={`${span} lg:text-sm text-xxs font-light ${align} text-gray-600 ${className}`}
+                className={`${span} lg:text-base text-xxs font-normal ${align} text-[#333] ${className}`}
               >
                 {text}
               </h3>
@@ -274,13 +297,13 @@ export default function Projects() {
 
         <Rounded
           onClick={handleToggleProjects}
-          className="!w-[140px] !h-[45px] sm:!w-[180px] sm:!h-[45px] lg:!w-[230px] lg:!h-[65px] 
+          className="!w-[140px] !h-[40px] sm:!w-[180px] sm:!h-[40px] lg:!w-[230px] lg:!h-[65px] 
                     rounded-full mt-2 lg:mt-12 mb-12 lg:mb-16 
-                    !border-[1px] !border-gray-500 hover:!border-transparent"
+                    !border-[1px] !border-[#333] hover:!border-[#E6E5DF] hover:bg-[#E6E5DF] group disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <p
-            className="relative z-10 group-hover:text-white dark:group-hover:text-black 
-                      text-base sm:text-sm lg:text-xl font-normal tracking-wider"
+            className="relative z-10 group-hover:text-[#E6E5DF] dark:group-hover:text-[#E6E5DF]
+                      text-base sm:text-sm lg:text-base font-normal tracking-wider"
           >
             {showAll ? 'Show Less' : 'More Work'}
           </p>

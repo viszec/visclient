@@ -71,7 +71,7 @@ export default function ProjectItem({ index, title, category, client, year, live
   const baseStyles = 'font-light self-center transition-all duration-500 group-hover:text-gray-400';
 
   return (
-    <div className="grid grid-cols-12 pr-2 lg:px-4 py-6 border-b border-gray-300 cursor-pointer group relative w-full">
+    <div className="grid grid-cols-12 pr-2 lg:px-4 py-6 border-b border-[#333] cursor-pointer group relative w-full">
       <div
         className="absolute top-0 left-0 w-[75%] h-[80%] z-10"
         onMouseEnter={(e) => manageModal(true, index, e.clientX, e.clientY)}
@@ -84,14 +84,14 @@ export default function ProjectItem({ index, title, category, client, year, live
           className={`
             ${span}
             ${baseStyles}
-            ${isTitle ? 'text-base text-black/85 uppercase lg:text-3xl font-medium lg:font-semibold lg:tracking-wide m-0' : ''}
+            ${isTitle ? 'text-base text-[#333] uppercase lg:text-3xl font-medium font-baskervville lg:font-semibold m-0' : ''}
             ${align}
             ${hoverTransform}
             ${className}
           `}
         >
           <div
-            className={`${isTitle ? 'text-sm text-black/85 lg:text-2xl group-hover:text-gray-400' : 'text-xs text-black/85 lg:text-base group-hover:text-gray-400'} transition-all duration-500`}
+            className={`${isTitle ? 'text-sm text-[#333] font-semibold lg:text-2xl group-hover:text-[#333]/40' : 'text-xs text-[#333] lg:text-base group-hover:text-[#333]/40'} transition-all duration-500`}
           >
             {content}
           </div>

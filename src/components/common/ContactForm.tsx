@@ -6,13 +6,14 @@ import { Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 import Rounded from '@/components/common/RoundedButton';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface FormData {
   name: string;
   email: string;
   message: string;
-  budget: string;
+  budget?: string;
 }
 
 const FORM_FIELDS = [
@@ -38,6 +39,7 @@ const FORM_FIELDS = [
     rows: 4,
     placeholder: 'Tell me more about your project...',
   },
+  /* 
   {
     id: 'budget',
     label: 'Project Budget',
@@ -51,6 +53,7 @@ const FORM_FIELDS = [
       { value: 'large', label: '$10,000+' },
     ],
   },
+  */
 ] as const;
 
 export default function ContactForm() {
@@ -58,7 +61,7 @@ export default function ContactForm() {
     name: '',
     email: '',
     message: '',
-    budget: '',
+    // budget: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -68,7 +71,7 @@ export default function ContactForm() {
     name: false,
     email: false,
     message: false,
-    budget: false,
+    // budget: false,
   });
 
   const handleSubmit = async (e: FormEvent) => {
@@ -156,16 +159,16 @@ export default function ContactForm() {
 
   // Consistent input styles with dark background
   const inputStyles =
-    'w-full px-4 py-3 bg-gray-800/50 rounded-lg border-none focus:outline-none focus:ring-0 text-white placeholder:text-gray-500/70 placeholder:text-xs lg:placeholder:text-sm';
+    'w-full px-4 py-3 bg-[#908f8c]/10 rounded-lg border-none focus:outline-none focus:ring-0 text-[#333] placeholder:text-[#333]/40 placeholder:text-xs lg:placeholder:text-sm placeholder:font-light';
 
   const renderField = (field: (typeof FORM_FIELDS)[number]) => {
     const labelContent = (
       <label
         htmlFor={field.id}
-        className="block text-xs lg:text-sm font-medium mb-2 text-gray-300"
+        className="block text-xs lg:text-sm font-medium mb-2 text-[#333]"
       >
         {field.label}
-        {field.required && <span className="text-orange-500 ml-1">*</span>}
+        {field.required && <span className="text-[#908f8c] ml-1">*</span>}
       </label>
     );
 
@@ -191,43 +194,44 @@ export default function ContactForm() {
       );
     }
 
-    if (field.type === 'select') {
-      return (
-        <div key={field.id}>
-          {labelContent}
-          <Select
-            name={field.id}
-            value={formData[field.id as keyof FormData] || 'default'}
-            onValueChange={(value) => {
-              setFormData((prev) => ({
-                ...prev,
-                [field.id]: value === 'default' ? '' : value,
-              }));
-              setFilledFields((prev) => ({
-                ...prev,
-                [field.id]: value !== 'default',
-              }));
-            }}
-            disabled={isSubmitting}
-          >
-            <SelectTrigger className="w-full px-4 py-3 h-[46px] bg-gray-800/50 rounded-lg border-none focus:ring-0 focus:ring-offset-0 text-gray-500">
-              <SelectValue placeholder={field.placeholder} />
-            </SelectTrigger>
-            <SelectContent className="bg-gray-800/90 border-none">
-              {field.options?.map((option) => (
-                <SelectItem
-                  key={option.value}
-                  value={option.value}
-                  className="text-white focus:bg-gray-700 focus:text-white"
-                >
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      );
-    }
+    // Commented out select type handling code
+    // if (field.type === 'select') {
+    //   return (
+    //     <div key={field.id}>
+    //       {labelContent}
+    //       <Select
+    //         name={field.id}
+    //         value={formData[field.id as keyof FormData] || 'default'}
+    //         onValueChange={(value) => {
+    //           setFormData((prev) => ({
+    //             ...prev,
+    //             [field.id]: value === 'default' ? '' : value,
+    //           }));
+    //           setFilledFields((prev) => ({
+    //             ...prev,
+    //             [field.id]: value !== 'default',
+    //           }));
+    //         }}
+    //         disabled={isSubmitting}
+    //       >
+    //         <SelectTrigger className="w-full px-4 py-3 h-[46px] bg-gray-800/50 rounded-lg border-none focus:ring-0 focus:ring-offset-0 text-gray-500">
+    //           <SelectValue placeholder={field.placeholder} />
+    //         </SelectTrigger>
+    //         <SelectContent className="bg-gray-800/90 border-none">
+    //           {field.options?.map((option) => (
+    //             <SelectItem
+    //               key={option.value}
+    //               value={option.value}
+    //               className="text-white focus:bg-gray-700 focus:text-white"
+    //             >
+    //               {option.label}
+    //             </SelectItem>
+    //           ))}
+    //         </SelectContent>
+    //       </Select>
+    //     </div>
+    //   );
+    // }
 
     return (
       <div key={field.id}>
@@ -250,7 +254,7 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 text-white"
+      className="space-y-6 text-[#333]"
     >
       {FORM_FIELDS.map(renderField)}
       <div className="pt-2">
@@ -265,12 +269,12 @@ export default function ContactForm() {
               handleSubmit({} as FormEvent);
             }
           }}
-          className="w-full !h-[40px] lg:!h-[55px] lg:!w-[230px] rounded-full !border-[1px] !border-gray-500 hover:!border-orange-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full !h-[40px] lg:!h-[65px] lg:!w-[230px] rounded-full !border-[1px] !border-[#333] hover:!border-[#E6E5DF] hover:bg-[#E6E5DF] group disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={isSubmitting}
         >
           <div className="flex items-center justify-center gap-2">
             {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
-            <p className="m-0 text-white font-medium text-sm lg:text-base">
+            <p className="m-0 text-[#333] font-normal text-sm lg:text-base group-hover:text-[#E6E5DF] transition-colors duration-200">
               {isSubmitting ? 'Sending...' : "Let's Connect"}
             </p>
           </div>
