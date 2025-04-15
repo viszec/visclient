@@ -186,7 +186,7 @@ export default function Services() {
           // Position cards in a vertical stack
           gsap.set(card, {
             left: '50%',
-            top: `${5 + index * 21}%`, // Reduced spacing from 35% to 22%, first card position from 10% to 5%
+            top: `${5 + index * 25}%`, // Reduced spacing from 35% to 22%, first card position from 10% to 5%
             xPercent: -50,
             yPercent: -50,
             rotation: ROTATIONS[index] * 0.3, // Added small rotation angle, half strength of desktop version
