@@ -31,7 +31,7 @@ export default function Contact() {
           ref={container}
           className="flex flex-col items-center justify-center text-[#333] relative"
         >
-          <div className="w-full pt-48 md:pt-28 pb-8 md:pb-18 lg:pb-16 lg:pt-30 bg-[#efeee9]">
+          <div className="w-full pt-56 md:pt-28 pb-8 md:pb-18 lg:pb-16 lg:pt-30 bg-[#efeee9]">
             <div className="after:block after:mb-10 lg:after:mb-8 pb-2 md:pb-4 lg:pb-8 mx-8 lg:mx-20 relative">
               {/* Main content wrapper - Two column layout */}
               <div className="flex flex-col lg:flex-row lg:gap-10 xl:gap-16 2xl:gap-20">
