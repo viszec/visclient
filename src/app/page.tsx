@@ -8,11 +8,11 @@ import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import About from '@/components/sections/About';
 import Contact from '@/components/sections/Contact';
-import HeroSection from '@/components/sections/HeroSection';
-import Preloader from '@/components/sections/Preloader';
+import Hero from '@/components/sections/Hero';
 import Projects from '@/components/sections/Projects';
-//import Skills from '@/components/sections/Skills';
+import Services from '@/components/sections/Services';
 import SlideImage from '@/components/sections/SlideImage';
+import PreloaderAnimation from '@/components/sections/PreloaderAnimation';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,11 +24,10 @@ export default function Home() {
       const locomotiveScroll = new LocomotiveScroll();
 
       setTimeout(() => {
-        setIsLoading(false);
         setShowHeader(true);
         document.body.style.cursor = 'default';
         window.scrollTo(0, 0);
-      }, 2000);
+      }, 1000);
 
       return () => {
         locomotiveScroll.destroy();
@@ -36,19 +35,29 @@ export default function Home() {
     })();
   }, []);
 
+  const handlePreloaderComplete = () => {
+    setIsLoading(false);
+  };
+
   return (
     <>
-      {showHeader && <Header />}
+      {!isLoading && showHeader && <Header />}
+
       <main className="min-h-screen">
-        <AnimatePresence mode="wait">{isLoading && <Preloader />}</AnimatePresence>
-        <HeroSection />
-        <About />
-        <Projects />
-        <SlideImage />
-        {/* <Skills /> */}
-        <Contact />
+        {isLoading ? (
+          <PreloaderAnimation onComplete={handlePreloaderComplete} />
+        ) : (
+          <>
+            <Hero isVisible={true} />
+            <About />
+            <Projects />
+            <Services />
+            {/* <SlideImage /> */}
+            <Contact />
+          </>
+        )}
       </main>
-      <Footer />
+      {!isLoading && <Footer />}
     </>
   );
 }

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mavis.studio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+        .highlight {
+            color: #e5e3dc !important;
+            -webkit-text-stroke: 0 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="website-container" style="display: none;">
+        <div class="navbar">
+            <div class="logo">Mavis<br/>MA.</div>
+            <div class="menu-icon">Menu</div>
+        </div>
+        <div class="site-header">
+            <div class="row">
+                <div class="header-row"><span>Hello</span>I'M MAVIS</div>
+                <div class="header-row-wrapper"></div>
+            </div>
+            <div class="row">
+                <div class="header-row"><span>I'm a</span>WEB DEVELOPER</div>
+                <div class="header-row-wrapper"></div>
+            </div>
+        </div>
+        <div class="footer">Proficient in React, Next.js, TypeScript, JavaScript, Tailwind CSS, Node.js, and Cursor.</div>
+    </div>
+    <div class="pre-loader">
+        <div class="pre-loader-container">
+            <div class="pre-loader-header">
+                <div class="header">
+                    <h1>Between</h1><h1 class="word-space"></h1><h1>yesterday's</h1><h1 class="word-space"></h1><h1>echoes</h1>
+                    <div class="header-wrapper"></div>
+                </div>
+                <div class="header">
+                    <h1>and</h1><h1 class="word-space"></h1><h1>to</h1><h1 data-text="M">M</h1><h1>orrow's</h1><h1 class="word-space"></h1><h1>whispers,</h1>
+                    <div class="header-wrapper"></div>
+                </div>
+                <div class="header">
+                    <h1>only</h1><h1 class="word-space"></h1><h1>tod</h1><h1 data-text="A">A</h1><h1>y's</h1><h1 class="word-space"></h1><h1 data-text="V">V</h1><h1>ital</h1>
+                    <div class="header-wrapper"></div>
+                </div>
+                <div class="header">
+                    <h1>transform</h1><h1 data-text="I">I</h1><h1>on</h1><h1 class="word-space"></h1><h1 data-text="S">S</h1><h1>peaks</h1>
+                    <div class="header-wrapper"></div>
+                </div>
+                <div class="header">
+                    <h1>authentic</h1><h1 class="word-space"></h1><h1 data-text="M">M</h1><h1>etamorphosis</h1><h1 data-text=".">.</h1>
+                    <div class="header-wrapper"></div>
+                </div>
+            </div>
+            <div class="pre-loader-btn">
+                <div class="btn" id="enter-btn">
+                    Click anywhere
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 10">
+                        <path fill="#e2e2dd" d="M59.2,9.6V6.2h-58v-2c0,0,0,0,0,0h58V0.7L67,5.1L59.2,9.6z"></path>
+                    </svg>
+                    to enable my world
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Make sure the main website is hidden initially
+        document.querySelector('.website-container').style.display = 'none';
+        
+        // Create timeline animation
+        const tl = gsap.timeline({paused: false});
+        let animationCompleted = false;
+
+        // Text animation and button display
+        tl.to(".header > h1", 2, {
+            top: 0,
+            ease: "power3.inOut",
+            stagger: {
+                amount: 0.3,
+            },
+        });
+        
+        // After text animation completes, add delay, then show button
+        tl.to(".pre-loader-btn", {
+            opacity: 1,
+            duration: 0.5,
+            delay: 4, // Extra delay to ensure fill animation completes
+            onComplete: function() {
+                animationCompleted = true;
+                document.querySelector('.pre-loader-btn').style.pointerEvents = 'auto';
+            }
+        });
+
+        // Initialize click area
+        document.querySelector('.pre-loader-btn').style.pointerEvents = 'none';
+        
+        // Start animation when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            tl.play();
+        });
+
+        // Function to reveal main site
+        function revealSite() {
+            if (!animationCompleted) return;
+            
+            const tl2 = gsap.timeline();
+            
+            // Fade out preloader
+            tl2.to(".pre-loader", {
+                opacity: 0,
+                duration: 1,
+                ease: "power2.inOut",
+                onComplete: function() {
+                    document.querySelector('.pre-loader').style.display = "none";
+                    document.querySelector('.website-container').style.display = "block";
+                }
+            });
+
+            // Show main content
+            tl2.to(
+                ".header-row",
+                0.8,
+                {
+                    top: 0,
+                    ease: "power4.inOut",
+                    stagger: {
+                        amount: 0.2,
+                    },
+                },
+                "+=0.2"
+            );
+            
+            tl2.from(".navbar, .footer", 2, 
+                {
+                    opacity: 0,
+                    y: 20,
+                    ease: "power4.inOut",
+                },
+                "-=0.5"
+            );
+            
+            // Add delay to ensure all animations complete after main content is displayed
+            setTimeout(() => {
+                // If any hidden elements are still not showing, ensure they display
+                gsap.to(".website-container", {
+                    autoAlpha: 1,
+                    duration: 0.5
+                });
+            }, 2500);
+        }
+        
+        // Add click event listeners
+        document.getElementById('enter-btn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            revealSite();
+        });
+        
+        // Add click event for entire preloader area
+        document.querySelector('.pre-loader').addEventListener('click', function() {
+            if (animationCompleted) {
+                revealSite();
+            }
+        });
+    </script>
+</body>
+</html>

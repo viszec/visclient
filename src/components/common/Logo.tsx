@@ -21,7 +21,7 @@ export const Logo = () => (
           priority
           className="w-3 h-3 -rotate-90"
         />
-        <span className="text-sm lg:text-base ml-1">MAViS M.</span>
+        <span className="text-sm ml-1 text-[#333]">MAViS M.</span>
       </div>
       <div
         className="flex items-center relative pl-[0.3em] text-sm lg:text-base transition-transform 
@@ -35,7 +35,7 @@ export const Logo = () => (
           priority
           className="w-3 h-3 -rotate-90"
         />
-        <span className="text-sm lg:text-base ml-1">Based in Melbourne AU</span>
+        <span className="text-sm ml-1 text-[#333]">Based in Melbourne, AU</span>
       </div>
     </div>
   </div>

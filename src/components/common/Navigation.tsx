@@ -13,7 +13,7 @@ export const Navigation = () => (
         <div className="flex flex-col relative z-[1] p-4 cursor-pointer group">
           <Link
             href={item.href}
-            className="text-sm lg:text-base no-underline hover:text-gray-700"
+            className="text-sm no-underline hover:text-[#333]/60 text-[#333] font-normal"
           >
             {item.label}
           </Link>

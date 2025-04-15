@@ -8,7 +8,7 @@ import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
-// 注册 GSAP 插件
+// Register GSAP plugins
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }

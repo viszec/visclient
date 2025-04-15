@@ -1,9 +1,122 @@
 {
   "CodeGPT.apiKey": "CodeGPT Plus Beta",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.guides.bracketPairs": "active",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.highlightActiveBracketPair": true,
+  "editor.guides.highlightActiveIndentation": true,
+  "editor.guides.bracketPairsHorizontal": "active",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
+  },
+  "editor.renderWhitespace": "none",
+  "editor.renderLineHighlight": "all",
+  "editor.matchBrackets": "always",
+  "editor.indentRainbow.indicatorStyle": "light",
+  "editor.semanticHighlighting.enabled": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.guides.indentation": true,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": ["comment", "comment.block", "comment.line"],
+        "settings": {
+          "foreground": "#747474c6"
+        }
+      },
+      {
+        "scope": ["entity.name.tag"],
+        "settings": {
+          "foreground": "#63b3ed",
+          "fontStyle": "italic"
+        }
+      },
+      {
+        "scope": ["support.class.component"],
+        "settings": {
+          "foreground": "#7dd593",
+          "fontStyle": "italic bold"
+        }
+      },
+      {
+        "scope": ["punctuation.definition.tag"],
+        "settings": {
+          "foreground": "#63b3ed",
+          "fontStyle": "italic"
+        }
+      },
+      {
+        "scope": "keyword.operator",
+        "settings": {
+          "foreground": "#d2799c",
+          "fontStyle": "italic"
+        }
+      },
+      {
+        "scope": ["entity.other.attribute-name", "entity.other.attribute-name.class"],
+        "settings": {
+          "foreground": "#c7985e"
+        }
+      },
+      {
+        "scope": ["string", "string.quoted", "string.quoted.double"],
+        "settings": {
+          "foreground": "#65ba8f"
+        }
+      },
+      {
+        "scope": ["variable", "variable.other", "variable.parameter", "variable.language"],
+        "settings": {
+          "foreground": "#76e4f7c9"
+        }
+      },
+      {
+        "scope": ["variable.other.property", "variable.other.object.property"],
+        "settings": {
+          "foreground": "#a786d5"
+        }
+      },
+      {
+        "scope": ["variable.other.object"],
+        "settings": {
+          "foreground": "#8be9fd"
+        }
+      },
+      {
+        "scope": ["support.type", "entity.name.type", "support.type.primitive"],
+        "settings": {
+          "foreground": "#e48dbf",
+          "fontStyle": "italic"
+        }
+      }
+    ]
+  },
+  "tailwindCSS.colorDecorators": true,
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  },
+  "tailwindCSS.validate": true,
+  "tailwindCSS.highlightClassesOnHover": true,
+  "dart.previewFlutterUiGuides": true,
+  "dart.previewFlutterUiGuidesCustomTracking": true,
+  "workbench.colorCustomizations": {
+    "editorIndentGuide.activeBackground1": "#9e59c9",
+    "editorIndentGuide.background1": "#3b3b3b",
+    "editorBracketPairGuide.activeBackground1": "#76e4f7b9",
+    "editorBracketPairGuide.background1": "#3b3b3b",
+    "editorBracketPairGuide.activeBackground2": "#f687b3",
+    "editorBracketPairGuide.activeBackground3": "#9ae6b4",
+    //"editorBracketPairGuide.activeBackground4": "#efc490",
+    "editorBracketPairGuide.activeBackground5": "#fc7b7b",
+    //"editorBracketPairGuide.activeBackground6": "#d2a13e",
+    "editor.lineHighlightBackground": "#1c453222",
+    "editor.lineHighlightBorder": "#1c453233",
+    "editorBracketMatch.background": "#1c453266",
+    "editorBracketMatch.border": "#9AE6B4",
+    "explorer.folderForeground": "#b04af0"
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,

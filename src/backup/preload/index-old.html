@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mavis.studio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+        .highlight {
+            color: #e5e3dc !important;
+            -webkit-text-stroke: 0 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="website-container">
+        <div class="navbar">
+            <div class="logo">Mavis <br /> Studio</div>
+            <div class="menu-icon">Menu</div>
+        </div>
+        <div class="site-header">
+            <div class="row">
+                <div class="header-row"><span>Hello</span> I'm Mavis</div>
+                <div class="header-row-wrapper"></div>
+            </div>
+            <div class="row">
+                <div class="header-row"><span>I'm a</span>web developer</div>
+                <div class="header-row-wrapper"></div>
+            </div>
+        </div>
+        <div class="footer">"Everyday life is hear sound"</div>
+    </div>
+    <div class="pre-loader">
+        <div class="pre-loader-container">
+            <div class="pre-loader-header">
+                <div class="header">
+                    <h1>A CREATOR OF</h1>
+                    <div class="header-wrapper"></div>
+                </div>
+                <div class="header concat">
+                    <h1 data-text="SOUND">SOUND</h1>
+                    <h1 style="margin-left: 15px;">FROM PURE</h1>
+                    <div class="header-wrapper"></div>
+                </div>
+                <div class="header">
+                    <h1>NOISE TO MELODY,</h1>
+                    <div class="header-wrapper"></div>
+                </div>
+                <div class="header">
+                    <h1>EVERYDAY LIFE</h1>
+                    <div class="header-wrapper"></div>
+                </div>
+                <div class="header concat">
+                    <h1 style="margin-right: 15px;">IS HER</h1>
+                    <h1 data-text="SYMPHONY">SYMPHONY</h1>
+                    <div class="header-wrapper"></div>
+                </div>
+            </div>
+            <div class="pre-loader-btn" onclick="revealSite()">
+                <div class="btn">
+                    Click anywhere
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 10">
+                        <defs>
+                        </defs>
+                        <path fill="#e2e2dd"
+                        d="M59.2,9.6V6.2h-58v-2c0,0,0,0,0,0h58V0.7L67,5.1L59.2,9.6z"></path>
+                    </svg>
+                    to enable the sound 
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const tl = gsap.timeline();
+
+        function revealSite() {
+            tl.to(".pre-loader", {
+                opacity: 0,
+                display: "none",
+                ease: "power2.inOut"
+            });
+
+            tl.to(
+                ".header-row",
+                0.8,
+                {
+                    top: 0,
+                    ease: "power4.inOut",
+                    stagger: {
+                        amount: 0.2,
+                    },
+                },
+                "-=1.2"
+            );
+            tl.from(".navbar > *, .footer ", 2, 
+            {
+                opacity: 0,
+                y: 40,
+                ease: "power4.inOut",
+                stagger: {
+                    amount: 0.2,
+                },
+            },
+            "-=1"
+        );
+        }
+
+        tl.to(".header > h1", 2, {
+            top: 0,
+            ease: "power3.inOut",
+            stagger: {
+                amount: 0.3,
+            },
+        }).to(".pre-loader-btn", 0.3, {
+            opacity: 1,
+            delay: 2,
+        });
+    </script>
+</body>
+</html>
