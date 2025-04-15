@@ -6,6 +6,7 @@ import { Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 import Rounded from '@/components/common/RoundedButton';
+
 // import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface FormData {
@@ -60,7 +61,7 @@ export default function ContactForm() {
     name: '',
     email: '',
     message: '',
-    // budget: '', 
+    // budget: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -70,7 +71,7 @@ export default function ContactForm() {
     name: false,
     email: false,
     message: false,
-    // budget: false, 
+    // budget: false,
   });
 
   const handleSubmit = async (e: FormEvent) => {

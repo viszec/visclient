@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from 'react';
 
-import { AnimatePresence } from 'framer-motion';
+//import { AnimatePresence } from 'framer-motion';
 
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import About from '@/components/sections/About';
 import Contact from '@/components/sections/Contact';
 import Hero from '@/components/sections/Hero';
+import PreloaderAnimation from '@/components/sections/PreloaderAnimation';
+//import SlideImage from '@/components/sections/SlideImage';
 import Projects from '@/components/sections/Projects';
 import Services from '@/components/sections/Services';
-import SlideImage from '@/components/sections/SlideImage';
-import PreloaderAnimation from '@/components/sections/PreloaderAnimation';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);

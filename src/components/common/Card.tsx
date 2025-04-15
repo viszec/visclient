@@ -92,16 +92,15 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
               </div>
 
               <div className="flex flex-col h-full text-left border-[1px] border-[#E6E5DF]/40 p-4 rounded-xl relative z-10">
-                <h3 className="text-xl font-bold text-[#E6E5DF] mb-2 font-baskervville tracking-wide">
-                  {title}
-                </h3>
+                <h3 className="text-xl font-bold text-[#E6E5DF] mb-2 font-baskervville tracking-wide">{title}</h3>
                 <div className="w-12 h-[1px] bg-[#E6E5DF]/60 mb-3 mt-3"></div>
-                <p className="text-sm text-[#E6E5DF] mb-4 font-light italic">
-                  {description}
-                </p>
+                <p className="text-sm text-[#E6E5DF] mb-4 font-light italic">{description}</p>
                 <div className="space-y-1 m-2">
                   {services.map((service, idx) => (
-                    <p key={idx} className="text-sm text-[#E6E5DF]/80 flex font-light">
+                    <p
+                      key={idx}
+                      className="text-sm text-[#E6E5DF]/80 flex font-light"
+                    >
                       <span className="mr-2 text-[#E6E5DF]/70">•</span>
                       <span>{service}</span>
                     </p>

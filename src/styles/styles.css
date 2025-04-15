@@ -113,40 +113,154 @@
 
 .pre-loader-btn {
     position: absolute;
-    bottom: 10%;
+    bottom: 12%;
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Neue Montreal', sans-serif;
-    font-size: 1.1em;
-    text-transform: uppercase;
+    font-size: 1rem;
     cursor: pointer;
     z-index: 10;
     opacity: 0;
     width: auto;
-    letter-spacing: 0.05em;
 }
 
 .pre-loader-btn .btn {
     display: flex;
+    flex-direction: column;
     align-items: center;
     color: #e5e3dc;
     opacity: 0.8;
-    transition: opacity 0.3s ease;
-    white-space: nowrap;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    overflow: hidden;
 }
 
 .pre-loader-btn .btn:hover {
     opacity: 1;
+    transform: translateY(2px);
 }
 
-.pre-loader-btn svg {
-    position: relative;
-    width: 70px;
-    top: 0;
-    padding: 0 0.4em;
+.pre-loader-btn span {
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+    text-transform: uppercase;
 }
 
-/* Keep media query styles for responsiveness */
-@media (max-width: 1200px) {
-    /* ...responsive styles... */
+.pre-loader-btn .down-arrow {
+    width: 24px;
+    height: 24px;
+    margin: 8px 0;
+    transition: transform 0.3s ease;
+}
+
+.pre-loader-btn .btn:hover .down-arrow {
+    transform: translateY(4px);
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    .pre-loader-header {
+        max-width: 90%;
+    }
+
+    .header h1 {
+        font-size: 8vw;
+        letter-spacing: 0.015em;
+        -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.6);
+        line-height: 0.9;
+    }
+
+    .header h1[data-text] {
+        font-size: 8vw;
+    }
+
+    .pre-loader-container .header {
+        height: 80px;
+        padding-bottom: 25px;
+        width: 100%;
+    }
+
+    .header-wrapper:after {
+        top: 80px;
+        height: 120px;
+    }
+
+    .pre-loader-btn {
+        bottom: 18%;
+    }
+
+    .pre-loader-btn .btn {
+        padding: 10px 20px;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    .pre-loader-header {
+        max-width: 92%;
+        padding-bottom: 70px;
+    }
+
+    .header h1 {
+        font-size: 9vw;
+        letter-spacing: 0.01em;
+        -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.6);
+        line-height: 0.9;
+    }
+
+    .header h1[data-text] {
+        font-size: 9vw;
+    }
+
+    .pre-loader-container .header {
+        height: 60px;
+        padding-bottom: 20px;
+        margin: 0 auto 10px;
+    }
+
+    .header-wrapper:after {
+        top: 60px;
+        height: 100px;
+        width: 105%;
+        left: -10px;
+    }
+
+    .pre-loader-btn {
+        bottom: 15%;
+    }
+
+    .pre-loader-btn .btn {
+        padding: 8px 16px;
+    }
+
+    .pre-loader-btn span {
+        font-size: 0.75rem;
+    }
+
+    .pre-loader-btn .down-arrow {
+        width: 20px;
+        height: 20px;
+        margin: 6px 0;
+    }
+}
+
+/* iPhone Pro Max specific adjustments */
+@media (min-width: 428px) and (max-width: 430px) and (min-height: 926px) {
+    .pre-loader-header {
+        max-width: 85%;
+    }
+
+    .header h1,
+    .header h1[data-text] {
+        font-size: 8.5vw;
+        line-height: 0.9;
+    }
+
+    .pre-loader-container .header {
+        margin: 0 auto 15px;
+    }
 }

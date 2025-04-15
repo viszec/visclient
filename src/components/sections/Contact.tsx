@@ -42,7 +42,9 @@ export default function Contact() {
                     {/* Title */}
                     <div className="flex flex-col">
                       <h1 className="text-[3rem] sm:text-[3.5rem] lg:text-[4rem] xl:text-[4.4rem] 2xl:text-[5rem] font-just-me-again m-0 font-light self-end">
-                        Let&apos;s Create<br />Together
+                        Let&apos;s Create
+                        <br />
+                        Together
                       </h1>
                     </div>
 
@@ -74,9 +76,10 @@ export default function Contact() {
                   {/* Row 2: Description */}
                   <div className="mt-2">
                     <div className="text-[#333]/75 text-sm md:text-base font-light font-baskervville lg:px-0 pr-4 2xl:pr-20 leading-relaxed">
-                      <span className="font-medium text-[#333]">This is me:</span> I&apos;m not just a coder 😉 I&apos;m a digital
-                      sorcerer who transforms pixels into mesmerizing experiences! ✨ I craft creations that make people
-                      exclaim, <span className="italic text-[#333]">&quot;Blimey, that&apos;s brilliant!&quot;</span> when code
+                      <span className="font-medium text-[#333]">This is me:</span> I&apos;m not just a coder 😉 I&apos;m
+                      a digital sorcerer who transforms pixels into mesmerizing experiences! ✨ I craft creations that
+                      make people exclaim,{' '}
+                      <span className="italic text-[#333]">&quot;Blimey, that&apos;s brilliant!&quot;</span> when code
                       meets creativity.{' '}
                       <span className="font-medium text-[#333]">
                         Pushing boundaries with AI is my passion, and I thrive on blending technology with
@@ -125,7 +128,6 @@ export default function Contact() {
               </motion.div>
 
               {/* Arrow SVG */}
-
             </div>
           </div>
         </motion.div>

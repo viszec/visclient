@@ -47,17 +47,37 @@ const fadeIn = {
 export default function About() {
   // Define special words in an object for individual styling
   const specialWords: { [key: string]: string } = {
-    'CRAFT': 'text-green-500 font-bold',
-    'Memorable': 'text-[#333]/70 italic font-serif font-medium',
+    CRAFT: 'text-green-500 font-bold',
+    Memorable: 'text-[#333]/70 italic font-serif font-medium',
     'FORWARD-THINKING': 'text-[#333]/50 font-light italic',
-    'FRONTIERS': 'text-black text-[1.8rem] xl:text-[2.8rem] 2xl:text-[4.2rem] font-just-me-again font-bold'
+    FRONTIERS: 'text-black text-[1.8rem] xl:text-[2.8rem] 2xl:text-[4.2rem] font-just-me-again font-bold',
   };
 
   // Common words
   const phraseWords = [
-    'BRINGING', 'DIGITAL', 'IDEAS', 'TO', 'LIFE', 'WITH', 'CARE', 'AND', 'CRAFT.',
-    'CREATING', 'Memorable', 'WEB', 'EXPERIENCES', 'FOR', 'FORWARD-THINKING',
-    'BRANDS.', 'LET\'S', 'EXPLORE', 'NEW', 'FRONTIERS', 'IN', 'DESIGN', 'TOGETHER.'
+    'BRINGING',
+    'DIGITAL',
+    'IDEAS',
+    'TO',
+    'LIFE',
+    'WITH',
+    'CARE',
+    'AND',
+    'CRAFT.',
+    'CREATING',
+    'Memorable',
+    'WEB',
+    'EXPERIENCES',
+    'FOR',
+    'FORWARD-THINKING',
+    'BRANDS.',
+    "LET'S",
+    'EXPLORE',
+    'NEW',
+    'FRONTIERS',
+    'IN',
+    'DESIGN',
+    'TOGETHER.',
   ];
 
   const phrase = phraseWords.join(' ');

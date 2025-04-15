@@ -1,5 +1,6 @@
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react';
+
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 
 interface CardRotateProps {
   children: React.ReactNode;
@@ -14,10 +15,7 @@ function CardRotate({ children, onSendToBack, sensitivity }: CardRotateProps) {
   const rotateY = useTransform(x, [-100, 100], [-60, 60]);
 
   function handleDragEnd(_: never, info: { offset: { x: number; y: number } }) {
-    if (
-      Math.abs(info.offset.x) > sensitivity ||
-      Math.abs(info.offset.y) > sensitivity
-    ) {
+    if (Math.abs(info.offset.x) > sensitivity || Math.abs(info.offset.y) > sensitivity) {
       onSendToBack();
     } else {
       x.set(0);
@@ -32,7 +30,7 @@ function CardRotate({ children, onSendToBack, sensitivity }: CardRotateProps) {
       drag
       dragConstraints={{ top: 0, right: 0, bottom: 0, left: 0 }}
       dragElastic={0.6}
-      whileTap={{ cursor: "grabbing" }}
+      whileTap={{ cursor: 'grabbing' }}
       onDragEnd={handleDragEnd}
     >
       {children}
@@ -55,11 +53,9 @@ export default function Stack({
   cardDimensions,
   cardsData = [],
   animationConfig = { stiffness: 260, damping: 20 },
-  sendToBackOnClick = false
+  sendToBackOnClick = false,
 }: StackProps) {
-  const [windowWidth, setWindowWidth] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : 0
-  );
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
 
   useEffect(() => {
     const handleResize = () => {
@@ -105,11 +101,11 @@ export default function Stack({
     cardsData.length
       ? cardsData
       : [
-        { id: 1, img: "/images/gif/belc.gif?q=80&w=500&auto=format" },
-        { id: 2, img: "/images/gif/nestease.gif?q=80&w=500&auto=format" },
-        { id: 3, img: "/images/gif/palettepicker.gif?q=80&w=500&auto=format" },
-        { id: 4, img: "/images/gif/opcc.gif?q=80&w=500&auto=format" }
-      ]
+          { id: 1, img: '/images/gif/belc.gif?q=80&w=500&auto=format' },
+          { id: 2, img: '/images/gif/nestease.gif?q=80&w=500&auto=format' },
+          { id: 3, img: '/images/gif/palettepicker.gif?q=80&w=500&auto=format' },
+          { id: 4, img: '/images/gif/opcc.gif?q=80&w=500&auto=format' },
+        ]
   );
 
   const sendToBack = (id: number) => {
@@ -148,11 +144,11 @@ export default function Stack({
               animate={{
                 rotateZ: (cards.length - index - 1) * 4 + randomRotate,
                 scale: 1 + index * 0.06 - cards.length * 0.06,
-                transformOrigin: "90% 90%",
+                transformOrigin: '90% 90%',
               }}
               initial={false}
               transition={{
-                type: "spring",
+                type: 'spring',
                 stiffness: animationConfig.stiffness,
                 damping: animationConfig.damping,
               }}

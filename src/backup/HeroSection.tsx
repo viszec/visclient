@@ -8,11 +8,11 @@ import { useScreenSize } from '@/hooks/useScreenSize';
 import { motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 
-import SliderText from '@/components/common/SliderText';
-import { TechSkills } from '@/components/common/TechSkills';
-import { WelcomeIntro } from '@/components/common/WelcomeIntro';
-import TiltedCard from '@/components/ui/TiltedCard';
-import { Particles } from '@/components/ui/particles';
+import SliderText from '../backup/SliderText';
+import { TechSkills } from '../backup/TechSkills';
+import { WelcomeIntro } from '../backup/WelcomeIntro';
+import TiltedCard from '../components/ui/TiltedCard';
+import { Particles } from '../components/ui/particles';
 
 // Animation variants
 const animations = {

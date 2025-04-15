@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -34,9 +34,9 @@ const CARDS_DATA: CardData[] = [
       'TypeScript Integration',
       'Responsive Interfaces',
       'Performance Optimization',
-      'Interactive Animations'
+      'Interactive Animations',
     ],
-    stacks: 'React, Next.js, TypeScript, TailwindCSS, ShadcnUI, GSAP, Cursor, MCP'
+    stacks: 'React, Next.js, TypeScript, TailwindCSS, ShadcnUI, GSAP, Cursor, MCP',
   },
   {
     id: 2,
@@ -44,14 +44,8 @@ const CARDS_DATA: CardData[] = [
     frontAlt: 'Backend & API Solutions',
     title: 'Backend & API Solutions',
     description: 'Robust APIs, CMS integration & server-side functionality',
-    services: [
-      'REST & GraphQL APIs',
-      'Database Design',
-      'Headless CMS',
-      'Serverless Functions',
-      'Auth Systems'
-    ],
-    stacks: 'Node.js, Express, MongoDB, Strapi, Contentful, Firebase, AWS Lambda'
+    services: ['REST & GraphQL APIs', 'Database Design', 'Headless CMS', 'Serverless Functions', 'Auth Systems'],
+    stacks: 'Node.js, Express, MongoDB, Strapi, Contentful, Firebase, AWS Lambda',
   },
   {
     id: 3,
@@ -59,14 +53,8 @@ const CARDS_DATA: CardData[] = [
     frontAlt: 'Digital Marketing',
     title: 'Digital Marketing',
     description: 'Data-driven strategies to boost online visibility & growth',
-    services: [
-      'SEO Optimization',
-      'Social Media Marketing',
-      'Google Ads',
-      'Content Creation',
-      'Analytics & Reporting'
-    ],
-    tools: 'Google Analytics, Google Ads, Pagespeed Insights, SEMrush'
+    services: ['SEO Optimization', 'Social Media Marketing', 'Google Ads', 'Content Creation', 'Analytics & Reporting'],
+    tools: 'Google Analytics, Google Ads, Pagespeed Insights, SEMrush',
   },
   {
     id: 4,
@@ -74,14 +62,8 @@ const CARDS_DATA: CardData[] = [
     frontAlt: 'UX/UI Design',
     title: 'UX/UI Design',
     description: 'Intuitive, user-centered interfaces with modern aesthetics',
-    services: [
-      'User Research',
-      'Wireframing',
-      'Interaction Design',
-      'Design Systems',
-      'AI-powered 10px precision'
-    ],
-    tools: 'Figma, Storybook, Relume'
+    services: ['User Research', 'Wireframing', 'Interaction Design', 'Design Systems', 'AI-powered 10px precision'],
+    tools: 'Figma, Storybook, Relume',
   },
 ];
 
@@ -125,11 +107,12 @@ export default function Services() {
       if (titleSection && titleElement && descriptionElement) {
         gsap.set([titleElement, descriptionElement], {
           opacity: 0,
-          y: 30
+          y: 30,
         });
 
         // Title element animation
-        gsap.fromTo(titleElement,
+        gsap.fromTo(
+          titleElement,
           { opacity: 0, y: 30 },
           {
             opacity: 1,
@@ -141,13 +124,14 @@ export default function Services() {
               start: 'top 80%',
               end: 'bottom 20%',
               toggleActions: 'play reverse play reverse',
-              markers: false
-            }
+              markers: false,
+            },
           }
         );
 
         // Description element animation with slight delay
-        gsap.fromTo(descriptionElement,
+        gsap.fromTo(
+          descriptionElement,
           { opacity: 0, y: 30 },
           {
             opacity: 1,
@@ -160,14 +144,15 @@ export default function Services() {
               start: 'top 80%',
               end: 'bottom 20%',
               toggleActions: 'play reverse play reverse',
-              markers: false
-            }
+              markers: false,
+            },
           }
         );
       }
 
       // Fade-in/Fade-out for cards section container
-      gsap.fromTo(cardsSection,
+      gsap.fromTo(
+        cardsSection,
         { opacity: 0, y: 30 },
         {
           opacity: 1,
@@ -180,8 +165,8 @@ export default function Services() {
             start: 'top 80%',
             end: 'bottom 20%',
             toggleActions: 'play reverse play reverse',
-            markers: false
-          }
+            markers: false,
+          },
         }
       );
 
@@ -205,7 +190,7 @@ export default function Services() {
             xPercent: -50,
             yPercent: -50,
             rotation: ROTATIONS[index] * 0.3, // Added small rotation angle, half strength of desktop version
-            scale: 0.85
+            scale: 0.85,
           });
 
           // Set initial flip state
@@ -223,18 +208,18 @@ export default function Services() {
               gsap.to(frontEl, {
                 rotationY: 180,
                 duration: 0.6,
-                ease: "power2.inOut"
+                ease: 'power2.inOut',
               });
               gsap.to(backEl, {
                 rotationY: 0,
                 duration: 0.6,
-                ease: "power2.inOut"
+                ease: 'power2.inOut',
               });
 
               // Scale up slightly when flipped
               gsap.to(card, {
                 scale: 0.9,
-                duration: 0.5
+                duration: 0.5,
               });
             },
             onLeaveBack: () => {
@@ -242,23 +227,22 @@ export default function Services() {
               gsap.to(frontEl, {
                 rotationY: 0,
                 duration: 0.6,
-                ease: "power2.inOut"
+                ease: 'power2.inOut',
               });
               gsap.to(backEl, {
                 rotationY: 180,
                 duration: 0.6,
-                ease: "power2.inOut"
+                ease: 'power2.inOut',
               });
 
               // Scale back down
               gsap.to(card, {
                 scale: 0.85,
-                duration: 0.5
+                duration: 0.5,
               });
-            }
+            },
           });
         });
-
       } else {
         // Desktop animation - keep original code
 
@@ -353,7 +337,8 @@ export default function Services() {
             SERVICES WHAT I OFFER
           </h1>
           <p className="text-center text-xs sm:text-sm 2xl:text-base text-[#333]/60 pt-8 xl:pt-14 2xl:pt-16 max-w-3xl mx-auto font-light px-6">
-            Elevating brands with AI-powered precision down to the last 10px. <br /> Fast delivery with zero compromise on quality guaranteed.
+            Elevating brands with AI-powered precision down to the last 10px. <br /> Fast delivery with zero compromise
+            on quality guaranteed.
           </p>
         </section>
         {/* Cards section - adjust height for mobile */}

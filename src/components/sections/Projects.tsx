@@ -190,7 +190,7 @@ export default function Projects() {
       const relativeScroll = current - sectionTop;
 
       /* animation trigger points:
-       * Scroll down:  
+       * Scroll down:
        * - trigger: when the Projects section is close to the top (relative scroll in -40% to 0%)
        * - reset: when the scroll is over 90% of the Projects section
        *
