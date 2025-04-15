@@ -88,7 +88,7 @@ export default function SidebarNav() {
                 />
               ))}
             </AnimatePresence>
-            <div className="flex flex-col pt-[400px] lg:pt-[100px] space-y-2">
+            <div className="flex flex-col pt-[220px] lg:pt-[100px] space-y-2">
               <div className="flex items-center gap-1">
                 <p className="text-sm lg:text-xl text-[#e6e5ef]/80 font-light tracking-tight">Let&apos;s connect</p>
                 <Image

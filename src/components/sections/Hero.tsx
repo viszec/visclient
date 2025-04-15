@@ -262,7 +262,7 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
         {/* Mobile layout - All left aligned */}
         <div className="flex md:hidden flex-1 flex-col justify-between">
           {/* Row 1: Creative, etc. */}
-          <div className="my-4 text-left space-y-3">
+          <div className="mb-4 text-left space-y-3">
             <div className="text-sm uppercase tracking-wider mb-1">FONTEND ENGINEER</div>
             <div className="text-3xl leading-none font-normal mb-2">
               Cre<span className="italic">a</span>t<span className="italic">i</span>ve
