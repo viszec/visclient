@@ -323,7 +323,7 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
         <div className="flex md:hidden flex-1 flex-col justify-between">
           {/* Row 1: Creative, etc. */}
           <div className="mb-4 text-left space-y-3">
-            <div className="text-sm uppercase tracking-wider mb-1 small-label">FONTEND ENGINEER</div>
+            <div className="text-sm uppercase tracking-wider mb-1 small-label">FRONTEND ENGINEER</div>
             <div className="text-3xl leading-none font-normal mb-2 text-creative">
               Cre<span className="italic">a</span>t<span className="italic">i</span>ve
             </div>
