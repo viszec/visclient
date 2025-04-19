@@ -4,7 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import { usePathname } from 'next/navigation';
 
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -18,6 +18,28 @@ const scrollAnimation = {
   scale: {
     show: { scale: 1, duration: 0.25, ease: 'power1.out' },
     hide: { scale: 0, duration: 0.25, ease: 'power1.out' },
+  },
+};
+
+// Fade-in animation variants
+const fadeInVariants = {
+  logoHidden: { opacity: 0, x: -20 },
+  logoVisible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+      ease: 'easeOut',
+    },
+  },
+  navHidden: { opacity: 0, x: 20 },
+  navVisible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+      ease: 'easeOut',
+    },
   },
 };
 
@@ -82,13 +104,24 @@ export default function Header() {
           bg-[#efeee9] md:bg-[#efeee9]/80`}
       >
         <div className="flex justify-between items-center py-2 lg:py-2">
-          <div className="flex items-center">
+          <motion.div
+            className="flex items-center"
+            initial="logoHidden"
+            animate="logoVisible"
+            variants={fadeInVariants}
+          >
             <Logo />
-          </div>
+          </motion.div>
 
-          <div className="flex items-center gap-4">
+          <motion.div
+            className="flex items-center gap-4"
+            initial="navHidden"
+            animate="navVisible"
+            variants={fadeInVariants}
+            transition={{ delay: 0.2 }}
+          >
             <Navigation />
-          </div>
+          </motion.div>
         </div>
       </header>
 
