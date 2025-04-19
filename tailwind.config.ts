@@ -8,6 +8,8 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,ts,jsx,tsx}',
+    './src/styles/**/*.{css}',
+    './src/app/fonts/**/*.{ttf,otf}',
   ],
   theme: {
     screens: {
@@ -141,6 +143,10 @@ const config: Config = {
         halenoir: ['Halenoir', 'sans-serif'],
         'roslindale': ['"Roslindale Display Condensed"', 'serif'],
         'baskervville': ['"Baskervville"', 'serif'],
+        'ppneuemontreal': ['"PP Neue Montreal"', 'sans-serif'],
+        'neuemontreal': ['"Neue Montreal"', 'sans-serif'],
+        'ppeditorialold': ['"PP Editorial Old"', 'serif'],
+        'ppeditorialoldultralight': ['"PP Editorial Old UltraLight"', 'serif'],
       },
       keyframes: {
         fill: {

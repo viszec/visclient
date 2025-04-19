@@ -264,3 +264,26 @@
         margin: 0 auto 15px;
     }
 }
+
+/* Special letter animation */
+.header h1[data-text="M"]::before,
+.header h1[data-text="A"]::before,
+.header h1[data-text="V"]::before,
+.header h1[data-text="I"]::before,
+.header h1[data-text="S"]::before,
+.header h1[data-text="."]::before {
+    animation-delay: 3.2s;
+    animation-duration: 3.2s;
+    transition: 1.5s;
+}
+
+/* Special highlight effect */
+.header h1[data-text="M"]::before,
+.header h1[data-text="A"]::before,
+.header h1[data-text="V"]::before,
+.header h1[data-text="I"]::before,
+.header h1[data-text="S"]::before,
+.header h1[data-text="."]::before {
+    color: #EFEEE9;
+    transition: 1.2s;
+}

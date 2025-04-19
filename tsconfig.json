@@ -18,10 +18,20 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@types/*": ["./src/types/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@data/*": ["./src/data/*"],
+      "@contexts/*": ["./src/contexts/*"],
+      "@assets/*": ["./src/assets/*"]
     },
     "target": "es5",
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "."
   },
   "include": [
     "next-env.d.ts",
@@ -32,6 +42,6 @@
     "src/components/Projects/components/project/ProjectNum.jsx",
     "src/components/Projects/Projects.jsx",
     "src/components/Projects/ProjectNum.jsx"
-  ],
+, "src/components/ui/image-trail.js"  ],
   "exclude": ["node_modules"]
 }

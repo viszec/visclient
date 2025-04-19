@@ -2,9 +2,9 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 
-import '../../styles/styles.css';
+import '../../styles/preloader.styles.css';
 import HeroSection from './Hero';
-
+import PreloaderCount from '@/components/common/PreloaderCount';
 type HeaderItem = {
   text?: string;
   type?: string;
@@ -119,6 +119,37 @@ export default function PreloaderAnimation({ onComplete }: PreloaderAnimationPro
     });
   };
 
+  const handlePreloaderCountComplete = () => {
+    setShowHeroSection(true);
+
+    const preLoader = document.querySelector('.pre-loader') as HTMLElement;
+    if (preLoader) preLoader.style.display = 'none';
+
+    if (onComplete) onComplete();
+
+    setTimeout(() => {
+      import('gsap').then((gsapModule) => {
+        const gsap = gsapModule.default;
+
+        gsap.to('.header-row', 0.8, {
+          top: 0,
+          ease: 'power4.inOut',
+          stagger: {
+            amount: 0.2,
+          },
+          delay: 0.2,
+        });
+
+        gsap.from('.navbar, .footer', 2, {
+          opacity: 0,
+          y: 20,
+          ease: 'power4.inOut',
+          delay: 0.5,
+        });
+      });
+    }, 100);
+  };
+
   // Create header content function
   const createHeader = (content: HeaderItem[]) => {
     return (
@@ -221,7 +252,9 @@ export default function PreloaderAnimation({ onComplete }: PreloaderAnimationPro
               <React.Fragment key={i}>{createHeader(content)}</React.Fragment>
             ))}
           </div>
-          <div className="pre-loader-btn">
+
+          <PreloaderCount onComplete={handlePreloaderCountComplete} />
+          {/* <div className="pre-loader-btn">
             <button
               className="btn"
               id="enter-btn"
@@ -261,7 +294,7 @@ export default function PreloaderAnimation({ onComplete }: PreloaderAnimationPro
               </svg>
               <span>TO ENABLE MY WORLD</span>
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
