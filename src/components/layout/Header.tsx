@@ -29,8 +29,8 @@ const fadeInVariants = {
     x: 0,
     transition: {
       duration: 0.5,
-      ease: "easeOut"
-    }
+      ease: 'easeOut',
+    },
   },
   navHidden: { opacity: 0, x: 20 },
   navVisible: {
@@ -38,9 +38,9 @@ const fadeInVariants = {
     x: 0,
     transition: {
       duration: 0.5,
-      ease: "easeOut"
-    }
-  }
+      ease: 'easeOut',
+    },
+  },
 };
 
 export default function Header() {

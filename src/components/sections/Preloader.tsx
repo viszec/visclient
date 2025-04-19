@@ -2,9 +2,11 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 
+import PreloaderCount from '@/components/common/PreloaderCount';
+
 import '../../styles/preloader.styles.css';
 import HeroSection from './Hero';
-import PreloaderCount from '@/components/common/PreloaderCount';
+
 type HeaderItem = {
   text?: string;
   type?: string;

@@ -171,7 +171,7 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
             onComplete: () => {
               // 所有动画完成后显示ImageTrail
               setShowImageTrail(true);
-            }
+            },
           }
         );
       };
@@ -188,7 +188,10 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
     >
       {/* ImageTrail Component - Now at top layer with absolute positioning */}
       {showImageTrail && (
-        <div className="absolute inset-x-0 top-0 z-10 overflow-hidden pb-12" style={{ height: 'calc(100% - 50px)' }}>
+        <div
+          className="absolute inset-x-0 top-0 z-10 overflow-hidden pb-12"
+          style={{ height: 'calc(100% - 50px)' }}
+        >
           <ImageTrail
             items={[
               'https://images.unsplash.com/photo-1745034059777-9af299ba7703?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -227,7 +230,9 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
                 </div>
               </div>
               <div className="col-span-2 pb-2">
-                <div className="text-xs sm:text-xxs lg:text-sm uppercase tracking-wider small-label">AVAILABLE FOR FREELANCE</div>
+                <div className="text-xs sm:text-xxs lg:text-sm uppercase tracking-wider small-label">
+                  AVAILABLE FOR FREELANCE
+                </div>
               </div>
               <div className="col-span-2 text-right">
                 <div className="text-4xl sm:text-2xl xl:text-[4rem] 2xl:text-[5rem] leading-none font-bold text-[#908f8c] mr-4 pb-4 text-solid">
@@ -280,9 +285,7 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
                   DEVELOPER
                 </div>
               </div>
-              <div className="col-span-2 flex justify-center pb-8 2xl:pl-20">
-                {/* <HeroStackImage /> */}
-              </div>
+              <div className="col-span-2 flex justify-center pb-8 2xl:pl-20">{/* <HeroStackImage /> */}</div>
               <div className="col-span-1">
                 <div className="italic text-3xl xl:text-[2.8rem] 2xl:text-[3.4rem] text-[#908f8c] pb-12 2xl:pb-24 pl-12 and-text">
                   and
