@@ -261,7 +261,7 @@
   }
 
   .section-container {
-    @apply relative mx-auto w-full max-w-2xl overflow-hidden px-4 sm:px-6 lg:px-12;
+    @apply relative mx-auto w-full max-w-2xl overflow-hidden px-0 sm:px-6;
   }
 
   .section-wrapper {

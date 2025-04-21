@@ -20,17 +20,19 @@ if (typeof window !== 'undefined') {
 }
 
 const scaleAnimation = {
-  initial: { scale: 0, x: '-50%', y: '-50%' },
+  initial: { scale: 0, x: '-50%', y: '-50%', opacity: 0 },
   enter: {
     scale: 1,
     x: '-50%',
     y: '-50%',
+    opacity: 1,
     transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] },
   },
   closed: {
     scale: 0,
     x: '-50%',
     y: '-50%',
+    opacity: 0,
     transition: { duration: 0.4, ease: [0.32, 0, 0.67, 0] },
   },
 };
@@ -130,6 +132,11 @@ export default function Projects() {
   };
 
   const manageModal = (active: boolean, index: number, x: number, y: number) => {
+    // If there is an expanded project, do not show the image preview
+    if (activeExpandedIndex !== null) {
+      return;
+    }
+
     moveItems(x, y);
     setModal({ active, index });
   };
@@ -226,11 +233,13 @@ export default function Projects() {
     return () => unsubscribe();
   }, [scrollY, isMobile]);
 
+  const [activeExpandedIndex, setActiveExpandedIndex] = useState<number | null>(null);
+
   return (
-    <section
+    <div
       id="work"
       ref={ref}
-      className="section-container !lg:px-0 py-12 lg:pt-28 lg:pb-48 bg-[#efeee9]"
+      className="px-4 lg:px-12 py-12 lg:pt-28 lg:pb-48 bg-[#efeee9]"
     >
       <div className="h-[9vh] sm:h-[2vh]"></div>
       <motion.div
@@ -246,10 +255,10 @@ export default function Projects() {
           animate={isAnimating ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="grid grid-cols-12 pl-0 pr-4 lg:px-4 pb-4 border-b border-[#333] w-full">
+          <div className="grid grid-cols-12 pl-3 lg:pl-0 pr-4 lg:px-4 pb-4 border-b border-[#333] w-full">
             {[
-              { text: 'PROJECT', span: 'col-start-1 col-end-5' },
-              { text: 'CATEGORY', span: 'col-start-6 lg:col-start-5 col-end-9' },
+              { text: 'PROJECT', span: 'col-start-1 col-end-5 pl-0 lg:pl-4' },
+              { text: 'CATEGORY', span: 'col-start-6 lg:col-start-5 col-end-9 pl-0 lg:pl-2' },
               {
                 text: 'CLIENT',
                 span: 'col-start-9 col-end-11',
@@ -260,8 +269,8 @@ export default function Projects() {
                 span: 'col-start-10 lg:col-start-11 col-end-12 lg:col-end-12',
               },
               {
-                text: 'WEBSITE',
-                span: 'col-start-12 col-end-13',
+                text: 'LIVE',
+                span: 'col-start-12 col-end-13 mr-0 sm:mr-0 lg:mr-4 ',
                 align: 'text-right',
               },
             ].map(({ text, span, align = '', className = '' }) => (
@@ -288,6 +297,8 @@ export default function Projects() {
                     index={index}
                     {...project}
                     manageModal={manageModal}
+                    activeExpandedIndex={activeExpandedIndex}
+                    setActiveExpandedIndex={setActiveExpandedIndex}
                   />
                 </motion.div>
               ))}
@@ -315,32 +326,34 @@ export default function Projects() {
             variants={scaleAnimation}
             initial="initial"
             animate={active ? 'enter' : 'closed'}
-            className="h-[200px] w-[220px] lg:h-[350px] lg:w-[500px] fixed top-1/2 left-1/2 bg-white pointer-events-none overflow-hidden z-[3]"
+            className="aspect-[5/3] w-[250px] lg:w-[500px] fixed top-1/2 left-1/2 pointer-events-none overflow-hidden z-[3] rounded-xl"
+            style={{ transform: 'translate(-50%, -50%)' }}
           >
             <div
               style={{ top: `${index * -100}%` }}
               className="h-full w-full relative transition-[top] duration-500 ease-custom-bezier"
             >
-              {projects.map((project, index) => {
-                const { src, color } = project;
-                return (
-                  <div
-                    className="h-full w-full flex items-center justify-center"
-                    style={{ backgroundColor: color }}
-                    key={`modal_${index}`}
-                  >
-                    <Image
-                      src={`/images/${src}`}
-                      width={0}
-                      height={0}
-                      alt="image"
-                      className="w-[180px] lg:w-[430px] h-auto"
-                      loading="lazy"
-                      sizes="(max-width: 768px) 280px, 430px"
-                    />
-                  </div>
-                );
-              })}
+              {projects.map((project, i) => (
+                <div
+                  key={`modal_${i}`}
+                  className="w-full aspect-[5/3] relative"
+                >
+                  <Image
+                    src={`/images/${project.src}`}
+                    fill
+                    alt={`${project.title} preview`}
+                    className="object-cover"
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    sizes="(max-width: 768px) 250px, 500px"
+                    priority={i === 0}
+                  />
+                  {/* {project.images && project.images[0] && project.images[0].caption && (
+                    <span className="absolute top-2 left-2 inline-block px-2 py-1 text-xxs lg:text-xs font-light text-[#333] bg-[#EFEEE9] border border-[#EFEEE9] rounded-full z-10">
+                      {project.images[0].caption}
+                    </span>
+                  )} */}
+                </div>
+              ))}
             </div>
           </motion.div>
 
@@ -367,6 +380,6 @@ export default function Projects() {
           */}
         </>
       </motion.div>
-    </section>
+    </div>
   );
 }
