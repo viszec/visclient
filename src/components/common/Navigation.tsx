@@ -10,7 +10,7 @@ export const Navigation = () => (
   <nav className="hidden md:flex items-center">
     {ROUTES.map((item) => (
       <Magnetic key={item.href}>
-        <div className="flex flex-col relative z-[1] p-4 cursor-pointer group">
+        <div className="flex flex-col relative z-[1] pl-4 py-4 cursor-pointer group">
           <Link
             href={item.href}
             className="text-base no-underline hover:text-[#333]/60 text-[#333] font-normal font-halenoir"

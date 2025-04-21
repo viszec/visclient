@@ -28,7 +28,7 @@ const SOCIAL_LINKS: SocialLink[] = [
 
 export default function Footer() {
   return (
-    <section className="section w-full h-full bg-[#efeee9] ">
+    <section className="w-full h-full bg-[#efeee9] ">
       <div className="flex flex-col px-6 2xl:px-12">
         <motion.div className="flex flex-col border-t border-gray-600 lg:flex-row justify-center lg:justify-between items-center gap-2 lg:gap-4 pt-2 lg:pt-6 sm:pt-4 pb-4 lg:pb-8">
           <div className="order-2 lg:order-1">
