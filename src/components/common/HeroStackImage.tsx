@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import Image from 'next/image';
+
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 
 interface CardRotateProps {
@@ -157,10 +159,13 @@ export default function Stack({
                 height: responsiveDimensions.height,
               }}
             >
-              <img
+              <Image
                 src={card.img}
                 alt={`card-${card.id}`}
                 className="w-full h-full object-cover pointer-events-none"
+                width={100}
+                height={100}
+                loading="lazy"
               />
             </motion.div>
           </CardRotate>

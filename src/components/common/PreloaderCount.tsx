@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+import Image from 'next/image';
+
 import '@/app/globals.css';
 import { gsap } from 'gsap';
 
@@ -178,26 +180,35 @@ export default function PreloaderCount({ onComplete }: { onComplete?: () => void
       {showRevealers && (
         <>
           <div className="revealer revealer-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <img
+            <Image
               src="/images/revealer-1.svg"
               alt="Revealer 1"
               className="w-full h-full object-cover"
+              width={100}
+              height={100}
+              loading="lazy"
             />
           </div>
 
           <div className="revealer revealer-2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <img
+            <Image
               src="/images/revealer-2.svg"
               alt="Revealer 2"
               className="w-full h-full object-cover"
+              width={100}
+              height={100}
+              loading="lazy"
             />
           </div>
 
           <div className="revealer revealer-3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <img
+            <Image
               src="/images/revealer-3.svg"
               alt="Revealer 3"
               className="w-full h-full object-cover"
+              width={100}
+              height={100}
+              loading="lazy"
             />
           </div>
         </>

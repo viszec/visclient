@@ -19,8 +19,6 @@ import {
   // for Tailwind
   GanttChart,
   LucideIcon,
-  // for Notion
-  LucideProps,
   // for Nextjs
   NotebookPen,
   // for Efficient Prompting

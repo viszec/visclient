@@ -80,7 +80,7 @@ export default function About() {
     'TOGETHER.',
   ];
 
-  const phrase = phraseWords.join(' ');
+  //const phrase = phraseWords.join(' ');
   const [isAnimating, setIsAnimating] = useState(false);
   const { scrollY } = useScroll();
   const { ref, entry } = useInView({
