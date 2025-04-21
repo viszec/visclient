@@ -18,7 +18,7 @@ export interface ProjectType {
 export const projects: ProjectType[] = [
   {
     title: 'HiveStream',
-    coverImage: './hiveStream/Dashboard.png',
+    coverImage: 'hiveStream/Dashboard.png',
     category: 'Front-end Development',
     client: 'HiveStream',
     year: '2025',
@@ -40,7 +40,7 @@ export const projects: ProjectType[] = [
   },
   {
     title: 'Acorn Ledger',
-    coverImage: './acornLedger/Dashboard.png',
+    coverImage: 'acornLedger/Dashboard.png',
     category: 'Full-stack Development',
     client: 'Freelance',
     year: '2025',
@@ -76,7 +76,7 @@ export const projects: ProjectType[] = [
   },
   {
     title: 'CognixAI',
-    coverImage: './cognix/Landing.png',
+    coverImage: 'cognix/Landing.png',
     category: 'Front-end Development',
     client: 'CognixAI',
     year: '2024',
