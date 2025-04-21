@@ -339,7 +339,7 @@ export default function Projects() {
                   className="w-full aspect-[5/3] relative"
                 >
                   <Image
-                    src={`/images/${project.src}`}
+                    src={`/images/${project.coverImage}`}
                     fill
                     alt={`${project.title} preview`}
                     className="object-cover"

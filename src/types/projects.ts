@@ -1,6 +1,6 @@
 export interface ProjectType {
   title: string;
-  src: string;
+  coverImage: string;
   category: string;
   client: string;
   year: string;
@@ -18,7 +18,7 @@ export interface ProjectType {
 export const projects: ProjectType[] = [
   {
     title: 'HiveStream',
-    src: './hiveStream/Dashboard.png',
+    coverImage: './hiveStream/Dashboard.png',
     category: 'Front-end Development',
     client: 'HiveStream',
     year: '2025',
@@ -40,7 +40,7 @@ export const projects: ProjectType[] = [
   },
   {
     title: 'Acorn Ledger',
-    src: './acornLedger/Dashboard.png',
+    coverImage: './acornLedger/Dashboard.png',
     category: 'Full-stack Development',
     client: 'Freelance',
     year: '2025',
@@ -76,7 +76,7 @@ export const projects: ProjectType[] = [
   },
   {
     title: 'CognixAI',
-    src: './cognix/Landing.png',
+    coverImage: './cognix/Landing.png',
     category: 'Front-end Development',
     client: 'CognixAI',
     year: '2024',
@@ -97,7 +97,7 @@ export const projects: ProjectType[] = [
   },
   {
     title: 'NestEase',
-    src: 'nestease.webp',
+    coverImage: 'nestease.webp',
     category: 'Full-stack Development',
     client: 'Freelance',
     year: '2024',
@@ -113,7 +113,7 @@ export const projects: ProjectType[] = [
   },
   {
     title: 'Palette Picker',
-    src: 'pp.webp',
+    coverImage: 'pp.webp',
     category: 'Web Development',
     client: 'Freelance',
     year: '2024',
@@ -129,7 +129,7 @@ export const projects: ProjectType[] = [
   },
   {
     title: 'Brighton ELC',
-    src: 'brightonelc.webp',
+    coverImage: 'brightonelc.webp',
     category: 'Web Design & Development',
     client: 'Brighton ELC',
     year: '2022',
@@ -146,7 +146,7 @@ export const projects: ProjectType[] = [
   },
   {
     title: 'Oak Park CC',
-    src: 'opcc.webp',
+    coverImage: 'opcc.webp',
     category: 'Web Design & Development',
     client: 'OPCC',
     year: '2021',
@@ -163,7 +163,7 @@ export const projects: ProjectType[] = [
   },
   {
     title: 'Logo Design',
-    src: 'logodesign.webp',
+    coverImage: 'logodesign.webp',
     category: 'Logo Design',
     client: 'Freelance',
     year: '2021',
@@ -171,7 +171,7 @@ export const projects: ProjectType[] = [
   },
   {
     title: 'Astra Early Learning',
-    src: 'astra.webp',
+    coverImage: 'astra.webp',
     category: 'Web Design & Development',
     client: 'Astra Early Learning',
     year: '2020',
