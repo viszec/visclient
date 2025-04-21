@@ -4,6 +4,8 @@
 
 [build.environment]
   YARN_ENABLE_IMMUTABLE_INSTALLS = "false"
+  NODE_VERSION = "20.18.0"
+  NEXT_PUBLIC_SITE_URL = "https://visclient.netlify.app"
 
 # This ensures we handle SPA routing in our Next.js app
 [[redirects]]
