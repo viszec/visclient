@@ -16,14 +16,33 @@ import { gsap } from 'gsap';
 export default function PreloaderCount({ onComplete }: { onComplete?: () => void }) {
   const loaderRef = useRef<HTMLDivElement>(null);
   const [showRevealers, setShowRevealers] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Add media query detection
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Check on initial render
+    checkMobile();
+
+    // Add event listener for resize
+    window.addEventListener('resize', checkMobile);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   useEffect(() => {
     if (!loaderRef.current) return;
 
     const windowWidth = window.innerWidth;
-    const wrapperWidth = 170;
+    const wrapperWidth = isMobile ? 70 : 170;
     const finalPosition = windowWidth - wrapperWidth;
-    const stepDistance = finalPosition / 5.5;
+    const stepDistance = isMobile ? finalPosition / 20 : finalPosition / 5.7;
 
     // Create timeline for count animation
     const tl = gsap.timeline();
@@ -102,6 +121,8 @@ export default function PreloaderCount({ onComplete }: { onComplete?: () => void
     });
   }, [showRevealers, onComplete]);
 
+  const digitSize = isMobile ? 'text-[280px]' : 'text-[320px]';
+
   return (
     <div
       className="loader fixed top-0 left-0 w-full h-full bg-transparent text-[#E6E5DF] flex items-end overflow-hidden"
@@ -109,33 +130,45 @@ export default function PreloaderCount({ onComplete }: { onComplete?: () => void
     >
       <div className="count-wrapper relative w-[160px] h-[340px] [clip-path:polygon(0_0,100%_0,100%_100%,0%_100%)] will-change-transform">
         <div className="count relative w-[1440px] h-[360px] flex -translate-x-[1440px] will-change-transform">
-          <div className="digit relative w-[180px] h-[360px] p-4">
-            <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[320px] font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]">
+          <div className="digit relative w-[180px] h-[360px]">
+            <h1
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${digitSize} font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]`}
+            >
               9
             </h1>
           </div>
-          <div className="digit relative w-[180px] h-[360px] p-4">
-            <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[320px] font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]">
+          <div className="digit relative w-[180px] h-[360px]">
+            <h1
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${digitSize} font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]`}
+            >
               8
             </h1>
           </div>
-          <div className="digit relative w-[180px] h-[360px] p-4">
-            <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[320px] font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]">
+          <div className="digit relative w-[180px] h-[360px]">
+            <h1
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${digitSize} font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]`}
+            >
               6
             </h1>
           </div>
-          <div className="digit relative w-[180px] h-[360px] p-4">
-            <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[320px] font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]">
+          <div className="digit relative w-[180px] h-[360px]">
+            <h1
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${digitSize} font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]`}
+            >
               4
             </h1>
           </div>
-          <div className="digit relative w-[180px] h-[360px] p-4">
-            <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[320px] font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]">
+          <div className="digit relative w-[180px] h-[360px]">
+            <h1
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${digitSize} font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]`}
+            >
               2
             </h1>
           </div>
-          <div className="digit relative w-[180px] h-[360px] p-4">
-            <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[320px] font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]">
+          <div className="digit relative w-[180px] h-[360px]">
+            <h1
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${digitSize} font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]`}
+            >
               0
             </h1>
           </div>
@@ -144,33 +177,45 @@ export default function PreloaderCount({ onComplete }: { onComplete?: () => void
 
       <div className="count-wrapper relative w-[160px] h-[340px] [clip-path:polygon(0_0,100%_0,100%_100%,0%_100%)] will-change-transform">
         <div className="count relative w-[1440px] h-[360px] flex -translate-x-[1440px] will-change-transform">
-          <div className="digit relative w-[180px] h-[360px] p-4">
-            <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[320px] font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]">
+          <div className="digit relative w-[180px] h-[360px]">
+            <h1
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${digitSize} font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]`}
+            >
               9
             </h1>
           </div>
-          <div className="digit relative w-[180px] h-[360px] p-4">
-            <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[320px] font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]">
+          <div className="digit relative w-[180px] h-[360px]">
+            <h1
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${digitSize} font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]`}
+            >
               5
             </h1>
           </div>
-          <div className="digit relative w-[180px] h-[360px] p-4">
-            <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[320px] font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]">
+          <div className="digit relative w-[180px] h-[360px]">
+            <h1
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${digitSize} font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]`}
+            >
               8
             </h1>
           </div>
-          <div className="digit relative w-[180px] h-[360px] p-4">
-            <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[320px] font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]">
+          <div className="digit relative w-[180px] h-[360px]">
+            <h1
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${digitSize} font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]`}
+            >
               7
             </h1>
           </div>
-          <div className="digit relative w-[180px] h-[360px] p-4">
-            <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[320px] font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]">
+          <div className="digit relative w-[180px] h-[360px]">
+            <h1
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${digitSize} font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]`}
+            >
               6
             </h1>
           </div>
-          <div className="digit relative w-[180px] h-[360px] p-4">
-            <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[320px] font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]">
+          <div className="digit relative w-[180px] h-[360px]">
+            <h1
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${digitSize} font-ppeditorialoldultralight font-thin leading-none text-[#e6e5df16]`}
+            >
               0
             </h1>
           </div>

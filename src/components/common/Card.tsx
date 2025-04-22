@@ -53,7 +53,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
                     width={140}
                     height={20}
                     alt="Extrovert decoration"
-                    className="opacity-30"
+                    className="opacity-30 w-auto"
                   />
                 </div>
 
@@ -65,13 +65,13 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
                 </div>
 
                 {/* Bottom SVG */}
-                <div className="w-full flex justify-center">
+                <div className="relative w-full flex justify-center">
                   <Image
                     src="/images/double-diamond.svg"
                     width={140}
                     height={60}
                     alt="Double diamond decoration"
-                    className="opacity-30"
+                    className="opacity-30 w-auto"
                   />
                 </div>
               </div>
@@ -86,8 +86,9 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
                 <Image
                   src="/images/back-card.svg"
                   alt="Card background"
-                  layout="fill"
-                  objectFit="cover"
+                  width={300}
+                  height={400}
+                  className="w-full h-full object-cover"
                 />
               </div>
 

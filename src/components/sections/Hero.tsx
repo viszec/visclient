@@ -26,18 +26,18 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
 
         // Setup the animation for the hero section
 
-        // 1. Navbar items fade in
-        gsap.fromTo(
-          '.nav-item',
-          { opacity: 0, y: -10 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.1,
-            ease: 'power2.out',
-          }
-        );
+        // // 1. Navbar items fade in
+        // gsap.fromTo(
+        //   '.nav-item',
+        //   { opacity: 0, y: -10 },
+        //   {
+        //     opacity: 1,
+        //     y: 0,
+        //     duration: 0.5,
+        //     stagger: 0.1,
+        //     ease: 'power2.out',
+        //   }
+        // );
 
         // 2. Text labels fade in - Top labels: FRONTEND ENGINEER, AVAILABLE FOR FREELANCE, GET IN TOUCH
         gsap.fromTo(
@@ -169,7 +169,7 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
             delay: 2.8,
             ease: 'power1.out',
             onComplete: () => {
-              // 所有动画完成后显示ImageTrail
+              // All animations completed, show ImageTrail
               setShowImageTrail(true);
             },
           }
@@ -320,7 +320,7 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
         </div>
 
         {/* Mobile layout - All left aligned */}
-        <div className="flex md:hidden flex-1 flex-col justify-between">
+        <div className="flex md:hidden flex-1 flex-col space-y-4">
           {/* Row 1: Creative, etc. */}
           <div className="mb-4 text-left space-y-3">
             <div className="text-sm uppercase tracking-wider mb-1 small-label">FRONTEND ENGINEER</div>
@@ -336,25 +336,25 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
           </div>
 
           {/* Row 2: hi, I'm MAVIS */}
-          <div className="my-4 text-left">
+          <div className="my-4 text-left pt-4">
             <div className="text-left">
               <span className="italic font-normal text-2xl text-[#908f8c] mr-2 text-center pl-2 hello-text">hi,</span>
-              <span className="text-3xl text-center pl-2 hello-text">I&apos;m MAVIS MA</span>
+              <span className="text-5xl text-center pl-2 hello-text font-just-me-again">I&apos;m MAViS MA</span>
             </div>
             <div className="w-full h-px bg-[#33333387] divider-line mt-3"></div>
           </div>
 
           {/* Row 3: Frontend Engineer */}
           <div className="my-4 text-left">
-            <div className="text-4xl font-normal font-halenoir leading-none px-2 engineer-title">
+            <div className="text-4xl font-normal font-baskervville leading-none px-2 engineer-title pt-8">
               Frontend <span className="text-4xl">Engineer</span>
             </div>
             <div className="w-full h-px bg-[#33333387] divider-line mt-3"></div>
           </div>
 
           {/* Row 4: web developer and designer */}
-          <div className="my-4 text-left">
-            <div className="text-3xl font-light font-halenoir leading-tight pl-2 web-developer">
+          <div className="mt-4 text-left">
+            <div className="text-3xl font-light font-halenoir leading-tight pl-8 web-developer pt-6">
               WEB
               <br />
               DEVELOPER
@@ -368,13 +368,13 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
           </div>
 
           {/* Row 5: Skills */}
-          <div className="mt-0 mb-12 text-left text-[#333]/80">
+          <div className="mt-0 mb-8 text-left text-[#333]/80">
             <div className="flex flex-wrap font-halenoir skills-text">
-              <span className="text-xs border border-[#333]/70 py-2 px-3 rounded-full">Proficient</span>
-              <span className="text-xs border border-[#333]/70 py-2 px-3 rounded-full">in</span>
-              <span className="text-xs border border-[#333]/70 py-2 px-3 rounded-full">
-                React / Next.js / TypeScript / JavaScript / Tailwind CSS / Node.js / GSAP / MCP / Figma / Cursor
-              </span>
+              <div className="inline-flex items-center relative">
+                <span className="relative px-6 py-2 text-xs font-semibold bg-[#E6E5DF] rounded-xl">
+                  Proficient in React / Next.js / Tailwind CSS / Node.js / GSAP / Figma / Cursor
+                </span>
+              </div>
             </div>
           </div>
         </div>

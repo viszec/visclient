@@ -131,7 +131,7 @@ export default function Projects() {
     yMoveCursorLabel.current?.(y);
   };
 
-  const manageModal = (active: boolean, index: number, x: number, y: number) => {
+  const manageModalAction = (active: boolean, index: number, x: number, y: number) => {
     // If there is an expanded project, do not show the image preview
     if (activeExpandedIndex !== null) {
       return;
@@ -234,6 +234,9 @@ export default function Projects() {
   }, [scrollY, isMobile]);
 
   const [activeExpandedIndex, setActiveExpandedIndex] = useState<number | null>(null);
+  const setActiveExpandedIndexAction = (index: number | null) => {
+    setActiveExpandedIndex(index);
+  };
 
   return (
     <div
@@ -296,9 +299,9 @@ export default function Projects() {
                   <Project
                     index={index}
                     {...project}
-                    manageModal={manageModal}
+                    manageModalAction={manageModalAction}
                     activeExpandedIndex={activeExpandedIndex}
-                    setActiveExpandedIndex={setActiveExpandedIndex}
+                    setActiveExpandedIndexAction={setActiveExpandedIndexAction}
                   />
                 </motion.div>
               ))}
@@ -314,7 +317,7 @@ export default function Projects() {
         >
           <p
             className="relative z-10 group-hover:text-[#E6E5DF] dark:group-hover:text-[#E6E5DF]
-                      text-base sm:text-sm lg:text-base font-normal tracking-wider"
+                      text-sm sm:!text-xs lg:!text-base font-normal tracking-wider"
           >
             {showAll ? 'Show Less' : 'More Work'}
           </p>
