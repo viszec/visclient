@@ -12,6 +12,10 @@ export interface ProjectType {
     src?: string;
     caption?: string;
   }[];
+  mobileImages?: {
+    src?: string;
+    caption?: string;
+  }[];
   solution?: string[];
 }
 
@@ -36,6 +40,11 @@ export const projects: ProjectType[] = [
       { src: '/images/hiveStream/Dashboard.webp', caption: 'App Analytics Dashboard' },
       { src: '/images/hiveStream/Sections.webp', caption: 'App Features' },
       { src: '/images/hiveStream/Landing.webp', caption: 'Landing Page' },
+    ],
+    mobileImages: [
+      { src: '/images/hiveStream/Dashboard_mobile.webp', caption: 'App Analytics Dashboard' },
+      { src: '/images/hiveStream/Sections_mobile.webp', caption: 'App Features' },
+      { src: '/images/hiveStream/Landing_mobile.webp', caption: 'Landing Page' },
     ],
   },
   {
@@ -73,6 +82,11 @@ export const projects: ProjectType[] = [
       { src: '/images/acornLedger/Landing.webp', caption: 'Landing Page' },
       { src: '/images/acornLedger/Sections.webp', caption: 'App Features' },
     ],
+    mobileImages: [
+      { src: '/images/acornLedger/Dashboard_mobile.webp', caption: 'Financial Dashboard' },
+      { src: '/images/acornLedger/Landing_mobile.webp', caption: 'Landing Page' },
+      { src: '/images/acornLedger/Sections_mobile.webp', caption: 'App Features' },
+    ],
   },
   {
     title: 'CognixAI',
@@ -94,10 +108,15 @@ export const projects: ProjectType[] = [
       { src: '/images/cognix/Landing.webp', caption: 'Landing Page' },
       { src: '/images/cognix/Docs.webp', caption: 'API Documentation' },
     ],
+    mobileImages: [
+      { src: '/images/cognix/Landing_mobile.webp', caption: 'Landing Page' },
+      { src: '/images/cognix/Docs_mobile.webp', caption: 'API Documentation' },
+      { src: '/images/cognix/Landing_all_mobile.webp', caption: 'Landing Page' },
+    ],
   },
   {
     title: 'NestEase',
-    coverImage: 'nestease.webp',
+    coverImage: 'nestease/Landing.webp',
     category: 'Full-stack Development',
     client: 'Freelance',
     year: '2024',
@@ -110,6 +129,16 @@ export const projects: ProjectType[] = [
       'Created an intuitive property management dashboard for hosts to track bookings and analytics.',
     ],
     stacks: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MongoDB'],
+    images: [
+      { src: '/images/nestease/Landing.webp', caption: 'Landing Page' },
+      { src: '/images/nestease/Leasepage.webp', caption: 'Lease Page' },
+      { src: '/images/nestease/Booking.webp', caption: 'Booking Page' },
+    ],
+    mobileImages: [
+      { src: '/images/nestease/Landing_mobile.webp', caption: 'Landing Page' },
+      { src: '/images/nestease/Leasepage_mobile.webp', caption: 'Lease Page' },
+      { src: '/images/nestease/Booking_mobile.webp', caption: 'Booking Page' },
+    ],
   },
   {
     title: 'Palette Picker',
