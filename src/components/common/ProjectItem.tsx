@@ -1,12 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { MoveDownRight, MoveUpRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, MoveDownRight, MoveUpRight } from 'lucide-react';
 
 import Magnetic from '../common/Magnetic';
 
@@ -25,10 +25,120 @@ interface ProjectProps {
     caption?: string;
   }[];
   solution?: string[];
-  manageModal: (show: boolean, index: number, x: number, y: number, fromExpand?: boolean) => void;
+  manageModalAction: (show: boolean, index: number, x: number, y: number, fromExpand?: boolean) => void;
   activeExpandedIndex: number | null;
-  setActiveExpandedIndex: (index: number | null) => void;
+  setActiveExpandedIndexAction: (index: number | null) => void;
 }
+
+const MobileImageCarousel = ({ images, title }: { images: { src?: string; caption?: string }[]; title: string }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showControls, setShowControls] = useState(false);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const handlePrev = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const handleNext = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    setShowControls(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current - touchEndX.current > 50) {
+      handleNext();
+    } else if (touchEndX.current - touchStartX.current > 50) {
+      handlePrev();
+    }
+
+    // Delay hiding control buttons
+    setTimeout(() => setShowControls(false), 2000);
+  };
+
+  return (
+    <div className="relative w-full">
+      {/* Left Arrow */}
+      {(showControls || currentIndex > 0) && (
+        <button
+          className={`absolute left-[-30px] top-1/2 -translate-y-1/2 w-7 h-7 flex items-center 
+                    justify-center bg-[#333]/70 hover:bg-[#333]/90 text-[#EFEEE9] rounded-full z-10
+                    ${showControls ? 'opacity-100' : 'opacity-60'} transition-opacity duration-300`}
+          onClick={handlePrev}
+          aria-label="Previous image"
+        >
+          <ChevronLeft size={17} />
+        </button>
+      )}
+
+      {/* Carousel Container */}
+      <div
+        className="relative w-full rounded-xl overflow-hidden"
+        style={{ paddingTop: 'calc(60% * 5/3)' }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {images.map((image, idx) => (
+          <div
+            key={idx}
+            className={`absolute inset-0 transition-opacity duration-300 ${
+              idx === currentIndex ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            }`}
+          >
+            {image.src && (
+              <>
+                <Image
+                  src={image.src}
+                  alt={`${title} - ${image.caption || ''}`}
+                  fill
+                  className="object-cover object-top"
+                  sizes="100vw"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-[#EFEEE9] bg-opacity-0 hover:bg-opacity-10 transition-all duration-300"></div>
+              </>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Right Arrow */}
+      {(showControls || currentIndex < images.length - 1) && (
+        <button
+          className={`absolute right-[-30px] top-1/2 -translate-y-1/2 w-7 h-7 flex items-center 
+                    justify-center bg-[#333]/70 hover:bg-[#333]/90 text-[#EFEEE9] rounded-full z-10
+                    ${showControls ? 'opacity-100' : 'opacity-80'} transition-opacity duration-300`}
+          onClick={handleNext}
+          aria-label="Next image"
+        >
+          <ChevronRight size={17} />
+        </button>
+      )}
+
+      {/* Indicator */}
+      <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1 z-10">
+        {images.map((_, idx) => (
+          <div
+            key={idx}
+            className={`w-1.5 h-1.5 rounded-full 
+                      ${idx === currentIndex ? 'bg-[#EFEEE9]' : 'bg-[#EFEEE9]/50'}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default function ProjectItem({
   index,
@@ -42,17 +152,17 @@ export default function ProjectItem({
   stacks,
   images,
   solution,
-  manageModal,
+  manageModalAction,
   activeExpandedIndex,
-  setActiveExpandedIndex,
+  setActiveExpandedIndexAction,
 }: ProjectProps) {
   const isExpanded = activeExpandedIndex === index;
 
   const handleToggleExpand = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setActiveExpandedIndex(isExpanded ? null : index);
+    setActiveExpandedIndexAction(isExpanded ? null : index);
     if (!isExpanded) {
-      manageModal(false, index, 0, 0, true);
+      manageModalAction(false, index, 0, 0, true);
     }
   };
 
@@ -87,18 +197,18 @@ export default function ProjectItem({
               ${isExpanded ? 'bg-[#EFEEE9] rotate-180' : 'bg-[#333] group-hover:bg-[#EFEEE9]'}`}
             onClick={(e) => {
               e.stopPropagation();
-              setActiveExpandedIndex(isExpanded ? null : index);
+              setActiveExpandedIndexAction(isExpanded ? null : index);
               if (!isExpanded) {
-                manageModal(false, index, 0, 0, true);
+                manageModalAction(false, index, 0, 0, true);
               }
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 e.stopPropagation();
-                setActiveExpandedIndex(isExpanded ? null : index);
+                setActiveExpandedIndexAction(isExpanded ? null : index);
                 if (!isExpanded) {
-                  manageModal(false, index, 0, 0, true);
+                  manageModalAction(false, index, 0, 0, true);
                 }
               }
             }}
@@ -150,8 +260,8 @@ export default function ProjectItem({
           {!isExpanded && (
             <div
               className="absolute top-0 left-0 w-[75%] h-[80%] z-10 border-1 border-[#EFEEE9]"
-              onMouseEnter={(e) => manageModal(true, index, e.clientX, e.clientY)}
-              onMouseLeave={(e) => manageModal(false, index, e.clientX, e.clientY)}
+              onMouseEnter={(e) => manageModalAction(true, index, e.clientX, e.clientY)}
+              onMouseLeave={(e) => manageModalAction(false, index, e.clientX, e.clientY)}
               aria-hidden="true"
             />
           )}
@@ -269,70 +379,99 @@ export default function ProjectItem({
                   )}
                 </div>
 
-                <div className="w-full lg:w-2/3">
+                <div className="w-full lg:w-2/3 mt-8">
                   {images && images.length > 0 && (
-                    <div className="grid grid-cols-4 gap-2 lg:gap-4">
-                      {images[0] && images[0].src && (
-                        <div className="col-span-4 lg:col-span-2 aspect-[5/3] relative rounded-xl overflow-hidden group">
-                          <Image
-                            src={images[0].src}
-                            alt={`${title} - ${images[0].caption || ''}`}
-                            fill
-                            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                            sizes="(max-width: 1024px) 100vw, 33vw"
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 bg-[#EFEEE9] bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
-                          <span className="absolute top-2 right-2 inline-block px-2 py-0.5 text-xxs lg:text-xs font-light text-[#333] bg-[#EFEEE9] border border-[#EFEEE9] rounded-full shadow-md z-10">
-                            {images[0].caption || ''}
-                          </span>
-                        </div>
-                      )}
+                    <>
+                      {/* Desktop view - Original grid layout */}
+                      <div className="hidden md:block w-full">
+                        <div className="grid grid-cols-4 gap-2 lg:gap-4">
+                          {images[0] && images[0].src && (
+                            <div className="relative col-span-4 lg:col-span-2 aspect-[5/3] rounded-xl overflow-hidden group">
+                              <Image
+                                src={images[0].src}
+                                alt={`${title} - ${images[0].caption || ''}`}
+                                fill
+                                className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                                sizes="(max-width: 1024px) 100vw, 50vw"
+                                loading="lazy"
+                              />
+                              <div className="absolute inset-0 bg-[#EFEEE9] bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+                            </div>
+                          )}
 
-                      {images[1] && images[1].src && (
-                        <div className="col-span-2 lg:col-span-1 relative rounded-xl overflow-hidden group">
-                          <div
-                            className="w-full h-full"
-                            style={{ paddingTop: 'calc(60% * 5/3)' }}
-                          >
-                            <Image
-                              src={images[1].src}
-                              alt={`${title} - ${images[1].caption || ''}`}
-                              fill
-                              className="object-cover object-top absolute top-0 left-0 transition-transform duration-500 group-hover:scale-105"
-                              sizes="(max-width: 1024px) 50vw, 16.5vw"
-                              loading="lazy"
-                            />
-                            <div className="absolute inset-0 bg-[#EFEEE9] bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
-                            <span className="absolute top-2 right-2 inline-block px-2 py-0.5 text-xxs lg:text-xs font-light text-[#333] bg-[#EFEEE9] border border-[#EFEEE9] rounded-full shadow-md z-10">
-                              {images[1].caption || ''}
-                            </span>
+                          {images[1] && images[1].src && (
+                            <div className="col-span-2 lg:col-span-1 relative rounded-xl overflow-hidden group">
+                              <div
+                                className="relative w-full h-full"
+                                style={{ paddingTop: 'calc(60% * 5/3)' }}
+                              >
+                                <Image
+                                  src={images[1].src}
+                                  alt={`${title} - ${images[1].caption || ''}`}
+                                  fill
+                                  className="object-cover object-top absolute top-0 left-0 transition-transform duration-500 group-hover:scale-105"
+                                  sizes="(max-width: 1024px) 50vw, 25vw"
+                                  loading="lazy"
+                                />
+                                <div className="absolute inset-0 bg-[#EFEEE9] bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+                              </div>
+                            </div>
+                          )}
+
+                          {images[2] && images[2].src && (
+                            <div className="col-span-2 lg:col-span-1 relative rounded-xl overflow-hidden group">
+                              <div
+                                className="relative w-full h-full"
+                                style={{ paddingTop: 'calc(60% * 5/3)' }}
+                              >
+                                <Image
+                                  src={images[2].src}
+                                  alt={`${title} - ${images[2].caption || ''}`}
+                                  fill
+                                  className="object-cover object-top absolute top-0 left-0 transition-transform duration-500 group-hover:scale-105"
+                                  sizes="(max-width: 1024px) 50vw, 25vw"
+                                  loading="lazy"
+                                />
+                                <div className="absolute inset-0 bg-[#EFEEE9] bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Caption row - separated from image containers */}
+                        <div className="grid grid-cols-4 gap-2 lg:gap-4 mt-2">
+                          <div className="col-span-4 lg:col-span-2 text-xxs lg:text-xs font-light text-[#EFEEE9] mt-1">
+                            {images[0] && images[0].caption && (
+                              <span className="border border-[#EFEEE9] rounded-full px-2 py-1">
+                                {images[0].caption}
+                              </span>
+                            )}
+                          </div>
+                          <div className="col-span-2 lg:col-span-1 text-xxs lg:text-xs font-light text-[#EFEEE9] mt-1">
+                            {images[1] && images[1].caption && (
+                              <span className="border border-[#EFEEE9] rounded-full px-2 py-1">
+                                {images[1].caption}
+                              </span>
+                            )}
+                          </div>
+                          <div className="col-span-2 lg:col-span-1 text-xxs lg:text-xs font-light text-[#EFEEE9] mt-1">
+                            {images[2] && images[2].caption && (
+                              <span className="border border-[#EFEEE9] rounded-full px-2 py-1">
+                                {images[2].caption}
+                              </span>
+                            )}
                           </div>
                         </div>
-                      )}
+                      </div>
 
-                      {images[2] && images[2].src && (
-                        <div className="col-span-2 lg:col-span-1 relative rounded-xl overflow-hidden group">
-                          <div
-                            className="w-full h-full"
-                            style={{ paddingTop: 'calc(60% * 5/3)' }}
-                          >
-                            <Image
-                              src={images[2].src}
-                              alt={`${title} - ${images[2].caption || ''}`}
-                              fill
-                              className="object-cover object-top absolute top-0 left-0 transition-transform duration-500 group-hover:scale-105"
-                              sizes="(max-width: 1024px) 50vw, 16.5vw"
-                              loading="lazy"
-                            />
-                            <div className="absolute inset-0 bg-[#EFEEE9] bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
-                            <span className="absolute top-2 right-2 inline-block px-2 py-0.5 text-xxs lg:text-xs font-light text-[#333] bg-[#EFEEE9] border border-[#EFEEE9] rounded-full shadow-md z-10">
-                              {images[2].caption || ''}
-                            </span>
-                          </div>
-                        </div>
-                      )}
-                    </div>
+                      {/* Mobile view - Carousel */}
+                      <div className="block md:hidden w-full">
+                        <MobileImageCarousel
+                          images={images}
+                          title={title}
+                        />
+                      </div>
+                    </>
                   )}
                 </div>
               </div>

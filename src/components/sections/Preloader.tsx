@@ -39,21 +39,21 @@ export default function PreloaderAnimation({ onComplete }: PreloaderAnimationPro
         },
       });
 
-      // After text animation completes, add delay, then show button
-      tl.to('.pre-loader-btn', {
-        opacity: 1,
-        duration: 0.5,
-        delay: 1.5,
-        onComplete: function () {
-          animationCompletedRef.current = true;
-          const btnElement = document.querySelector('.pre-loader-btn') as HTMLElement;
-          if (btnElement) btnElement.style.pointerEvents = 'auto';
+      // // After text animation completes, add delay, then show button
+      // tl.to('.pre-loader-btn', {
+      //   opacity: 1,
+      //   duration: 0.5,
+      //   delay: 1.5,
+      //   onComplete: function () {
+      //     animationCompletedRef.current = true;
+      //     const btnElement = document.querySelector('.pre-loader-btn') as HTMLElement;
+      //     if (btnElement) btnElement.style.pointerEvents = 'auto';
 
-          // Add cursor pointer to the entire preloader
-          const preLoaderElement = document.querySelector('.pre-loader') as HTMLElement;
-          if (preLoaderElement) preLoaderElement.style.cursor = 'pointer';
-        },
-      });
+      //     // Add cursor pointer to the entire preloader
+      //     const preLoaderElement = document.querySelector('.pre-loader') as HTMLElement;
+      //     if (preLoaderElement) preLoaderElement.style.cursor = 'pointer';
+      //   },
+      // });
 
       // Initialize click area
       const preLoaderBtn = document.querySelector('.pre-loader-btn') as HTMLElement;
@@ -100,6 +100,8 @@ export default function PreloaderAnimation({ onComplete }: PreloaderAnimationPro
         import('gsap').then((gsapModule) => {
           const gsap = gsapModule.default;
 
+          // Commented out the animation code that targets non-existent elements, if you want to use it, uncomment the code below
+          /*
           // Show main content (now in HeroSection)
           gsap.to('.header-row', 0.8, {
             top: 0,
@@ -116,6 +118,7 @@ export default function PreloaderAnimation({ onComplete }: PreloaderAnimationPro
             ease: 'power4.inOut',
             delay: 0.5,
           });
+          */
         });
       }, 1000);
     });
@@ -133,6 +136,8 @@ export default function PreloaderAnimation({ onComplete }: PreloaderAnimationPro
       import('gsap').then((gsapModule) => {
         const gsap = gsapModule.default;
 
+        // Commented out the animation code that targets non-existent elements, if you want to use it, uncomment the code below
+        /* 
         gsap.to('.header-row', 0.8, {
           top: 0,
           ease: 'power4.inOut',
@@ -148,6 +153,7 @@ export default function PreloaderAnimation({ onComplete }: PreloaderAnimationPro
           ease: 'power4.inOut',
           delay: 0.5,
         });
+        */
       });
     }, 100);
   };

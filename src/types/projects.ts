@@ -18,7 +18,7 @@ export interface ProjectType {
 export const projects: ProjectType[] = [
   {
     title: 'HiveStream',
-    coverImage: 'hiveStream/Dashboard.png',
+    coverImage: 'hiveStream/Dashboard.webp',
     category: 'Front-end Development',
     client: 'HiveStream',
     year: '2025',
@@ -33,14 +33,14 @@ export const projects: ProjectType[] = [
     ],
     stacks: ['React', 'TypeScript', 'Next.js', 'Redux', 'Styled Components', 'Tailwind CSS', 'Stripe'],
     images: [
-      { src: '/images/hiveStream/Dashboard.png', caption: 'App Analytics Dashboard' },
-      { src: '/images/hivestream/Sections.png', caption: 'App Features' },
-      { src: '/images/hivestream/Landing.png', caption: 'Landing Page' },
+      { src: '/images/hiveStream/Dashboard.webp', caption: 'App Analytics Dashboard' },
+      { src: '/images/hiveStream/Sections.webp', caption: 'App Features' },
+      { src: '/images/hiveStream/Landing.webp', caption: 'Landing Page' },
     ],
   },
   {
     title: 'Acorn Ledger',
-    coverImage: 'acornLedger/Dashboard.png',
+    coverImage: 'acornLedger/Dashboard.webp',
     category: 'Full-stack Development',
     client: 'Freelance',
     year: '2025',
@@ -69,14 +69,14 @@ export const projects: ProjectType[] = [
       'Dwolla',
     ],
     images: [
-      { src: '/images/acornLedger/Dashboard.png', caption: 'Financial Dashboard' },
-      { src: '/images/acornLedger/Landing.png', caption: 'Landing Page' },
-      { src: '/images/acornLedger/Sections.png', caption: 'App Features' },
+      { src: '/images/acornLedger/Dashboard.webp', caption: 'Financial Dashboard' },
+      { src: '/images/acornLedger/Landing.webp', caption: 'Landing Page' },
+      { src: '/images/acornLedger/Sections.webp', caption: 'App Features' },
     ],
   },
   {
     title: 'CognixAI',
-    coverImage: 'cognix/Landing.png',
+    coverImage: 'cognix/Landing.webp',
     category: 'Front-end Development',
     client: 'CognixAI',
     year: '2024',
@@ -91,8 +91,8 @@ export const projects: ProjectType[] = [
     ],
     stacks: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Shadcn UI', 'Docusaurus'],
     images: [
-      { src: '/images/cognix/Landing.png', caption: 'Landing Page' },
-      { src: '/images/cognix/Docs.png', caption: 'API Documentation' },
+      { src: '/images/cognix/Landing.webp', caption: 'Landing Page' },
+      { src: '/images/cognix/Docs.webp', caption: 'API Documentation' },
     ],
   },
   {

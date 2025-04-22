@@ -217,9 +217,9 @@
     }
 
     .pre-loader-container .header {
-        height: 60px;
-        padding-bottom: 20px;
-        margin: 0 auto 10px;
+        height: 45px;
+        padding-bottom: 5px;
+        margin: 0 auto 5px;
     }
 
     .header-wrapper:after {
