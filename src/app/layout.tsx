@@ -24,10 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${justMe.variable}`}
     >
-      <body
-        className={inter.className}
-        suppressHydrationWarning={true}
-      >
+      <body className={inter.className}>
         {children}
         <Toaster />
       </body>

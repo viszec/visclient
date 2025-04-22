@@ -43,7 +43,7 @@ export default function Home() {
     <>
       {!isLoading && showHeader && <Header />}
 
-      <main className="relative min-h-screen">
+      <main className="min-h-screen">
         {isLoading ? (
           <Preloader onComplete={handlePreloaderComplete} />
         ) : (

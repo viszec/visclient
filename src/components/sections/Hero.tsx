@@ -254,7 +254,7 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
                   <span className="italic font-normal text-4xl sm:text-2xl xl:text-[4rem] 2xl:text-[5rem] hello-text text-[#908f8c] mr-8">
                     hi,
                   </span>
-                  <span className="text-5xl sm:text-2xl xl:text-[4.6rem] 2xl:text-[5.6rem] hello-text">
+                  <span className="text-5xl sm:text-2xl xl:text-[4.6rem] 2xl:text-[8rem] font-just-me-again hello-text">
                     I&apos;m MAVIS MA
                   </span>
                 </div>
@@ -346,7 +346,7 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
 
           {/* Row 3: Frontend Engineer */}
           <div className="my-4 text-left">
-            <div className="text-4xl font-normal font-baskervville leading-none px-2 engineer-title pt-2">
+            <div className="text-4xl font-normal font-halenoir leading-none px-2 engineer-title pt-2">
               Frontend <span className="text-4xl">Engineer</span>
             </div>
             <div className="w-full h-px bg-[#33333353] divider-line mt-3"></div>
@@ -371,7 +371,7 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
           <div className="mt-0 mb-8 text-left text-[#333]/80">
             <div className="flex flex-wrap font-halenoir skills-text">
               <div className="inline-flex items-center relative">
-                <span className="relative px-6 py-2 text-xs font-semibold bg-[#E6E5DF] rounded-xl">
+                <span className="relative px-6 py-2 text-sm font-medium text-[#333] bg-[#E6E5DF] rounded-xl">
                   Proficient in React / Next.js / Tailwind CSS / Node.js / GSAP / Figma / Cursor
                 </span>
               </div>
