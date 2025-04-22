@@ -24,13 +24,23 @@ interface ProjectProps {
     src?: string;
     caption?: string;
   }[];
+  mobileImages?: {
+    src?: string;
+    caption?: string;
+  }[];
   solution?: string[];
   manageModalAction: (show: boolean, index: number, x: number, y: number, fromExpand?: boolean) => void;
   activeExpandedIndex: number | null;
   setActiveExpandedIndexAction: (index: number | null) => void;
 }
 
-const MobileImageCarousel = ({ images, title }: { images: { src?: string; caption?: string }[]; title: string }) => {
+const MobileImageCarousel = ({
+  mobileImages,
+  title,
+}: {
+  mobileImages: { src?: string; caption?: string }[];
+  title: string;
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showControls, setShowControls] = useState(false);
   const touchStartX = useRef(0);
@@ -38,12 +48,12 @@ const MobileImageCarousel = ({ images, title }: { images: { src?: string; captio
 
   const handlePrev = (e?: React.MouseEvent) => {
     e?.stopPropagation();
-    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? mobileImages.length - 1 : prev - 1));
   };
 
   const handleNext = (e?: React.MouseEvent) => {
     e?.stopPropagation();
-    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev === mobileImages.length - 1 ? 0 : prev + 1));
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -89,18 +99,18 @@ const MobileImageCarousel = ({ images, title }: { images: { src?: string; captio
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {images.map((image, idx) => (
+        {mobileImages.map((mobileImage, idx) => (
           <div
             key={idx}
             className={`absolute inset-0 transition-opacity duration-300 ${
               idx === currentIndex ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
           >
-            {image.src && (
+            {mobileImage.src && (
               <>
                 <Image
-                  src={image.src}
-                  alt={`${title} - ${image.caption || ''}`}
+                  src={mobileImage.src}
+                  alt={`${title} - ${mobileImage.caption || ''}`}
                   fill
                   className="object-cover object-top"
                   sizes="100vw"
@@ -114,7 +124,7 @@ const MobileImageCarousel = ({ images, title }: { images: { src?: string; captio
       </div>
 
       {/* Right Arrow */}
-      {(showControls || currentIndex < images.length - 1) && (
+      {(showControls || currentIndex < mobileImages.length - 1) && (
         <button
           className={`absolute right-[-30px] top-1/2 -translate-y-1/2 w-7 h-7 flex items-center 
                     justify-center bg-[#333]/70 hover:bg-[#333]/90 text-[#EFEEE9] rounded-full z-10
@@ -128,7 +138,7 @@ const MobileImageCarousel = ({ images, title }: { images: { src?: string; captio
 
       {/* Indicator */}
       <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1 z-10">
-        {images.map((_, idx) => (
+        {mobileImages.map((_, idx) => (
           <div
             key={idx}
             className={`w-1.5 h-1.5 rounded-full 
@@ -151,6 +161,7 @@ export default function ProjectItem({
   overview,
   stacks,
   images,
+  mobileImages,
   solution,
   manageModalAction,
   activeExpandedIndex,
@@ -467,7 +478,7 @@ export default function ProjectItem({
                       {/* Mobile view - Carousel */}
                       <div className="block md:hidden w-full">
                         <MobileImageCarousel
-                          images={images}
+                          mobileImages={mobileImages || []} // Ensure mobileImages is an array or an empty array
                           title={title}
                         />
                       </div>

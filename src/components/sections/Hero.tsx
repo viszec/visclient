@@ -209,7 +209,7 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
       )}
 
       {/* Top nav spacer */}
-      <div className="h-24"></div>
+      <div className="h-16 lg:h-24"></div>
 
       {/* Main content area */}
       <div className="flex-1 flex flex-col justify-between px-6 md:px-12 relative z-0">
@@ -320,9 +320,9 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
         </div>
 
         {/* Mobile layout - All left aligned */}
-        <div className="flex md:hidden flex-1 flex-col space-y-4">
+        <div className="flex md:hidden flex-1 flex-col space-y-3">
           {/* Row 1: Creative, etc. */}
-          <div className="mb-4 text-left space-y-3">
+          <div className="mb-4 text-left space-y-2">
             <div className="text-sm uppercase tracking-wider mb-1 small-label">FRONTEND ENGINEER</div>
             <div className="text-3xl leading-none font-normal mb-2 text-creative">
               Cre<span className="italic">a</span>t<span className="italic">i</span>ve
@@ -332,29 +332,29 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
               S<span className="italic">ol</span>id
             </div>
             <div className="text-sm uppercase tracking-wider mb-2 small-label">GET IN TOUCH</div>
-            <div className="w-full h-px bg-[#33333387] divider-line"></div>
+            <div className="w-full h-px bg-[#33333353] divider-line"></div>
           </div>
 
           {/* Row 2: hi, I'm MAVIS */}
-          <div className="my-4 text-left pt-4">
+          <div className="my-4 text-left">
             <div className="text-left">
               <span className="italic font-normal text-2xl text-[#908f8c] mr-2 text-center pl-2 hello-text">hi,</span>
               <span className="text-5xl text-center pl-2 hello-text font-just-me-again">I&apos;m MAViS MA</span>
             </div>
-            <div className="w-full h-px bg-[#33333387] divider-line mt-3"></div>
+            <div className="w-full h-px bg-[#33333353] divider-line mt-3"></div>
           </div>
 
           {/* Row 3: Frontend Engineer */}
           <div className="my-4 text-left">
-            <div className="text-4xl font-normal font-baskervville leading-none px-2 engineer-title pt-8">
+            <div className="text-4xl font-normal font-baskervville leading-none px-2 engineer-title pt-2">
               Frontend <span className="text-4xl">Engineer</span>
             </div>
-            <div className="w-full h-px bg-[#33333387] divider-line mt-3"></div>
+            <div className="w-full h-px bg-[#33333353] divider-line mt-3"></div>
           </div>
 
           {/* Row 4: web developer and designer */}
           <div className="mt-4 text-left">
-            <div className="text-3xl font-light font-halenoir leading-tight pl-8 web-developer pt-6">
+            <div className="text-3xl font-light font-halenoir leading-tight pl-8 web-developer pt-2">
               WEB
               <br />
               DEVELOPER
@@ -364,7 +364,7 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
               <span className="italic text-2xl text-[#908f8c] ml-32 and-text">and</span>
             </div>
             <div className="text-3xl font-halenoir font-light leading-none text-right pr-2 designer">DESIGNER</div>
-            <div className="w-full h-px bg-[#33333387] divider-line mt-3"></div>
+            <div className="w-full h-px bg-[#33333353] divider-line mt-3"></div>
           </div>
 
           {/* Row 5: Skills */}
