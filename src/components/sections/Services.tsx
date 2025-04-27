@@ -99,7 +99,7 @@ export default function Services() {
 
   // 清理所有ScrollTrigger实例的函数
   const clearTriggers = () => {
-    triggerRefs.current.forEach(trigger => {
+    triggerRefs.current.forEach((trigger) => {
       if (trigger) trigger.kill();
     });
     triggerRefs.current = [];
@@ -202,13 +202,13 @@ export default function Services() {
 
           // 初始位置设置
           gsap.set(card, {
-            left: '50%',          // 水平居中
-            top: '15%',           // 初始都在顶部位置
-            xPercent: -50,        // 水平居中
-            yPercent: -50,        // 垂直居中
-            rotation: MOBILE_ROTATIONS[index],  // 保持旋转角度
-            scale: 0.85,          // 缩小比例
-            opacity: 1,           // 完全不透明
+            left: '50%', // 水平居中
+            top: '15%', // 初始都在顶部位置
+            xPercent: -50, // 水平居中
+            yPercent: -50, // 垂直居中
+            rotation: MOBILE_ROTATIONS[index], // 保持旋转角度
+            scale: 0.85, // 缩小比例
+            opacity: 1, // 完全不透明
           });
 
           // 设置初始翻转状态
@@ -218,24 +218,24 @@ export default function Services() {
 
         // 第一步：当进入标题区域，立即展开卡片位置
         const expandTrigger = ScrollTrigger.create({
-          trigger: titleSection,  // 以标题区域为触发点
-          start: 'top 60%',       // 当标题接近视图中部
-          end: 'bottom top',      // 当标题离开顶部
-          once: true,             // 只触发一次
+          trigger: titleSection, // 以标题区域为触发点
+          start: 'top 60%', // 当标题接近视图中部
+          end: 'bottom top', // 当标题离开顶部
+          once: true, // 只触发一次
           onEnter: () => {
             // 立即展开所有卡片到最终位置
             cards.forEach((card, index) => {
               if (!card) return;
 
               gsap.to(card, {
-                top: `${MOBILE_Y_POSITIONS[index]}%`,  // 直接到目标位置
-                rotation: MOBILE_ROTATIONS[index],     // 应用旋转
-                duration: 0.5,                         // 快速展开
+                top: `${MOBILE_Y_POSITIONS[index]}%`, // 直接到目标位置
+                rotation: MOBILE_ROTATIONS[index], // 应用旋转
+                duration: 0.5, // 快速展开
                 ease: 'power2.out',
-                delay: index * 0.1,                    // 轻微延迟，形成连锁效果
+                delay: index * 0.1, // 轻微延迟，形成连锁效果
               });
             });
-          }
+          },
         });
 
         triggerRefs.current.push(expandTrigger);
@@ -249,16 +249,16 @@ export default function Services() {
 
           // 为每张卡片创建翻转触发器
           const flipTrigger = ScrollTrigger.create({
-            trigger: card,                 // 以卡片为触发点
-            start: 'top center',           // 当卡片顶部到达视图中心
-            end: 'center center-=50',      // 当卡片中心略微超过视图中心
-            scrub: 0.5,                    // 平滑翻转
+            trigger: card, // 以卡片为触发点
+            start: 'top center', // 当卡片顶部到达视图中心
+            end: 'center center-=50', // 当卡片中心略微超过视图中心
+            scrub: 0.5, // 平滑翻转
             onEnter: () => {
               // 使用延时实现逐一翻转效果
               gsap.to(frontEl, {
                 rotationY: 180,
                 duration: 0.8,
-                delay: 0.1,                // 短暂延迟，让翻转看起来更自然
+                delay: 0.1, // 短暂延迟，让翻转看起来更自然
                 ease: 'power2.inOut',
               });
               gsap.to(backEl, {
@@ -295,7 +295,7 @@ export default function Services() {
                 duration: 0.6,
                 ease: 'power2.out',
               });
-            }
+            },
           });
 
           triggerRefs.current.push(flipTrigger);
@@ -304,9 +304,9 @@ export default function Services() {
         // 第三步：在离开服务区域底部时，所有卡片回缩
         const retractTrigger = ScrollTrigger.create({
           trigger: cardsSection,
-          start: 'bottom bottom',        // 当区域底部刚好到达视图底部
-          end: 'bottom+=50% bottom',     // 延长结束点，给更多回缩空间
-          scrub: 0.8,                    // 更平滑的过渡
+          start: 'bottom bottom', // 当区域底部刚好到达视图底部
+          end: 'bottom+=50% bottom', // 延长结束点，给更多回缩空间
+          scrub: 0.8, // 更平滑的过渡
           onUpdate: (self) => {
             const progress = self.progress;
 
@@ -320,16 +320,16 @@ export default function Services() {
                 const delay = index * 0.05;
 
                 gsap.to(card, {
-                  top: '15%',                  // 回到顶部位置
+                  top: '15%', // 回到顶部位置
                   rotation: MOBILE_ROTATIONS[index] * (1 - progress), // 逐渐减小旋转
-                  scale: 0.75,                 // 回到初始大小
-                  opacity: Math.max(0, 1 - progress * 1.5),  // 更慢的淡出
+                  scale: 0.75, // 回到初始大小
+                  opacity: Math.max(0, 1 - progress * 1.5), // 更慢的淡出
                   duration: 0.3,
-                  delay: delay,                // 顺序回缩
+                  delay: delay, // 顺序回缩
                 });
               });
             }
-          }
+          },
         });
 
         triggerRefs.current.push(retractTrigger);
@@ -345,7 +345,7 @@ export default function Services() {
             xPercent: -50,
             yPercent: -50,
             rotation: 0,
-            clearProps: 'all',  // 清除之前可能应用的属性
+            clearProps: 'all', // 清除之前可能应用的属性
           });
         });
 
@@ -418,7 +418,8 @@ export default function Services() {
 
   return (
     <ReactLenis root>
-      <section id="services"
+      <section
+        id="services"
         className="m-0 p-0 box-border mt-32 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12"
         ref={container}
       >
