@@ -71,7 +71,7 @@ const CARDS_DATA: CardData[] = [
 const POSITIONS = [20, 40, 60, 80];
 
 // Mobile - Vertical position distribution (Y-axis) - Increased spacing to prevent card overlap
-const MOBILE_Y_POSITIONS = [15, 40, 65, 90]; // Vertical distribution from top to bottom, increased spacing
+const MOBILE_Y_POSITIONS = [15, 38, 61, 84]; // Vertical distribution from top to bottom, increased spacing
 
 // Desktop - Rotation angle
 const ROTATIONS = [-4, -2, 2, 4];
@@ -369,7 +369,7 @@ export default function Services() {
         </div>
 
         {/* Cards section - adjust height for mobile */}
-        <div className={`relative w-full ${isMobile ? 'h-[200vh]' : 'h-[65vh]'} bg-[#efeee9] cards`}>
+        <div className={`relative w-full ${isMobile ? 'h-[210vh]' : 'h-[65vh]'} bg-[#efeee9] cards`}>
           {CARDS_DATA.map((card, index) => (
             <Card
               key={card.id}
