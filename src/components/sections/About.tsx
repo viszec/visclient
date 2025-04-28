@@ -160,9 +160,9 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="section flex min-h-screen lg:min-h-[1000px] bg-[#efeee9] px-4 lg:px-28 mt-12 lg:mt-24 md:mt-24 sm:mt-46 text-4xl lg:pb-0 justify-center relative w-full pt-12 lg:pt-20"
+      className="section flex min-h-screen lg:min-h-[1000px] bg-[#efeee9] px-4 lg:px-28 mt-12 lg:mt-24 md:mt-24 sm:mt-36 text-4xl lg:pb-0 justify-center relative w-full pt-8 lg:pt-20"
     >
-      <div className="section-container flex flex-col lg:flex-row gap-4 lg:gap-12 relative pt-20 lg:pt-28">
+      <div className="section-container flex flex-col lg:flex-row gap-4 lg:gap-12 relative pt-12 lg:pt-28">
         {/* Main heading - takes up full width on mobile, 60% on desktop */}
         <div className="w-full lg:w-[62%]">
           <p className="m-0 text-2xl lg:text-[2.8rem] 2xl:text-[3.2rem] leading-[1.1em] justify-around tracking-tight font-bold text-[#333] pl-4 pr-8 lg:pl-0 lg:pr-0">
@@ -207,7 +207,7 @@ export default function About() {
                 MOTIVATION
               </h1>
               {showDescription && (
-                <div className="m-0 text-sm pr-16 lg:pr-16 lg:text-lg 2xl:text-[19px] font-light text-[#333]/60 font-baskervville leading-tight sm:tracking-tight pl-4 lg:pl-0">
+                <div className="m-0 text-sm px-4 lg:pr-16 lg:text-lg 2xl:text-[19px] font-light text-[#333]/60 font-baskervville leading-tight sm:tracking-tight pl-4 lg:pl-0">
                   <VerticalCutReveal
                     splitBy="characters"
                     staggerDuration={0.002}

@@ -209,7 +209,7 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
       )}
 
       {/* Top nav spacer */}
-      <div className="h-16 lg:h-24"></div>
+      <div className="h-20 lg:h-24"></div>
 
       {/* Main content area */}
       <div className="flex-1 flex flex-col justify-between px-6 md:px-12 relative z-0">
