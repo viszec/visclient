@@ -222,7 +222,7 @@ export default function Services() {
                 ease: 'power1.out',
               });
             });
-          }
+          },
         });
 
         triggerRefs.current.push(expandTrigger);
@@ -263,7 +263,7 @@ export default function Services() {
                 scale: 0.85 + 0.1 * flipProgress, // Increase scale from 0.85 to 0.95
                 duration: 0.4, // Match duration with flip animation
               });
-            }
+            },
           });
 
           triggerRefs.current.push(flipTrigger);

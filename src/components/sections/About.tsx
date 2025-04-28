@@ -203,7 +203,9 @@ export default function About() {
                   priority
                 />
               </div>
-              <h1 className="text-2xl xl:text-[2.5rem] 2xl:text-[2.6rem] font-bold text-[#333] pb-4 pl-4 lg:pl-0">MOTIVATION</h1>
+              <h1 className="text-2xl xl:text-[2.5rem] 2xl:text-[2.6rem] font-bold text-[#333] pb-4 pl-4 lg:pl-0">
+                MOTIVATION
+              </h1>
               {showDescription && (
                 <div className="m-0 text-sm pr-16 lg:pr-16 lg:text-lg 2xl:text-[19px] font-light text-[#333]/60 font-baskervville leading-tight sm:tracking-tight pl-4 lg:pl-0">
                   <VerticalCutReveal
