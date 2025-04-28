@@ -48,9 +48,9 @@ export default function About() {
   // Define special words in an object for individual styling
   const specialWords: { [key: string]: string } = {
     CRAFT: 'text-green-500 font-bold',
-    Memorable: 'text-[#333]/70 italic font-serif font-medium',
-    'FORWARD-THINKING': 'text-[#333]/50 font-light italic',
-    FRONTIERS: 'text-black text-[1.8rem] xl:text-[2.8rem] 2xl:text-[4.2rem] font-just-me-again font-bold',
+    MEMORABLE: 'text-[#333]/50 font-medium',
+    'FORWARD-THINKING': 'text-[#333]/50 font-light',
+    FRONTIERS: 'text-[#333]/50 text-[2rem] xl:text-[2.8rem] 2xl:text-[4.2rem] font-just-me-again font-bold',
   };
 
   // Common words
@@ -65,7 +65,7 @@ export default function About() {
     'AND',
     'CRAFT.',
     'CREATING',
-    'Memorable',
+    'MEMORABLE',
     'WEB',
     'EXPERIENCES',
     'FOR',
@@ -165,11 +165,11 @@ export default function About() {
       <div className="section-container flex flex-col lg:flex-row gap-4 lg:gap-12 relative pt-20 lg:pt-28">
         {/* Main heading - takes up full width on mobile, 60% on desktop */}
         <div className="w-full lg:w-[62%]">
-          <p className="m-0 text-xl lg:text-[2.8rem] 2xl:text-[3.2rem] leading-[1.1em] justify-between tracking-tight font-bold text-[#333]">
+          <p className="m-0 text-2xl lg:text-[2.8rem] 2xl:text-[3.2rem] leading-[1.1em] justify-around tracking-tight font-bold text-[#333] pl-4 pr-8 lg:pl-0 lg:pr-0">
             {phraseWords.map((word, index) => (
               <span
                 key={index}
-                className="inline-block overflow-hidden mr-[0.15em]"
+                className="inline-block overflow-hidden mr-[0.15em] font-grotesk"
               >
                 <motion.span
                   className={`inline-block font-grotesk ${specialWords[word] || ''}`}
@@ -194,7 +194,7 @@ export default function About() {
             animate={isAnimating ? 'open' : 'closed'}
           >
             <div className="flex flex-col items-start space-y-3">
-              <div className="pb-6">
+              <div className="pb-6 pl-4 lg:pl-0">
                 <Image
                   src="/icons/arrow.svg"
                   alt="arrow"
@@ -203,9 +203,11 @@ export default function About() {
                   priority
                 />
               </div>
-              <h1 className="text-2xl xl:text-[2.5rem] 2xl:text-[2.6rem] font-bold text-[#333] pb-4">MOTIVATION</h1>
+              <h1 className="text-2xl xl:text-[2.5rem] 2xl:text-[2.6rem] font-bold text-[#333] pb-4 pl-4 lg:pl-0">
+                MOTIVATION
+              </h1>
               {showDescription && (
-                <div className="m-0 text-sm pr-8 lg:pr-16 lg:text-lg 2xl:text-[19px] font-light text-[#333]/60 font-baskervville leading-tight sm:tracking-tight">
+                <div className="m-0 text-sm pr-16 lg:pr-16 lg:text-lg 2xl:text-[19px] font-light text-[#333]/60 font-baskervville leading-tight sm:tracking-tight pl-4 lg:pl-0">
                   <VerticalCutReveal
                     splitBy="characters"
                     staggerDuration={0.002}
@@ -216,7 +218,7 @@ export default function About() {
                       damping: 35,
                       delay: 0.1,
                     }}
-                    containerClassName="text-[#00000] leading-tight"
+                    containerClassName="text-[#00000] leading-tight justify-between"
                   >
                     {`Digital excellence is driven by an unwavering commitment to innovation and precision. As a web designer and developer, I find deep motivation in transforming complex challenges into elegant solutions. Each design element, ranging from pixel-perfect layouts through seamless interactions, becomes a deliberate step in crafting meaningful user experiences. Drawing from a passion for emerging technologies, I focus on creating solutions that not only captivate but solve real business challenges. This journey of continuous growth fuels my mission: to inspire, engage, and deliver digital experiences that leave a lasting impact in our ever-evolving landscape.`}
                   </VerticalCutReveal>
@@ -227,7 +229,7 @@ export default function About() {
             {/* About me button */}
             <div
               className="absolute 
-                right-0 top-[-2em]          // mobile position
+                right-12 top-[-3em]          // mobile position
                 md:right-auto md:left-[-3.5em] md:top-[13.5em]  // tablet
                 laptop:right-auto laptop:left-[-3.5em] laptop:top-[15.5em]  // 13-inch MacBook
                 lg:right-auto lg:left-[-3.5em] lg:top-[11.5em]  // larger displays

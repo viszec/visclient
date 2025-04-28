@@ -67,23 +67,23 @@ const CARDS_DATA: CardData[] = [
   },
 ];
 
-// 桌面端 - 水平位置分布 (X轴)
+// Desktop - Horizontal position distribution (X-axis)
 const POSITIONS = [20, 40, 60, 80];
 
-// 移动端 - 垂直位置分布 (Y轴)
-const MOBILE_Y_POSITIONS = [15, 35, 55, 75]; // 垂直从上到下分布
+// Mobile - Vertical position distribution (Y-axis) - Increased spacing to prevent card overlap
+const MOBILE_Y_POSITIONS = [15, 38, 61, 84]; // Vertical distribution from top to bottom, increased spacing
 
-// 桌面端 - 旋转角度
-const ROTATIONS = [-8, -4, 4, 8];
+// Desktop - Rotation angle
+const ROTATIONS = [-4, -2, 2, 4];
 
-// 移动端 - 旋转角度，稍微小一些但保持方向一致
-const MOBILE_ROTATIONS = [-4, -2, 2, 4];
+// Mobile - Rotation angle, slightly smaller but consistent direction
+const MOBILE_ROTATIONS = [-4, -2, 2, -3];
 
 export default function Services() {
   const container = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [isMobile, setIsMobile] = useState(false);
-  // 添加一个ref来跟踪ScrollTrigger实例
+  // Add a ref to track ScrollTrigger instances
   const triggerRefs = useRef<ScrollTrigger[]>([]);
 
   // Check if device is mobile
@@ -97,7 +97,7 @@ export default function Services() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // 清理所有ScrollTrigger实例的函数
+  // Function to clear all ScrollTrigger instances
   const clearTriggers = () => {
     triggerRefs.current.forEach((trigger) => {
       if (trigger) trigger.kill();
@@ -113,7 +113,7 @@ export default function Services() {
       const cardsSection = containerEl.querySelector('.cards');
       if (!cardsSection) return;
 
-      // 先清理所有现有触发器
+      // First clear all existing triggers
       clearTriggers();
 
       const titleSection = containerEl.querySelector('.title-section');
@@ -167,72 +167,59 @@ export default function Services() {
         );
       }
 
-      // // Fade-in/Fade-out for cards section container
-      // gsap.fromTo(
-      //   cardsSection,
-      //   { opacity: 0, y: 30 },
-      //   {
-      //     opacity: 1,
-      //     y: 0,
-      //     duration: 0.8,
-      //     delay: 0.3,
-      //     ease: 'power2.out',
-      //     scrollTrigger: {
-      //       trigger: cardsSection,
-      //       start: 'top 80%',
-      //       end: 'bottom 20%',
-      //       toggleActions: 'play reverse play reverse',
-      //       markers: false,
-      //     },
-      //   }
-      // );
-
       const cards = cardRefs.current.filter(Boolean);
 
-      // 将移动端和桌面端的动画完全分开处理
+      // Separate mobile and desktop animations
       if (isMobile) {
         console.log('Setting up mobile animations');
 
-        // 初始状态 - 所有卡片堆叠在顶部
+        // Initial state - All cards stacked at first card position
         cards.forEach((card, index) => {
           const frontEl = card?.querySelector('.flip-card-front');
           const backEl = card?.querySelector('.flip-card-back');
 
           if (!frontEl || !backEl || !card) return;
 
-          // 初始位置设置
+          // Initial position setup - All cards start from first card position
           gsap.set(card, {
-            left: '50%', // 水平居中
-            top: '15%', // 初始都在顶部位置
-            xPercent: -50, // 水平居中
-            yPercent: -50, // 垂直居中
-            rotation: MOBILE_ROTATIONS[index], // 保持旋转角度
-            scale: 0.85, // 缩小比例
-            opacity: 1, // 完全不透明
+            left: '50%', // Horizontal center
+            top: MOBILE_Y_POSITIONS[0] + '%', // All cards start at first card position
+            xPercent: -50, // Horizontal center
+            yPercent: -50, // Vertical center
+            rotation: MOBILE_ROTATIONS[index], // Keep rotation angle
+            scale: 0.85, // Shrink ratio
+            opacity: 1, // Fully opaque
+            zIndex: 10 - index, // Ensure correct stacking order
           });
 
-          // 设置初始翻转状态
+          // Set initial flip state - Initial flip state
           gsap.set(frontEl, { rotationY: 0 });
           gsap.set(backEl, { rotationY: 180 });
         });
 
-        // 第一步：当进入标题区域，立即展开卡片位置
+        // First step: When entering service area, expand cards down
         const expandTrigger = ScrollTrigger.create({
-          trigger: titleSection, // 以标题区域为触发点
-          start: 'top 60%', // 当标题接近视图中部
-          end: 'bottom top', // 当标题离开顶部
-          once: true, // 只触发一次
-          onEnter: () => {
-            // 立即展开所有卡片到最终位置
+          trigger: cardsSection, // Trigger point is card section
+          start: 'top 70%', // When card section top is接近视图
+          end: 'top 30%', // When card section further enters view
+          scrub: 0.5, // Smooth transition
+          markers: false,
+          onUpdate: (self) => {
+            const progress = self.progress;
+
+            // As scroll progresses, gradually move cards to their final positions
             cards.forEach((card, index) => {
               if (!card) return;
 
+              // Calculate the position the current card should be at (gradually moving from initial position to final position)
+              const startPos = MOBILE_Y_POSITIONS[0]; // Starting position for all cards (first card position)
+              const endPos = MOBILE_Y_POSITIONS[index]; // Final position for each card
+              const currentPos = gsap.utils.interpolate(startPos, endPos, progress);
+
               gsap.to(card, {
-                top: `${MOBILE_Y_POSITIONS[index]}%`, // 直接到目标位置
-                rotation: MOBILE_ROTATIONS[index], // 应用旋转
-                duration: 0.5, // 快速展开
-                ease: 'power2.out',
-                delay: index * 0.1, // 轻微延迟，形成连锁效果
+                top: `${currentPos}%`,
+                duration: 0.1, // Quick scroll follow
+                ease: 'power1.out',
               });
             });
           },
@@ -240,104 +227,52 @@ export default function Services() {
 
         triggerRefs.current.push(expandTrigger);
 
-        // 第二步：逐个卡片翻转
+        // Second step: When scrolling continues, flip each card individually, but keep the card position unchanged
         cards.forEach((card, index) => {
           const frontEl = card?.querySelector('.flip-card-front');
           const backEl = card?.querySelector('.flip-card-back');
 
           if (!frontEl || !backEl || !card) return;
 
-          // 为每张卡片创建翻转触发器
+          // Create a flip trigger for each card, set different triggers based on index to achieve sequential flipping
           const flipTrigger = ScrollTrigger.create({
-            trigger: card, // 以卡片为触发点
-            start: 'top center', // 当卡片顶部到达视图中心
-            end: 'center center-=50', // 当卡片中心略微超过视图中心
-            scrub: 0.5, // 平滑翻转
-            onEnter: () => {
-              // 使用延时实现逐一翻转效果
+            trigger: cardsSection, // Use card section as trigger point
+            start: `top+=${index * 15}% center`, // Offset trigger timing based on card index
+            end: `top+=${index * 15 + 15}% center`, // Expand flip range to smooth animation
+            scrub: 0.6, // Increase scrub value to smooth flip
+            markers: false,
+            onUpdate: (self) => {
+              // Flip progress
+              const flipProgress = self.progress;
+
+              // Apply flip, increase duration to smooth animation
               gsap.to(frontEl, {
-                rotationY: 180,
-                duration: 0.8,
-                delay: 0.1, // 短暂延迟，让翻转看起来更自然
-                ease: 'power2.inOut',
-              });
-              gsap.to(backEl, {
-                rotationY: 0,
-                duration: 0.8,
-                delay: 0.1,
+                rotationY: 180 * flipProgress,
+                duration: 0.4, // Increase duration value
                 ease: 'power2.inOut',
               });
 
-              // 翻转时略微放大
-              gsap.to(card, {
-                scale: 0.9,
-                duration: 0.8,
-                delay: 0.1,
-                ease: 'power2.out',
-              });
-            },
-            onLeaveBack: () => {
-              // 往回滚动时翻回正面
-              gsap.to(frontEl, {
-                rotationY: 0,
-                duration: 0.6,
-                ease: 'power2.inOut',
-              });
               gsap.to(backEl, {
-                rotationY: 180,
-                duration: 0.6,
+                rotationY: 180 - 180 * flipProgress,
+                duration: 0.4, // Increase duration value
                 ease: 'power2.inOut',
               });
 
-              // 恢复原始大小
+              // Slightly scale when flipping
               gsap.to(card, {
-                scale: 0.75,
-                duration: 0.6,
-                ease: 'power2.out',
+                scale: 0.85 + 0.1 * flipProgress, // Increase scale from 0.85 to 0.95
+                duration: 0.4, // Match duration with flip animation
               });
             },
           });
 
           triggerRefs.current.push(flipTrigger);
         });
-
-        // 第三步：在离开服务区域底部时，所有卡片回缩
-        const retractTrigger = ScrollTrigger.create({
-          trigger: cardsSection,
-          start: 'bottom bottom', // 当区域底部刚好到达视图底部
-          end: 'bottom+=50% bottom', // 延长结束点，给更多回缩空间
-          scrub: 0.8, // 更平滑的过渡
-          onUpdate: (self) => {
-            const progress = self.progress;
-
-            // 只有真正开始离开视图时才开始回缩
-            if (progress > 0) {
-              // 回缩所有卡片，增加延迟形成连锁效果
-              cards.forEach((card, index) => {
-                if (!card) return;
-
-                // 添加索引相关的延迟，让卡片按顺序回缩
-                const delay = index * 0.05;
-
-                gsap.to(card, {
-                  top: '15%', // 回到顶部位置
-                  rotation: MOBILE_ROTATIONS[index] * (1 - progress), // 逐渐减小旋转
-                  scale: 0.75, // 回到初始大小
-                  opacity: Math.max(0, 1 - progress * 1.5), // 更慢的淡出
-                  duration: 0.3,
-                  delay: delay, // 顺序回缩
-                });
-              });
-            }
-          },
-        });
-
-        triggerRefs.current.push(retractTrigger);
       } else {
         console.log('Setting up desktop animations');
 
-        /* 桌面端动画 */
-        // 初始状态 - 卡片堆叠在中央
+        /* Desktop animations */
+        // Initial state - Cards stacked in the center
         cards.forEach((card) => {
           gsap.set(card, {
             left: '50%',
@@ -345,11 +280,11 @@ export default function Services() {
             xPercent: -50,
             yPercent: -50,
             rotation: 0,
-            clearProps: 'all', // 清除之前可能应用的属性
+            clearProps: 'all', // Clear previously applied properties
           });
         });
 
-        // 为每张卡片创建主时间线
+        // Create main timeline for each card
         cards.forEach((card, index) => {
           const frontEl = card?.querySelector('.flip-card-front');
           const backEl = card?.querySelector('.flip-card-back');
@@ -364,7 +299,7 @@ export default function Services() {
             onUpdate: (self) => {
               const progress = self.progress;
 
-              // 定义动画阶段
+              // Define animation stages
               const spreadStart = 0.1;
               const spreadEnd = 0.3;
               const flipStart = 0.2;
@@ -372,23 +307,23 @@ export default function Services() {
               const reverseStart = 0.6;
               const reverseEnd = 0.8;
 
-              // 计算阶段进度
+              // Calculate stage progress
               const spreadProgress = gsap.utils.clamp(0, 1, (progress - spreadStart) / (spreadEnd - spreadStart));
               const flipProgress = gsap.utils.clamp(0, 1, (progress - flipStart) / (flipEnd - flipStart));
               const reverseProgress = gsap.utils.clamp(0, 1, (progress - reverseStart) / (reverseEnd - reverseStart));
 
-              // 扩散动画
+              // Spread animation
               const currentPosition = gsap.utils.interpolate(50, POSITIONS[index], spreadProgress - reverseProgress);
               const currentRotation = gsap.utils.interpolate(0, ROTATIONS[index], spreadProgress - reverseProgress);
 
-              // 应用扩散
+              // Apply spread
               gsap.to(card, {
                 left: `${currentPosition}%`,
                 rotation: currentRotation,
                 duration: 0.1,
               });
 
-              // 翻转动画
+              // Flip animation
               const frontRotation = -180 * (flipProgress - reverseProgress);
               const backRotation = 180 - 180 * (flipProgress - reverseProgress);
 
@@ -403,15 +338,10 @@ export default function Services() {
             },
           });
 
-          // 存储触发器引用
+          // Store trigger reference
           triggerRefs.current.push(trigger);
         });
       }
-
-      // return () => {
-      //   // 组件卸载时清理
-      //   clearTriggers();
-      // };
     },
     { scope: container, dependencies: [isMobile] }
   );
@@ -424,7 +354,7 @@ export default function Services() {
         ref={container}
       >
         {/* Title section - 30% of viewport height */}
-        <div className="relative w-full h-[15vh] bg-[#efeee9] top-2/5 title-section">
+        <div className="relative w-full h-[10vh] lg:h-[12vh] bg-[#efeee9] top-2/5 title-section">
           <h1
             className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 
                         text-center font-semibold font-baskervville tracking-wide text-lg lg:text-[2rem] xl:text-[2.5rem] 2xl:text-[3rem] leading-none text-[#333]
@@ -439,7 +369,7 @@ export default function Services() {
         </div>
 
         {/* Cards section - adjust height for mobile */}
-        <div className={`relative w-full ${isMobile ? 'h-[210vh]' : 'h-[65vh]'} bg-[#efeee9] cards`}>
+        <div className={`relative w-full ${isMobile ? 'h-[170vh]' : 'h-[65vh]'} bg-[#efeee9] cards`}>
           {CARDS_DATA.map((card, index) => (
             <Card
               key={card.id}

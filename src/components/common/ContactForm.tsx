@@ -257,7 +257,7 @@ export default function ContactForm() {
       className="space-y-6 text-[#333]"
     >
       {FORM_FIELDS.map(renderField)}
-      <div className="pt-2">
+      <div className="flex pt-2 w-[50%]">
         <Rounded
           onClick={(e) => {
             if (e) {
@@ -269,7 +269,7 @@ export default function ContactForm() {
               handleSubmit({} as FormEvent);
             }
           }}
-          className="w-full !h-[40px] lg:!h-[65px] lg:!w-[230px] rounded-full !border-[1px] !border-[#333] hover:!border-[#E6E5DF] hover:bg-[#E6E5DF] group disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full !h-[50px] lg:!h-[65px] lg:!w-[230px] rounded-full !border-[1px] !border-[#333] hover:!border-[#E6E5DF] hover:bg-[#E6E5DF] group disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={isSubmitting}
         >
           <div className="flex items-center justify-center gap-2">
