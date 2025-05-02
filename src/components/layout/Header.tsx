@@ -49,6 +49,17 @@ export default function Header() {
   const [isActive, setIsActive] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const [isChromeMobile, setIsChromeMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isMobile = window.innerWidth < 768;
+      const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+      const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+
+      setIsChromeMobile(isMobile && isChrome && !isSafari);
+    }
+  }, []);
 
   useEffect(() => {
     if (isActive) setIsActive(false);
@@ -66,6 +77,8 @@ export default function Header() {
 
   // Only use ScrollTrigger on desktop
   useLayoutEffect(() => {
+    if (typeof window === 'undefined') return;
+
     gsap.registerPlugin(ScrollTrigger);
 
     // Just show the menu button on desktop
@@ -77,11 +90,15 @@ export default function Header() {
         start: 'top+=100 top',
         end: 'bottom top',
         onEnter: () => {
-          gsap.to(buttonRef.current, scrollAnimation.scale.show);
+          if (buttonRef.current) {
+            gsap.to(buttonRef.current, scrollAnimation.scale.show);
+          }
         },
         onLeaveBack: () => {
-          gsap.to(buttonRef.current, scrollAnimation.scale.hide);
-          setIsActive(false);
+          if (buttonRef.current) {
+            gsap.to(buttonRef.current, scrollAnimation.scale.hide);
+            setIsActive(false);
+          }
         },
         toggleClass: {
           targets: buttonRef.current,
@@ -106,19 +123,21 @@ export default function Header() {
         <div className="flex justify-between items-center py-2 lg:py-2">
           <motion.div
             className="flex items-center"
-            initial="logoHidden"
+            initial={isChromeMobile ? 'logoVisible' : 'logoHidden'}
             animate="logoVisible"
             variants={fadeInVariants}
+            style={isChromeMobile ? { opacity: 1, transform: 'translateX(0)' } : {}}
           >
             <Logo />
           </motion.div>
 
           <motion.div
             className="flex items-center gap-4"
-            initial="navHidden"
+            initial={isChromeMobile ? 'navVisible' : 'navHidden'}
             animate="navVisible"
             variants={fadeInVariants}
             transition={{ delay: 0.2 }}
+            style={isChromeMobile ? { opacity: 1, transform: 'translateX(0)' } : {}}
           >
             <Navigation />
           </motion.div>
