@@ -27,34 +27,34 @@ export default function Home() {
   const { setPreloaderComplete, setLandingPageReady } = useAppContext();
   const { hasVisitedSite } = useNavigation();
 
-  // Check if user has visited site and set state accordingly
-  useEffect(() => {
-    if (hasVisitedSite) {
-      // User has visited before, skip preloader
-      console.log('User has visited before, skipping preloader');
-      setIsLoading(false);
-      setShowHeader(true);
-      setPreloaderComplete(true);
-      setLandingPageReady(true);
+  // 移除这个useEffect，这是导致跳过preloader的主要原因
+  // useEffect(() => {
+  //   if (hasVisitedSite) {
+  //     // User has visited before, skip preloader
+  //     console.log('User has visited before, skipping preloader');
+  //     setIsLoading(false);
+  //     setShowHeader(true);
+  //     setPreloaderComplete(true);
+  //     setLandingPageReady(true);
+  //
+  //     // Initialize LocomotiveScroll (no waiting, because we skipped preloader)
+  //     import('locomotive-scroll').then(({ default: LocomotiveScroll }) => {
+  //       const locomotiveScroll = new LocomotiveScroll();
+  //       // Scroll to top can be placed here
+  //       window.scrollTo(0, 0);
+  //       document.body.style.cursor = 'default';
+  //     });
+  //   }
+  // }, [hasVisitedSite, setPreloaderComplete, setLandingPageReady]);
 
-      // Initialize LocomotiveScroll (no waiting, because we skipped preloader)
-      import('locomotive-scroll').then(({ default: LocomotiveScroll }) => {
-        const locomotiveScroll = new LocomotiveScroll();
-        // Scroll to top can be placed here
-        window.scrollTo(0, 0);
-        document.body.style.cursor = 'default';
-      });
-    }
-  }, [hasVisitedSite, setPreloaderComplete, setLandingPageReady]);
-
-  // Only initialize LocomotiveScroll when preloader is needed (first visit to site)
+  // 修改这个useEffect，移除hasVisitedSite条件
   useEffect(() => {
-    if (isLoading || hasVisitedSite) {
-      return; // If still loading or user has visited, do not initialize
+    if (isLoading) {
+      return; // 如果还在加载中，退出
     }
 
     (async () => {
-      // Initialize LocomotiveScroll when preloader is complete (first visit to site)
+      // Initialize LocomotiveScroll when preloader is complete
       if (!showHeader) {
         const LocomotiveScroll = (await import('locomotive-scroll')).default;
         const locomotiveScroll = new LocomotiveScroll();
@@ -70,9 +70,9 @@ export default function Home() {
         };
       }
     })();
-  }, [isLoading, showHeader, hasVisitedSite]);
+  }, [isLoading, showHeader]);
 
-  // Listen for page load status
+  // 保持其他逻辑不变
   useEffect(() => {
     if (!isLoading) {
       console.log('Page is not loading, setting landing page ready');

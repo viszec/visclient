@@ -2,10 +2,10 @@ import { useEffect, useRef } from 'react';
 
 import ImageTrail from '@components/ui/image-trail';
 
-type ImageTrailProps = {
-  items: string[];
-  variant?: number;
-};
+// type ImageTrailProps = {
+//   items: string[];
+//   variant?: number;
+// };
 
 export default function ImageTrailComponent() {
   const containerRef = useRef<HTMLDivElement>(null);

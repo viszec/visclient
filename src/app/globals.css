@@ -425,7 +425,7 @@
 
 /* Custom transparent scrollbar for chat */
 .transparent-scrollbar::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 .transparent-scrollbar::-webkit-scrollbar-track {
@@ -433,16 +433,20 @@
 }
 
 .transparent-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(155, 155, 155, 0.3);
-  border-radius: 6px;
+  background: rgba(155, 155, 155, 0.5);
+  border-radius: 4px;
 }
 
 .transparent-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(155, 155, 155, 0.5);
+  background: rgba(155, 155, 155, 0.7);
 }
 
 /* For Firefox */
 .transparent-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: rgba(155, 155, 155, 0.3) transparent;
+}
+
+.scrollbar-gutter-stable {
+  scrollbar-gutter: stable;
 }

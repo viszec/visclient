@@ -12,105 +12,238 @@ export interface ChatMessageProps {
   content: string;
   type: 'user' | 'bot';
   timestamp: Date;
+  messageId?: string; // 添加唯一ID标识
 }
 
-// 配置
-const PARAGRAPH_DELAY = 2000; // 段落之间的延迟 (ms)
-const DISPLAY_SPEED = 300; // 段落显示速度 (完整显示一段需要的毫秒数)
+// 创建一个全局消息状态缓存
+type MessageState = {
+  isFullyLoaded: boolean;
+  visibleParagraphs: string[];
+};
 
-const ChatMessage: React.FC<ChatMessageProps> = ({ content, type, timestamp }) => {
+// 全局消息状态缓存
+const messageStateCache = new Map<string, MessageState>();
+
+// 配置
+const PARAGRAPH_DELAY = 3000; // 段落之间的延迟 (ms)
+const DISPLAY_SPEED = 1000; // 段落显示速度 (完整显示一段需要的毫秒数)
+
+const ChatMessage: React.FC<ChatMessageProps> = ({ content, type, timestamp, messageId }) => {
   const isUser = type === 'user';
 
-  // 消息状态
-  const [visibleParagraphs, setVisibleParagraphs] = useState<string[]>([]);
-  const [currentParagraphIndex, setCurrentParagraphIndex] = useState(0);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [paragraphs, setParagraphs] = useState<string[]>([]);
+  // 为消息创建唯一ID
+  const uniqueId = useRef(
+    messageId || `${type}-${timestamp.getTime()}-${Math.random().toString(36).substring(2, 9)}`
+  ).current;
 
-  // 音效引用
-  const popSoundRef = useRef<HTMLAudioElement | null>(null);
+  // 检查缓存中是否有此消息的状态
+  const cachedState = messageStateCache.get(uniqueId);
+
+  // 消息状态
+  const [visibleParagraphs, setVisibleParagraphs] = useState<string[]>(cachedState?.visibleParagraphs || []);
+  const [currentParagraphIndex, setCurrentParagraphIndex] = useState(0);
+  const [isProcessing, setIsProcessing] = useState(!cachedState?.isFullyLoaded && !isUser);
+  const [paragraphs, setParagraphs] = useState<string[]>([]);
+  const [isFullyLoaded, setIsFullyLoaded] = useState(cachedState?.isFullyLoaded || false);
 
   // 滚动标记元素
   const messageEndRef = useRef<HTMLDivElement>(null);
 
-  // 初始化音效
+  // 在组件顶部添加新的初始化通知功能
   useEffect(() => {
-    // 气泡音效
-    popSoundRef.current = new Audio('/sounds/pop.mp3');
-    popSoundRef.current.volume = 0.2;
-
-    return () => {
-      popSoundRef.current?.pause();
-    };
+    // 请求通知权限
+    if ('Notification' in window && Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+      Notification.requestPermission();
+    }
   }, []);
+
+  // 创建播放系统声音的函数
+  const playSystemSound = () => {
+    try {
+      // 尝试用系统音效API
+      if ('Audio' in window) {
+        const context = new (window.AudioContext ||
+          (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+        const oscillator = context.createOscillator();
+        oscillator.type = 'sine';
+        oscillator.frequency.value = 800;
+        oscillator.connect(context.destination);
+        oscillator.start();
+        oscillator.stop(context.currentTime + 0.1);
+      } else if (typeof window !== 'undefined' && 'vibrate' in navigator) {
+        // 移动设备尝试振动
+        navigator.vibrate(50);
+      }
+    } catch (e) {
+      console.log('系统音效播放失败:', e);
+    }
+  };
 
   // 处理消息内容
   useEffect(() => {
-    // 分段
-    const parts = content.split(/<br\s*\/?><br\s*\/?>/);
-    setParagraphs(parts);
+    // 如果消息已完全加载，无需再次处理
+    if (isFullyLoaded) return;
+
+    // 替换matchAll方法
+    const regex = /<p class='index-(\d+)'>(.*?)<\/p>/g;
+    const matches: Array<{ index: number; text: string }> = [];
+    let match;
+
+    while ((match = regex.exec(content)) !== null) {
+      matches.push({
+        index: parseInt(match[1]),
+        text: match[2],
+      });
+    }
+
+    // 如果找到了带索引的段落
+    const newParagraphs: string[] = [];
+    if (matches.length > 0) {
+      // 按索引排序
+      const sortedParts = matches.sort((a, b) => a.index - b.index).map((part) => part.text);
+
+      newParagraphs.push(...sortedParts);
+      console.log('找到带索引段落:', sortedParts.length);
+      setParagraphs(sortedParts);
+    } else {
+      // 如果没有找到带索引的段落，尝试直接使用内容
+      newParagraphs.push(content);
+      setParagraphs([content]);
+    }
 
     if (isUser) {
       // 用户消息直接全部显示
-      setVisibleParagraphs(parts);
-      // 播放气泡音
-      popSoundRef.current?.play().catch((e) => console.log('音效播放失败:', e));
+      setVisibleParagraphs(newParagraphs);
+      setIsFullyLoaded(true);
+
+      // 更新缓存
+      messageStateCache.set(uniqueId, {
+        isFullyLoaded: true,
+        visibleParagraphs: newParagraphs,
+      });
+
       return;
     }
 
-    // 机器人消息从第一段开始
-    setCurrentParagraphIndex(0);
-    setVisibleParagraphs([]);
-    setIsProcessing(true);
+    // 如果缓存已存在，使用缓存状态
+    if (cachedState?.isFullyLoaded) {
+      setVisibleParagraphs(cachedState.visibleParagraphs);
+      setIsProcessing(false);
+      setIsFullyLoaded(true);
+      return;
+    }
 
-    // 播放气泡音
-    popSoundRef.current?.play().catch((e) => console.log('音效播放失败:', e));
+    // 新消息或未完全加载的消息
+    if (cachedState?.visibleParagraphs.length) {
+      // 部分加载状态恢复
+      setVisibleParagraphs(cachedState.visibleParagraphs);
+      setCurrentParagraphIndex(cachedState.visibleParagraphs.length);
 
-    // 显示第一段
-    setTimeout(() => {
-      setVisibleParagraphs([parts[0]]);
+      // 判断是否还有段落需要加载
+      if (cachedState.visibleParagraphs.length < newParagraphs.length) {
+        setIsProcessing(true);
 
-      // 如果只有一段，则处理完成
-      if (parts.length <= 1) {
+        // 延迟显示下一段
+        setTimeout(() => {
+          setCurrentParagraphIndex(cachedState.visibleParagraphs.length);
+        }, PARAGRAPH_DELAY);
+      } else {
         setIsProcessing(false);
-        return;
+        setIsFullyLoaded(true);
+
+        // 更新缓存
+        messageStateCache.set(uniqueId, {
+          isFullyLoaded: true,
+          visibleParagraphs: newParagraphs,
+        });
       }
+      return;
+    }
 
-      // 设置延迟显示下一段的计时器
-      const timer = setTimeout(() => {
-        setCurrentParagraphIndex(1);
-      }, PARAGRAPH_DELAY);
+    // 全新的机器人消息，从第一段开始
+    if (newParagraphs.length > 0) {
+      setCurrentParagraphIndex(0);
+      setVisibleParagraphs([]);
+      setIsProcessing(true);
 
-      return () => clearTimeout(timer);
-    }, DISPLAY_SPEED);
-  }, [content, isUser]);
+      // 显示第一段 - 使用固定的时间
+      const firstParagraphTimer = setTimeout(() => {
+        setVisibleParagraphs([newParagraphs[0]]);
+
+        // 更新缓存
+        messageStateCache.set(uniqueId, {
+          isFullyLoaded: false,
+          visibleParagraphs: [newParagraphs[0]],
+        });
+
+        // 如果只有一段，则处理完成
+        if (newParagraphs.length <= 1) {
+          setIsProcessing(false);
+          setIsFullyLoaded(true);
+
+          // 更新缓存
+          messageStateCache.set(uniqueId, {
+            isFullyLoaded: true,
+            visibleParagraphs: [newParagraphs[0]],
+          });
+          return;
+        }
+
+        // 设置延迟显示下一段的计时器 - 使用固定的PARAGRAPH_DELAY时间
+        setTimeout(() => {
+          setCurrentParagraphIndex(1);
+        }, PARAGRAPH_DELAY);
+      }, DISPLAY_SPEED); // 第一段的显示时间
+
+      return () => clearTimeout(firstParagraphTimer);
+    }
+  }, [content, isUser, isFullyLoaded, uniqueId, cachedState]);
 
   // 处理后续段落的显示
   useEffect(() => {
-    // 跳过初始状态和用户消息
-    if (currentParagraphIndex === 0 || isUser || currentParagraphIndex >= paragraphs.length) return;
+    // 跳过不需要处理的情况
+    if (
+      isFullyLoaded ||
+      currentParagraphIndex === 0 ||
+      isUser ||
+      paragraphs.length === 0 ||
+      currentParagraphIndex >= paragraphs.length
+    )
+      return;
 
     setIsProcessing(true);
 
-    // 播放气泡音
-    popSoundRef.current?.play().catch((e) => console.log('音效播放失败:', e));
+    // 使用系统通知声音替代
+    playSystemSound();
 
-    // 显示当前段落
-    setTimeout(() => {
-      setVisibleParagraphs((prev) => [...prev, paragraphs[currentParagraphIndex]]);
+    // 添加新段落
+    const nextParagraph = paragraphs[currentParagraphIndex];
+    const updatedParagraphs = [...visibleParagraphs];
 
-      // 判断是否还有下一段
-      if (currentParagraphIndex < paragraphs.length - 1) {
-        // 延迟显示下一段
-        setTimeout(() => {
-          setCurrentParagraphIndex((prev) => prev + 1);
-        }, PARAGRAPH_DELAY);
-      } else {
-        // 所有段落处理完成
-        setIsProcessing(false);
-      }
-    }, DISPLAY_SPEED);
-  }, [currentParagraphIndex, paragraphs, isUser]);
+    // 确保不添加重复段落
+    if (!updatedParagraphs.includes(nextParagraph)) {
+      updatedParagraphs.push(nextParagraph);
+      setVisibleParagraphs(updatedParagraphs);
+
+      // 更新缓存
+      messageStateCache.set(uniqueId, {
+        isFullyLoaded: currentParagraphIndex === paragraphs.length - 1,
+        visibleParagraphs: updatedParagraphs,
+      });
+    }
+
+    // 判断是否还有下一段
+    if (currentParagraphIndex < paragraphs.length - 1) {
+      // 延迟显示下一段
+      setTimeout(() => {
+        setCurrentParagraphIndex((prev) => prev + 1);
+      }, PARAGRAPH_DELAY);
+    } else {
+      // 所有段落处理完成
+      setIsProcessing(false);
+      setIsFullyLoaded(true);
+    }
+  }, [currentParagraphIndex, paragraphs, isUser, visibleParagraphs, isFullyLoaded, uniqueId]);
 
   // Scroll to bottom when new paragraphs are added or processing state changes
   useEffect(() => {
@@ -123,8 +256,8 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ content, type, timestamp }) =
   // 渲染消息气泡
   const renderMessageBubble = (content: string, index: number, isLastBubble: boolean = false) => (
     <div
-      key={`message-${index}`}
-      className={cn('flex w-full mt-2', isUser ? 'justify-end' : 'justify-start')}
+      key={`message-${uniqueId}-${index}`}
+      className={cn('flex w-full mt-4', isUser ? 'justify-end' : 'justify-start')}
     >
       {/* 头像列 */}
       <div className={cn('flex-shrink-0', isUser ? 'order-2 ml-2' : 'order-1 mr-2')}>
@@ -143,7 +276,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ content, type, timestamp }) =
       {/* 消息内容列 */}
       <div className={cn('flex flex-col', isUser ? 'order-1 items-end' : 'order-2 items-start')}>
         {/* 消息发送者名称 */}
-        <div className={cn('text-[10px] font-medium mb-1 text-[#706e6a]', isUser ? 'text-right' : 'text-left')}>
+        <div className={cn('text-[11px] font-medium mb-1 mt-1 text-[#575654]', isUser ? 'text-right' : 'text-left')}>
           {isUser ? 'You' : 'Mavis'}
         </div>
 
@@ -156,16 +289,16 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ content, type, timestamp }) =
             delay: 0.1,
           }}
           className={cn(
-            'py-2 rounded-xl text-[13px] px-3',
+            'py-2 rounded-xl text-xs md:text-[13px] px-3 leading-tight md:leading-normal',
             isUser
-              ? 'bg-[#333333af] text-[#fdfdfd] rounded-tr-none ml-12'
-              : 'bg-[#efeee9] text-[#333] rounded-tl-none mr-12'
+              ? 'bg-[#333333af] text-[#fdfdfd] rounded-tr-none ml-6 md:ml-12'
+              : 'bg-[#efeee9] text-[#333] rounded-tl-none mr-6 md:mr-12'
           )}
           dangerouslySetInnerHTML={{ __html: content }}
         />
 
         {/* 仅在最后一条消息显示时间 */}
-        {isLastBubble && <div className="text-[9px] text-gray-500 mt-1">{formattedTime}</div>}
+        {isLastBubble && <div className="text-[9px] text-gray-800 mt-1">{formattedTime}</div>}
       </div>
     </div>
   );
@@ -240,20 +373,6 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ content, type, timestamp }) =
           )}
         </>
       )}
-
-      {/* 隐藏的音频元素 */}
-      <audio
-        id="popSound"
-        src="/sounds/pop.mp3"
-        preload="auto"
-      >
-        <track
-          kind="captions"
-          src="/sounds/pop-captions.vtt"
-          srcLang="en"
-          label="English captions"
-        />
-      </audio>
 
       {/* 滚动标记元素 - 确保滚动到最新消息 */}
       <div ref={messageEndRef} />

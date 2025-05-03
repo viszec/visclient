@@ -24,13 +24,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [isLandingPageReady, setLandingPageReady] = useState(false);
   const { hasVisitedSite } = useNavigation();
 
-  // When user has visited site, automatically set preloader complete and landing page ready state
-  useEffect(() => {
-    if (hasVisitedSite) {
-      setIsPreloaderComplete(true);
-      setLandingPageReady(true);
-    }
-  }, [hasVisitedSite]);
+  // // When user has visited site, automatically set preloader complete and landing page ready state
+  // useEffect(() => {
+  //   if (hasVisitedSite) {
+  //     setIsPreloaderComplete(true);
+  //     setLandingPageReady(true);
+  //   }
+  // }, [hasVisitedSite]);
 
   // Check localStorage when component mounts
   useEffect(() => {
