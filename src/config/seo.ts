@@ -5,7 +5,7 @@ export const siteConfig = {
   title: 'Mavis M. → Creative Web Developer & Designer | Melbourne AU',
   description:
     'Creative Web Developer and Designer based in Melbourne, Australia. Specializing in creating memorable web experiences for forward-thinking brands.',
-  url: 'https://www.mavisma.com', // Replace with your actual domain
+  url: 'https://mavism.me', // Changed from mavisma.com to mavism.me
 
   // Contact Information
   email: 'imavisma@gmail.com',
@@ -19,11 +19,20 @@ export const siteConfig = {
 
   // Primary Keywords
   keywords: [
+    'software engineer',
+    'vibe coding',
+    'creative web developer',
+    'digital marketing',
+    'seo specialist',
     'web developer',
+    'web designer',
+    'nextjs',
+    'typescript',
     'web designer',
     'frontend developer',
     'UI designer',
     'Melbourne',
+    'Australia',
     'creative developer',
     'portfolio',
     'React developer',
