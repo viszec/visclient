@@ -201,7 +201,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
-          className={`fixed bottom-4 right-4 w-[370px] ${isMinimized ? 'h-[60px]' : 'h-[600px]'} bg-[#adaca778] backdrop-blur-lg rounded-lg shadow-xl flex flex-col overflow-hidden border border-gray-200 z-50 transition-all duration-300`}
+          className={`fixed bottom-2 md:bottom-4 right-1 md:right-4 w-[300px] md:w-[370px] ${isMinimized ? 'h-40 md:h-[60px]' : 'h-[500px] md:h-[600px]'} bg-[#adaca778] backdrop-blur-lg rounded-lg shadow-xl flex flex-col overflow-hidden border border-gray-200 z-50 transition-all duration-300`}
         >
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b">
