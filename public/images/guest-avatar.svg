@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none">
+  <!-- Background Circle -->
+  <circle cx="50" cy="50" r="48" fill="#efeee9" />
+  
+  <!-- Simple User Icon -->
+  <g transform="translate(25, 12)">
+    <!-- Head -->
+    <circle cx="25" cy="22" r="16" fill="rgba(51,51,51,0.287)" />
+    
+    <!-- Body -->
+    <path d="M25 42 C 10 42, 0 55, 0 75 L 50 75 C 50 55, 40 42, 25 42" fill="rgba(51,51,51,0.287)" />
+  </g>
+  
+  <!-- Border -->
+  <circle cx="50" cy="50" r="48" stroke="#ffffff" stroke-width="5" fill="none" />
+</svg>

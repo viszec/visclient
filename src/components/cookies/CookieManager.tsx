@@ -17,7 +17,7 @@ const CookieManager = () => {
     // Only show the cookie manager button if the user has already set cookie preferences
     if (hasConsent) {
       const timer = setTimeout(() => {
-        setShowButton(true);
+        setShowButton(false); // Changed to false to hide the floating button
       }, 5000); // Show after 5 seconds
 
       return () => clearTimeout(timer);
@@ -33,6 +33,7 @@ const CookieManager = () => {
     }
   };
 
+  // 保留代码和功能，但默认不显示悬浮按钮
   return (
     <AnimatePresence>
       {showButton && (
