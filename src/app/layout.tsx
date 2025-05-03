@@ -6,8 +6,8 @@ import { siteConfig } from '@/config/seo';
 import { AppProvider } from '@/context/AppContext';
 import { NavigationProvider } from '@/context/NavigationContext';
 
-import CookieConsent from '@/components/common/CookieConsent';
-import CookieManager from '@/components/common/CookieManager';
+import CookieConsent from '@/components/cookies/CookieConsent';
+import CookieManager from '@/components/cookies/CookieManager';
 import { Toaster } from '@/components/ui/sonner';
 
 import './globals.css';

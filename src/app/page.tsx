@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useAppContext } from '@/context/AppContext';
 import { useNavigation } from '@/context/NavigationContext';
 
+import { ChatbotButton } from '@/components/chatbot';
 //import { AnimatePresence } from 'framer-motion';
 
 import Footer from '@/components/layout/Footer';
@@ -94,6 +95,17 @@ export default function Home() {
     }, 300);
   };
 
+  const handleSendMessage = async (message: string, language = 'en') => {
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message, language }),
+    });
+
+    const data = await response.json();
+    return data;
+  };
+
   return (
     <>
       {!isLoading && showHeader && <Header />}
@@ -109,6 +121,7 @@ export default function Home() {
             <Services />
             {/* <SlideImage /> */}
             <Contact />
+            <ChatbotButton onSendMessage={handleSendMessage} />
           </>
         )}
       </main>
