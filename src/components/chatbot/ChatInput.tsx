@@ -34,6 +34,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, disabled = false, 
           onChange={(e) => setMessage(e.target.value)}
           disabled={disabled}
           className="w-full p-2 px-4 border rounded-full focus:outline-none focus:ring-1 focus:ring-[#adaca7] bg-[#efeee9] text-gray-800 placeholder:text-gray-400 text-[13px]"
+          style={{ fontSize: '13px' }}
         />
       </div>
       <Button

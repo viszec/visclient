@@ -321,6 +321,27 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
     }
   };
 
+  // 在组件内添加此useEffect
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // 防止双击缩放
+      let lastTouchEnd = 0;
+      const handleTouchEnd = (e: TouchEvent) => {
+        const now = Date.now();
+        if (now - lastTouchEnd <= 300) {
+          e.preventDefault();
+        }
+        lastTouchEnd = now;
+      };
+
+      document.addEventListener('touchend', handleTouchEnd);
+
+      return () => {
+        document.removeEventListener('touchend', handleTouchEnd);
+      };
+    }
+  }, []);
+
   return (
     <AnimatePresence>
       {isOpen && (
