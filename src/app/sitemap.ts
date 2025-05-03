@@ -61,29 +61,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // Add only the live URLs of projects to the sitemap
-  // This includes external websites that the portfolio links to
-  projects.forEach((project) => {
-    if (project.liveURL && project.liveURL.includes('http')) {
-      // Only include external URLs (not relative paths)
-      routes.push({
-        url: project.liveURL,
-        lastModified,
-        changeFrequency: 'monthly' as const,
-        priority: 0.6,
-      });
-    }
-
-    // If project has an app URL, add it as well
-    if (project.appURL && project.appURL.includes('http')) {
-      routes.push({
-        url: project.appURL,
-        lastModified,
-        changeFrequency: 'monthly' as const,
-        priority: 0.6,
-      });
-    }
-  });
-
   return routes;
 }
