@@ -190,7 +190,7 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
       {showImageTrail && (
         <div
           className="absolute inset-x-0 top-0 z-10 overflow-hidden pb-12"
-          style={{ height: 'calc(100% - 50px)' }}
+          style={{ height: 'calc(100% - 250px)' }}
         >
           <ImageTrail
             items={[

@@ -109,15 +109,20 @@ export default function Projects() {
 
     // cleanup function
     return () => {
-      // clean up GSAP instance
-      if (modalContainer.current) {
-        gsap.killTweensOf(modalContainer.current);
+      // 缓存ref的当前值以避免闭包问题
+      const currentModalContainer = modalContainer.current;
+      const currentCursor = cursor.current;
+      const currentCursorLabel = cursorLabel.current;
+
+      // 使用缓存的ref值进行清理
+      if (currentModalContainer) {
+        gsap.killTweensOf(currentModalContainer);
       }
-      if (cursor.current) {
-        gsap.killTweensOf(cursor.current);
+      if (currentCursor) {
+        gsap.killTweensOf(currentCursor);
       }
-      if (cursorLabel.current) {
-        gsap.killTweensOf(cursorLabel.current);
+      if (currentCursorLabel) {
+        gsap.killTweensOf(currentCursorLabel);
       }
     };
   }, []);

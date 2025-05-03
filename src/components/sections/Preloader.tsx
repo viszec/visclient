@@ -98,8 +98,7 @@ export default function PreloaderAnimation({ onComplete }: PreloaderAnimationPro
       // After setting showHeroSection to true, we can animate the hero section
       setTimeout(() => {
         import('gsap').then((gsapModule) => {
-          const gsap = gsapModule.default;
-
+          // const gsap = gsapModule.default;
           // Commented out the animation code that targets non-existent elements, if you want to use it, uncomment the code below
           /*
           // Show main content (now in HeroSection)

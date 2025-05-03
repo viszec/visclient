@@ -33,7 +33,7 @@ export default function useCookieConsent() {
   };
 
   // Function to check if specific cookie type is allowed
-  const isAllowed = (type?: 'analytics' | 'marketing' | 'preferences'): boolean => {
+  const isAllowed = (_type?: 'analytics' | 'marketing' | 'preferences'): boolean => {
     if (consent === 'accepted') return true;
     if (consent === 'essential' || consent === 'rejected') return false;
     return false;
