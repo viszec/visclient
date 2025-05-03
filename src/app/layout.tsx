@@ -1,5 +1,6 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Just_Me_Again_Down_Here } from 'next/font/google';
+import Head from 'next/head';
 import Script from 'next/script';
 
 import { siteConfig } from '@/config/seo';
@@ -18,6 +19,13 @@ const justMe = Just_Me_Again_Down_Here({
   subsets: ['latin'],
   variable: '--font-just-me-again',
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 
 export const metadata: Metadata = {
   title: siteConfig.title,
@@ -55,6 +63,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${justMe.variable}`}
     >
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </head>
       <body className={inter.className}>
         <NavigationProvider>
           <AppProvider>
@@ -68,8 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               id="facebook-pixel-consent-checker"
               strategy="afterInteractive"
             >
-              {`
-                function initFacebookPixel() {
+              {`                function initFacebookPixel() {
                   if(typeof window !== 'undefined') {
                     // Only initialize if consent was given for marketing cookies
                     const consent = localStorage.getItem('cookieConsent');
